@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="山海万象神兽 3D 场景" />
+    <title>神兽 · 山海万象</title>
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/css/site.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../../assets/vendor/three/build/three.module.min.js",
+          "three/addons/": "../../assets/vendor/three/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body class="collection-page" data-collection-config="./collection.json">
+    <div id="viewer" class="viewer-shell">
+      <canvas id="scene-canvas" aria-label="可交互神兽 3D 场景"></canvas>
+
+      <header class="viewer-header">
+        <a class="brand viewer-brand" href="../../index.html" aria-label="返回山海万象首页">
+          <span class="brand-mark">山海</span>
+          <span class="brand-name">Shanhaiworld</span>
+        </a>
+        <a class="back-link" href="../../index.html">返回图鉴</a>
+      </header>
+
+      <aside class="creature-panel" aria-labelledby="creature-name">
+        <p id="creature-kicker" class="eyebrow">SHANHAI CREATURE</p>
+        <h1 id="creature-name">加载中</h1>
+        <p id="creature-summary">正在唤醒神兽与它的栖息之境。</p>
+        <dl id="creature-facts" class="creature-facts"></dl>
+      </aside>
+
+      <section class="viewer-controls" aria-label="神兽动作控制">
+        <label for="action-select">动作</label>
+        <select id="action-select" disabled>
+          <option>正在加载</option>
+        </select>
+        <button id="toggle-roam" type="button" aria-pressed="true" disabled>自动游走：开</button>
+        <button id="reset-camera" type="button">重置视角</button>
+      </section>
+
+      <div class="mouse-hint" aria-hidden="true">
+        <span>拖动旋转</span><span>滚轮缩放</span><span>点击互动</span>
+      </div>
+
+      <div id="loading-state" class="loading-state" role="status" aria-live="polite">
+        <span class="loading-ring" aria-hidden="true"></span>
+        <strong>正在进入山海之境</strong>
+        <span id="loading-detail">读取神兽设定…</span>
+      </div>
+
+      <div id="viewer-error" class="viewer-error" role="alert" hidden>
+        <strong>场景加载失败</strong>
+        <span id="viewer-error-message"></span>
+        <a href="../../index.html">返回首页</a>
+      </div>
+    </div>
+
+    <script type="module" src="../../assets/js/collection-page.js?v=20260815-2"></script>
+  </body>
+</html>

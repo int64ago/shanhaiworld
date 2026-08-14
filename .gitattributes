@@ -1,0 +1,42 @@
+# High-resolution source images and generated originals are production assets.
+collections/*/concepts/*.png filter=lfs diff=lfs merge=lfs -text
+collections/*/views/*.png filter=lfs diff=lfs merge=lfs -text
+collections/*/production/generations/** filter=lfs diff=lfs merge=lfs -text
+
+# Keep editable/intermediate 3D and animation binaries out of normal Git history.
+collections/*/models/*.glb filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.glb filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/*.glb filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/**/*.glb filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/*.fbx filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/*.bvh filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/**/*.bvh filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/*.bin filter=lfs diff=lfs merge=lfs -text
+collections/*/animations/**/*.bin filter=lfs diff=lfs merge=lfs -text
+
+# The optimized browser model remains a normal Git/deployment asset while it is
+# below the project limit. Revisit this exception if hosting is not GitHub Pages.
+collections/*/models/web.glb !filter !diff !merge -text
+
+# Common optional source formats, scoped to asset directories only.
+collections/*/models/*.fbx filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.obj filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.obj filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.usd filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.usd filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.usdz filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.usdz filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.blend filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.blend filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.bin filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.bin filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.exr filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.exr filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.hdr filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.hdr filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.tif filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.tif filter=lfs diff=lfs merge=lfs -text
+collections/*/models/*.tiff filter=lfs diff=lfs merge=lfs -text
+collections/*/models/**/*.tiff filter=lfs diff=lfs merge=lfs -text

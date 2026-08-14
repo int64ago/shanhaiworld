@@ -1,0 +1,4 @@
+interface:
+  display_name: "山海神兽 3D"
+  short_description: "只凭名称生成结构准确、动作丰富的高质量神兽 3D 场景"
+  default_prompt: "Use $shanhai3d with only one creature name to build a high-detail PC Three.js collection. Derive a creature-specific anatomy profile, prioritize skeletal animation, use only a high-quality local-deformation fallback when rigging is genuinely unsuitable, require at least six semantically correct actions, and prioritize quality over API credits."

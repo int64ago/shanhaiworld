@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "id": "replace-me",
+  "name": "待生成神兽",
+  "subtitle": "山海神兽",
+  "summary": "",
+  "body_type": "unknown",
+  "status": "draft",
+  "preview": "./preview.webp",
+  "model": {
+    "path": "./models/web.glb",
+    "target_height": 2.6,
+    "facing_offset": 0,
+    "in_place_root_motion": true
+  },
+  "animation": {
+    "mode": "skeletal",
+    "min_actions": 6,
+    "min_animated_nodes": 3
+  },
+  "quality": {
+    "require_reference_qc": true,
+    "require_model_qc": true,
+    "require_detail_qc": true,
+    "require_rig_qc": true,
+    "require_animation_qc": true
+  },
+  "scene": {
+    "background": "./scene/background.webp",
+    "background_color": "#0b1110",
+    "fog_color": "#101a17",
+    "fog_near": 12,
+    "fog_far": 42,
+    "ground_color": "#17231d",
+    "ground_size": 42,
+    "props": "./scene/props.glb"
+  },
+  "lighting": {
+    "ambient_color": "#a9c6b6",
+    "ambient_intensity": 1.3,
+    "sun_color": "#f1d3a0",
+    "sun_intensity": 2.8,
+    "sun_position": [6, 10, 4]
+  },
+  "actions": {},
+  "interaction": {
+    "click_actions": ["observe", "roar", "attack"]
+  },
+  "roaming": {
+    "enabled": true,
+    "bounds": 7,
+    "walk_speed": 0.7,
+    "run_speed": 1.45
+  },
+  "facts": []
+}

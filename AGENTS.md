@@ -1,0 +1,111 @@
+# Shanhaiworld project rules
+
+## Product contract
+
+- Treat one Chinese mythic-creature name as the complete input and use the repo-scoped `$shanhai3d` skill.
+- Do not ask the user for prompts, images, style, action names, scene design, performance targets, or Blender work.
+- Deliver one independent PC Three.js page with coherent environment, mouse orbit/zoom/click, autonomous roaming, high-fidelity materials, and rich anatomically meaningful motion. Prefer a real skeleton; accept morph, articulated-node, mesh-deformation, or hybrid motion only when it meets the same visible quality bar.
+- Automation never overrides quality gates. Stop with an explicit blocking status instead of publishing a structurally wrong, blurry, unrigged, or weakly animated result.
+
+## Mandatory stage gates
+
+Complete and persist each gate before starting the next paid stage. Read `.agents/skills/shanhai3d/references/quality-gates.md` for the full checklist.
+
+### Reference images
+
+- Separate the cinematic identity master from clean provider input views.
+- Provider views must use one frozen pose, matching proportions/materials, neutral light, a clean contrasting background, and consistent orthographic directions.
+- Build a creature-specific `anatomy_profile` before prompting: counted features, continuous structures, articulated regions, surface features, locomotion modes, and explicit not-applicable items. Validate only applicable counts; validate continuous bodies by silhouette, volume, connection, and branch topology; validate moving regions by attachment and available motion space.
+- Do not treat `exactly N` in the prompt as evidence. Do not submit mirrored images as genuine opposite views.
+- Save `reports/reference-qc.json`. If any blocking check fails, regenerate the earliest bad view and do not call the 3D provider.
+
+### Model structure and detail
+
+- Submit only the 2–4 views that passed QC; more inconsistent views are worse than fewer consistent views.
+- Validate the high-quality source model with eight-direction turntable renders and close-ups before remeshing, rigging, or optimization.
+- Reject any mismatch with the anatomy profile, fused or floating geometry, broken connections, topology holes, blurry identity features, smooth clay/plastic surfaces, or unreadable PBR detail.
+- Never ship a model whose wrong anatomy was repaired by deleting erroneous generated parts. BANG/component splitting is not an anatomy-correction workflow.
+- Apply detail rules conditionally: fur needs silhouette clumps plus directional normal/roughness; scales, plates, feathers, skin and keratin each need their own readable geometry/normal, overlap and reflectance cues. Preserve identity regions and silhouette during optimization.
+- Persist `reports/model-qc.json` and `reports/detail-qc.json` before rigging.
+
+### Motion system and animation
+
+- Run provider `rig-check` and use a currently documented rig type matching the creature body type; never force a non-humanoid asset onto a biped skeleton.
+- For the preferred skeletal route, the final GLB must contain a skin, valid joint/weight attributes, and chains covering the creature's `articulated_regions`.
+- If a provider cannot rig the body type to release quality, document that attempt and use morph targets, articulated nodes, deterministic mesh deformation, or a hybrid. The fallback must drive meaningful local regions, preserve connections, and remain auditable; a whole-model wobble is never a fallback.
+- Final release requires at least six validated actions: idle, a locomotion matching `locomotion_modes`, and four distinct action/reaction/signature motions chosen for the creature.
+- Each action needs preparation, main and recovery phases, and must affect at least two semantic body regions or one continuous body-length deformation field. Translation, rotation or scale of the actor root, camera motion, materials and particles do not fill action slots.
+- Code-authored motion may target joints, morph weights, articulated nodes or reproducible mesh deformation. Bake tracks into the GLB when possible; otherwise keep deterministic animation assets with the collection and apply the same visual QA.
+- Persist `reports/rig-qc.json` and `reports/animation-qc.json`. Fewer than six actions, semantic mismatch, root-only motion, sliding, collapse, detachment, visible seams or unstable deformation block release.
+
+## Provider boundaries
+
+- Use Rodin for the high-quality static source model; do not imply it supplies the required non-humanoid rig and rich animation set.
+- For non-humanoid rigging, verify current Tripo docs, call `rig-check`, and use the documented non-humanoid model/rig type.
+- Tripo non-humanoid preset animation coverage may be sparse; never describe one locomotion preset as a rich action set.
+- Meshy API rigging is not a non-humanoid fallback unless current official API docs explicitly support the target body type. Web-app features do not prove API support.
+- Require `RODIN_API_KEY` and `TRIPO_API_KEY` for the default complete pipeline. ImageGen does not use `OPENAI_API_KEY`.
+- Quality outranks credits and paid attempt count. Never lower source topology, texture resolution, action richness or gate thresholds to save credits. Retry only after diagnosing a failure and changing a relevant input, parameter, topology, source or provider.
+
+## Repository shape and traceability
+
+```text
+index.html
+assets/
+collections/<slug>/index.html
+collections/<slug>/collection.json
+collections/<slug>/preview.webp
+collections/<slug>/{concepts,views,models,animations,scene,reports}/
+collections/<slug>/production/{research,prompts,generations,providers,logs}/
+```
+
+- Reuse shared loaders, UI, animation state, roaming logic and CSS under `assets/`; generate collection HTML from `assets/templates/collection/index.html`.
+- Keep paths relative. Preserve every prompt, generated original, rejection, selected source and sanitized provider task under the collection.
+- Never overwrite accepted assets; create versioned replacements and append audit records.
+- Keep collection and catalog status `draft` until every mandatory gate passes. Only `ready` collections appear on the home page.
+
+## Git commit convention
+
+- Create commits only when the user explicitly asks. Do not push, amend, rebase, squash, tag, or rewrite existing history without separate authorization.
+- Use Conventional Commits: `<type>(<scope>): <summary>`. Keep the summary imperative, specific, and at most 72 characters; use either Chinese or English consistently within one commit.
+- Allowed types: `feat`, `fix`, `docs`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, and `revert`.
+- Prefer a concrete scope such as `skill`, `pipeline`, `viewer`, `scene`, `assets`, `home`, or the creature slug. Examples:
+  - `feat(jiuweihu): add verified animated collection`
+  - `fix(viewer): reject root-only motion as an action`
+  - `docs(skill): generalize anatomy quality gates`
+- Keep each commit atomic: one behavior change, one infrastructure change, or one creature production milestone. Do not mix unrelated refactors, documentation edits, generated assets, and creature work in a single catch-all commit.
+- A creature milestone must commit its code/config together with the prompts, selected source images, sanitized provider task records, audit updates, and QC reports needed to reproduce and review it. Failed generations may be included when they are part of the required production trace, but never include raw secrets or unsanitized responses.
+- Do not mark a collection `ready` or commit its catalog promotion until all mandatory gates pass. Prefer a separate final commit for the `draft` → `ready` promotion so the release decision is reviewable.
+- Before committing, inspect the complete diff and run the checks relevant to the changed files. Never bypass failing hooks or validation with `--no-verify`.
+- Never commit `.env`, API keys, Authorization/Cookie values, provider JWTs, signed URLs, account/billing data, `.agents/runtime/`, temporary downloads, caches, or local server output. Confirm provider records are sanitized before staging them.
+- Preserve user-authored or unrelated working-tree changes. Stage explicit paths instead of `git add .` when unrelated files are present.
+- Do not introduce Git LFS, rewrite binary history, or remove versioned production evidence solely to reduce repository size unless the user explicitly approves that repository-level change.
+
+### Large files and Git LFS
+
+- Follow the repository `.gitattributes`; do not broaden LFS to every `*.png`, `*.webp`, or `*.glb` without explicit approval. Small runtime assets should not pay the collaboration and hosting cost of LFS unnecessarily.
+- Use normal Git for text, prompts, audit/QC JSON, code, small previews, and optimized runtime assets below 10 MiB.
+- Prefer LFS for binary source assets from 10–50 MiB when they are expected to change, including source/intermediate GLB files, animation binaries, high-resolution concepts/views, and original generated images.
+- Files at or above 50 MiB must not enter normal Git. Put them in LFS or approved external object storage before staging. GitHub rejects normal Git objects above 100 MiB, so 100 MiB is a hard failure threshold, not the point at which cleanup should begin.
+- Prefer external object/artifact storage for a single file above 500 MiB, provider archives, caches, or large batches of failed generations. Keep a sanitized URL/object key, SHA-256, size, provenance, and selection status in the collection audit; do not commit expiring signed URLs.
+- `collections/<slug>/models/web.glb`, `preview.webp`, optimized scene backgrounds, and other files required directly by the static page remain normal Git assets only while each is below 50 MiB. If a runtime asset reaches that threshold, optimize it or decide the hosting/CDN strategy with the user instead of silently moving it to LFS.
+- GitHub Pages cannot serve Git LFS objects as ordinary site assets. When Pages is the target, keep compliant optimized runtime files in normal Git or deploy them to an external static host/CDN; use LFS only for production/source assets that the page does not request directly.
+- LFS stores each version of a binary as a new object. Do not repeatedly commit tiny changes to huge models; finish a meaningful production milestone locally, then commit the reviewed version and its traceability records.
+- Before committing assets, inspect file sizes and verify the intended classification with `git check-attr -a <path>` and `git lfs ls-files`. A file represented by an LFS pointer must have its corresponding LFS object available.
+- Adding LFS rules before the first asset commit is safe. Migrating already committed files or rewriting history with `git lfs migrate` requires explicit user approval and a backup/coordination plan.
+
+## Three.js requirements
+
+- Load `models/web.glb` and validate the declared `animation.mode`: skeletal needs a skinned mesh, morph needs morph-target tracks, articulated needs multiple animated semantic nodes, and hybrid needs valid evidence from its component modes.
+- Populate controls only from real playable actions; crossfade or equivalently blend actions and keep locomotion in place.
+- Autonomous world movement must be paired with a locomotion action that visibly expresses the expected gait, flap, wave, crawl or swim. World movement controls the path, not body motion.
+- Keep props out of creature raycasts, distinguish click from drag, constrain orbit/zoom, follow a roaming actor, and release all GPU resources.
+- Validate at 1920×1080 near 60 FPS, but do not trade away recognizable fur, facial, appendage or deformation quality merely to hit a smaller file.
+
+## Validation and security
+
+- Run `inspect_glb.py models/web.glb --motion-mode <skeletal|morph|articulated|hybrid> --min-animations 6`, then validate every action visually in the browser.
+- Record triangle count, texture sizes/channels, joint count, clips, animated nodes, draw calls, FPS, load size, console errors and close-up comparisons.
+- Load keys through `env_utils.py`; process values override root `.env`.
+- Never expose `.env`, `.agents` or `production/` from the preview server.
+- Never write or echo provider keys, Authorization, Cookie, account/billing data, subscription JWTs or signed download URLs. Store active status tokens only in ignored `.agents/runtime/` with mode 0600 and delete them when the task ends.

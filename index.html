@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="山海万象：可交互、可漫游、拥有丰富动作的《山海经》神兽 3D 图鉴。"
+    />
+    <title>山海万象 · Shanhaiworld</title>
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./assets/css/site.css" />
+  </head>
+  <body class="home-page">
+    <header class="site-header">
+      <a class="brand" href="./index.html" aria-label="山海万象首页">
+        <span class="brand-mark">山海</span>
+        <span class="brand-name">Shanhaiworld</span>
+      </a>
+      <div class="catalog-count" aria-live="polite">
+        已收录 <strong id="collection-count">0</strong> 只神兽
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">THE CLASSIC OF MOUNTAINS AND SEAS</p>
+        <h1 id="hero-title">山海万象</h1>
+        <p class="hero-copy">
+          在古籍记载与当代数字造物之间，观看神兽呼吸、行走、盘旋与回应。
+        </p>
+        <a class="hero-link" href="#collection-grid">进入神兽图鉴</a>
+      </section>
+
+      <section class="catalog-section" aria-labelledby="catalog-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">COLLECTIONS</p>
+            <h2 id="catalog-title">神兽图鉴</h2>
+          </div>
+          <p>点击卡片进入每只神兽独立的 3D 场景。</p>
+        </div>
+
+        <div id="collection-grid" class="collection-grid" aria-live="polite"></div>
+
+        <div id="empty-state" class="empty-state" hidden>
+          <span class="empty-orbit" aria-hidden="true"></span>
+          <h3>神兽正在苏醒</h3>
+          <p>使用 <code>$shanhai3d 神兽名称</code> 创建第一只神兽。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>山海万象 · Shanhaiworld</span>
+      <span>PC Interactive 3D Archive</span>
+    </footer>
+
+    <noscript>此网站需要启用 JavaScript 才能加载神兽图鉴。</noscript>
+    <script type="module" src="./assets/js/home.js"></script>
+  </body>
+</html>
