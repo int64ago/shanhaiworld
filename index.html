@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="山海万象：可交互、可漫游、拥有丰富动作的《山海经》神兽 3D 图鉴。"
+      content="山海万象儿童可读 3D 神兽图鉴：提供神兽名拼音、详细介绍、语音朗读、动作观察与鼠标互动。"
     />
     <title>山海万象 · Shanhaiworld</title>
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./assets/css/site.css" />
+    <link rel="stylesheet" href="./assets/css/site.css?v=20260815-kids-4" />
   </head>
-  <body class="home-page">
+  <body class="home-page kid-home">
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="山海万象首页">
         <span class="brand-mark">山海</span>
-        <span class="brand-name">Shanhaiworld</span>
+        <span class="brand-name"><span>山海图鉴</span></span>
       </a>
       <div class="catalog-count" aria-live="polite">
         已收录 <strong id="collection-count">0</strong> 只神兽
@@ -24,21 +24,21 @@
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">THE CLASSIC OF MOUNTAINS AND SEAS</p>
+        <p class="eyebrow"><span>欢迎浏览山海神兽图鉴</span></p>
         <h1 id="hero-title">山海万象</h1>
         <p class="hero-copy">
-          在古籍记载与当代数字造物之间，观看神兽呼吸、行走、盘旋与回应。
+          <span>从古籍记载出发，通过可交互的 3D 模型观察神兽的结构、动作与环境。</span>
         </p>
-        <a class="hero-link" href="#collection-grid">进入神兽图鉴</a>
+        <a class="hero-link" href="#collection-grid"><span>查看神兽图鉴</span></a>
       </section>
 
       <section class="catalog-section" aria-labelledby="catalog-title">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">COLLECTIONS</p>
+            <p class="eyebrow"><span>选择一只神兽</span></p>
             <h2 id="catalog-title">神兽图鉴</h2>
           </div>
-          <p>点击卡片进入每只神兽独立的 3D 场景。</p>
+          <p><span>点击卡片，查看详细介绍与可交互的 3D 模型。</span></p>
         </div>
 
         <div id="collection-grid" class="collection-grid" aria-live="polite"></div>
@@ -52,11 +52,10 @@
     </main>
 
     <footer class="site-footer">
-      <span>山海万象 · Shanhaiworld</span>
-      <span>PC Interactive 3D Archive</span>
+      <span class="footer-copy"><b>山海万象 · 古籍考据 · 互动观察</b></span>
     </footer>
 
     <noscript>此网站需要启用 JavaScript 才能加载神兽图鉴。</noscript>
-    <script type="module" src="./assets/js/home.js"></script>
+    <script type="module" src="./assets/js/home.js?v=20260815-kids-4"></script>
   </body>
 </html>

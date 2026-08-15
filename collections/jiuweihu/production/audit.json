@@ -1,0 +1,688 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "created_at": "2026-08-14T17:59:20+00:00",
+  "updated_at": "2026-08-15T03:09:51Z",
+  "runs": [
+    {
+      "id": "research-001",
+      "stage": "research",
+      "tool": "web_primary_sources",
+      "created_at": "2026-08-14T17:59:42Z",
+      "prompt_files": [],
+      "reference_files": [],
+      "output_files": [
+        "collections/jiuweihu/production/research/sources.json",
+        "collections/jiuweihu/spec.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "Separated Shanhaijing canonical anatomy from later color tradition and visual inference."
+      ]
+    },
+    {
+      "id": "concept-001",
+      "stage": "concept",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T18:02:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/concepts/001-master.json"
+      ],
+      "reference_files": [],
+      "output_files": [
+        "collections/jiuweihu/production/generations/concepts/001-master.png",
+        "collections/jiuweihu/concepts/master.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "Identity and material master only; deliberately excluded from provider inputs because tail-root topology is perspective-occluded."
+      ]
+    },
+    {
+      "id": "view-left-001",
+      "stage": "provider_view",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T18:04:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/views/001-left.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/concepts/master.png"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/generations/views/001-left.png"
+      ],
+      "status": "rejected",
+      "notes": [
+        "Failed earliest bad-view gate: far foreleg fully hidden; only three paws verifiable."
+      ]
+    },
+    {
+      "id": "view-left-002",
+      "stage": "provider_view",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T18:06:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/views/002-left.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/production/generations/views/001-left.png"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/generations/views/002-left.png",
+        "collections/jiuweihu/views/left.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "Targeted correction exposes all four leg chains and paws while retaining nine-tail anatomy."
+      ]
+    },
+    {
+      "id": "view-front-003",
+      "stage": "provider_view",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T18:08:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/views/003-front.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/concepts/master.png",
+        "collections/jiuweihu/views/left.png"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/generations/views/003-front.png"
+      ],
+      "status": "rejected",
+      "notes": [
+        "Counted eleven tails and only two visible paws; removed from provider candidate set."
+      ]
+    },
+    {
+      "id": "view-threequarter-front-004",
+      "stage": "provider_view",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T18:10:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/views/004-threequarter-front.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/concepts/master.png",
+        "collections/jiuweihu/views/left.png"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/generations/views/004-threequarter-front.png",
+        "collections/jiuweihu/views/front.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "Passed reference QC with four paws, nine tail chains and cross-view consistency."
+      ]
+    },
+    {
+      "id": "rodin-source-001",
+      "stage": "model_submission",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-14T18:15:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/rodin/001-source.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/views/front.png",
+        "collections/jiuweihu/views/left.png",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/providers/rodin/requests/001-submit.json"
+      ],
+      "status": "rejected",
+      "notes": [
+        "Provider rejected before task creation because prompt exceeded the documented endpoint limit of 1024 characters; no paid task was created. Next attempt compresses wording while preserving anatomy and quality constraints."
+      ]
+    },
+    {
+      "id": "rodin-source-002",
+      "stage": "model_submission",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-14T18:11:32Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/rodin/002-source.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/views/front.png",
+        "collections/jiuweihu/views/left.png",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/providers/rodin/requests/002-submit.json",
+        "collections/jiuweihu/production/providers/rodin/responses/001-submit.json",
+        "collections/jiuweihu/production/providers/rodin/tasks.json"
+      ],
+      "provider_task_id": "f1ae51db-7167-42dd-964f-1e6b2ef35eda",
+      "status": "rejected",
+      "notes": [
+        "Generated as Quad high, HighPack 4K PBR, concat-mode multi-view model, then rejected by eight-direction model QC because the rear exposes duplicated tail fans with eighteen ends."
+      ]
+    },
+    {
+      "id": "model-qc-001",
+      "stage": "model_qc",
+      "tool": "threejs_browser_turntable",
+      "created_at": "2026-08-14T18:24:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/spec.json",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/raw-v1.glb",
+        "collections/jiuweihu/reports/model-qc.json",
+        "collections/jiuweihu/reports/model-turntable/000.png",
+        "collections/jiuweihu/reports/model-turntable/045.png",
+        "collections/jiuweihu/reports/model-turntable/090.png",
+        "collections/jiuweihu/reports/model-turntable/135.png",
+        "collections/jiuweihu/reports/model-turntable/180.png",
+        "collections/jiuweihu/reports/model-turntable/225.png",
+        "collections/jiuweihu/reports/model-turntable/270.png",
+        "collections/jiuweihu/reports/model-turntable/315.png"
+      ],
+      "status": "rejected",
+      "notes": [
+        "Eight-direction inspection exposed a hidden duplicate tail fan; no deletion or component trimming attempted. Returned to reference conditioning."
+      ]
+    },
+    {
+      "id": "view-back-005",
+      "stage": "provider_view_rework",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T18:26:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/views/005-back.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/concepts/master.png",
+        "collections/jiuweihu/views/left.png",
+        "collections/jiuweihu/views/front.png",
+        "collections/jiuweihu/reports/model-turntable/180.png"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/generations/views/005-back.png",
+        "collections/jiuweihu/views/back.png",
+        "collections/jiuweihu/reports/contact-sheet-v2.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "Targeted reference rework constrains one 1+4+4 rear tail fan and replaces the hidden topology ambiguity exposed by Rodin attempt 1."
+      ]
+    },
+    {
+      "id": "rodin-source-003",
+      "stage": "model_submission",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-14T18:31:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/rodin/003-source.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/views/front.png",
+        "collections/jiuweihu/views/back.png",
+        "collections/jiuweihu/views/left.png",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/providers/rodin/requests/003-submit.json",
+        "collections/jiuweihu/production/providers/rodin/responses/004-submit.json",
+        "collections/jiuweihu/production/providers/rodin/tasks.json"
+      ],
+      "provider_task_id": "b6f73c25-e0e7-407d-bd64-7b2537d94acc",
+      "status": "rejected",
+      "notes": [
+        "Changed conditioning set added an authoritative rear topology-lock view and reduced the duplicated fan from eighteen to eleven tails, but remained structurally wrong and was rejected."
+      ]
+    },
+    {
+      "id": "model-qc-002",
+      "stage": "model_qc",
+      "tool": "threejs_browser_turntable",
+      "created_at": "2026-08-14T18:38:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/spec.json",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/raw-v2.glb",
+        "collections/jiuweihu/reports/model-qc.json",
+        "collections/jiuweihu/reports/model-turntable-v2/000.png",
+        "collections/jiuweihu/reports/model-turntable-v2/045.png",
+        "collections/jiuweihu/reports/model-turntable-v2/090.png",
+        "collections/jiuweihu/reports/model-turntable-v2/135.png",
+        "collections/jiuweihu/reports/model-turntable-v2/180.png",
+        "collections/jiuweihu/reports/model-turntable-v2/225.png",
+        "collections/jiuweihu/reports/model-turntable-v2/270.png",
+        "collections/jiuweihu/reports/model-turntable-v2/315.png"
+      ],
+      "status": "rejected",
+      "notes": [
+        "Rear topology improved but still contains eleven tails; no deletion or component surgery attempted. Returned to matched direct-front/direct-rear reference design."
+      ]
+    },
+    {
+      "id": "view-front-006",
+      "stage": "provider_view_rework",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T18:40:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/views/006-front-v2.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/concepts/master.png",
+        "collections/jiuweihu/views/back.png",
+        "collections/jiuweihu/reports/model-turntable-v2/180.png"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/generations/views/006-front-v2.png",
+        "collections/jiuweihu/views/front-v2.png",
+        "collections/jiuweihu/reports/contact-sheet-v3.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "Matched direct-front opposite of the accepted rear view; verified exactly one 1+4+4 fan and four paws. Side and oblique views are superseded for Rodin conditioning."
+      ]
+    },
+    {
+      "id": "rodin-source-004",
+      "stage": "model_submission",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-14T18:50:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/rodin/004-source.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/views/front-v2.png",
+        "collections/jiuweihu/views/back.png",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/providers/rodin/requests/004-submit.json",
+        "collections/jiuweihu/production/providers/rodin/responses/007-submit.json",
+        "collections/jiuweihu/production/providers/rodin/tasks.json"
+      ],
+      "provider_task_id": "a922f329-44ee-445f-b680-f07bd91330af",
+      "status": "rejected",
+      "notes": [
+        "Third diagnosed model attempt used only the matched direct-front/direct-rear pair; rejected because body depth collapsed into a flattened doubled anatomy."
+      ]
+    },
+    {
+      "id": "model-qc-003",
+      "stage": "model_qc",
+      "tool": "threejs_browser_turntable",
+      "created_at": "2026-08-14T18:58:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/spec.json",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/raw-v3.glb",
+        "collections/jiuweihu/reports/model-qc.json",
+        "collections/jiuweihu/reports/model-turntable-v3/000.png",
+        "collections/jiuweihu/reports/model-turntable-v3/045.png",
+        "collections/jiuweihu/reports/model-turntable-v3/090.png",
+        "collections/jiuweihu/reports/model-turntable-v3/135.png",
+        "collections/jiuweihu/reports/model-turntable-v3/180.png",
+        "collections/jiuweihu/reports/model-turntable-v3/225.png",
+        "collections/jiuweihu/reports/model-turntable-v3/270.png",
+        "collections/jiuweihu/reports/model-turntable-v3/315.png"
+      ],
+      "status": "rejected",
+      "notes": [
+        "Direct front/rear conditioning produced severe depth collapse and duplicated anatomy; next attempt restores only the shallow-front body-volume view plus rear topology lock."
+      ]
+    },
+    {
+      "id": "reference-selection-004",
+      "stage": "provider_view_selection",
+      "tool": "model_qc_driven_selection",
+      "created_at": "2026-08-14T19:01:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/views/front.png",
+        "collections/jiuweihu/views/back.png",
+        "collections/jiuweihu/reports/model-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/reports/reference-qc.json",
+        "collections/jiuweihu/reports/contact-sheet-v4.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "Revision 4 pairs the shallow-front body-volume view with the direct rear topology lock; excludes side-induced extra centers and direct-opposite depth collapse."
+      ]
+    },
+    {
+      "id": "rodin-source-005",
+      "stage": "model_submission",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-14T18:35:59Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/rodin/005-source.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/views/front.png",
+        "collections/jiuweihu/views/back.png",
+        "collections/jiuweihu/reports/reference-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/providers/rodin/requests/005-submit.json",
+        "collections/jiuweihu/production/providers/rodin/responses/010-submit.json",
+        "collections/jiuweihu/production/providers/rodin/responses/011-status.json",
+        "collections/jiuweihu/production/providers/rodin/responses/012-download.json",
+        "collections/jiuweihu/production/providers/rodin/downloads/004/base_high_pbr.glb",
+        "collections/jiuweihu/models/raw-v4.glb",
+        "collections/jiuweihu/production/providers/rodin/tasks.json"
+      ],
+      "provider_task_id": "1f9ee21d-d605-435c-8d26-60c06f987ded",
+      "status": "selected",
+      "notes": [
+        "Fourth diagnosed attempt keeps the shallow-front view for body volume and the direct rear view for the authoritative one-center plus four-per-side tail topology; Quad high with 4K HighPack PBR."
+      ]
+    },
+    {
+      "id": "model-qc-004",
+      "stage": "model_and_detail_qc",
+      "tool": "threejs_browser_turntable_and_deterministic_topology_audit",
+      "created_at": "2026-08-14T18:46:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/spec.json",
+        "collections/jiuweihu/reports/reference-qc.json",
+        "collections/jiuweihu/models/raw-v4.glb"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/raw.glb",
+        "collections/jiuweihu/reports/model-qc.json",
+        "collections/jiuweihu/reports/detail-qc.json",
+        "collections/jiuweihu/reports/topology-cleanup.json",
+        "collections/jiuweihu/reports/model-turntable-v4/",
+        "collections/jiuweihu/reports/model-closeups-v4/"
+      ],
+      "status": "selected",
+      "notes": [
+        "Eight-direction review passed one-head, four-leg, nine-tail anatomy. A deterministic script removed one duplicate terminal triangle only; the immutable Rodin original remains preserved and no anatomical component was deleted.",
+        "Selected source is closed manifold geometry with three 4096x4096 PBR textures and readable directional fur detail."
+      ]
+    },
+    {
+      "id": "tripo-rig-001",
+      "stage": "rigging",
+      "tool": "tripo_quadruped_rig",
+      "created_at": "2026-08-14T18:48:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/models/raw.glb",
+        "collections/jiuweihu/spec.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/providers/tripo/requests/003-rig-check.json",
+        "collections/jiuweihu/production/providers/tripo/responses/003-rig-check.json",
+        "collections/jiuweihu/production/providers/tripo/requests/004-rig.json",
+        "collections/jiuweihu/production/providers/tripo/responses/005-rig.json",
+        "collections/jiuweihu/models/rigged-v1.glb"
+      ],
+      "provider_task_id": "4a596855-31bc-48d1-a63d-04cb226f3d16",
+      "status": "selected_source_only",
+      "notes": [
+        "Official rig-check task f180564b-6066-429e-a119-610832a54704 returned riggable=true and quadruped.",
+        "The rigged bind asset has one valid skin, 60 joints and valid joint/weight attributes; it is preserved as the stable source for motion experiments."
+      ]
+    },
+    {
+      "id": "tripo-walk-001",
+      "stage": "animation_provider_attempt",
+      "tool": "tripo_quadruped_retarget",
+      "created_at": "2026-08-14T18:52:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/models/rigged-v1.glb"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/providers/tripo/requests/005-retarget.json",
+        "collections/jiuweihu/production/providers/tripo/responses/008-retarget.json",
+        "collections/jiuweihu/models/rigged-walk-v1.glb",
+        "collections/jiuweihu/reports/rig-walk-v1/"
+      ],
+      "provider_task_id": "40a6d598-9789-46cb-aeef-2ad89310df82",
+      "status": "rejected",
+      "notes": [
+        "The official quadruped walk clip passed structural validation but failed browser deformation QC: low tail and hind-body branches dragged and fragmented.",
+        "The failed animation and evidence remain intact; the release does not claim this skeletal motion."
+      ]
+    },
+    {
+      "id": "morph-fallback-001",
+      "stage": "deterministic_motion_fallback",
+      "tool": "build_morph_actions.py",
+      "created_at": "2026-08-14T18:55:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/models/rigged-v1.glb",
+        "collections/jiuweihu/reports/rig-walk-v1/"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/morph-v1.glb",
+        "collections/jiuweihu/reports/morph-actions-v1/"
+      ],
+      "status": "rejected",
+      "notes": [
+        "First localized morph build removed the provider collapse and was structurally valid, but non-walk signature actions were too visually subtle."
+      ]
+    },
+    {
+      "id": "morph-fallback-002",
+      "stage": "motion_system_and_animation_qc",
+      "tool": "build_morph_actions.py_and_threejs_browser",
+      "created_at": "2026-08-14T18:59:23Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/models/rigged-v1.glb",
+        "collections/jiuweihu/spec.json",
+        "collections/jiuweihu/reports/rig-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/morph-v2.glb",
+        "collections/jiuweihu/models/web.glb",
+        "collections/jiuweihu/reports/morph-build-v2.json",
+        "collections/jiuweihu/reports/morph-actions-v2/",
+        "collections/jiuweihu/reports/rig-qc.json",
+        "collections/jiuweihu/reports/animation-qc.json"
+      ],
+      "status": "selected_then_superseded",
+      "notes": [
+        "Sixteen localized semantic targets cover head/neck, spine/pelvis, four surface-geodesic leg regions and a continuous nine-tail field without changing anatomy.",
+        "Seven GLB clips passed structural validation and preparation/main/recovery browser review with no collapse, detachment, seam or root-only action.",
+        "Superseded without visual changes because the morph POSITION accessors lacked optional min/max metadata and caused Three.js loader warnings."
+      ]
+    },
+    {
+      "id": "morph-fallback-003",
+      "stage": "motion_asset_metadata_cleanup",
+      "tool": "build_morph_actions.py_and_threejs_browser",
+      "created_at": "2026-08-14T19:07:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/models/morph-v2.glb",
+        "collections/jiuweihu/reports/morph-actions-v2/"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/morph-v3.glb",
+        "collections/jiuweihu/models/web.glb",
+        "collections/jiuweihu/reports/morph-build-v3.json",
+        "collections/jiuweihu/reports/final-page/"
+      ],
+      "status": "selected",
+      "notes": [
+        "v3 adds min/max bounds to all 16 morph POSITION accessors; its binary geometry, texture and animation chunk is byte-identical to visually accepted v2.",
+        "Final clean-tab Three.js load reports zero warnings and errors."
+      ]
+    },
+    {
+      "id": "scene-background-001",
+      "stage": "scene_generation",
+      "tool": "codex_imagegen",
+      "created_at": "2026-08-14T19:02:00Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/scene/001-qingqiu-background.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/spec.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/production/generations/scene/001-qingqiu-background.png",
+        "collections/jiuweihu/scene/background.webp"
+      ],
+      "status": "selected",
+      "notes": [
+        "Selected environment plate contains no creature and preserves an uncluttered central roaming field, layered Qingqiu mountains and dawn lighting."
+      ]
+    },
+    {
+      "id": "release-qc-001",
+      "stage": "interactive_release_qc",
+      "tool": "threejs_browser_1920x1080",
+      "created_at": "2026-08-14T19:10:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/reports/reference-qc.json",
+        "collections/jiuweihu/reports/model-qc.json",
+        "collections/jiuweihu/reports/detail-qc.json",
+        "collections/jiuweihu/reports/rig-qc.json",
+        "collections/jiuweihu/reports/animation-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/index.html",
+        "collections/jiuweihu/collection.json",
+        "collections/jiuweihu/preview.webp",
+        "collections/jiuweihu/reports/final-page/",
+        "collections/jiuweihu/reports/release-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "At 1920x1080 the original release page sustained 82.5 average FPS with five draw calls and 95,250 rendered triangles.",
+        "All seven controls started their matching clips, autonomous translation paired with Walk, creature click triggered a one-shot, and a 100-pixel orbit drag did not trigger a click action.",
+        "Final browser console contained zero warnings and errors."
+      ]
+    },
+    {
+      "id": "morph-fallback-004",
+      "stage": "walk_hind_leg_revision",
+      "tool": "build_morph_actions.py_and_threejs_browser",
+      "created_at": "2026-08-15T03:09:51Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/models/morph-v3.glb",
+        "collections/jiuweihu/reports/morph-build-v3.json",
+        "collections/jiuweihu/production/scripts/build_morph_actions.py"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/morph-v8.glb",
+        "collections/jiuweihu/models/web-v8.glb",
+        "collections/jiuweihu/models/web.glb",
+        "collections/jiuweihu/reports/morph-build-v4.json",
+        "collections/jiuweihu/reports/morph-build-v5.json",
+        "collections/jiuweihu/reports/morph-build-v6.json",
+        "collections/jiuweihu/reports/morph-build-v7.json",
+        "collections/jiuweihu/reports/morph-build-v8.json",
+        "collections/jiuweihu/reports/morph-actions-v8/"
+      ],
+      "status": "selected",
+      "notes": [
+        "Diagnosis found that opposite rear-left and rear-right geodesic masks overlapped at both rear paws, causing their offsets to cancel visually.",
+        "v4 through v7 were rejected during targeted browser review for excessive or unstable inner rear-body deformation; their reports and screenshots are retained while temporary large binaries are not release artifacts.",
+        "Selected v8 adds side ownership and restrained upper-leg/pelvis falloff; alternating rear-paw displacement is approximately 0.048–0.051 model units versus about 0.030 before repair.",
+        "The final GLB retains seven clips, 16 morph targets, 91,600 source triangles and zero structural validation failures."
+      ]
+    },
+    {
+      "id": "readable-interface-001",
+      "stage": "interface_accessibility_and_narration",
+      "tool": "threejs_browser_1920x1080",
+      "created_at": "2026-08-15T03:09:51Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/audio/002-narration-zh-cn.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/collection.json",
+        "collections/jiuweihu/reports/animation-qc.json"
+      ],
+      "output_files": [
+        "collections/jiuweihu/index.html",
+        "collections/jiuweihu/collection.json",
+        "collections/jiuweihu/scene/narration-zh-cn-v2.m4a",
+        "collections/jiuweihu/reports/final-page/final-no-pinyin-1920x1080.png",
+        "collections/jiuweihu/reports/final-page/home-no-pinyin-1920x1080.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "Only jiǔ wěi hú remains as visible pinyin, placed above the creature name; all other descriptions, facts, controls, action messages and speech states are Chinese-only.",
+        "The top three-step strip and bottom mouse-hint strip were removed to enlarge the observation field while keeping orbit, zoom and creature-click interaction active.",
+        "Previous and next action buttons wrap across all seven clips; the detailed formal introduction has a 51.110-second Mandarin audio reading.",
+        "Clean single-tab 1920x1080 QA measured 116.9 average FPS, five draw calls, 95,250 rendered triangles, and zero console warnings or errors."
+      ]
+    }
+  ],
+  "selections": {
+    "concept": {
+      "source": "collections/jiuweihu/production/generations/concepts/001-master.png",
+      "stable": "collections/jiuweihu/concepts/master.png",
+      "reason": "One fox head, four anatomically plausible legs, nine distinct tail tips and strong copper fur identity; used only to lock design and materials."
+    },
+    "views": {
+      "left": {
+        "source": "collections/jiuweihu/production/generations/views/002-left.png",
+        "stable": "collections/jiuweihu/views/left.png",
+        "reason": "Near-orthographic full-body view with all four limb chains and nine tails independently readable."
+      },
+      "front_threequarter": {
+        "source": "collections/jiuweihu/production/generations/views/004-threequarter-front.png",
+        "stable": "collections/jiuweihu/views/front.png",
+        "reason": "Adds torso depth and tail-root lateral information while matching the accepted left view."
+      },
+      "back": {
+        "source": "collections/jiuweihu/production/generations/views/005-back.png",
+        "stable": "collections/jiuweihu/views/back.png",
+        "reason": "Genuine rear orthographic topology lock showing exactly one nine-tail fan as 1+4+4 and four visible paws."
+      },
+      "front_direct_v2": {
+        "source": "collections/jiuweihu/production/generations/views/006-front-v2.png",
+        "stable": "collections/jiuweihu/views/front-v2.png",
+        "reason": "Strict direct-front match to the rear view, showing the same 1+4+4 fan and four paws without side-view depth ambiguity."
+      }
+    },
+    "scene_background": {
+      "source": "collections/jiuweihu/production/generations/scene/001-qingqiu-background.png",
+      "stable": "collections/jiuweihu/scene/background.webp",
+      "reason": "Creature-free Qingqiu dawn environment with an uncluttered roaming clearing and edge-weighted mountain framing.",
+      "sha256": "80759c50c4ca054faf10cfb79a15be5b9ffbd435e968f440d64f171675288f85"
+    },
+    "preview": {
+      "source": "collections/jiuweihu/reports/final-page/preview-source-v3.png",
+      "stable": "collections/jiuweihu/preview.webp",
+      "reason": "Real Three.js release frame using the selected v3 asset and Nine-Tail Flare clip; no concept-image substitution.",
+      "sha256": "a077f8d66a392fb3e8bc1c3e34b1453926e0b23d8fc5ac7f216e82e38fb0dade"
+    },
+    "model": {
+      "source": "collections/jiuweihu/models/raw-v4.glb",
+      "stable": "collections/jiuweihu/models/raw.glb",
+      "reason": "First Rodin attempt to pass eight-direction anatomy and detail review; selected stable file differs only by removal of one audited duplicate non-anatomical triangle.",
+      "sha256": "749485341e47a58c6791d400b056b4f03b58b0e8dfd2928ede9a23dd63b25c2b"
+    },
+    "motion": {
+      "source": "collections/jiuweihu/models/rigged-v1.glb",
+      "stable": "collections/jiuweihu/models/web.glb",
+      "reason": "Tripo quadruped skeletal motion failed visual QC; selected v8 uses 16 deterministic localized morph targets and seven visually validated clips, with repaired alternating rear-leg stride, complete accessor bounds and a clean Three.js console.",
+      "sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e"
+    }
+  }
+}

@@ -11,9 +11,16 @@ const loadingDetail = document.querySelector("#loading-detail");
 const errorPanel = document.querySelector("#viewer-error");
 const errorMessage = document.querySelector("#viewer-error-message");
 const actionSelect = document.querySelector("#action-select");
+const prevActionButton = document.querySelector("#prev-action");
+const nextActionButton = document.querySelector("#next-action");
 const roamButton = document.querySelector("#toggle-roam");
 const resetButton = document.querySelector("#reset-camera");
+const speechButton = document.querySelector("#speak-intro");
+const speechStatus = document.querySelector("#voice-status");
+const actionMessage = document.querySelector("#action-message");
 const configUrl = new URL(document.body.dataset.collectionConfig || "./collection.json", window.location.href);
+const previewMode = new URLSearchParams(window.location.search).has("preview");
+document.body.dataset.previewMode = String(previewMode);
 
 const clock = new THREE.Clock();
 const raycaster = new THREE.Raycaster();
@@ -46,6 +53,8 @@ let roamMode = "idle";
 let roamUntil = 0;
 let destination = new THREE.Vector3();
 let pointerDown = null;
+let narrationUtterance = null;
+let narrationAudio = null;
 
 actor.add(motionRoot);
 
@@ -115,25 +124,179 @@ function setText(selector, value) {
   if (element) element.textContent = value || "";
 }
 
+function setBilingualContent(target, text, pinyin, { ruby = false } = {}) {
+  if (!target) return;
+  if (ruby && pinyin) {
+    const rubyElement = document.createElement("ruby");
+    rubyElement.append(document.createTextNode(text || ""));
+    const reading = document.createElement("rt");
+    reading.textContent = pinyin;
+    rubyElement.append(reading);
+    target.replaceChildren(rubyElement);
+    return;
+  }
+
+  const hanzi = document.createElement("span");
+  hanzi.className = "hanzi-line";
+  hanzi.textContent = text || "";
+  target.setAttribute("aria-label", text || "");
+  target.replaceChildren(hanzi);
+}
+
+function setBilingualButton(button, text) {
+  if (!button) return;
+  const label = button.querySelector("span:not(.voice-icon):not(.voice-copy)")
+    || button.querySelector(".voice-copy b");
+  if (label) label.textContent = text;
+  button.querySelectorAll("small").forEach((reading) => reading.remove());
+}
+
 function renderMetadata() {
+  document.body.dataset.kidMode = String(config.kid_mode === true);
   document.title = `${config.name} · 山海万象`;
-  setText("#creature-name", config.name);
-  setText("#creature-kicker", config.subtitle || "SHANHAI CREATURE");
-  setText("#creature-summary", config.summary || "一只从古籍记载中苏醒的山海神兽。");
+  setBilingualContent(
+    document.querySelector("#creature-name"),
+    config.name,
+    config.name_pinyin,
+    { ruby: true },
+  );
+  setBilingualContent(
+    document.querySelector("#creature-kicker"),
+    config.subtitle || "山海神兽",
+  );
+  setBilingualContent(
+    document.querySelector("#creature-summary"),
+    config.summary || "一只从古籍记载中苏醒的山海神兽。",
+  );
 
   const facts = document.querySelector("#creature-facts");
   const rows = Array.isArray(config.facts) ? [...config.facts] : [];
-  if (config.body_type) rows.unshift({ label: "形态", value: config.body_type });
+  if (config.body_type) {
+    rows.unshift({
+      label: "身体类型",
+      value: config.body_type === "quadruped" ? "狐形四足兽" : config.body_type,
+    });
+  }
 
   const fragment = document.createDocumentFragment();
-  rows.slice(0, 5).forEach((row) => {
+  rows.slice(0, 5).forEach((row, index) => {
     const term = document.createElement("dt");
     const value = document.createElement("dd");
-    term.textContent = row.label;
-    value.textContent = row.value;
+    if (typeof row === "string") {
+      setBilingualContent(term, index === 0 && config.body_type ? "古书" : "发现");
+      setBilingualContent(value, row);
+    } else {
+      setBilingualContent(term, row.label);
+      setBilingualContent(value, row.value);
+    }
     fragment.append(term, value);
   });
   facts.replaceChildren(fragment);
+}
+
+function selectChineseVoice() {
+  const voices = window.speechSynthesis?.getVoices?.() || [];
+  return voices.find((voice) => /zh[-_](CN|Hans)/iu.test(voice.lang))
+    || voices.find((voice) => voice.lang.toLowerCase().startsWith("zh"))
+    || null;
+}
+
+function setSpeechState(speaking) {
+  setBilingualButton(
+    speechButton,
+    speaking ? "停止朗读" : config.narration?.button_label || "朗读介绍",
+  );
+  speechButton?.setAttribute("aria-pressed", String(speaking));
+}
+
+function speakWithBrowserVoice() {
+  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return;
+  narrationUtterance = new SpeechSynthesisUtterance(
+    config.narration?.text || `${config.name}。${config.summary || ""}`,
+  );
+  narrationUtterance.lang = "zh-CN";
+  narrationUtterance.rate = 0.86;
+  narrationUtterance.pitch = 1.08;
+  const voice = selectChineseVoice();
+  if (voice) narrationUtterance.voice = voice;
+  narrationUtterance.onstart = () => {
+    setSpeechState(true);
+    speechStatus.textContent = "正在朗读详细介绍";
+  };
+  narrationUtterance.onend = () => {
+    setSpeechState(false);
+    speechStatus.textContent = "介绍已朗读完毕，可以再次播放";
+  };
+  narrationUtterance.onerror = () => {
+    setSpeechState(false);
+    speechStatus.textContent = "暂时无法朗读，请再点击一次";
+  };
+  window.speechSynthesis.speak(narrationUtterance);
+}
+
+async function speakIntroduction() {
+  const audioIsPlaying = narrationAudio && !narrationAudio.paused && !narrationAudio.ended;
+  if (audioIsPlaying || window.speechSynthesis?.speaking) {
+    narrationAudio?.pause();
+    if (narrationAudio) narrationAudio.currentTime = 0;
+    window.speechSynthesis?.cancel();
+    setSpeechState(false);
+    speechStatus.textContent = "朗读已停止";
+    return;
+  }
+
+  if (narrationAudio) {
+    try {
+      narrationAudio.currentTime = 0;
+      await narrationAudio.play();
+      setSpeechState(true);
+      speechStatus.textContent = "正在朗读详细介绍";
+      return;
+    } catch {
+      narrationAudio = null;
+    }
+  }
+
+  speakWithBrowserVoice();
+}
+
+function setupSpeech() {
+  if (!speechButton) return;
+  if (config.narration?.audio) {
+    narrationAudio = new Audio(assetUrl(config.narration.audio));
+    narrationAudio.preload = "metadata";
+    narrationAudio.addEventListener("ended", () => {
+      setSpeechState(false);
+      speechStatus.textContent = "介绍已朗读完毕，可以再次播放";
+    });
+    narrationAudio.addEventListener("error", () => {
+      narrationAudio = null;
+    }, { once: true });
+  }
+  if (!narrationAudio && (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window))) {
+    if (speechStatus) speechStatus.textContent = "这个浏览器暂时无法朗读";
+    return;
+  }
+  speechButton.disabled = false;
+  setSpeechState(false);
+  speechStatus.textContent = `点击按钮，朗读${config.name}的详细介绍`;
+  speechButton.addEventListener("click", speakIntroduction);
+}
+
+function renderActionMessage(clipName) {
+  if (!actionMessage) return;
+  const content = config.action_labels?.[clipName];
+  if (!content) {
+    setBilingualContent(actionMessage, clipName, "");
+    return;
+  }
+  const title = document.createElement("strong");
+  title.className = "action-message-title";
+  setBilingualContent(title, content.label);
+  const detail = document.createElement("span");
+  detail.className = "action-message-detail";
+  setBilingualContent(detail, content.message || content.label);
+  actionMessage.replaceChildren(title, detail);
 }
 
 function configureCamera() {
@@ -487,6 +650,7 @@ function playClip(keyOrName, { once = false } = {}) {
   if (!clip || !mixer) return false;
 
   const next = mixer.clipAction(clip);
+  renderActionMessage(clip.name);
   if (next === activeAction && next.isRunning()) return true;
 
   next.reset();
@@ -517,10 +681,30 @@ function setupActions() {
   actionSelect.replaceChildren();
   if (!clips.length) throw new Error("动作面板无法找到真实 GLB clips");
 
-  clips.forEach((clip) => actionSelect.add(new Option(clip.name, clip.name)));
+  clips.forEach((clip) => {
+    const label = config.action_labels?.[clip.name];
+    const text = label ? label.label : clip.name;
+    actionSelect.add(new Option(text, clip.name));
+  });
   actionSelect.disabled = false;
+  prevActionButton.disabled = clips.length < 2;
+  nextActionButton.disabled = clips.length < 2;
   roamButton.disabled = !(resolveClip("walk") || resolveClip("run") || resolveClip("fly"));
   playClip("idle") || playClip(clips[0].name);
+}
+
+function stopRoamingForManualAction() {
+  roamEnabled = false;
+  roamButton.setAttribute("aria-pressed", "false");
+  setBilingualButton(roamButton, "自动巡游：关");
+}
+
+function playAdjacentClip(offset) {
+  if (!availableClips.length) return;
+  const current = Math.max(0, availableClips.findIndex((clip) => clip.name === actionSelect.value));
+  const next = (current + offset + availableClips.length) % availableClips.length;
+  stopRoamingForManualAction();
+  playClip(availableClips[next].name);
 }
 
 function chooseRoamState(now) {
@@ -532,12 +716,13 @@ function chooseRoamState(now) {
 
   if (!shouldMove) {
     roamMode = "idle";
-    const choices = ["idle", "observe", "call", "display"].filter(
+    const choices = ["idle", "listen", "threat", "tail_flare"].filter(
       (name) => resolveClip(name),
     );
     const selected = choices[Math.floor(Math.random() * choices.length)] || "idle";
     playClip(selected, { once: selected !== "idle" });
-    roamUntil = now + THREE.MathUtils.randFloat(2.8, 6.2);
+    const selectedDuration = resolveClip(selected)?.duration || 0;
+    roamUntil = now + Math.max(THREE.MathUtils.randFloat(2.8, 6.2), selectedDuration + 0.4);
     return;
   }
 
@@ -586,7 +771,7 @@ function triggerClickAction() {
   const available = choices.filter((name) => resolveClip(name));
   if (!available.length) return;
   const selected = available[Math.floor(Math.random() * available.length)];
-  roamUntil = clock.elapsedTime + 2.5;
+  roamUntil = clock.elapsedTime + (resolveClip(selected)?.duration || 2.5) + 0.4;
   roamMode = "idle";
   playClip(selected, { once: true });
 }
@@ -611,16 +796,20 @@ function onPointerUp(event) {
 
 function bindControls() {
   actionSelect.addEventListener("change", () => {
-    roamEnabled = false;
-    roamButton.setAttribute("aria-pressed", "false");
-    roamButton.textContent = "自动游走：关";
+    stopRoamingForManualAction();
     playClip(actionSelect.value);
   });
+
+  prevActionButton.addEventListener("click", () => playAdjacentClip(-1));
+  nextActionButton.addEventListener("click", () => playAdjacentClip(1));
 
   roamButton.addEventListener("click", () => {
     roamEnabled = !roamEnabled;
     roamButton.setAttribute("aria-pressed", String(roamEnabled));
-    roamButton.textContent = `自动游走：${roamEnabled ? "开" : "关"}`;
+    setBilingualButton(
+      roamButton,
+      `自动巡游：${roamEnabled ? "开" : "关"}`,
+    );
     roamUntil = 0;
     if (!roamEnabled) playClip("idle");
   });
@@ -657,13 +846,17 @@ function cleanup() {
   dracoLoader.dispose();
   ktx2Loader.dispose();
   renderer.dispose();
+  narrationAudio?.pause();
+  if (narrationUtterance && window.speechSynthesis?.speaking) window.speechSynthesis.cancel();
 }
 
 async function start() {
   try {
     loadingDetail.textContent = "读取神兽设定…";
     config = await fetchConfig();
+    renderer.toneMappingExposure = config.lighting?.exposure ?? 1.08;
     renderMetadata();
+    setupSpeech();
     configureCamera();
     addLighting();
     addGround();
@@ -671,9 +864,12 @@ async function start() {
     await loadBackground();
     await Promise.all([loadProps(), loadCreature()]);
     bindControls();
-    roamEnabled = config.roaming?.enabled !== false;
+    roamEnabled = !previewMode && config.roaming?.enabled !== false;
     roamButton.setAttribute("aria-pressed", String(roamEnabled));
-    roamButton.textContent = `自动游走：${roamEnabled ? "开" : "关"}`;
+    setBilingualButton(
+      roamButton,
+      `自动巡游：${roamEnabled ? "开" : "关"}`,
+    );
     loadingState.classList.add("is-hidden");
     runtimeMetrics.status = "ready";
     runtimeMetrics.started_at = performance.now();
@@ -699,6 +895,9 @@ async function start() {
         document.body.dataset.averageFps = runtimeMetrics.average_fps.toFixed(1);
         document.body.dataset.drawCalls = String(runtimeMetrics.draw_calls);
         document.body.dataset.renderedTriangles = String(runtimeMetrics.rendered_triangles);
+        document.body.dataset.roamMode = roamMode;
+        document.body.dataset.actorPosition = actor.position.toArray().map((value) => value.toFixed(3)).join(",");
+        document.body.dataset.activeAction = activeAction?._clip?.name || "";
       }
     });
   } catch (error) {

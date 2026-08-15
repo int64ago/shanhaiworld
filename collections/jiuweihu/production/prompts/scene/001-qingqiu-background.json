@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "scene-background-001",
+  "created_at": "2026-08-14T19:02:00Z",
+  "tool": "codex_imagegen",
+  "purpose": "Wide environment plate for the interactive Three.js Qingqiu habitat",
+  "prompt": "Create a cinematic ultra-wide 16:9 environment plate of Qingqiu, the mythic mountain habitat from the Classic of Mountains and Seas, at the blue hour just before dawn. A broad, low jade-green valley clearing occupies the lower middle so a copper-red nine-tailed fox 3D model can stand and roam without visual clutter. Layered rounded Chinese mountains and weathered pale-jade rock formations frame the distant horizon; sparse dark grasses, shallow reflective water, drifting ground mist, and a few ancient wind-shaped pines provide depth. Warm pale-gold dawn light breaks softly from the upper right while cool blue-green ambient light preserves texture. Elegant Chinese mythic naturalism, realistic atmospheric perspective, high-end cinematic game environment, rich but restrained detail, no buildings, no shrine, no characters, no animals, no fox, no tails, no text, no border, no UI. Keep the center and lower-center calm and readable; place strong visual accents toward the far left and far right edges. Camera at fox eye level, rectilinear wide view, seamless background composition.",
+  "negative_constraints": [
+    "no creature or animal",
+    "no fox or tails",
+    "no people",
+    "no architecture",
+    "no text or interface",
+    "no central foreground obstruction",
+    "no high-contrast fog over the roaming area"
+  ]
+}

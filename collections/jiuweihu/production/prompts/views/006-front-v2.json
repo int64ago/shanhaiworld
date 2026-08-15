@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "view-front-006",
+  "stage": "provider_view_rework",
+  "tool": "codex_imagegen",
+  "created_at": "2026-08-14T18:40:00Z",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: stylized-concept\nAsset type: clean strict front orthographic provider input matched directly to an accepted rear topology-lock view\nInput images: Image 1 is the identity, face, palette and fur-material master only. Image 2 is the authoritative rear orthographic topology and frozen-pose reference. Re-render the exact same creature at the same instant from the opposite direct front direction. Preserve Image 2's single nine-tail 1+4+4 fan as one physical structure; do not infer extra center tails from Image 1's perspective.\nPrimary request: produce a strict full-body front orthographic view of the same Shanhaijing Nine-Tailed Fox. This view and Image 2 must form a matched direct-front/direct-rear pair that allows only one three-dimensional interpretation.\nScene/backdrop: clean flat medium cool-gray identical to Image 2; no horizon, floor seam, cast shadow, scenery, fog, gradient or vignette\nSubject: one non-humanoid adult fox facing straight at camera, one head, two upright ears, two eyes, exactly two forelegs, exactly two hindlegs, four separately visible grounded paws and exactly nine complete tails. Keep Image 2's level spine and staggered neutral stance. Behind the body, show the SAME single tail fan in front projection as exactly one central tail plus exactly four tails visible to image-left and exactly four tails visible to image-right, total nine. Each of nine tips is distinct with clean negative space. There is no second depth layer of tails and no extra central stack. Tails remain attached only at the unseen sacral/caudal region behind the torso; none emerges from a shoulder or leg.\nStyle/medium: high-fidelity realistic 3D creature turnaround render, production sculpt and PBR reconstruction reference\nComposition/framing: strict direct front orthographic projection, camera centered on sternum, full body and all nine tail tips in frame, even margins, no perspective convergence\nLighting/mood: uniform neutral studio illumination matching Image 2, low contrast and no rim bloom\nMaterials/textures: same copper-red/umber layered directional fur as both references; preserve Image 1's ivory muzzle/chest/inner ears, amber eyes, dark nose and claws; muted ivory tail tips match Image 2\nConstraints: matched opposite of Image 2; exactly one 1+4+4 nine-tail fan total; four legs and four paws; same proportions, stance, tail lengths, palette and materials; clean unannotated image\nAvoid: eleven tails, eighteen tails, five central tails, two overlapping fans, depth-layer duplication, fewer or more than nine tails, branching/fused/floating tails, hidden paws, anatomy drift, decorative halo, split panels, text, arrows, watermark, crop, perspective, blur, fog, shadow, horizon, plastic fur",
+  "negative_prompt": "eleven tails, eighteen tails, five central tails, two overlapping fans, depth-layer duplication, fewer or more than nine tails, branching/fused/floating tails, hidden paws, anatomy drift, crop, perspective, shadow, horizon, text, watermark, plastic fur",
+  "references": [
+    "collections/jiuweihu/concepts/master.png",
+    "collections/jiuweihu/views/back.png"
+  ],
+  "expected_output": "collections/jiuweihu/production/generations/views/006-front-v2.png",
+  "outputs": [
+    "collections/jiuweihu/production/generations/views/006-front-v2.png"
+  ],
+  "status": "selected",
+  "notes": [
+    "Generated after Rodin attempt 2 produced eleven tails; intended to replace the oblique front/side conditioning with a matched direct-front/direct-rear pair.",
+    "Passed full-resolution and 200-percent QC with one center plus four-left plus four-right tails, four visible paws and direct correspondence to views/back.png."
+  ]
+}

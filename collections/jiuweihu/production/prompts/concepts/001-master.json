@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "concept-001",
+  "stage": "concept",
+  "tool": "codex_imagegen",
+  "created_at": "2026-08-14T18:02:00Z",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: stylized-concept\nAsset type: cinematic identity master for a high-fidelity PC 3D mythic-creature collection\nPrimary request: create one full-body three-quarter front identity master of the Shanhaijing Nine-Tailed Fox from Qingqiu, designed as a physically believable non-humanoid fox predator for later 3D reconstruction\nScene/backdrop: restrained dark jade-to-charcoal studio gradient with a faint low ground plane, no landscape props and no mist crossing the body\nSubject: a single adult fox creature with exactly one fox head, two upright triangular ears, two eyes, four anatomically plausible fox legs ending in four grounded paws, and exactly nine complete large tails. The nine tails must each have a separately visible root emerging naturally from the sacral/caudal fan, an independently traceable full-volume body, and one distinct tip; arrange them as an elegant asymmetric fan behind and above the body with clear negative-space gaps and mild depth staggering, never branching, merging, floating, or replacing a leg. Long pointed muzzle, alert predatory expression, natural digitigrade fox proportions, level spine.\nStyle/medium: premium realistic creature concept rendered as a high-end 3D maquette with production-ready anatomy and PBR material thinking; no human traits, no costume, no jewelry\nComposition/framing: full body entirely inside frame, three-quarter front view at near eye level, all four paws visible, head and forequarters unobscured, every tail traceable from root to tip, moderate long-lens perspective\nLighting/mood: controlled warm dawn key and broad cool fill; copper fur remains below clipping; predatory and numinous rather than cute\nColor palette: deep copper-red and burnt sienna body fur, smoked-umber shadow fur, muted ivory muzzle/chest/inner ears and subtle tail tips, amber-gold eyes\nMaterials/textures: layered sculpted fox-fur clumps following anatomy, clear silhouette breakup at cheeks/ruff/belly/elbows/haunches/all nine tails, directional normal and roughness variation, wet dark nose, separate lips, small readable teeth, restrained dark keratin claws\nConstraints: exactly one isolated creature; four legs and four paws; exactly nine complete tails; correct continuous connections; all counted structures visually verifiable at original resolution and 200 percent; non-humanoid; no text, labels, symbols, watermark, harness or props\nAvoid: extra or missing tails; fused, forked, braided, transparent, cropped or floating tails; tail-like legs; extra limbs, heads, eyes or ears; hidden paws; human face or hands; exaggerated fantasy armor; smooth clay, plastic fur, blurry painted fur, strong bloom, depth of field, motion blur, fog, rim-light clipping",
+  "negative_prompt": "extra/fused/missing appendages, fewer or more than nine tails, merged tail roots, branched tails, cropped body, occlusion, hidden paws, human traits, costume, text, watermark, motion blur, depth of field, fog, rim-light bloom, smooth clay, plastic fur, painted fur blur",
+  "references": [],
+  "expected_output": "collections/jiuweihu/production/generations/concepts/001-master.png",
+  "outputs": [
+    "collections/jiuweihu/production/generations/concepts/001-master.png"
+  ],
+  "status": "selected",
+  "notes": [
+    "1536x1024 identity master selected after original-resolution review: one head, four legs, nine distinct tail tips, readable copper fur clumps and materially separated face. Not approved as provider input because dramatic three-quarter depth partly hides the tail-root topology."
+  ]
+}

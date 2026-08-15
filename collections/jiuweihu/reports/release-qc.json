@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "status": "passed",
+  "checked_at": "2026-08-15T03:09:51Z",
+  "page": "collections/jiuweihu/index.html",
+  "runtime_asset": {
+    "path": "collections/jiuweihu/models/web.glb",
+    "sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e",
+    "bytes": 52131460,
+    "mebibytes": 49.716,
+    "triangles": 91600,
+    "textures": 3,
+    "texture_resolution": [4096, 4096],
+    "texture_channels": ["base_color", "normal", "metallic_roughness"],
+    "skin_count": 1,
+    "joint_count": 60,
+    "release_motion_mode": "morph",
+    "morph_target_count": 16,
+    "animation_clip_count": 7,
+    "animated_mesh_nodes": 1
+  },
+  "performance": {
+    "viewport": [1920, 1080],
+    "device_pixel_ratio": 1,
+    "average_fps": 116.9,
+    "draw_calls": 5,
+    "rendered_triangles": 95250,
+    "console_errors": 0,
+    "console_warnings": 0,
+    "evidence": "collections/jiuweihu/reports/final-page/final-no-pinyin-1920x1080.png"
+  },
+  "checks": [
+    {
+      "id": "final_glb_structure",
+      "status": "passed",
+      "evidence": "python3 .agents/skills/shanhai3d/scripts/inspect_glb.py collections/jiuweihu/models/web.glb --motion-mode morph --min-animations 6",
+      "notes": [
+        "Validator reports morph evidence, seven clips and no validation failures."
+      ]
+    },
+    {
+      "id": "all_actions_playable",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/final-page/",
+      "notes": [
+        "The final v8 page control activated Idle, Walk, Pounce, Nine-Tail Flare, Threat Display, Listen and Dodge by exact clip name.",
+        "Preparation, main and recovery visuals are retained in reports/morph-actions-v2; targeted v8 walk views verify the repaired rear stride."
+      ]
+    },
+    {
+      "id": "action_navigation",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/index.html and assets/js/collection-page.js",
+      "notes": [
+        "Previous and next buttons advance through the seven real clips and wrap from Idle to Dodge and from Dodge to Idle."
+      ]
+    },
+    {
+      "id": "readable_interface_and_narration",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/final-page/final-no-pinyin-1920x1080.png",
+      "notes": [
+        "Only the creature name retains pinyin above the Chinese characters; introductions, facts, controls, action messages and speech status are Chinese-only.",
+        "The formal source-based introduction has a 51.110-second Mandarin audio track with browser speech synthesis as fallback.",
+        "The redundant top instruction strip and bottom mouse-hint strip were removed while orbit, zoom and click behavior remain available."
+      ]
+    },
+    {
+      "id": "hind_leg_walk_revision",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-build-v8.json and collections/jiuweihu/reports/morph-actions-v8/",
+      "notes": [
+        "The prior rear-left and rear-right surface masks overlapped at each rear paw and their opposite offsets visually cancelled.",
+        "The v8 side-owned rear fields now alternate visible fore-aft paw motion with restrained upper-leg and pelvis falloff and no seam or detachment."
+      ]
+    },
+    {
+      "id": "autonomous_roaming",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/final-page/auto-roam-walk.png",
+      "notes": [
+        "Actor world position changed from -0.640,0.000,0.006 to -0.950,0.000,0.008 while both roam mode and active action were Walk."
+      ]
+    },
+    {
+      "id": "mouse_orbit_zoom_click",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/final-page/",
+      "notes": [
+        "A creature raycast click changed Idle to Nine-Tail Flare.",
+        "A 100-pixel canvas orbit drag left Idle active, confirming drag is not treated as click.",
+        "Wheel zoom changed camera distance while OrbitControls retained configured polar and distance bounds."
+      ]
+    },
+    {
+      "id": "props_excluded_from_creature_raycast",
+      "status": "passed",
+      "evidence": "assets/js/collection-page.js",
+      "notes": [
+        "Click raycasts target modelRoot only; procedural rocks, water and ground are never included."
+      ]
+    },
+    {
+      "id": "camera_follow_and_gpu_cleanup",
+      "status": "passed",
+      "evidence": "assets/js/collection-page.js",
+      "notes": [
+        "Camera and OrbitControls target follow actor world movement with damping.",
+        "beforeunload stops the animation loop and disposes geometries, materials, textures, controls, loaders and renderer."
+      ]
+    },
+    {
+      "id": "visual_release_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/final-page/final-no-pinyin-1920x1080.png",
+      "notes": [
+        "The release frame preserves readable face, four grounded legs, nine continuous tails, directional fur and a coherent Qingqiu dawn environment."
+      ]
+    },
+    {
+      "id": "catalog_promotion",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/final-page/home-no-pinyin-1920x1080.png",
+      "notes": [
+        "The home page reports one ready creature, renders the 九尾狐 card, and keeps only the creature-name pinyin without console warnings or errors."
+      ]
+    }
+  ],
+  "blocking_failures": []
+}

@@ -3,6 +3,9 @@ collections/*/concepts/*.png filter=lfs diff=lfs merge=lfs -text
 collections/*/views/*.png filter=lfs diff=lfs merge=lfs -text
 collections/*/production/generations/** filter=lfs diff=lfs merge=lfs -text
 
+# Preserve provider-delivered source/intermediate GLBs in LFS as production evidence.
+collections/*/production/providers/**/*.glb filter=lfs diff=lfs merge=lfs -text
+
 # Keep editable/intermediate 3D and animation binaries out of normal Git history.
 collections/*/models/*.glb filter=lfs diff=lfs merge=lfs -text
 collections/*/models/**/*.glb filter=lfs diff=lfs merge=lfs -text

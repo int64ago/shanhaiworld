@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "view-front-003",
+  "stage": "provider_view",
+  "tool": "codex_imagegen",
+  "created_at": "2026-08-14T18:08:00Z",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: stylized-concept\nAsset type: clean front orthographic provider input for high-quality multi-view 3D reconstruction\nInput images: Image 1 is the cinematic identity and material master. Image 2 is the accepted left near-orthographic pose/anatomy reference. Render the exact same creature at the exact same instant; preserve identity, skull width, ear shape, body height, leg lengths, copper/ivory fur placement, all nine tail lengths and their existing vertical phase order.\nPrimary request: produce a strict full-body front orthographic model sheet view of the same Shanhaijing Nine-Tailed Fox in the frozen neutral reconstruction stance\nScene/backdrop: perfectly clean flat medium cool-gray background identical in value to Image 2; no horizon, floor seam, cast shadow, scenery, mist, gradient or vignette\nSubject: one non-humanoid adult fox facing straight at camera, one head, two upright ears, two eyes, closed mouth, exactly two forelegs, exactly two hindlegs and four separately readable grounded paws. Keep the stance seen in Image 2: level spine, neutral neck, all four paws on one invisible ground line with small fore-aft offsets; in this front projection preserve enough lateral separation to verify every leg chain. Exactly nine complete full-volume tails remain attached to the sacral/caudal fan behind the pelvis. Show the nine tail bodies as a controlled three-dimensional fan visible around and above the torso with nine separately traceable tips and negative-space gaps, while maintaining the vertical phase order and length family from Image 2. No tail may originate from a leg, shoulder or empty space; no branching, merging, crossing that hides topology, or added tail.\nStyle/medium: high-fidelity realistic 3D creature turnaround render, production sculpt and PBR reference, exactly matching both references\nComposition/framing: strict front orthographic view, camera centered on sternum and perpendicular to frontal plane, full body and all tail tips inside frame with generous margins, bilateral anatomy readable without wide-angle distortion\nLighting/mood: uniform neutral three-point studio illumination matching Image 2, low contrast, no rim bloom; shallow fur color variation only from material, not light\nMaterials/textures: same layered directional fox-fur clumps, copper-red/umber body, muted ivory muzzle/chest/inner ears/tail tips, wet dark nose, amber eyes and restrained keratin claws as references\nConstraints: same frozen pose, proportions, topology, palette and materials; exactly one creature, four legs, four paws and nine complete tails; clean image with no text, labels, arrows, split panels or watermark\nAvoid: extra/fused/missing appendages, fewer or more than nine tails, hidden legs or paws, merged tail roots, forked tails, flat decorative tail halo, changed pose or proportions, perspective, crop, occlusion, motion blur, depth of field, fog, cast shadow, horizon, smooth clay, plastic fur, painted fur blur, costume or human traits",
+  "negative_prompt": "extra/fused/missing appendages, fewer or more than nine tails, hidden legs, hidden paws, merged/forked/floating tails, anatomy or pose drift, crop, perspective, motion, depth of field, fog, rim light, shadow, horizon, text, watermark, plastic fur",
+  "references": [
+    "collections/jiuweihu/concepts/master.png",
+    "collections/jiuweihu/views/left.png"
+  ],
+  "expected_output": "collections/jiuweihu/production/generations/views/003-front.png",
+  "outputs": [
+    "collections/jiuweihu/production/generations/views/003-front.png"
+  ],
+  "status": "rejected",
+  "notes": [
+    "Rejected at original-resolution anatomy review: the radial silhouette contains eleven visible tails rather than nine, and only the two forelegs/paws are verifiable. Excluded from provider inputs."
+  ]
+}

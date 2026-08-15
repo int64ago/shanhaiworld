@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "view-threequarter-front-004",
+  "stage": "provider_view",
+  "tool": "codex_imagegen",
+  "created_at": "2026-08-14T18:10:00Z",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: stylized-concept\nAsset type: clean front-left three-quarter long-lens provider input for high-quality multi-view 3D reconstruction\nInput images: Image 1 is the sole identity/material master. Image 2 is the accepted left near-orthographic pose/anatomy reference and is authoritative for exact counts, proportions, stance and the nine-tail family. Do not use the rejected radial front concept.\nPrimary request: render the same Shanhaijing Nine-Tailed Fox at the same frozen instant, seen from a shallow front-left three-quarter direction with near-orthographic long-lens projection so the chest width, torso depth, pelvis, tail attachments and four limb chains are reconstructable\nScene/backdrop: perfectly clean flat medium cool-gray background identical to Image 2; no horizon, floor seam, cast shadow, scenery, mist, gradient or vignette\nSubject: one non-humanoid adult fox with one head, two upright ears, two eyes, exactly two forelegs, exactly two hindlegs, exactly four grounded paws and exactly nine complete tails. Preserve Image 2's level spine, natural fox proportions, closed mouth and staggered neutral stance; rotate only the virtual camera around the stationary creature by about 25 degrees toward its front. The nine tails must keep Image 2's count, length family, color placement and vertical phase order while revealing modest lateral depth. Each of nine tail roots must connect continuously to one intact sacral/caudal fan; each tail body must be traceable to one distinct tip with negative-space gaps. No decorative radial halo, symmetry multiplication, branch, merge, crossing that hides topology or tail emerging from a limb.\nStyle/medium: high-fidelity realistic 3D creature turnaround render, production sculpt and PBR reconstruction reference, same facial identity and copper/ivory markings as both references\nComposition/framing: full body centered with even generous margins, moderate long-lens shallow three-quarter projection, all four leg chains and paws visible, all nine tail tips in frame, no crop or wide-angle distortion\nLighting/mood: uniform neutral studio illumination matching Image 2, low contrast and no rim bloom\nMaterials/textures: same layered directional sculpted fur clumps, wet dark nose, amber eyes, separate lips and restrained dark keratin claws as the references\nConstraints: one isolated creature; same frozen pose, proportions, fur pattern and materials; exact four legs/four paws/nine tails verified visually; clean unannotated image; no text, numbers, arrows, split panels or watermark\nAvoid: extra/fused/missing appendages, fewer or more than nine tails, eleven-tail radial halo, hidden legs/paws, merged/forked/floating tails, changed stance, anatomy drift, perspective exaggeration, crop, occlusion, motion blur, depth of field, fog, shadow, horizon, smooth clay, plastic fur, painted fur blur, costume or human traits",
+  "negative_prompt": "extra/fused/missing appendages, fewer or more than nine tails, eleven-tail radial halo, hidden legs or paws, merged/forked/floating tails, changed pose or proportions, crop, wide-angle perspective, motion, fog, shadow, horizon, text, watermark, plastic fur",
+  "references": [
+    "collections/jiuweihu/concepts/master.png",
+    "collections/jiuweihu/views/left.png"
+  ],
+  "expected_output": "collections/jiuweihu/production/generations/views/004-threequarter-front.png",
+  "outputs": [
+    "collections/jiuweihu/production/generations/views/004-threequarter-front.png"
+  ],
+  "status": "selected",
+  "notes": [
+    "Passed original-resolution and 200-percent reference QC with four visible paws, nine continuous tail chains and cross-view consistency to the accepted left view."
+  ]
+}

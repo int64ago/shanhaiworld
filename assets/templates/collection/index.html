@@ -6,7 +6,7 @@
     <meta name="description" content="山海万象神兽 3D 场景" />
     <title>神兽 · 山海万象</title>
     <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="../../assets/css/site.css" />
+    <link rel="stylesheet" href="../../assets/css/site.css?v=20260815-kids-4" />
     <script type="importmap">
       {
         "imports": {
@@ -25,42 +25,48 @@
           <span class="brand-mark">山海</span>
           <span class="brand-name">Shanhaiworld</span>
         </a>
-        <a class="back-link" href="../../index.html">返回图鉴</a>
+        <a class="back-link bilingual-button" href="../../index.html"><span>返回图鉴</span></a>
       </header>
 
       <aside class="creature-panel" aria-labelledby="creature-name">
         <p id="creature-kicker" class="eyebrow">SHANHAI CREATURE</p>
         <h1 id="creature-name">加载中</h1>
         <p id="creature-summary">正在唤醒神兽与它的栖息之境。</p>
+        <button id="speak-intro" class="voice-button" type="button" disabled>
+          <span class="voice-icon" aria-hidden="true">🔊</span>
+          <span class="voice-copy"><b>朗读介绍</b></span>
+        </button>
+        <p id="voice-status" class="voice-status" aria-live="polite">点击按钮，朗读神兽的详细介绍。</p>
         <dl id="creature-facts" class="creature-facts"></dl>
       </aside>
 
       <section class="viewer-controls" aria-label="神兽动作控制">
-        <label for="action-select">动作</label>
+        <label for="action-select"><span>选择动作</span></label>
         <select id="action-select" disabled>
           <option>正在加载</option>
         </select>
-        <button id="toggle-roam" type="button" aria-pressed="true" disabled>自动游走：开</button>
-        <button id="reset-camera" type="button">重置视角</button>
+        <div class="action-nav" aria-label="上一个或下一个动作">
+          <button id="prev-action" class="bilingual-button" type="button" disabled><span>上一个动作</span></button>
+          <button id="next-action" class="bilingual-button" type="button" disabled><span>下一个动作</span></button>
+        </div>
+        <div id="action-message" class="action-message" aria-live="polite"></div>
+        <button id="toggle-roam" class="bilingual-button" type="button" aria-pressed="true" disabled><span>自动巡游：开</span></button>
+        <button id="reset-camera" class="bilingual-button" type="button"><span>回到正面</span></button>
       </section>
-
-      <div class="mouse-hint" aria-hidden="true">
-        <span>拖动旋转</span><span>滚轮缩放</span><span>点击互动</span>
-      </div>
 
       <div id="loading-state" class="loading-state" role="status" aria-live="polite">
         <span class="loading-ring" aria-hidden="true"></span>
         <strong>正在进入山海之境</strong>
-        <span id="loading-detail">读取神兽设定…</span>
+        <span id="loading-detail">正在请神兽出来…</span>
       </div>
 
       <div id="viewer-error" class="viewer-error" role="alert" hidden>
-        <strong>场景加载失败</strong>
+        <strong>模型暂时无法加载</strong>
         <span id="viewer-error-message"></span>
         <a href="../../index.html">返回首页</a>
       </div>
     </div>
 
-    <script type="module" src="../../assets/js/collection-page.js?v=20260815-2"></script>
+    <script type="module" src="../../assets/js/collection-page.js?v=20260815-kids-4"></script>
   </body>
 </html>

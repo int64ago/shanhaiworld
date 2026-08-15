@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "view-back-005",
+  "stage": "provider_view_rework",
+  "tool": "codex_imagegen",
+  "created_at": "2026-08-14T18:26:00Z",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: stylized-concept\nAsset type: clean strict rear orthographic provider input that resolves a hidden multi-view topology ambiguity\nInput images: Image 1 is the identity/material master. Image 2 is the accepted left near-orthographic view. Image 3 is the accepted shallow front-left three-quarter view. They all show the same creature and frozen pose. Preserve their exact fox identity, body proportions, stance, palette, fur placement and nine-tail length family.\nPrimary request: render the exact same stationary Shanhaijing Nine-Tailed Fox from directly behind in strict orthographic projection. This new rear view must unambiguously prove that the creature has one single fan of exactly nine tails total, not two overlapping fans.\nScene/backdrop: clean flat medium cool-gray identical to the accepted views; no horizon, floor seam, cast shadow, scenery, fog, gradient or vignette\nSubject: one non-humanoid adult fox with one head, two ears, exactly two forelegs, exactly two hindlegs, four paws and exactly nine complete full-volume tails. Camera is centered on the pelvis and looks directly forward along the body axis. Keep the same level spine and staggered neutral stance; use the existing small fore-aft and lateral offsets so all four leg chains and paws remain visible through negative spaces. Arrange the same nine tails as ONE unambiguous rear fan: exactly one central tail plus exactly four tails spreading to the left and exactly four tails spreading to the right, total nine. Every tail has one visible continuous root attached to one intact sacral/caudal region, one unbranched body and one distinct tip. Leave readable negative space around the pelvis and between roots.\nStyle/medium: high-fidelity realistic 3D creature turnaround render, production sculpt and PBR reconstruction reference, matching all three inputs\nComposition/framing: strict rear orthographic view, full body and all nine tips in frame with even margins, camera perpendicular to rear plane, no perspective convergence\nLighting/mood: uniform neutral studio illumination matching the accepted views, low contrast and no rim bloom\nMaterials/textures: same layered directional copper-red/umber fur, muted ivory tail tips and body markings, dark lower legs and claws\nConstraints: exactly one nine-tail fan total; exact 1+4+4 rear topology; four legs/four paws; same pose, proportions, tail lengths, pattern and materials; clean unannotated image\nAvoid: two overlapping fans, doubled bilateral tails, eighteen tail ends, fewer or more than nine tails, pair duplication, branching, fusion, merged or hidden roots, tail emerging from a leg, hidden paws, changed pose, anatomy drift, decorative halo, split panels, text, arrows, watermark, crop, perspective, blur, fog, shadow, horizon, plastic fur",
+  "negative_prompt": "two overlapping fans, doubled bilateral tails, eighteen tail ends, fewer or more than nine tails, pair duplication, branching/fused/hidden tail roots, hidden paws, anatomy drift, crop, perspective, shadow, horizon, text, watermark, plastic fur",
+  "references": [
+    "collections/jiuweihu/concepts/master.png",
+    "collections/jiuweihu/views/left.png",
+    "collections/jiuweihu/views/front.png"
+  ],
+  "expected_output": "collections/jiuweihu/production/generations/views/005-back.png",
+  "outputs": [
+    "collections/jiuweihu/production/generations/views/005-back.png"
+  ],
+  "status": "selected",
+  "notes": [
+    "Generated specifically after Rodin attempt 1 revealed a duplicated rear tail fan hidden by the original two selected projections.",
+    "Passed original-resolution and 200-percent QC with one 1+4+4 tail fan, four paws, matching fur and a clean rear orthographic background."
+  ]
+}

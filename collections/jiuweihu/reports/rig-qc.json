@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "status": "passed",
+  "checked_at": "2026-08-15T03:09:51Z",
+  "selected_motion_mode": "morph",
+  "provider_attempt": {
+    "provider": "Tripo",
+    "rig_check_task_id": "f180564b-6066-429e-a119-610832a54704",
+    "rig_task_id": "4a596855-31bc-48d1-a63d-04cb226f3d16",
+    "retarget_task_id": "40a6d598-9789-46cb-aeef-2ad89310df82",
+    "documented_rig_type": "quadruped",
+    "riggable": true,
+    "joint_count": 60,
+    "structural_result": "passed",
+    "visual_result": "rejected",
+    "rejection_reason": "The documented quadruped walk preset visibly misclassified low tail and hind-body branches: a tail tip dragged along the ground and the rear abdomen fragmented during the gait."
+  },
+  "fallback": {
+    "type": "deterministic localized morph targets",
+    "source": "collections/jiuweihu/models/rigged-v1.glb",
+    "selected_asset": "collections/jiuweihu/models/morph-v8.glb",
+    "web_asset": "collections/jiuweihu/models/web.glb",
+    "generator": "collections/jiuweihu/production/scripts/build_morph_actions.py",
+    "target_count": 16,
+    "targets": [
+      "tail_left",
+      "tail_right",
+      "tail_lift",
+      "tail_flare",
+      "head_left",
+      "head_right",
+      "head_down",
+      "head_up",
+      "crouch",
+      "arch",
+      "gait_a",
+      "gait_b",
+      "surge",
+      "pounce_extend",
+      "lean_left",
+      "lean_right"
+    ],
+    "anatomy_changed": false,
+    "root_motion": false
+  },
+  "checks": [
+    {
+      "id": "motion_mode_declared",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/collection.json",
+      "notes": [
+        "Release mode is morph; the retained skin is an inert bind-pose source and is not claimed as the release animation system."
+      ]
+    },
+    {
+      "id": "skeletal_attempt_recorded",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/production/providers/tripo/",
+      "notes": [
+        "Rig-check, quadruped rig and quadruped walk retarget tasks are preserved as sanitized requests and responses.",
+        "The failed visual result is preserved at reports/rig-walk-v1 rather than silently replaced."
+      ]
+    },
+    {
+      "id": "motion_targets_present",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-build-v8.json",
+      "notes": [
+        "One mesh primitive exposes 16 named local morph targets; all seven clips contain playable morph-weight tracks."
+      ]
+    },
+    {
+      "id": "articulated_region_coverage",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-actions-v8/",
+      "notes": [
+        "Continuous nine-tail fields preserve every root while producing sweep, lift and flare.",
+        "Surface-geodesic leg masks isolate four paws and leg chains from spatially adjacent tails.",
+        "Head/neck, spine/pelvis, all four leg regions and the complete tail fan are visibly driven.",
+        "The v8 rear-leg field adds side ownership plus upper-leg and pelvis tapers, preventing opposite rear masks from cancelling at the paws."
+      ]
+    },
+    {
+      "id": "deformation_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/final-page/",
+      "notes": [
+        "The complete v2 action frame set plus targeted v8 rear and side walk frames cover preparation, main and recovery phases.",
+        "No collapse, detachment, visible seam, topology change or nine-tail count loss was observed.",
+        "Selected v8 retains the accepted geometry, textures, seven-clip structure and accessor bounds while visibly increasing alternate rear-leg stride; the final browser load has zero warnings and errors."
+      ]
+    }
+  ],
+  "blocking_failures": []
+}

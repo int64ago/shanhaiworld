@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "id": "jiuweihu",
+  "name": "九尾狐",
+  "name_pinyin": "jiǔ wěi hú",
+  "subtitle": "《山海经》中的青丘异兽",
+  "summary": "九尾狐见于《山海经》有关青丘的记载。它有狐狸般的身体、四只脚和九条尾巴，叫声被形容为像婴儿；原典中的它是一种具有危险性的异兽。",
+  "body_type": "quadruped",
+  "status": "ready",
+  "kid_mode": true,
+  "preview": "./preview.webp",
+  "model": {
+    "path": "./models/web.glb?v=8",
+    "target_height": 2.6,
+    "facing_offset": 0,
+    "in_place_root_motion": true
+  },
+  "animation": {
+    "mode": "morph",
+    "min_actions": 6,
+    "min_animated_nodes": 1,
+    "morph_target_count": 16,
+    "fallback_reason": "Tripo quadruped rig passed structurally, but its preset walk failed visual deformation QC."
+  },
+  "quality": {
+    "require_reference_qc": true,
+    "require_model_qc": true,
+    "require_detail_qc": true,
+    "require_rig_qc": true,
+    "require_animation_qc": true
+  },
+  "scene": {
+    "background": "./scene/background.webp",
+    "background_color": "#132523",
+    "fog_color": "#425f5b",
+    "fog_near": 15,
+    "fog_far": 40,
+    "ground_color": "#233a31",
+    "ground_size": 42,
+    "procedural_props": {
+      "enabled": true,
+      "water_radius": 14,
+      "water_color": "#1a4745",
+      "water_opacity": 0.34,
+      "rock_count": 24,
+      "rock_color": "#3d5e55",
+      "rock_radius": 16
+    }
+  },
+  "lighting": {
+    "ambient_color": "#a9c6b6",
+    "ambient_intensity": 1.55,
+    "sun_color": "#f1d3a0",
+    "sun_intensity": 3.1,
+    "exposure": 1.18,
+    "sun_position": [
+      8,
+      10,
+      5
+    ]
+  },
+  "camera": {
+    "position": [7.1, 3.8, 9.2],
+    "target": [0, 1.35, 0],
+    "min_distance": 3.4,
+    "max_distance": 16
+  },
+  "actions": {
+    "idle": "Idle",
+    "locomotion": "Walk",
+    "pounce": "Pounce",
+    "tail_flare": "Nine-Tail Flare",
+    "threat": "Threat Display",
+    "listen": "Listen",
+    "dodge": "Dodge"
+  },
+  "action_labels": {
+    "Idle": {
+      "label": "静止观察",
+      "message": "身体保持站立，呼吸带动躯干起伏，九条尾巴缓慢摆动。"
+    },
+    "Walk": {
+      "label": "四足行走",
+      "message": "前腿与后腿交替迈步，躯干和尾巴随步伐保持平衡。"
+    },
+    "Pounce": {
+      "label": "伏身扑跃",
+      "message": "先压低身体积蓄力量，再伸展四肢向前扑出，最后恢复站姿。"
+    },
+    "Nine-Tail Flare": {
+      "label": "九尾舒展",
+      "message": "九条尾巴从尾根向外展开，形成清楚可数的扇形轮廓。"
+    },
+    "Threat Display": {
+      "label": "防御姿态",
+      "message": "身体压低、头部前探、尾巴抬高，用更大的轮廓发出警告。"
+    },
+    "Listen": {
+      "label": "侧耳聆听",
+      "message": "头部依次转向两侧，模拟捕捉周围声音时的警觉反应。"
+    },
+    "Dodge": {
+      "label": "侧身闪避",
+      "message": "重心先向一侧压低，再快速移向另一侧，尾巴负责反向平衡。"
+    }
+  },
+  "narration": {
+    "button_label": "朗读介绍",
+    "audio": "./scene/narration-zh-cn-v2.m4a",
+    "text": "九尾狐是《山海经》中与青丘有关的异兽。《南山经》说它外形像狐狸，却长着九条尾巴，声音像婴儿；《海外东经》又明确记载它有四只脚和九条尾巴。古书里的九尾狐具有危险性，并不只是后来故事中常见的温和狐仙。这个模型采用自然的狐形身体，九条尾巴都从腰后连续生长。铜红色毛发参考了后世文献中的赤色传统，并不是《山海经》原文规定的颜色。你可以拖动鼠标观察它的头部、四肢和九条尾巴，也可以切换动作，比较它在行走、防御和聆听时的身体变化。"
+  },
+  "interaction": {
+    "click_actions": [
+      "Nine-Tail Flare",
+      "Threat Display",
+      "Listen"
+    ]
+  },
+  "roaming": {
+    "enabled": true,
+    "bounds": 6.2,
+    "walk_speed": 0.62,
+    "run_speed": 1.45
+  },
+  "facts": [
+    {
+      "label": "原典出处",
+      "value": "《山海经·南山经》与《海外东经》"
+    },
+    {
+      "label": "身体结构",
+      "value": "一颗狐首、四只脚、九条完整尾巴"
+    },
+    {
+      "label": "原典声音",
+      "value": "叫声被形容为像婴儿"
+    },
+    {
+      "label": "视觉说明",
+      "value": "铜红毛色来自后世传统，不是原典定色"
+    }
+  ]
+}

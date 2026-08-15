@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "source": "collections/jiuweihu/models/rigged-v1.glb",
+  "output": "collections/jiuweihu/models/morph-v3.glb",
+  "motion_mode": "morph",
+  "fallback_reason": "Tripo quadruped rig-check passed, but its preset walk visibly misclassified low tail chains and failed deformation QC.",
+  "welded_vertices": 45802,
+  "raw_vertices": 50175,
+  "paw_seeds": {
+    "front_left": {
+      "welded_vertex": 30930,
+      "position": [
+        -0.053310904651880264,
+        0.005448490381240845,
+        0.30957067012786865
+      ]
+    },
+    "front_right": {
+      "welded_vertex": 8325,
+      "position": [
+        0.054184701293706894,
+        0.0016072392463684082,
+        0.31434762477874756
+      ]
+    },
+    "rear_left": {
+      "welded_vertex": 25545,
+      "position": [
+        -0.02108911983668804,
+        0.03131106495857239,
+        -0.3242514729499817
+      ]
+    },
+    "rear_right": {
+      "welded_vertex": 3034,
+      "position": [
+        0.021712377667427063,
+        0.03238925337791443,
+        -0.32506752014160156
+      ]
+    }
+  },
+  "leg_region_vertices": {
+    "front_left": 5798,
+    "front_right": 5539,
+    "rear_left": 10179,
+    "rear_right": 10549
+  },
+  "morph_targets": [
+    "tail_left",
+    "tail_right",
+    "tail_lift",
+    "tail_flare",
+    "head_left",
+    "head_right",
+    "head_down",
+    "head_up",
+    "crouch",
+    "arch",
+    "gait_a",
+    "gait_b",
+    "surge",
+    "pounce_extend",
+    "lean_left",
+    "lean_right"
+  ],
+  "maximum_displacements": {
+    "tail_left": 0.111568,
+    "tail_right": 0.111568,
+    "tail_lift": 0.120254,
+    "tail_flare": 0.12151,
+    "head_left": 0.147179,
+    "head_right": 0.147179,
+    "head_down": 0.107131,
+    "head_up": 0.09531,
+    "crouch": 0.075,
+    "arch": 0.055,
+    "gait_a": 0.095335,
+    "gait_b": 0.094919,
+    "surge": 0.116726,
+    "pounce_extend": 0.260549,
+    "lean_left": 0.055,
+    "lean_right": 0.055
+  },
+  "animations": [
+    "Idle",
+    "Walk",
+    "Pounce",
+    "Nine-Tail Flare",
+    "Threat Display",
+    "Listen",
+    "Dodge"
+  ],
+  "animation_count": 7,
+  "anatomy_changed": false,
+  "notes": [
+    "Leg masks are derived from welded surface geodesics, preventing spatially adjacent tails from being treated as paws.",
+    "Tail motion is a continuous root-preserving field over the original nine-tail mesh; no tail is split, deleted or regenerated.",
+    "All action clips are in place and contain explicit preparation, main and recovery phases."
+  ]
+}

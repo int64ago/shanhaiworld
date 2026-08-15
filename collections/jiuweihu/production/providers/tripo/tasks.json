@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "provider": "tripo",
+  "tasks": [
+    {
+      "kind": "rig-check",
+      "task_id": "f180564b-6066-429e-a119-610832a54704",
+      "status": "success",
+      "submitted_at": "2026-08-14T18:46:28+00:00",
+      "request_record": "collections/jiuweihu/production/providers/tripo/requests/003-rig-check.json",
+      "response_record": "collections/jiuweihu/production/providers/tripo/responses/003-rig-check.json",
+      "updated_at": "2026-08-14T18:46:32+00:00",
+      "status_record": "collections/jiuweihu/production/providers/tripo/responses/004-task.json",
+      "credits_consumed": 0.0,
+      "output_summary": {
+        "riggable": true,
+        "rig_type": "quadruped",
+        "available_files": []
+      }
+    },
+    {
+      "kind": "rig",
+      "task_id": "4a596855-31bc-48d1-a63d-04cb226f3d16",
+      "status": "success",
+      "submitted_at": "2026-08-14T18:47:07+00:00",
+      "request_record": "collections/jiuweihu/production/providers/tripo/requests/004-rig.json",
+      "response_record": "collections/jiuweihu/production/providers/tripo/responses/005-rig.json",
+      "updated_at": "2026-08-14T18:48:00+00:00",
+      "status_record": "collections/jiuweihu/production/providers/tripo/responses/006-task.json",
+      "credits_consumed": 25.0,
+      "output_summary": {
+        "available_files": [
+          "model_url",
+          "rendered_image_url"
+        ]
+      },
+      "download_record": "collections/jiuweihu/production/providers/tripo/responses/007-download.json",
+      "downloaded_files": [
+        "collections/jiuweihu/production/providers/tripo/downloads/rig-001/01-output-model_url.glb",
+        "collections/jiuweihu/production/providers/tripo/downloads/rig-001/02-output-rendered_image_url.webp"
+      ]
+    },
+    {
+      "kind": "retarget",
+      "task_id": "40a6d598-9789-46cb-aeef-2ad89310df82",
+      "status": "success",
+      "submitted_at": "2026-08-14T18:48:24+00:00",
+      "request_record": "collections/jiuweihu/production/providers/tripo/requests/005-retarget.json",
+      "response_record": "collections/jiuweihu/production/providers/tripo/responses/008-retarget.json",
+      "updated_at": "2026-08-14T18:48:52+00:00",
+      "status_record": "collections/jiuweihu/production/providers/tripo/responses/009-task.json",
+      "credits_consumed": 10.0,
+      "output_summary": {
+        "available_files": [
+          "model_url"
+        ]
+      },
+      "download_record": "collections/jiuweihu/production/providers/tripo/responses/010-download.json",
+      "downloaded_files": [
+        "collections/jiuweihu/production/providers/tripo/downloads/walk-001/01-output-model_url.glb"
+      ]
+    }
+  ]
+}

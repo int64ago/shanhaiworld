@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "status": "ready",
+  "created_at": "2026-08-14T17:59:20+00:00",
+  "updated_at": "2026-08-15T03:09:51Z",
+  "artifacts": [
+    {
+      "kind": "release_qc",
+      "path": "collections/jiuweihu/reports/release-qc.json",
+      "status": "ready",
+      "notes": [
+        "Final 1920x1080 performance, interaction, security, catalog and console gate."
+      ]
+    },
+    {
+      "kind": "mandarin_narration",
+      "path": "collections/jiuweihu/scene/narration-zh-cn-v2.m4a",
+      "status": "ready",
+      "sha256": "9c8f7e4a298ebd8a2d689558d54bf2d6e49385c534a4800c3537de37ce2cddc2",
+      "notes": [
+        "51.110-second Mandarin reading of the formal source-based introduction; browser speech synthesis remains the fallback."
+      ]
+    },
+    {
+      "kind": "scene_background",
+      "path": "collections/jiuweihu/scene/background.webp",
+      "status": "ready",
+      "sha256": "80759c50c4ca054faf10cfb79a15be5b9ffbd435e968f440d64f171675288f85",
+      "notes": [
+        "Creature-free Qingqiu dawn environment plate selected for the interactive scene."
+      ]
+    },
+    {
+      "kind": "catalog_preview",
+      "path": "collections/jiuweihu/preview.webp",
+      "status": "ready",
+      "sha256": "a077f8d66a392fb3e8bc1c3e34b1453926e0b23d8fc5ac7f216e82e38fb0dade",
+      "notes": [
+        "Captured from the real Three.js v3 release scene during Nine-Tail Flare."
+      ]
+    },
+    {
+      "kind": "tripo_rigged_glb",
+      "path": "collections/jiuweihu/models/rigged-v1.glb",
+      "status": "source_preserved",
+      "sha256": "9ca839eb641b5761ce0623b3b289484acfd12ecc8edc747a030d4c90af667584",
+      "notes": [
+        "Documented quadruped rig-check and rig succeeded structurally with one skin and 60 joints."
+      ]
+    },
+    {
+      "kind": "tripo_walk_attempt",
+      "path": "collections/jiuweihu/models/rigged-walk-v1.glb",
+      "status": "failed",
+      "sha256": "dfddc1b59b2f4aa7780667c4c8150a3ef67246195d4d80eab5eda52b92ae8b31",
+      "notes": [
+        "Rejected visually because low tail and hind-body deformation fragmented and dragged during the preset gait."
+      ]
+    },
+    {
+      "kind": "morph_fallback_attempt_1",
+      "path": "collections/jiuweihu/models/morph-v1.glb",
+      "status": "failed",
+      "sha256": "acfefe72d82b14ff7db00d16d9310ff345fca5ac141256336de4889573061e42",
+      "notes": [
+        "Structurally valid and stable, but rejected because non-locomotion action amplitudes were too subtle for the release quality bar."
+      ]
+    },
+    {
+      "kind": "morph_fallback_attempt_2",
+      "path": "collections/jiuweihu/models/morph-v2.glb",
+      "status": "superseded",
+      "sha256": "08f7b2e62373a42f67acb0cce3716ea3ec2bf52b3f72bc620386bc4940753713",
+      "notes": [
+        "Passed structural and visual animation QC; superseded only to add glTF accessor bounds and remove loader warnings."
+      ]
+    },
+    {
+      "kind": "selected_animated_glb",
+      "path": "collections/jiuweihu/models/web.glb",
+      "status": "ready",
+      "sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e",
+      "notes": [
+        "Seven playable clips drive 16 localized semantic morph targets across head, spine, legs and the continuous nine-tail field.",
+        "The v8 walk repair prevents overlapping opposite rear masks from cancelling and increases visible alternating hind-paw stride.",
+        "All morph POSITION accessors include min/max bounds; final Three.js console has zero warnings and errors."
+      ]
+    },
+    {
+      "kind": "identity_master",
+      "path": "collections/jiuweihu/concepts/master.png",
+      "status": "ready",
+      "sha256": "89b9bb7fc75156c272e4d626d7351d997a9ca63c86aeb05fd9c1d32b6550aa48",
+      "notes": [
+        "Identity/material reference only; not a provider input."
+      ]
+    },
+    {
+      "kind": "provider_view_left",
+      "path": "collections/jiuweihu/views/left.png",
+      "status": "ready",
+      "sha256": "beefd0fb964cdada68565248d3b8fab280d33e5c32b18ac71abddf7850aafa96",
+      "notes": []
+    },
+    {
+      "kind": "provider_view_front_threequarter",
+      "path": "collections/jiuweihu/views/front.png",
+      "status": "ready",
+      "sha256": "f3019fa1890a3fcebe7c72fa960491a80e65116d5bbf04baaf6de8df9b7880a4",
+      "notes": []
+    },
+    {
+      "kind": "source_glb_attempt_1",
+      "path": "collections/jiuweihu/models/raw-v1.glb",
+      "status": "failed",
+      "sha256": "93835a97e54219742505c08f4438c1e1dc10b44460997786eb2c278125c9d788",
+      "notes": [
+        "Rejected by model gate: rear turntable exposes duplicated tail fans and eighteen tail ends."
+      ]
+    },
+    {
+      "kind": "provider_view_back_topology_lock",
+      "path": "collections/jiuweihu/views/back.png",
+      "status": "ready",
+      "sha256": "71f3a4f4d65a593c2b935590e88eb0335a3e5cfd3c1b170e281f2b9b5fd7fc2a",
+      "notes": [
+        "Added after model attempt 1 to constrain one nine-tail rear fan."
+      ]
+    },
+    {
+      "kind": "source_glb_attempt_2",
+      "path": "collections/jiuweihu/models/raw-v2.glb",
+      "status": "failed",
+      "sha256": "f501935670942ca1a4878d5c7edfda4bfe45ebadafa8288d0948851cefbc8199",
+      "notes": [
+        "Rejected by model gate: rear turntable shows eleven tail ends with five stacked centrally."
+      ]
+    },
+    {
+      "kind": "provider_view_front_direct_v2",
+      "path": "collections/jiuweihu/views/front-v2.png",
+      "status": "ready",
+      "sha256": "0711fd000f720fc6efc9a8d03bc7c9b6cb3e748f14e9c49aa4e10843585f5580",
+      "notes": [
+        "Matched direct opposite of the rear topology-lock view; one explicit 1+4+4 tail fan."
+      ]
+    },
+    {
+      "kind": "source_glb_attempt_3",
+      "path": "collections/jiuweihu/models/raw-v3.glb",
+      "status": "failed",
+      "sha256": "c4f5ce663433de03c6ff8b5c5b712efcd03a9cead52f2e8b7f43b8eb88f5b91d",
+      "notes": [
+        "Rejected by model gate: direct-opposite inputs collapse depth and generate a flattened doubled body with invalid side anatomy."
+      ]
+    },
+    {
+      "kind": "source_glb_attempt_4_original",
+      "path": "collections/jiuweihu/models/raw-v4.glb",
+      "status": "source_preserved",
+      "sha256": "ef80f4e2468d8e9a9a9cbedc009c2f37fc8520d0338c983a5dff2c492ba3a809",
+      "notes": [
+        "First Rodin result to pass eight-direction anatomy review; preserved unchanged as the provider original."
+      ]
+    },
+    {
+      "kind": "selected_source_glb",
+      "path": "collections/jiuweihu/models/raw.glb",
+      "status": "ready",
+      "sha256": "749485341e47a58c6791d400b056b4f03b58b0e8dfd2928ede9a23dd63b25c2b",
+      "notes": [
+        "Closed manifold selected source with 91,600 triangles and three 4096x4096 PBR textures.",
+        "Differs from raw-v4.glb only by audited removal of one duplicate terminal triangle; no anatomy changed."
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "reference_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/reference-qc.json"
+    },
+    {
+      "id": "model_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/model-qc.json"
+    },
+    {
+      "id": "detail_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/detail-qc.json"
+    },
+    {
+      "id": "motion_system_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/rig-qc.json"
+    },
+    {
+      "id": "animation_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/animation-qc.json"
+    },
+    {
+      "id": "release_quality",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/release-qc.json"
+    }
+  ],
+  "notes": [
+    "Canonical traits and creature-specific anatomy_profile persisted before image generation.",
+    "Rodin Gen-2 source task submitted only after reference QC passed; Quad high with 4K HighPack PBR and two concat-mode provider views.",
+    "Reference QC revision 2 adds a genuine rear topology-lock view after attempt 1 exposed duplicated tail geometry.",
+    "Reference QC revision 3 replaces side/oblique conditioning with a matched direct-front/direct-rear 1+4+4 pair after attempt 2 still generated eleven tails.",
+    "Reference QC revision 4 selects shallow-front body volume plus rear topology lock after attempt 3 proved direct-opposite depth collapse.",
+    "Rodin attempt 4 and its audited closed-manifold derivative pass source model and detail gates.",
+    "Tripo quadruped rigging passed structurally, but the provider walk failed visual deformation QC and remains preserved as a rejection.",
+    "The selected deterministic fallback contains 16 localized morph targets and seven visually validated actions; the v8 rear-leg repair passes targeted walk review.",
+    "The readable interface keeps pinyin only over the creature name, provides formal detailed copy and Mandarin narration, and supports previous/next action navigation.",
+    "Final 1920x1080 interaction, performance, security and console checks pass; collection remains ready."
+  ]
+}

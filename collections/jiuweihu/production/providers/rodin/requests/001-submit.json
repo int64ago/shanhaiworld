@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-14T18:10:37+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/jiuweihu/views/front.png",
+    "collections/jiuweihu/views/left.png"
+  ],
+  "prompt_file": "collections/jiuweihu/production/prompts/rodin/001-source.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "Create one high-fidelity, production-ready 3D model of the exact same isolated Shanhaijing Nine-Tailed Fox shown across the submitted multi-view images. Treat the images as two camera views of one frozen object, not separate designs.\n\nANATOMY IS THE PRIMARY HARD CONSTRAINT. The finished model must have exactly one natural fox head, exactly two upright triangular ears, two eyes, exactly two forelegs, exactly two hindlegs, exactly four paws, and exactly nine complete tails. Preserve a physically believable adult fox quadruped skeleton: long pointed muzzle, natural neck, level thoracic/lumbar spine, intact chest, abdomen and pelvis, digitigrade shoulder/elbow/carpal and hip/stifle/hock chains. Do not create humanoid anatomy.\n\nBuild all nine tails as genuine continuous full-volume geometry. Each tail must have one separately readable root attached naturally to the intact sacral/caudal fan, a tapered body with enough negative space for later independent rigging, and one distinct tip. No tail may branch, merge, fuse into a neighboring tail, float, emerge from a leg or empty space, replace a limb, or terminate as an unexplained stump. Preserve the input views' nine-tail length family, staggered vertical fan, moderate lateral depth and root-to-tip continuity.\n\nMatch the selected identity and materials: deep copper-red and burnt-sienna fox fur, smoked-umber lower legs/shadow fur, muted-ivory muzzle, cheeks, throat, chest, inner ears and subtle tail tips, amber-gold eyes, a wet dark nose, distinct lips and teeth, and restrained dark keratin claws. Use layered sculpted fur clumps that follow anatomical flow and visibly break the silhouette at cheeks, neck ruff, belly, elbows, haunches and all nine tails. Preserve directional normal and roughness detail; avoid smooth clay, inflated plastic fur or blurred painted hair.\n\nGenerate clean manifold or repairable rig-ready quad topology with clear limb loops and enough deformation space at neck, jaw, shoulders, elbows, wrists, hips, knees, hocks, paws, spine, pelvis and all nine tail roots. Keep the creature as a coherent connected anatomical model; no duplicate shells, floating fragments, fused legs, holes, artificial base, pedestal, ground, scenery, costume, jewelry, text or watermark.\n\nThe output pose must remain the same neutral alert stance from the inputs: four paws grounded, slight fore-aft offsets, level spine, head neutral, mouth closed, and nine tails fanned behind. Prioritize exact anatomy, clean connections, facial identity, readable layered fur and 4K PBR material fidelity over compact file size.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Quad",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "addons": "HighPack"
+  },
+  "estimated_credit_cost": 1.5,
+  "credentials_recorded": false
+}

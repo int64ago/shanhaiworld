@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "input_mode": "name_only",
+  "status": "ready",
+  "created_at": "2026-08-14T17:59:20+00:00",
+  "intent": {
+    "platform": "desktop_web",
+    "renderer": "threejs",
+    "interaction": "mouse",
+    "autonomous_motion": true,
+    "rich_actions": true,
+    "coherent_scene": true,
+    "visual_target": "high_fidelity_pc",
+    "quality_priority": "quality_over_credits",
+    "preferred_motion_mode": "skeletal",
+    "accepted_motion_modes": [
+      "skeletal",
+      "morph",
+      "articulated",
+      "hybrid"
+    ],
+    "hard_quality_gates": [
+      "reference",
+      "model",
+      "detail",
+      "motion_system",
+      "animation"
+    ]
+  },
+  "source": {
+    "canonical_traits": [
+      "青丘之山所见之兽，整体形态如狐",
+      "一首、四足、九尾",
+      "声音如婴儿",
+      "具有捕食人的危险性",
+      "食其肉可使人不受蛊毒侵害"
+    ],
+    "visual_inferences": [
+      "采用后世《瑞应编》转引的赤色记载作为铜红主毛色，而非冒充《山海经》原文",
+      "胸腹、吻部与尾尖使用低饱和象牙白，增强九尾分界与近景辨识度",
+      "整体保持自然狐科解剖比例，以青丘山地捕食者而非人形狐妖呈现",
+      "九尾从骶尾区分束生长并作扇形错相展开，确保每条尾根和完整尾长可读"
+    ],
+    "citations": [
+      "https://ctext.org/shan-hai-jing/nan-shan-jing/zh",
+      "https://zh.wikisource.org/zh-hant/%E5%B1%B1%E6%B5%B7%E7%B6%93_%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29/%E5%8D%B709",
+      "https://ctext.org/taiping-guangji/447/ruiying/zh"
+    ]
+  },
+  "design": {
+    "body_type": "quadruped",
+    "locked_traits": [
+      "single fox head",
+      "four anatomically plausible fox legs",
+      "exactly nine complete tails with nine distinct roots and tips",
+      "all tails continuously attached to the sacral and caudal body region",
+      "long pointed fox muzzle and two upright triangular ears",
+      "predatory but non-humanoid silhouette"
+    ],
+    "anatomy_profile": {
+      "counted_features": [
+        {
+          "feature": "head",
+          "count": 1,
+          "evidence_rule": "one uninterrupted fox head and muzzle"
+        },
+        {
+          "feature": "eyes",
+          "count": 2,
+          "evidence_rule": "paired eyes on one fox head"
+        },
+        {
+          "feature": "ears",
+          "count": 2,
+          "evidence_rule": "two separate upright triangular ears"
+        },
+        {
+          "feature": "forelimbs",
+          "count": 2,
+          "evidence_rule": "paired shoulder-to-paw chains"
+        },
+        {
+          "feature": "hindlimbs",
+          "count": 2,
+          "evidence_rule": "paired hip-to-paw chains"
+        },
+        {
+          "feature": "paws",
+          "count": 4,
+          "evidence_rule": "one grounded paw at the end of every leg"
+        },
+        {
+          "feature": "tails",
+          "count": 9,
+          "evidence_rule": "nine independently traceable tail roots, bodies and tips with visible negative space"
+        }
+      ],
+      "continuous_features": [
+        {
+          "feature": "fox axial body",
+          "rule": "muzzle, skull, neck, thorax, abdomen, pelvis and spine form one plausible continuous quadruped volume"
+        },
+        {
+          "feature": "nine tail chains",
+          "rule": "each tail is a full-volume tapering structure continuously connected from the sacral tail fan to one tip; no fusion, branching or floating segments"
+        },
+        {
+          "feature": "limb chains",
+          "rule": "each shoulder or hip connects continuously through anatomically placed joints to a paw"
+        }
+      ],
+      "articulated_regions": [
+        {
+          "region": "neck_head_jaw",
+          "motion": "head turn, pitch, jaw opening and recovery",
+          "attachment": "cervical chain into skull and mandibular hinge"
+        },
+        {
+          "region": "ears",
+          "motion": "independent swivel and flattening",
+          "attachment": "paired pivots at the upper skull"
+        },
+        {
+          "region": "spine_and_pelvis",
+          "motion": "quadruped gait flexion, compression, extension and turn",
+          "attachment": "continuous cervical-thoracic-lumbar-sacral chain"
+        },
+        {
+          "region": "four_leg_chains",
+          "motion": "walk, run, crouch, push-off, landing and weight transfer",
+          "attachment": "paired shoulder and hip chains with elbow/stifle, carpal/hock and paw articulation"
+        },
+        {
+          "region": "nine_tail_chains",
+          "motion": "independent root fan, overlapping body waves and tip follow-through with phase offsets",
+          "attachment": "nine separately readable roots distributed across one intact sacral/caudal fan"
+        },
+        {
+          "region": "facial_throat",
+          "motion": "infant-like call, snarl and breathing shape",
+          "attachment": "muzzle, jaw, cheeks and throat remain connected"
+        }
+      ],
+      "surface_features": [
+        {
+          "feature": "layered_fur",
+          "rule": "medium-scale sculpted clumps follow anatomical flow and break the silhouette along cheeks, neck ruff, belly, elbows, haunches and tails"
+        },
+        {
+          "feature": "directional_fur_pbr",
+          "rule": "normal and roughness retain directional variation at normal camera distance and 200 percent close-up"
+        },
+        {
+          "feature": "face_identity",
+          "rule": "eyes, wet nose, lips, teeth and whisker pads remain materially distinct from fur"
+        },
+        {
+          "feature": "keratin",
+          "rule": "claws and teeth show harder, smoother reflectance than fur without plastic shine"
+        }
+      ],
+      "locomotion_modes": [
+        "quadruped_stand",
+        "quadruped_walk",
+        "quadruped_run",
+        "crouch_and_pounce",
+        "bounded_turn"
+      ],
+      "not_applicable": [
+        "wings",
+        "horns",
+        "scales",
+        "feathers",
+        "fins",
+        "serpentine_body",
+        "humanoid_hands",
+        "biped_skeleton",
+        "aquatic_propulsion"
+      ]
+    }
+  },
+  "creative_brief": {
+    "identity": "《山海经》青丘山地的九尾捕食者：真实狐科骨架、非人形、一首四足九尾",
+    "palette": [
+      "deep copper red",
+      "burnt sienna",
+      "smoked umber",
+      "muted ivory",
+      "amber gold eyes"
+    ],
+    "material_language": "layered sculpted fox fur with directional PBR breakup; wet dark nose, amber eyes and restrained keratin claws",
+    "pose_lock": "neutral alert quadruped stance, all four paws grounded, spine level, head forward, nine tails fanned backward and upward with distinct root-to-tip negative spaces",
+    "animation_set": [
+      "Idle",
+      "Walk",
+      "Pounce",
+      "Nine-Tail Flare",
+      "Threat Display",
+      "Listen",
+      "Dodge"
+    ]
+  },
+  "scene": {
+    "habitat": "青丘山地",
+    "terrain": "低矮青草、浅色岩砾与远处层叠丘陵",
+    "time_of_day": "黎明前后",
+    "weather": "薄雾但主体活动区清晰",
+    "palette": [
+      "blue green",
+      "weathered jade",
+      "warm dawn gold",
+      "low contrast charcoal"
+    ],
+    "lighting": {
+      "key": "soft warm dawn from upper right",
+      "fill": "cool broad sky fill",
+      "contrast": "restrained to preserve copper fur and ivory tail tips"
+    },
+    "props": [
+      "weathered jade-colored rocks",
+      "low mountain grass"
+    ]
+  },
+  "production": {
+    "concept_provider": "codex_imagegen",
+    "model_provider": "hyper3d_rodin_gen2",
+    "animation_provider": "best_available_motion_system",
+    "required_env": [
+      "RODIN_API_KEY",
+      "TRIPO_API_KEY"
+    ],
+    "optional_env": [
+      "MESHY_API_KEY"
+    ],
+    "env_file": ".env"
+  }
+}

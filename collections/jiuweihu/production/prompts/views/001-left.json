@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "view-left-001",
+  "stage": "provider_view",
+  "tool": "codex_imagegen",
+  "created_at": "2026-08-14T18:04:00Z",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: stylized-concept\nAsset type: clean left orthographic provider input for high-quality multi-view 3D reconstruction\nInput images: Image 1 is the sole identity, proportions, palette and fur-material reference; re-render the same creature, do not redesign it\nPrimary request: produce a strict full-body left-side orthographic model sheet view of the exact same Shanhaijing Nine-Tailed Fox in a frozen neutral reconstruction pose\nScene/backdrop: perfectly clean flat medium cool-gray background clearly contrasting with copper-red and ivory fur; no horizon, floor seam, cast shadow, scenery, mist or vignette\nSubject: one non-humanoid adult fox, one head, two upright ears, four anatomically plausible digitigrade legs and exactly nine complete tails. Pose lock: level spine, neck neutral, head facing straight toward image-left in exact profile, mouth closed, ears alert, all four paws planted on the same invisible ground line; near and far legs use a slight front/back stance offset so all four complete leg chains and paws remain separately readable without changing proportions. The nine tails originate as nine separately readable continuous roots from one intact sacral/caudal fan, then extend backward toward image-right in a controlled vertically staggered fan. Every tail must be independently traceable from root through full-volume body to exactly one tip; preserve clear negative-space gaps; no branching, merging, crossing that hides topology, floating or tail-like legs.\nStyle/medium: high-fidelity realistic 3D creature turnaround render, production sculpt and PBR reference, same deep copper-red, smoked-umber and muted-ivory pattern as Image 1, same facial identity and natural fox proportions\nComposition/framing: strict orthographic left profile, creature centered, complete silhouette with generous even margins, no crop, camera exactly perpendicular to body axis, no perspective convergence\nLighting/mood: uniform neutral three-point studio illumination, low contrast, no dramatic rim light, no bloom; all fur and joint connections readable\nMaterials/textures: layered sculpted fur clumps following anatomy, restrained directional normal/roughness cues, wet dark nose and distinct keratin claws; maintain the same material placement on every later view\nConstraints: exact same frozen pose and proportions for all later views; exactly nine tails and four legs; clean unannotated image; no text, numbers, arrows, turntable, split panels or watermark\nAvoid: extra/fused/missing appendages, fewer or more than nine tails, merged or hidden tail roots, forked tails, crossed tail bundle, occlusion, cropped body, perspective, motion, depth of field, fog, shadow, horizon, overexposure, smooth clay, plastic fur, painted fur blur, costume, human traits",
+  "negative_prompt": "extra/fused/missing appendages, fewer or more than nine tails, hidden/merged/forked tail roots, crossed tails, occluded paws, crop, perspective, motion blur, depth of field, fog, rim light, cast shadow, horizon, text, watermark, smooth clay, plastic fur",
+  "references": [
+    "collections/jiuweihu/concepts/master.png"
+  ],
+  "expected_output": "collections/jiuweihu/production/generations/views/001-left.png",
+  "outputs": [
+    "collections/jiuweihu/production/generations/views/001-left.png"
+  ],
+  "status": "rejected",
+  "notes": [
+    "Rejected at original-resolution anatomy review: nine tail tips are visible, but the far foreleg is fully hidden behind the near foreleg, leaving only three independently verifiable paws and failing the four-limb articulation-visibility requirement."
+  ]
+}

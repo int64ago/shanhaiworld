@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "status": "passed",
+  "checked_at": "2026-08-14T18:46:00Z",
+  "provider": "hyper3d_rodin_gen2",
+  "provider_attempt_count": 4,
+  "attempts": [
+    {
+      "attempt": 1,
+      "provider_task_id": "f1ae51db-7167-42dd-964f-1e6b2ef35eda",
+      "source_file": "collections/jiuweihu/models/raw-v1.glb",
+      "source_sha256": "93835a97e54219742505c08f4438c1e1dc10b44460997786eb2c278125c9d788",
+      "triangles": 94124,
+      "input_set": ["collections/jiuweihu/views/front.png", "collections/jiuweihu/views/left.png"],
+      "turntable_dir": "collections/jiuweihu/reports/model-turntable/",
+      "status": "failed",
+      "blocking_observation": "The rear exposes two overlapping tail fans with eighteen ends.",
+      "diagnosis": "The first two projections did not constrain the rear count."
+    },
+    {
+      "attempt": 2,
+      "provider_task_id": "b6f73c25-e0e7-407d-bd64-7b2537d94acc",
+      "source_file": "collections/jiuweihu/models/raw-v2.glb",
+      "source_sha256": "f501935670942ca1a4878d5c7edfda4bfe45ebadafa8288d0948851cefbc8199",
+      "triangles": 95014,
+      "input_set": ["collections/jiuweihu/views/front.png", "collections/jiuweihu/views/back.png", "collections/jiuweihu/views/left.png"],
+      "turntable_dir": "collections/jiuweihu/reports/model-turntable-v2/",
+      "status": "failed",
+      "blocking_observation": "The rear still shows eleven tail ends.",
+      "diagnosis": "Side and oblique fan projections introduced extra central tails."
+    },
+    {
+      "attempt": 3,
+      "provider_task_id": "a922f329-44ee-445f-b680-f07bd91330af",
+      "source_file": "collections/jiuweihu/models/raw-v3.glb",
+      "source_sha256": "c4f5ce663433de03c6ff8b5c5b712efcd03a9cead52f2e8b7f43b8eb88f5b91d",
+      "triangles": 94350,
+      "input_set": ["collections/jiuweihu/views/front-v2.png", "collections/jiuweihu/views/back.png"],
+      "turntable_dir": "collections/jiuweihu/reports/model-turntable-v3/",
+      "status": "failed",
+      "blocking_observation": "The direct-opposite pair collapses body depth into a flattened doubled anatomy.",
+      "diagnosis": "Direct front/rear projections underconstrained fox body length and volume."
+    },
+    {
+      "attempt": 4,
+      "provider_task_id": "1f9ee21d-d605-435c-8d26-60c06f987ded",
+      "source_file": "collections/jiuweihu/models/raw-v4.glb",
+      "source_sha256": "ef80f4e2468d8e9a9a9cbedc009c2f37fc8520d0338c983a5dff2c492ba3a809",
+      "bytes": 42267024,
+      "triangles": 91601,
+      "input_set": ["collections/jiuweihu/views/front.png", "collections/jiuweihu/views/back.png"],
+      "turntable_dir": "collections/jiuweihu/reports/model-turntable-v4/",
+      "status": "selected_after_topology_cleanup",
+      "observation": "The shallow-front plus direct-rear pair yields one coherent fox, four legs and exactly nine tails in all eight directions.",
+      "cleanup": "One duplicate terminal triangle was removed by an audited deterministic script; no component or anatomical region was altered."
+    }
+  ],
+  "selected_source": {
+    "path": "collections/jiuweihu/models/raw.glb",
+    "sha256": "749485341e47a58c6791d400b056b4f03b58b0e8dfd2928ede9a23dd63b25c2b",
+    "bytes": 42267024,
+    "geometry": {
+      "scenes": 1,
+      "nodes": 1,
+      "meshes": 1,
+      "primitives": 1,
+      "triangles": 91600,
+      "materials": 1,
+      "textures": 3,
+      "images": 3,
+      "skins": 0,
+      "animations": 0,
+      "boundary_edges_after_position_weld": 0,
+      "nonmanifold_edges_after_position_weld": 0
+    },
+    "topology_cleanup": "collections/jiuweihu/reports/topology-cleanup.json"
+  },
+  "checks": [
+    {
+      "id": "locked_traits",
+      "status": "passed",
+      "evidence": "Eight 1920x1080 views show one fox head, two eyes, two ears, two forelegs, two hindlegs, four paws and exactly nine independently traceable tail roots, bodies and tips.",
+      "files": ["collections/jiuweihu/reports/model-turntable-v4/000.png", "collections/jiuweihu/reports/model-turntable-v4/090.png", "collections/jiuweihu/reports/model-turntable-v4/180.png", "collections/jiuweihu/reports/model-turntable-v4/270.png"]
+    },
+    {
+      "id": "topology_and_connections",
+      "status": "passed",
+      "evidence": "All nine tails connect continuously to one sacral fan, every limb connects shoulder or hip to paw, and the audited selected mesh is closed and manifold after removing one duplicate non-anatomical triangle.",
+      "files": ["collections/jiuweihu/reports/model-closeups-v4/roots-final.png", "collections/jiuweihu/reports/topology-cleanup.json"]
+    },
+    {
+      "id": "silhouette",
+      "status": "passed",
+      "evidence": "Cardinal and diagonal views preserve natural adult-fox depth, readable paws, pointed muzzle and negative space between nine complete tails without fused, floating or hidden duplicate geometry.",
+      "files": ["collections/jiuweihu/reports/model-turntable-v4/045.png", "collections/jiuweihu/reports/model-turntable-v4/135.png", "collections/jiuweihu/reports/model-turntable-v4/225.png", "collections/jiuweihu/reports/model-turntable-v4/315.png"]
+    },
+    {
+      "id": "turntable_and_closeups",
+      "status": "passed",
+      "evidence": "A complete eight-direction turntable and face, tail-surface and tail-root closeups were captured from the cleaned selected GLB at 1920x1080.",
+      "files": ["collections/jiuweihu/reports/model-turntable-v4/", "collections/jiuweihu/reports/model-closeups-v4/face-final.png", "collections/jiuweihu/reports/model-closeups-v4/tails-final.png", "collections/jiuweihu/reports/model-closeups-v4/roots-final.png"]
+    }
+  ],
+  "resolved_root_cause": "The successful conditioning set uses the shallow front-left view only for body volume and the direct rear view only for 1+4+4 tail topology. It excludes both the side view that created extra centers and the direct-front view that collapsed depth.",
+  "blocking_failures": []
+}

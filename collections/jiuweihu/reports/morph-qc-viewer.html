@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>九尾狐 · Morph 动作 QC</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #152022; }
+    canvas { display: block; width: 100%; height: 100%; }
+    #status { position: fixed; left: 18px; top: 16px; z-index: 2; padding: 9px 12px; border-radius: 8px; color: #e4f6e9; background: rgba(6, 12, 13, .80); font: 13px/1.5 -apple-system, BlinkMacSystemFont, sans-serif; white-space: pre-line; }
+    body[data-error="true"] #status { color: #ffd4d4; }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"../../../assets/vendor/three/build/three.module.min.js"}}
+  </script>
+</head>
+<body data-ready="false" data-error="false">
+  <div id="status">正在载入 Morph 动作…</div>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from '../../../assets/vendor/three/examples/jsm/loaders/GLTFLoader.js';
+    import { OrbitControls } from '../../../assets/vendor/three/examples/jsm/controls/OrbitControls.js';
+
+    const query = new URLSearchParams(location.search);
+    const clipIndex = Number(query.get('clip') || 0);
+    const requestedTime = Number(query.get('time') || 0);
+    const yawDegrees = Number(query.get('yaw') || 90);
+    const modelFile = query.get('model') || 'morph-v8.glb';
+    const yaw = THREE.MathUtils.degToRad(yawDegrees);
+    const live = query.get('live') === '1';
+    const status = document.querySelector('#status');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x202d2f);
+    scene.fog = new THREE.Fog(0x202d2f, 18, 38);
+    const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, .02, 100);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.04;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    document.body.prepend(renderer.domElement);
+    scene.add(new THREE.HemisphereLight(0xc8e1df, 0x31271f, 2.2));
+    const key = new THREE.DirectionalLight(0xffd7a3, 4.2);
+    key.position.set(5, 9, 6);
+    key.castShadow = true;
+    key.shadow.mapSize.set(2048, 2048);
+    scene.add(key);
+    const rim = new THREE.DirectionalLight(0x76bbed, 2.3);
+    rim.position.set(-7, 5, -6);
+    scene.add(rim);
+    const ground = new THREE.Mesh(new THREE.CircleGeometry(16, 96), new THREE.MeshStandardMaterial({ color: 0x2b3a3c, roughness: .98 }));
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.enablePan = false;
+    const clock = new THREE.Clock();
+    let mixer = null;
+
+    try {
+      const gltf = await new GLTFLoader().loadAsync(`../models/${modelFile}`);
+      const model = gltf.scene;
+      let mesh = null;
+      model.traverse((object) => {
+        if (!object.isMesh) return;
+        object.castShadow = true;
+        object.receiveShadow = true;
+        object.frustumCulled = false;
+        if (object.material?.map) object.material.map.colorSpace = THREE.SRGBColorSpace;
+        if (object.morphTargetInfluences) mesh = object;
+      });
+      scene.add(model);
+      mixer = new THREE.AnimationMixer(model);
+      const clip = gltf.animations[Math.max(0, Math.min(clipIndex, gltf.animations.length - 1))];
+      const action = mixer.clipAction(clip);
+      action.play();
+      const time = Math.max(0, Math.min(requestedTime, Math.max(0, clip.duration - .001)));
+      mixer.setTime(time);
+      model.updateMatrixWorld(true);
+      let box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      model.position.set(-center.x, -box.min.y, -center.z);
+      model.updateMatrixWorld(true);
+      box = new THREE.Box3().setFromObject(model);
+      const size = box.getSize(new THREE.Vector3());
+      const sphere = box.getBoundingSphere(new THREE.Sphere());
+      const target = new THREE.Vector3(0, size.y * .48, 0);
+      const radius = sphere.radius * 2.62;
+      camera.position.set(target.x + Math.sin(yaw) * radius, target.y + radius * .08, target.z + Math.cos(yaw) * radius);
+      camera.lookAt(target);
+      controls.target.copy(target);
+      controls.minDistance = sphere.radius * .7;
+      controls.maxDistance = sphere.radius * 4;
+      controls.update();
+      globalThis.__MORPH_QC__ = {
+        ready: true,
+        mode: 'morph',
+        clip: clip.name,
+        clipIndex,
+        duration: clip.duration,
+        time,
+        yaw: yawDegrees,
+        live,
+        morphTargets: mesh ? Object.keys(mesh.morphTargetDictionary || {}) : [],
+        weights: mesh?.morphTargetInfluences?.slice() || []
+      };
+      status.textContent = `${clip.name} · morph fallback\n16 semantic targets · t=${time.toFixed(2)}s / ${clip.duration.toFixed(2)}s · yaw ${yawDegrees}°`;
+      document.body.dataset.ready = 'true';
+    } catch (error) {
+      console.error(error);
+      status.textContent = `载入失败：${error.message}`;
+      document.body.dataset.error = 'true';
+    }
+
+    function render() {
+      const delta = clock.getDelta();
+      if (live && mixer) mixer.update(delta);
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+    render();
+    addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-08-14T18:48:40+00:00",
+  "task_id": "40a6d598-9789-46cb-aeef-2ad89310df82",
+  "type": "animate_retarget",
+  "status": "success",
+  "progress": 100,
+  "credits_consumed": 10.0,
+  "error_code": null,
+  "error_message": null,
+  "output": {
+    "available_files": [
+      "model_url"
+    ]
+  },
+  "created_at": "2026-08-14T18:48:24.096159Z",
+  "completed_at": "2026-08-14T18:48:38.601848Z"
+}

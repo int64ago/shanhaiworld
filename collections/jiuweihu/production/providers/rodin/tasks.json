@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "provider": "hyper3d_rodin_gen2",
+  "tasks": [
+    {
+      "task_uuid": "f1ae51db-7167-42dd-964f-1e6b2ef35eda",
+      "job_uuids": [
+        "bb457b15-ee38-452f-9e75-d7e26041083a",
+        "b37c7e05-6ea3-46fb-8c82-b2be3ce4654b",
+        "86e965d9-abbd-4bf5-bc98-5faed9bf8864",
+        "d1c546f6-5417-47e3-9d22-508d2bdbba1b",
+        "d2f36123-f812-4ea7-99b0-af4de31e2763",
+        "6c339f1c-3b04-4efe-b5db-45837b2eff6b",
+        "87ff40b0-7513-4af9-8889-bd59f1a20ad3"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-14T18:11:32+00:00",
+      "request_record": "collections/jiuweihu/production/providers/rodin/requests/002-submit.json",
+      "response_record": "collections/jiuweihu/production/providers/rodin/responses/001-submit.json",
+      "credit_cost": 1.5,
+      "status_record": "collections/jiuweihu/production/providers/rodin/responses/002-status.json",
+      "updated_at": "2026-08-14T18:13:44+00:00",
+      "download_record": "collections/jiuweihu/production/providers/rodin/responses/003-download.json",
+      "downloaded_files": [
+        "collections/jiuweihu/production/providers/rodin/downloads/001/base_high_pbr.glb",
+        "collections/jiuweihu/production/providers/rodin/downloads/001/preview.webp",
+        "collections/jiuweihu/production/providers/rodin/downloads/001/render.jpg"
+      ]
+    },
+    {
+      "task_uuid": "b6f73c25-e0e7-407d-bd64-7b2537d94acc",
+      "job_uuids": [
+        "dff5d725-d9a0-48eb-8e43-b57497e9c88f",
+        "4da0c805-e216-4ee2-9ca5-8d3525783ce8",
+        "61eb46d0-5bee-4b65-949e-a6c76c3de3be",
+        "86760036-380e-4206-8c83-e3251b1d2115",
+        "2d6dd763-c697-4d9e-a85c-f2bd40f17840",
+        "0e513429-2eb4-41f0-8ae4-849b59c05096",
+        "da8a8248-26f5-466f-b7d4-bd43e75b2da4"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-14T18:21:12+00:00",
+      "request_record": "collections/jiuweihu/production/providers/rodin/requests/003-submit.json",
+      "response_record": "collections/jiuweihu/production/providers/rodin/responses/004-submit.json",
+      "credit_cost": 1.5,
+      "status_record": "collections/jiuweihu/production/providers/rodin/responses/005-status.json",
+      "updated_at": "2026-08-14T18:23:39+00:00",
+      "download_record": "collections/jiuweihu/production/providers/rodin/responses/006-download.json",
+      "downloaded_files": [
+        "collections/jiuweihu/production/providers/rodin/downloads/002/base_high_pbr.glb",
+        "collections/jiuweihu/production/providers/rodin/downloads/002/preview.webp",
+        "collections/jiuweihu/production/providers/rodin/downloads/002/render.jpg"
+      ]
+    },
+    {
+      "task_uuid": "a922f329-44ee-445f-b680-f07bd91330af",
+      "job_uuids": [
+        "9ed7af1b-35c0-499b-9e10-9139b0daf992",
+        "1148686d-1246-440e-a46c-2186974d268f",
+        "6e5f6198-3e32-4c86-9927-874317b11f33",
+        "512b6edc-afa1-4e2f-a770-18afffefffb5",
+        "32e3bf27-d4a8-445b-b516-186810a07c87",
+        "79880a15-42c8-43da-8d26-157536d75577",
+        "2b070ee8-8d1f-45a1-a9c5-3d9197d043c1"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-14T18:28:54+00:00",
+      "request_record": "collections/jiuweihu/production/providers/rodin/requests/004-submit.json",
+      "response_record": "collections/jiuweihu/production/providers/rodin/responses/007-submit.json",
+      "credit_cost": 1.5,
+      "status_record": "collections/jiuweihu/production/providers/rodin/responses/008-status.json",
+      "updated_at": "2026-08-14T18:31:24+00:00",
+      "download_record": "collections/jiuweihu/production/providers/rodin/responses/009-download.json",
+      "downloaded_files": [
+        "collections/jiuweihu/production/providers/rodin/downloads/003/base_high_pbr.glb",
+        "collections/jiuweihu/production/providers/rodin/downloads/003/preview.webp",
+        "collections/jiuweihu/production/providers/rodin/downloads/003/render.jpg"
+      ]
+    },
+    {
+      "task_uuid": "1f9ee21d-d605-435c-8d26-60c06f987ded",
+      "job_uuids": [
+        "25dc81e0-9fbc-4ea6-957c-4cc196da682d",
+        "1bbf1834-b538-4b69-a6fd-452cee8064f6",
+        "d167bd18-fe4b-45f5-8581-6679d8025ea2",
+        "eeceacf7-6e4c-49b0-b377-c032edfafefb",
+        "7331acfe-1747-42f5-ab44-dee37ed223ac",
+        "ae885317-213e-4c99-b196-39208cd6bc55",
+        "40ec7fdb-1f7d-4c46-b8cf-fd9d5c52ab42"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-14T18:36:02+00:00",
+      "request_record": "collections/jiuweihu/production/providers/rodin/requests/005-submit.json",
+      "response_record": "collections/jiuweihu/production/providers/rodin/responses/010-submit.json",
+      "credit_cost": 1.5,
+      "status_record": "collections/jiuweihu/production/providers/rodin/responses/011-status.json",
+      "updated_at": "2026-08-14T18:38:38+00:00",
+      "download_record": "collections/jiuweihu/production/providers/rodin/responses/012-download.json",
+      "downloaded_files": [
+        "collections/jiuweihu/production/providers/rodin/downloads/004/base_high_pbr.glb",
+        "collections/jiuweihu/production/providers/rodin/downloads/004/preview.webp",
+        "collections/jiuweihu/production/providers/rodin/downloads/004/render.jpg"
+      ]
+    }
+  ]
+}

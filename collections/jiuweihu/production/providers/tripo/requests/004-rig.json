@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-14T18:46:46+00:00",
+  "provider": "tripo",
+  "endpoint": "/animations/rig",
+  "parameters": {
+    "input": "file_c0d74842-be8c-458a-b97e-334973caab2e",
+    "model": "v2.5-20260210",
+    "rig_type": "quadruped",
+    "spec": "tripo",
+    "out_format": "glb"
+  },
+  "credentials_recorded": false
+}

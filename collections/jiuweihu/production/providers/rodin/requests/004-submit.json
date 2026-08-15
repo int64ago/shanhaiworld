@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-14T18:28:51+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/jiuweihu/views/front-v2.png",
+    "collections/jiuweihu/views/back.png"
+  ],
+  "prompt_file": "collections/jiuweihu/production/prompts/rodin/004-source.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "Create one rig-ready 3D Nine-Tailed Fox from this matched direct front/rear pair. Both images show one identical fan: exactly nine tails total, one center plus four left and four right. Rear is authoritative for nine roots on one intact sacral fan; front is authoritative for face/material. No hidden depth layer, fan per view, extra center tails, doubled geometry, eleven/eighteen ends, branch, fusion, stump, floating part, tail-like leg or extra appendage. Exact body: one fox head, two ears, two eyes, two forelegs, two hindlegs, four paws. Keep fox proportions, intact torso/pelvis, neutral stance and grounded offset paws. Match copper-red/umber fur, ivory muzzle/chest/inner ears/tail tips, amber eyes, dark nose/claws. Preserve layered directional fur, silhouette breakup, normal/roughness detail. Produce coherent quad topology and 4K PBR with deformation space at jaw, neck, spine, limbs, pelvis and nine tail roots. No humanoid traits, smooth clay, plastic fur, base, scenery, costume, text or watermark.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Quad",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "addons": "HighPack"
+  },
+  "estimated_credit_cost": 1.5,
+  "credentials_recorded": false
+}

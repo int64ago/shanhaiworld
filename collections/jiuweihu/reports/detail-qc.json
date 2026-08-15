@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "status": "passed",
+  "scope": "selected_high_quality_source",
+  "checked_at": "2026-08-14T19:10:00Z",
+  "checks": [
+    {
+      "id": "face_and_signature_details",
+      "status": "passed",
+      "evidence": "The close view preserves a long fox muzzle, paired eyes, upright ears, dark nose, ivory cheeks and the nine-tail crown without blur or melted features.",
+      "files": ["collections/jiuweihu/reports/model-closeups-v4/face-final.png"]
+    },
+    {
+      "id": "surface_directionality",
+      "status": "passed",
+      "evidence": "Chest and cheek fur break the silhouette while dense strand-scale normal relief follows the body and each tail length; ivory tips remain individually readable under key and rim light.",
+      "files": ["collections/jiuweihu/reports/model-closeups-v4/tails-final.png", "collections/jiuweihu/reports/model-turntable-v4/045.png"]
+    },
+    {
+      "id": "pbr_channels",
+      "status": "passed",
+      "evidence": "The GLB contains one material with 4096x4096 base-color, normal and packed metallic/roughness PNG textures; roughness response separates fur, nose, eyes, ears and claws.",
+      "metrics": {"texture_count": 3, "texture_resolution": [4096, 4096], "base_color": true, "normal": true, "metallic_roughness": true}
+    },
+    {
+      "id": "optimization_retention",
+      "status": "passed",
+      "evidence": "Final models/web.glb retains 91,600 triangles and byte-identical 4096x4096 base-color, normal, and metallic/roughness images from the accepted Rodin source. Release frames at normal view and constrained close zoom preserve the muzzle, wet nose, eye/ear contrast, directional body fur, tail strand relief and ivory tips.",
+      "files": [
+        "collections/jiuweihu/reports/final-page/release-final-1920x1080.png",
+        "collections/jiuweihu/reports/final-page/zoom-in.png",
+        "collections/jiuweihu/models/web.glb"
+      ],
+      "metrics": {
+        "triangles": 91600,
+        "texture_count": 3,
+        "texture_resolution": [4096, 4096],
+        "embedded_texture_payloads_identical_to_selected_source": true
+      },
+      "notes": [
+        "Rigging reorganized mesh buffers but did not reduce triangle count or replace PBR images; final identity and surface retention were rechecked visually."
+      ]
+    }
+  ],
+  "blocking_failures": []
+}

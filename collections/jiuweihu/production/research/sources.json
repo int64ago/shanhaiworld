@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "accessed_at": "2026-08-14T17:59:42Z",
+  "sources": [
+    {
+      "id": "shanhaijing-nanshanjing",
+      "title": "《山海经·南山经》青丘之山条",
+      "source_type": "primary_text",
+      "url": "https://ctext.org/shan-hai-jing/nan-shan-jing/zh",
+      "adopted_traits": [
+        "location: 青丘之山",
+        "form: 状如狐而九尾",
+        "voice: 音如婴儿",
+        "behavior: 能食人",
+        "effect: 食者不蛊"
+      ],
+      "notes": "中国哲学书电子化计划所收《山海经》底本文本；用于锁定核心身份，不据此推断毛色。"
+    },
+    {
+      "id": "shanhaijing-haiwaidongjing",
+      "title": "《山海经·海外东经》青丘国条（四库全书本）",
+      "source_type": "primary_text",
+      "url": "https://zh.wikisource.org/zh-hant/%E5%B1%B1%E6%B5%B7%E7%B6%93_%28%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC%29/%E5%8D%B709",
+      "adopted_traits": [
+        "form: 四足九尾",
+        "location: 青丘国"
+      ],
+      "notes": "用于明确四足身体类型，并与《南山经》的狐形、九尾交叉核对。"
+    },
+    {
+      "id": "taipingguangji-ruiying",
+      "title": "《太平广记·狐一·瑞应》转引《瑞应编》",
+      "source_type": "later_tradition",
+      "url": "https://ctext.org/taiping-guangji/447/ruiying/zh",
+      "adopted_traits": [
+        "later color tradition: 赤色",
+        "repeats: 四足九尾、出青丘、音如婴儿"
+      ],
+      "notes": "仅把赤色作为后世视觉依据，明确与《山海经》原典层级分开。"
+    }
+  ],
+  "canonical_summary": "一只来自青丘、外形如狐的一首四足九尾兽，声音如婴儿，具有捕食性。",
+  "inference_boundary": "《山海经》未锁定毛色、眼色、尾尖颜色和纹样；这些只作为视觉推断，不能进入 canonical_traits。"
+}

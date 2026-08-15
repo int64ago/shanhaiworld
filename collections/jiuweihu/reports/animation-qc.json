@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "status": "passed",
+  "checked_at": "2026-08-15T03:09:51Z",
+  "motion_mode": "morph",
+  "asset": "collections/jiuweihu/models/web.glb",
+  "asset_sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e",
+  "action_count": 7,
+  "actions": [
+    {
+      "name": "Idle",
+      "duration_seconds": 4.0,
+      "phases": ["preparation", "main", "recovery"],
+      "regions": ["head_neck", "spine", "nine_tail_field"],
+      "loop": true
+    },
+    {
+      "name": "Walk",
+      "duration_seconds": 2.4,
+      "phases": ["preparation", "main", "recovery"],
+      "regions": ["four_leg_chains", "spine_pelvis", "nine_tail_field"],
+      "loop": true,
+      "in_place": true
+    },
+    {
+      "name": "Pounce",
+      "duration_seconds": 3.0,
+      "phases": ["preparation", "main", "recovery"],
+      "regions": ["spine_pelvis", "front_and_rear_leg_chains", "head_neck", "nine_tail_field"],
+      "loop": false
+    },
+    {
+      "name": "Nine-Tail Flare",
+      "duration_seconds": 3.5,
+      "phases": ["preparation", "main", "recovery"],
+      "regions": ["nine_tail_field", "spine_pelvis", "head_neck"],
+      "loop": false
+    },
+    {
+      "name": "Threat Display",
+      "duration_seconds": 3.4,
+      "phases": ["preparation", "main", "recovery"],
+      "regions": ["head_neck", "spine_pelvis", "nine_tail_field"],
+      "loop": false
+    },
+    {
+      "name": "Listen",
+      "duration_seconds": 3.0,
+      "phases": ["preparation", "main", "recovery"],
+      "regions": ["head_neck", "spine", "nine_tail_field"],
+      "loop": false
+    },
+    {
+      "name": "Dodge",
+      "duration_seconds": 2.2,
+      "phases": ["preparation", "main", "recovery"],
+      "regions": ["spine_pelvis", "head_neck", "nine_tail_field"],
+      "loop": false
+    }
+  ],
+  "checks": [
+    {
+      "id": "minimum_six_actions",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-build-v8.json",
+      "notes": ["Seven real GLB animation clips exceed the minimum of six."]
+    },
+    {
+      "id": "semantic_match",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-actions-v8/",
+      "notes": ["Idle, quadruped walk, pounce, tail flare, threat, listen and dodge are visibly distinct and creature-appropriate."]
+    },
+    {
+      "id": "body_region_deformation",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-build-v8.json",
+      "notes": ["Every action affects at least two semantic regions or one continuous nine-tail deformation field; no slot is root, camera, material or particle motion."]
+    },
+    {
+      "id": "locomotion_match",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-actions-v8/",
+      "notes": [
+        "Walk is an in-place quadruped gait with alternating front and rear leg fields, pelvic response and tail counter-motion; autonomous world translation pairs only with this clip.",
+        "Rear paw displacement is now approximately 0.048–0.051 model units per alternating field, up from about 0.030 before the overlap-cancellation repair."
+      ]
+    },
+    {
+      "id": "timing_and_recovery",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-actions-v2/",
+      "notes": ["Preparation, main and recovery frames are preserved for all seven actions."]
+    },
+    {
+      "id": "action_variety",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-actions-v2/contact-sheet.jpg",
+      "notes": ["The release set includes rest, locomotion, attack, signature display, reaction and perception motions."]
+    },
+    {
+      "id": "transitions_and_loops",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/morph-actions-v2/",
+      "notes": ["Idle and Walk have loop-compatible endpoints; one-shots recover to the neutral state for mixer crossfades."]
+    }
+  ],
+  "blocking_failures": []
+}

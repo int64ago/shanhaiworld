@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "view-left-002",
+  "stage": "provider_view",
+  "tool": "codex_imagegen",
+  "created_at": "2026-08-14T18:06:00Z",
+  "use_case": "stylized-concept",
+  "prompt": "Use case: precise-object-edit\nAsset type: corrected clean left near-orthographic provider input for high-quality multi-view 3D reconstruction\nInput images: Image 1 is the rejected left-view edit target. Preserve its creature identity, exact one-head/two-ear/nine-tail anatomy, body proportions, tail fan geometry, fur pattern, materials, camera height, gray background, lighting and framing.\nPrimary request: change only the leg stance and the minimum adjacent body pixels needed to expose all four complete anatomical leg chains and all four paws. Add/reveal the currently hidden far foreleg as a natural shoulder-to-elbow-to-carpal-to-paw chain, placed one small paw-length forward of the near foreleg. Keep the two hind paws similarly offset. The result must still read as a left near-orthographic reconstruction view, not a dramatic three-quarter view.\nSubject invariants: one non-humanoid fox head, two upright ears, two eyes, exactly two forelegs, exactly two hindlegs, exactly four paws, exactly nine full-volume tails. Preserve each of the nine existing tails from a continuous sacral/caudal attachment to one tip; do not add, delete, branch, merge, cross, shorten or restyle any tail. All four paws rest on the same invisible ground line.\nComposition/framing: complete body with generous margins; each leg and paw separately traceable; no crop or perspective convergence\nLighting/mood: unchanged uniform neutral studio illumination\nConstraints: change only the stance visibility defect; keep identity, material, background and nine-tail fan unchanged; no text, labels, arrows, cast shadow, horizon or watermark\nAvoid: a fifth leg, tail-like leg, hidden far foreleg, merged paws, extra/fused/missing tails, anatomy drift, body-proportion drift, perspective, motion blur, fog, depth of field, smooth clay or plastic fur",
+  "negative_prompt": "hidden far foreleg, only three paws, extra limb, fifth leg, tail-like leg, merged paws, extra/fused/missing tails, fewer or more than nine tails, anatomy drift, crop, perspective, shadow, horizon, text, watermark",
+  "references": [
+    "collections/jiuweihu/production/generations/views/001-left.png"
+  ],
+  "expected_output": "collections/jiuweihu/production/generations/views/002-left.png",
+  "outputs": [
+    "collections/jiuweihu/production/generations/views/002-left.png"
+  ],
+  "status": "selected",
+  "notes": [
+    "Passed original-resolution and 200-percent reference QC: one head, two ears, two forelegs, two hindlegs, four separate grounded paws and nine independently traceable full tails; cross-view consistency confirmed against view 004."
+  ]
+}

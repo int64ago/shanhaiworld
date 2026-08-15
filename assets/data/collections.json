@@ -1,4 +1,16 @@
 {
   "schema_version": 1,
-  "collections": []
+  "collections": [
+    {
+      "id": "jiuweihu",
+      "name": "九尾狐",
+      "name_pinyin": "jiǔ wěi hú",
+      "subtitle": "《山海经》中的青丘异兽",
+      "summary": "狐形、四足、九尾；原典记载它声音像婴儿，是一种具有危险性的青丘异兽。",
+      "body_type": "quadruped",
+      "preview": "./collections/jiuweihu/preview.webp",
+      "href": "./collections/jiuweihu/index.html",
+      "status": "ready"
+    }
+  ]
 }

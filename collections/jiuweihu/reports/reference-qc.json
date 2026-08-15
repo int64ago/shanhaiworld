@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "name": "九尾狐",
+  "status": "passed",
+  "checked_at": "2026-08-14T19:01:00Z",
+  "anatomy_profile_source": "collections/jiuweihu/spec.json",
+  "review_method": {
+    "original_resolution": "1536x1024 selected PNGs reviewed in full",
+    "critical_region_zoom": "200 percent crops persisted under collections/jiuweihu/reports/reference-crops/",
+    "contact_sheet": "collections/jiuweihu/reports/contact-sheet-v4.png"
+  },
+  "revision": {
+    "number": 4,
+    "reason": "Rodin attempt 3 proved that the matched direct-front/direct-rear pair underconstrains body depth and collapses the fox into a flattened doubled volume.",
+    "change": "Reselected the already QC-passed shallow front-left three-quarter view for body depth together with the direct rear topology lock; excluded both the side view that created extra central tails and the direct-front view that caused depth collapse.",
+    "supersedes_contact_sheet": "collections/jiuweihu/reports/contact-sheet-v3.png",
+    "history": [
+      "Revision 1 selected left plus shallow-front views.",
+      "Revision 2 added a genuine rear topology lock after attempt 1 generated eighteen ends.",
+      "Revision 3 adds the matched direct-front opposite after attempt 2 still generated eleven ends.",
+      "Revision 4 restores only the shallow-front body-volume constraint plus rear topology after attempt 3 collapsed depth."
+    ]
+  },
+  "images": [
+    {
+      "path": "collections/jiuweihu/views/left.png",
+      "source": "collections/jiuweihu/production/generations/views/002-left.png",
+      "role": "superseded_provider_input_left_near_orthographic",
+      "resolution": [1536, 1024],
+      "sha256": "beefd0fb964cdada68565248d3b8fab280d33e5c32b18ac71abddf7850aafa96",
+      "original_resolution_checked": true,
+      "zoom_200_evidence": [
+        "collections/jiuweihu/reports/reference-crops/left-tail-roots-200.png",
+        "collections/jiuweihu/reports/reference-crops/left-limbs-200.png"
+      ],
+      "checks": {
+        "anatomy_profile_defined": "passed",
+        "applicable_counts": "passed",
+        "continuous_structure_integrity": "passed",
+        "articulation_visibility": "passed",
+        "cross_view_consistency": "passed",
+        "material_legibility": "passed",
+        "clean_background": "passed"
+      },
+      "evidence": "原图可逐一辨认一首、双耳、两前肢、两后肢、四只落地爪和九个独立尾尖；从尾根 200% 裁切可把九条全体积尾链从同一完整骶尾扇向外追踪，未见分叉、浮空或断裂。四肢裁切显示四条肩/髋至爪的连续链。灰色背景无文字、地平线、投影、雾或遮挡。"
+    },
+    {
+      "path": "collections/jiuweihu/views/front.png",
+      "source": "collections/jiuweihu/production/generations/views/004-threequarter-front.png",
+      "role": "provider_input_front_left_threequarter_body_volume",
+      "resolution": [1536, 1024],
+      "sha256": "f3019fa1890a3fcebe7c72fa960491a80e65116d5bbf04baaf6de8df9b7880a4",
+      "original_resolution_checked": true,
+      "zoom_200_evidence": [
+        "collections/jiuweihu/reports/reference-crops/front-tail-roots-200.png",
+        "collections/jiuweihu/reports/reference-crops/front-limbs-200.png"
+      ],
+      "checks": {
+        "anatomy_profile_defined": "passed",
+        "applicable_counts": "passed",
+        "continuous_structure_integrity": "passed",
+        "articulation_visibility": "passed",
+        "cross_view_consistency": "passed",
+        "material_legibility": "passed",
+        "clean_background": "passed"
+      },
+      "evidence": "浅三分之四视图提供胸宽、躯干厚度和尾根横向深度；原图仍明确显示四条腿、四爪及九条完整尾链。与左视图的身长/肩高、耳形、面部白斑、铜红毛色、四肢错位站姿、九尾长短族与垂直相位一致。"
+    },
+    {
+      "path": "collections/jiuweihu/views/back.png",
+      "source": "collections/jiuweihu/production/generations/views/005-back.png",
+      "role": "provider_input_rear_orthographic_topology_lock",
+      "resolution": [1536, 1024],
+      "sha256": "71f3a4f4d65a593c2b935590e88eb0335a3e5cfd3c1b170e281f2b9b5fd7fc2a",
+      "original_resolution_checked": true,
+      "zoom_200_evidence": [
+        "collections/jiuweihu/reports/reference-crops/back-tail-roots-200.png",
+        "collections/jiuweihu/reports/reference-crops/back-limbs-200.png"
+      ],
+      "checks": {
+        "anatomy_profile_defined": "passed",
+        "applicable_counts": "passed",
+        "continuous_structure_integrity": "passed",
+        "articulation_visibility": "passed",
+        "cross_view_consistency": "passed",
+        "material_legibility": "passed",
+        "clean_background": "passed"
+      },
+      "evidence": "原图与 200% 尾根裁切明确显示一个单独九尾扇：一个中央尾、左四尾、右四尾；九条尾根从同一完整骶尾区连续分离，无第二套重叠扇、分叉或悬浮结构。四肢裁切显示两前腿与两后腿前后错位，四只爪均可辨。"
+    },
+    {
+      "path": "collections/jiuweihu/views/front-v2.png",
+      "source": "collections/jiuweihu/production/generations/views/006-front-v2.png",
+      "role": "superseded_provider_input_direct_front_matched_topology_lock",
+      "resolution": [1254, 1254],
+      "sha256": "0711fd000f720fc6efc9a8d03bc7c9b6cb3e748f14e9c49aa4e10843585f5580",
+      "original_resolution_checked": true,
+      "zoom_200_evidence": [
+        "collections/jiuweihu/reports/reference-crops/front-v2-tail-fan-200.png",
+        "collections/jiuweihu/reports/reference-crops/front-v2-limbs-200.png"
+      ],
+      "checks": {
+        "anatomy_profile_defined": "passed",
+        "applicable_counts": "passed",
+        "continuous_structure_integrity": "passed",
+        "articulation_visibility": "passed",
+        "cross_view_consistency": "passed",
+        "material_legibility": "passed",
+        "clean_background": "passed"
+      },
+      "evidence": "原图与 200% 尾扇裁切显示一个中央尾、左四尾、右四尾共九个独立端部，与后视严格对应；没有第二深度层、额外中央尾、分叉或合并。前后腿通过前后错位形成四只可数爪，面部、铜红/象牙白毛色和毛束语言与主稿及后视一致。"
+    }
+  ],
+  "rejected_images": [
+    {
+      "path": "collections/jiuweihu/production/generations/views/001-left.png",
+      "reason": "far foreleg fully occluded; only three paws verifiable"
+    },
+    {
+      "path": "collections/jiuweihu/production/generations/views/003-front.png",
+      "reason": "eleven tails visible and only two paws verifiable"
+    }
+  ],
+  "superseded_provider_views": [
+    {
+      "path": "collections/jiuweihu/views/left.png",
+      "reason": "Visually valid but removed from provider set after Rodin attempt 2 interpreted its vertical fan as extra central geometry."
+    },
+    {
+      "path": "collections/jiuweihu/views/front-v2.png",
+      "reason": "Visually valid direct-front match but removed from provider set after Rodin attempt 3 proved direct-opposite inputs collapse body depth."
+    }
+  ],
+  "checks": [
+    {
+      "id": "anatomy_profile_defined",
+      "status": "passed",
+      "evidence": "spec.json defines counted features, continuous structures, articulated regions, fur/keratin surface rules, quadruped locomotion and explicit not-applicable categories.",
+      "notes": []
+    },
+    {
+      "id": "applicable_counts",
+      "status": "passed",
+      "evidence": "Both revision-4 provider inputs independently show 1 head, 2 ears, 2 forelegs, 2 hindlegs, 4 paws and exactly nine tails; the rear image explicitly locks them as one 1+4+4 fan and the shallow-front image supplies coherent body depth.",
+      "notes": []
+    },
+    {
+      "id": "continuous_structure_integrity",
+      "status": "passed",
+      "evidence": "The shallow-front image shows one continuous fox axial volume and four limb chains; the rear image proves nine full-volume unbranched tails from one intact sacral fan. Both retain matching tail length families and material cues.",
+      "notes": []
+    },
+    {
+      "id": "articulation_visibility",
+      "status": "passed",
+      "evidence": "Staggered stance exposes all shoulder/hip-to-paw chains; the nine tail bodies separate shortly after their roots and retain negative space for later tail-chain articulation.",
+      "notes": []
+    },
+    {
+      "id": "cross_view_consistency",
+      "status": "passed",
+      "evidence": "The v4 contact sheet confirms the same frozen stance, fox identity, copper-and-ivory material placement, nine-tail length family and four paws across a shallow-front body-volume view and a direct rear topology-lock view.",
+      "notes": [
+        "The rejected direct-front image is excluded because its eleven-tail radial anatomy conflicts with the accepted set.",
+        "The rear view was generated as a real new camera direction after model QC exposed an ambiguity; it is not a mirrored side image.",
+        "The direct-front view is a new render from the opposite camera direction and preserves the master face; it is not a mirror of the rear image."
+      ]
+    },
+    {
+      "id": "material_legibility",
+      "status": "passed",
+      "evidence": "Normal-distance and 200 percent views retain directional layered fur clumps, silhouette breakup, separate ivory muzzle/chest, wet dark nose, amber eyes and darker keratin claws.",
+      "notes": []
+    },
+    {
+      "id": "clean_background",
+      "status": "passed",
+      "evidence": "Selected views use an unobstructed cool-gray studio field without scene elements, text, arrows, fog, bloom, depth of field, floor seam or cast shadow.",
+      "notes": []
+    },
+    {
+      "id": "provider_input_suitability",
+      "status": "passed",
+      "evidence": "Exactly two high-resolution, clean views are selected: one shallow three-quarter view supplies body depth and one rear orthographic view locks one nine-tail fan. Side and flattened direct-front conditioning are excluded based on model-QC evidence.",
+      "notes": []
+    }
+  ],
+  "provider_inputs": [
+    "collections/jiuweihu/views/front.png",
+    "collections/jiuweihu/views/back.png"
+  ],
+  "blocking_failures": []
+}

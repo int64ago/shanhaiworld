@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-14T18:11:28+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/jiuweihu/views/front.png",
+    "collections/jiuweihu/views/left.png"
+  ],
+  "prompt_file": "collections/jiuweihu/production/prompts/rodin/002-source.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "Create one isolated high-fidelity rig-ready 3D model of the same Nine-Tailed Fox in both views. Exact anatomy: one fox head, two ears, two eyes, two forelegs, two hindlegs, four paws, exactly nine full-volume tails. Keep adult fox proportions, digitigrade joints, level spine, intact torso/pelvis, neutral stance and four grounded offset paws. Each tail needs one distinct root attached continuously to one intact sacral fan, room for rigging, one tapered body and one tip; no branch, merge, fusion, floating part, stump, tail-like leg or extra appendage. Match copper-red/umber fur, ivory muzzle/chest/inner ears/tail tips, amber eyes, wet dark nose and dark claws. Preserve layered directional fur clumps, silhouette breakup, normal and roughness detail. Produce coherent quad topology and 4K PBR materials with deformation space at jaw, neck, spine, limb joints, pelvis and all tail roots. No humanoid traits, smooth clay, plastic fur, duplicate shells, fused limbs, holes, base, scenery, costume, text or watermark.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Quad",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "addons": "HighPack"
+  },
+  "estimated_credit_cost": 1.5,
+  "credentials_recorded": false
+}

@@ -36,7 +36,10 @@ function createCard(item, index) {
   subtitle.textContent = item.subtitle || item.body_type || "山海神兽";
   const name = document.createElement("h3");
   name.textContent = item.name;
-  heading.append(subtitle, name);
+  const namePinyin = document.createElement("small");
+  namePinyin.className = "collection-card-pinyin";
+  namePinyin.textContent = item.name_pinyin || "";
+  heading.append(subtitle, namePinyin, name);
 
   const arrow = document.createElement("span");
   arrow.className = "card-arrow";

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>九尾狐 · 四足骨骼 QC</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #11191b; }
+    canvas { display: block; width: 100%; height: 100%; }
+    #status { position: fixed; left: 18px; top: 16px; z-index: 2; padding: 9px 12px; border-radius: 8px; color: #e6f5ea; background: rgba(7, 13, 14, .78); font: 13px/1.5 -apple-system, BlinkMacSystemFont, sans-serif; white-space: pre-line; }
+    body[data-error="true"] #status { color: #ffd4d4; }
+  </style>
+  <script type="importmap">
+    {"imports":{"three":"../../../assets/vendor/three/build/three.module.min.js"}}
+  </script>
+</head>
+<body data-ready="false" data-error="false">
+  <div id="status">正在载入 Tripo 四足骨骼…</div>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from '../../../assets/vendor/three/examples/jsm/loaders/GLTFLoader.js';
+    import { OrbitControls } from '../../../assets/vendor/three/examples/jsm/controls/OrbitControls.js';
+
+    const query = new URLSearchParams(location.search);
+    const yawDegrees = Number(query.get('yaw') || 90);
+    const yaw = THREE.MathUtils.degToRad(yawDegrees);
+    const time = Number(query.get('time') || 0);
+    const live = query.get('live') === '1';
+    const showSkeleton = query.get('skeleton') === '1';
+    const status = document.querySelector('#status');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x1d282a);
+    scene.fog = new THREE.Fog(0x1d282a, 18, 38);
+
+    const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, .02, 100);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.03;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    document.body.prepend(renderer.domElement);
+
+    scene.add(new THREE.HemisphereLight(0xc7e4e5, 0x30291f, 2.2));
+    const key = new THREE.DirectionalLight(0xffd7a3, 4.2);
+    key.position.set(5, 9, 6);
+    key.castShadow = true;
+    key.shadow.mapSize.set(2048, 2048);
+    scene.add(key);
+    const rim = new THREE.DirectionalLight(0x70b9e8, 2.3);
+    rim.position.set(-7, 4, -6);
+    scene.add(rim);
+    const ground = new THREE.Mesh(new THREE.CircleGeometry(16, 96), new THREE.MeshStandardMaterial({ color: 0x273638, roughness: .98 }));
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.enablePan = false;
+    const clock = new THREE.Clock();
+    let mixer = null;
+
+    try {
+      const gltf = await new GLTFLoader().loadAsync('../models/rigged-walk-v1.glb');
+      const model = gltf.scene;
+      let skinned = null;
+      model.traverse((object) => {
+        if (object.isMesh) {
+          object.castShadow = true;
+          object.receiveShadow = true;
+          object.frustumCulled = false;
+          if (object.material?.map) object.material.map.colorSpace = THREE.SRGBColorSpace;
+        }
+        if (object.isSkinnedMesh) skinned = object;
+      });
+      scene.add(model);
+      mixer = new THREE.AnimationMixer(model);
+      const clip = gltf.animations[0];
+      const action = mixer.clipAction(clip);
+      action.play();
+      mixer.setTime(Math.max(0, Math.min(time, clip.duration)));
+      model.updateMatrixWorld(true);
+      if (showSkeleton && skinned) {
+        const helper = new THREE.SkeletonHelper(skinned);
+        helper.material.depthTest = false;
+        helper.material.transparent = true;
+        helper.material.opacity = .95;
+        helper.renderOrder = 20;
+        scene.add(helper);
+      }
+
+      let box = new THREE.Box3().setFromObject(model);
+      const center = box.getCenter(new THREE.Vector3());
+      model.position.set(-center.x, -box.min.y, -center.z);
+      model.updateMatrixWorld(true);
+      box = new THREE.Box3().setFromObject(model);
+      const size = box.getSize(new THREE.Vector3());
+      const sphere = box.getBoundingSphere(new THREE.Sphere());
+      const target = new THREE.Vector3(0, size.y * .48, 0);
+      const radius = sphere.radius * 2.6;
+      camera.position.set(target.x + Math.sin(yaw) * radius, target.y + radius * .08, target.z + Math.cos(yaw) * radius);
+      camera.lookAt(target);
+      controls.target.copy(target);
+      controls.minDistance = sphere.radius * .7;
+      controls.maxDistance = sphere.radius * 4;
+      controls.update();
+      globalThis.__RIG_QC__ = {
+        ready: true,
+        skin: Boolean(skinned),
+        joints: skinned?.skeleton.bones.length || 0,
+        clip: clip.name,
+        duration: clip.duration,
+        time,
+        yaw: yawDegrees,
+        live,
+        skeleton: showSkeleton,
+        bones: skinned?.skeleton.bones.map((bone) => bone.name) || []
+      };
+      status.textContent = `Tripo quadruped · ${clip.name}\n60 joints · t=${time.toFixed(2)}s / ${clip.duration.toFixed(2)}s · yaw ${yawDegrees}°${showSkeleton ? ' · skeleton' : ''}`;
+      document.body.dataset.ready = 'true';
+    } catch (error) {
+      console.error(error);
+      status.textContent = `载入失败：${error.message}`;
+      document.body.dataset.error = 'true';
+    }
+
+    function render() {
+      const delta = clock.getDelta();
+      if (live && mixer) mixer.update(delta);
+      controls.update();
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+    render();
+    addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+  </script>
+</body>
+</html>

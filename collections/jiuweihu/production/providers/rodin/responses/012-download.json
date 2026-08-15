@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-14T18:38:38+00:00",
+  "task_uuid": "1f9ee21d-d605-435c-8d26-60c06f987ded",
+  "error": null,
+  "files": [
+    {
+      "provider_name": "base_high_pbr.glb",
+      "local_path": "collections/jiuweihu/production/providers/rodin/downloads/004/base_high_pbr.glb",
+      "bytes": 42267024
+    },
+    {
+      "provider_name": "preview.webp",
+      "local_path": "collections/jiuweihu/production/providers/rodin/downloads/004/preview.webp",
+      "bytes": 7094
+    },
+    {
+      "provider_name": "render.jpg",
+      "local_path": "collections/jiuweihu/production/providers/rodin/downloads/004/render.jpg",
+      "bytes": 12497
+    }
+  ],
+  "signed_urls_recorded": false
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "files": [
+    {
+      "file_token": "sha256:6efd6f4a48d1eebf0342f09a2538527860834ce5b5623168a7183cd91a79f08e",
+      "local_path": "collections/jiuweihu/models/raw.glb",
+      "bytes": 42267024,
+      "uploaded_at": "2026-08-14T18:45:57+00:00",
+      "request_record": "collections/jiuweihu/production/providers/tripo/requests/001-upload.json",
+      "response_record": "collections/jiuweihu/production/providers/tripo/responses/001-upload.json"
+    },
+    {
+      "file_token": "sha256:f36ffa1bb78490b84b9b2006669dd374cbff125127a0e29027bf7a75b50cf44b",
+      "local_path": "collections/jiuweihu/models/raw.glb",
+      "bytes": 42267024,
+      "uploaded_at": "2026-08-14T18:46:03+00:00",
+      "request_record": "collections/jiuweihu/production/providers/tripo/requests/002-upload.json",
+      "response_record": "collections/jiuweihu/production/providers/tripo/responses/002-upload.json"
+    }
+  ]
+}
