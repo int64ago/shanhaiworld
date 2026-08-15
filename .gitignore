@@ -7,4 +7,5 @@ node_modules/
 __pycache__/
 *.pyc
 .agents/runtime/
-.DS_Store
+dist/
+_site/
