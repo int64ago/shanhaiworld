@@ -60,9 +60,18 @@ collections/<slug>/production/{research,prompts,generations,providers,logs}/
 ```
 
 - Reuse shared loaders, UI, animation state, roaming logic and CSS under `assets/`; generate collection HTML from `assets/templates/collection/index.html`.
-- Keep paths relative. Preserve every prompt, generated original, rejection, selected source and sanitized provider task under the collection.
+- Keep paths relative. Preserve every prompt, selection/rejection decision and sanitized provider task. Preserve binary evidence by unique content, not by every temporary path: one SHA-256 value gets one canonical committed file.
 - Never overwrite accepted assets; create versioned replacements and append audit records.
 - Keep collection and catalog status `draft` until every mandatory gate passes. Only `ready` collections appear on the home page.
+
+### Artifact hygiene and admission gate
+
+- Treat `production/` as an audit trail, not a download cache. Keep text records complete; commit only binary artifacts that are selected inputs/outputs, materially distinct rejected evidence needed to explain a gate, deterministic reproduction inputs, final runtime assets, or the minimum QC media explicitly referenced by a report.
+- Never commit byte-identical binaries at multiple paths. A stable delivery path may itself be the canonical original; record its provider task, source role, SHA-256 and byte size instead of copying it into `production/`. Do not keep `models/web-vN.glb` when it is identical to `models/web.glb` or duplicate provider downloads under both `production/providers/**` and `models/**`.
+- Download provider outputs and disposable renders into ignored `.agents/runtime/<slug>/`. Promote only a reviewed unique artifact to a versioned canonical path such as `models/raw-vN.glb` or `models/rigged-vN.glb`; update provider/audit JSON to that path and remove the temporary download when the task ends.
+- Do not commit provider archives, raw download directories, caches, contact sheets superseded by a final sheet, exploratory screenshots, duplicate close-ups, or unreferenced browser captures. Every committed binary under a collection must be referenced by `collection.json`, `manifest.json`, `production/audit.json`, or a QC report.
+- Failed or superseded large binaries are not automatically production evidence. Keep their prompt, provider task, rejection reason, SHA-256 and byte size; retain the binary only when it is materially distinct and necessary for reproducibility or gate review. Otherwise use approved external artifact storage or leave it untracked locally—never invent a permanent URL and never commit an expiring signed URL.
+- Before any asset commit, stage explicit paths and run `python3 .agents/skills/shanhai3d/scripts/audit_assets.py --project-root . --staged`. Any duplicate, orphaned binary, provider-download binary, oversized normal-Git object or unapproved archive blocks the commit. Also inspect `git diff --cached --stat`, `git check-attr -a <asset>` and `git lfs ls-files`.
 
 ## Git commit convention
 
@@ -74,7 +83,7 @@ collections/<slug>/production/{research,prompts,generations,providers,logs}/
   - `fix(viewer): reject root-only motion as an action`
   - `docs(skill): generalize anatomy quality gates`
 - Keep each commit atomic: one behavior change, one infrastructure change, or one creature production milestone. Do not mix unrelated refactors, documentation edits, generated assets, and creature work in a single catch-all commit.
-- A creature milestone must commit its code/config together with the prompts, selected source images, sanitized provider task records, audit updates, and QC reports needed to reproduce and review it. Failed generations may be included when they are part of the required production trace, but never include raw secrets or unsanitized responses.
+- A creature milestone must commit its code/config together with the prompts, selected unique source artifacts, sanitized provider task records, audit updates, and the minimum QC evidence needed to reproduce and review it. Rejected binaries may be included only when materially distinct and explicitly referenced; rejection metadata alone is sufficient for redundant or externally stored artifacts. Never include raw secrets or unsanitized responses.
 - Do not mark a collection `ready` or commit its catalog promotion until all mandatory gates pass. Prefer a separate final commit for the `draft` → `ready` promotion so the release decision is reviewable.
 - Before committing, inspect the complete diff and run the checks relevant to the changed files. Never bypass failing hooks or validation with `--no-verify`.
 - Never commit `.env`, API keys, Authorization/Cookie values, provider JWTs, signed URLs, account/billing data, `.agents/runtime/`, temporary downloads, caches, or local server output. Confirm provider records are sanitized before staging them.
@@ -91,7 +100,7 @@ collections/<slug>/production/{research,prompts,generations,providers,logs}/
 - `collections/<slug>/models/web.glb`, `preview.webp`, optimized scene backgrounds, and other files required directly by the static page remain normal Git assets only while each is below 50 MiB. If a runtime asset reaches that threshold, optimize it or decide the hosting/CDN strategy with the user instead of silently moving it to LFS.
 - GitHub Pages cannot serve Git LFS objects as ordinary site assets. When Pages is the target, keep compliant optimized runtime files in normal Git or deploy them to an external static host/CDN; use LFS only for production/source assets that the page does not request directly.
 - LFS stores each version of a binary as a new object. Do not repeatedly commit tiny changes to huge models; finish a meaningful production milestone locally, then commit the reviewed version and its traceability records.
-- Before committing assets, inspect file sizes and verify the intended classification with `git check-attr -a <path>` and `git lfs ls-files`. A file represented by an LFS pointer must have its corresponding LFS object available.
+- Before committing assets, run the artifact admission gate, inspect file sizes and verify the intended classification with `git check-attr -a <path>` and `git lfs ls-files`. A file represented by an LFS pointer must have its corresponding LFS object available.
 - Adding LFS rules before the first asset commit is safe. Migrating already committed files or rewriting history with `git lfs migrate` requires explicit user approval and a backup/coordination plan.
 
 ## Three.js requirements

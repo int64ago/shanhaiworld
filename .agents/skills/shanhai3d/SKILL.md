@@ -14,7 +14,7 @@ description: 只接收一个《山海经》或中国神话生物名称，自主�
 - 默认使用 Hyper3D Rodin 生成高质量静态模型，优先使用当前明确支持对应 `body_type` 的 API 完成骨骼和动画；骨骼不可用时采用能真实驱动身体局部的 Morph、分段节点或网格形变方案。
 - 不把 Blender 或其他 DCC 设为默认步骤。
 - 每只神兽交付独立 `collections/<slug>/index.html`，复用根目录公共 JS/CSS。
-- 保留 Prompt、参考图、失败版本、平台任务和选择依据；不得静默覆盖。
+- 完整保留 Prompt、平台任务和选择/拒绝依据；二进制按内容单份留存，只提交被选中、可复现或被 QC 明确引用的唯一产物，不把临时下载、重复副本和无引用截图当作审计证据。
 - 只按 PC 桌面浏览器设计，优先细节与动作质量，再做实时优化。
 - 质量优先于 API credits、文件大小和生成次数；只禁止无诊断的盲目重跑，不因节省积分主动降低源质量。
 - 任何硬门未通过时回到最早失败阶段继续改进；只有能力确实不可达或缺少权限/凭据时才进入阻塞状态。
@@ -27,7 +27,7 @@ description: 只接收一个《山海经》或中国神话生物名称，自主�
 4. **运动系统门**：首选与身体结构匹配的 skin/joints；若自动绑定确实不可用，允许 Morph targets、分段节点层级或程序网格形变，但必须驱动实际身体局部并可审计。
 5. **动作门**：最终至少有 6 个经浏览器验证、语义明确且接近预期行为的动作，包含待机、主要移动和特色/反应动作。仅移动、旋转、缩放或上下晃动整个模型不算动作。
 
-执行图片、模型、骨骼或动画阶段前，完整读取 [quality-gates.md](references/quality-gates.md)。创建或修改产物前读取 [artifact-contract.md](references/artifact-contract.md)。调用平台前读取 [provider-workflow.md](references/provider-workflow.md) 并核对当前官方文档。
+执行图片、模型、骨骼或动画阶段前，完整读取 [quality-gates.md](references/quality-gates.md)。创建或修改产物前读取 [artifact-contract.md](references/artifact-contract.md)，遵守其中的单份二进制与提交准入规则。调用平台前读取 [provider-workflow.md](references/provider-workflow.md) 并核对当前官方文档。
 
 ## 快速入口
 
@@ -117,7 +117,15 @@ python3 .agents/skills/shanhai3d/scripts/check_environment.py --project-root . -
 
 2. 在 PC Chrome 1920×1080 检查首页入口、GLB/贴图、所有动作、鼠标旋转缩放、点击、游走、背景接缝、接地、控制台和资源释放。
 3. 保存结构、材质与毛发近景，以及每个动作的可复查截图或短视频证据；记录三角面、纹理、draw calls、FPS 和加载体积。
-4. 只有参考图、模型、细节、运动系统、动画、场景、交互、性能和审计全部通过，才把 collection 与 catalog 同时改为 `ready`。
+4. 删除或外置未被审计/QC 引用的临时产物，确保同一 SHA-256 只保留一个规范文件；provider 下载不得同时存在于 `production/providers/**` 与 `models/**`。
+5. 对准备提交的显式路径运行：
+
+   ```bash
+   python3 .agents/skills/shanhai3d/scripts/audit_assets.py --project-root . --staged
+   ```
+
+   重复二进制、孤立二进制、provider 下载目录、超限普通 Git 对象或未批准归档任一存在时不得提交。
+6. 只有参考图、模型、细节、运动系统、动画、场景、交互、性能、审计与资产准入全部通过，才把 collection 与 catalog 同时改为 `ready`。
 
 ## 失败与费用规则
 

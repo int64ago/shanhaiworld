@@ -12,7 +12,7 @@
 - 视觉主稿与 provider 输入图分开生成。前者锁定审美，后者优先结构清晰、负空间和跨视图一致性。
 - 以一张通过检查的主稿为角色参考派生视图，不用互不关联的纯文本请求制造四个不同角色。
 - 不把镜像图当作真实相反侧视图提交给 3D provider。
-- 每轮调用前记录实际 Prompt；每轮原图和失败版本都进入 `production/`。
+- 每轮调用前记录实际 Prompt；被选中、参与 QC 或能证明关键拒绝结论的唯一原图进入规范路径，其余版本记录生成 ID、SHA-256、字节数和拒绝原因，不制造相同字节副本。
 - 完整执行 `quality-gates.md` 的参考图门。未通过时禁止进入付费 3D。
 
 ## 静态模型：Hyper3D Rodin Gen-2
@@ -38,6 +38,7 @@
 ### 记录与临时令牌
 
 - 提交前保存脱敏请求摘要；返回后只把 task UUID、job UUID、状态、调用次数和本地产物路径写入 `production/providers/rodin/`。
+- 把下载目录设为 `.agents/runtime/<slug>/downloads/rodin/<task-id>/`。通过模型门后只将选中的唯一 GLB 提升为 `models/raw-vN.glb`，并把规范路径、SHA-256、字节数和选择状态写回 provider/audit JSON；不得提交 `production/providers/rodin/downloads/` 或与 `models/**` 重复的副本。
 - status 所需 subscription token/JWT 只能临时写入被忽略的 `.agents/runtime/rodin/`，权限 0600；任务结束立即删除。
 - 下载签名 URL 只存在于内存中并立即下载，不能进入 requests、responses、tasks、manifest 或日志。
 - 网络超时先查现有 task，不直接创建新的付费任务。
@@ -60,7 +61,7 @@
 5. 预设不足时，后续动作必须由额外明确支持的来源或代码生成的 joint tracks 补齐并烘焙进 GLB；依然需要逐动作验收。
 6. 若 anatomy profile 中需要独立活动的区域没有得到骨骼覆盖，骨骼路线失败；先针对拓扑、rig 类型和 provider 迭代。确认骨骼不可行后转入高质量 morph、articulated node 或 mesh deformation 路线，不以整体摇晃代替，也不因一次绑定失败直接放弃全部运动系统。
 
-平台任务的请求、响应和临时 URL 遵循与 Rodin 相同的脱敏规则。
+平台任务的请求、响应、临时 URL 与下载文件遵循与 Rodin 相同的脱敏和单份留存规则。下载到 `.agents/runtime/<slug>/downloads/tripo/<task-id>/`，只把被选中的 rig/animation GLB 提升到一个版本化 `models/**` 或 `animations/**` 规范路径。
 
 项目提供 `scripts/tripo_client.py`，支持：
 
@@ -132,5 +133,5 @@ initialized
 - `5xx/网络中断`：先查询已有 task ID。
 - 参考图错误：重新生成最早失败视图并重新执行完整 reference QC。
 - 模型结构错误：判断是否由输入矛盾导致；不得进入 BANG 删件修复路线。
-- 绑定/动作错误：保留任务证据，先回到模型拓扑、rig 参数或动作来源；骨骼路线确认不可行时改用可审计的 morph、articulated node 或 mesh deformation。只有所有合理运动路线都无法达到动作语义和形变质量时才阻塞。
+- 绑定/动作错误：保留任务元数据和必要的唯一 QC 证据，不保留重复下载；先回到模型拓扑、rig 参数或动作来源。骨骼路线确认不可行时改用可审计的 morph、articulated node 或 mesh deformation。只有所有合理运动路线都无法达到动作语义和形变质量时才阻塞。
 - 临时 URL 过期：使用 task ID 重新查询，无法恢复时才重新生成。

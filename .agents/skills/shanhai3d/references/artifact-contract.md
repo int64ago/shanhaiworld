@@ -74,14 +74,31 @@ collections/<slug>/
 
 ## 生产过程与可追溯性
 
-`production/` 保存完整生产证据，不是临时缓存。不得只保存最终选中的图片。
+`production/` 保存完整决策链，不是临时缓存，也不是“所有下载都进 Git”的理由。文本记录要完整；二进制证据按唯一内容和明确用途准入。
 
 - 每次考据结果写入 `production/research/sources.json`，保留来源、访问时间和采用的原典特征。
 - 每次 ImageGen 调用前，先把实际 Prompt、负面约束、参考图路径和预期输出写入一个编号 JSON，例如 `production/prompts/concepts/001-master.json`。
-- 每轮生成图原样保存在 `production/generations/` 对应阶段，采用 `001-*`、`002-*` 递增编号；失败或未选中的图也保留。
-- 最终选中图复制或转换到 `concepts/master.png`、`views/*.png`、`scene/background.webp`、`preview.webp` 等稳定交付路径；选择理由和源文件路径写入 `production/audit.json.selections`。
+- 每轮生成的唯一原图若被选中、参与 QC 对比或对拒绝结论不可替代，才进入版本化稳定路径；其余轮次保留 Prompt、生成 ID、SHA-256、字节数和拒绝原因，较大文件放到批准的外部产物存储或保持本地未跟踪。
+- 最终选中图直接以 `concepts/master.png`、`views/*.png`、`scene/background.webp`、`preview.webp` 等稳定路径作为规范副本，或转换成不同编码的交付版本；禁止仅为“生产目录留档”再复制一份相同字节。
 - Rodin/Tripo 的脱敏请求、响应摘要和 task ID 分别保存在各自 `production/providers/<provider>/requests/`、`responses/` 和 `tasks.json`。
-- 不覆盖旧 Prompt 或旧生成图。重试必须新建编号文件，并在 `audit.json.runs` 追加一条记录。
+- 不覆盖旧 Prompt 或已接受的唯一产物。重试必须新建编号记录，并在 `audit.json.runs` 追加一条记录；是否保留二进制由下方准入规则决定。
+
+### 二进制单份留存与准入
+
+- 对每个二进制计算 SHA-256。相同 SHA-256 在 Git/LFS 中只能有一个规范路径；审计、provider response 和 QC 报告都引用该路径，不用复制文件表达不同角色。
+- Provider 输出先下载到被忽略的 `.agents/runtime/<slug>/downloads/`。验收后只把需要的唯一文件提升到版本化规范路径，例如 `models/raw-vN.glb`、`models/rigged-vN.glb` 或 `models/morph-vN.glb`，然后删除临时下载。
+- 禁止在 `production/providers/**` 提交 GLB、FBX、贴图包或 provider archive。该目录只保存脱敏请求、响应摘要、task ID、规范产物路径、SHA-256、字节数和状态。
+- `models/web.glb` 是网页运行时规范文件。只有内容不同且审计说明用途时才保留 `web-vN.glb`；与 `web.glb` 完全相同的版本副本必须删除。
+- 报告目录只保留 QC 所需的最小证据集。旧 contact sheet、探索性截图、重复 close-up、临时页面截图或没有被任何 QC/audit JSON 引用的媒体不得提交。
+- 失败或被替代的大型二进制只有在内容确实不同、能解释关键拒绝结论且被报告引用时才进入 LFS。否则只保存 prompt/task、拒绝原因、SHA-256、字节数和外部 object key；不得保存临时签名 URL。
+- 每个提交的 collection 二进制必须至少被 `collection.json`、`manifest.json`、`production/audit.json` 或某个 QC JSON 引用。记录至少包含规范路径、SHA-256、字节数、阶段、状态、来源 task/run 和选择或拒绝理由。
+- 提交前只暂存明确路径，并运行：
+
+  ```bash
+  python3 .agents/skills/shanhai3d/scripts/audit_assets.py --project-root . --staged
+  ```
+
+  任一准入错误都会阻断提交，不得用 `--no-verify` 或改名绕过。
 
 单次图片生成 Prompt 记录示例：
 
@@ -313,4 +330,4 @@ collections/<slug>/
 - 临时下载 URL 只用于即时下载；manifest 和 `production/` 仅保存 provider task ID、本地文件路径和脱敏摘要。
 - Provider status 所需 subscription token/JWT 只能暂存在被忽略的 `.agents/runtime/`，权限 0600，任务结束立即删除；不得写入 `production/`。
 - Provider 请求与响应在落盘前删除密钥、Authorization header、Cookie、签名参数、账户信息和计费信息。
-- 原始 Prompt 与中间图片必须保留；包含秘密或临时授权信息的原始网络响应不得保留。
+- 原始 Prompt 必须保留；中间图片和模型遵守二进制单份准入规则。包含秘密或临时授权信息的原始网络响应不得保留。
