@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:46:14+00:00",
+  "task_uuid": "a37fe3ff-1a9f-434c-8d17-1ef97afe513f",
+  "error": null,
+  "files": [
+    {
+      "provider_name": "base_high_pbr.glb",
+      "local_path": ".agents/runtime/yinglong/downloads/rodin/a37fe3ff-1a9f-434c-8d17-1ef97afe513f/base_high_pbr.glb",
+      "bytes": 45430648
+    },
+    {
+      "provider_name": "preview.webp",
+      "local_path": ".agents/runtime/yinglong/downloads/rodin/a37fe3ff-1a9f-434c-8d17-1ef97afe513f/preview.webp",
+      "bytes": 3154
+    },
+    {
+      "provider_name": "render.jpg",
+      "local_path": ".agents/runtime/yinglong/downloads/rodin/a37fe3ff-1a9f-434c-8d17-1ef97afe513f/render.jpg",
+      "bytes": 9774
+    }
+  ],
+  "signed_urls_recorded": false
+}

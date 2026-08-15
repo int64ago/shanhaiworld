@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:28:15+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/yinglong/views/left.png",
+    "collections/yinglong/views/front.png",
+    "collections/yinglong/views/back.png"
+  ],
+  "prompt_file": "collections/yinglong/production/prompts/models/001-rodin.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "Create one complete high-fidelity PBR 3D asset of Yinglong, matching the three approved multi-view images as one identical creature in one frozen pose. Preserve exact anatomy: one head with two eyes and exactly two backward-branched horns; one continuous elongated Chinese-dragon body from skull through long neck, deep chest, torso, pelvis and one unbranched tapering tail; exactly four distinct legs with clean shoulder and hip attachments, usable elbow/knee/ankle articulation space and separated taloned feet; exactly two large feathered wings with two distinct roots integrated into the left and right upper back, the creature's left wing higher and right wing lower exactly as shown. Do not merge, duplicate, shorten or hide any limb, wing root or tail segment. Preserve the full silhouette and negative spaces.\n\nSurface fidelity: physically readable overlapping bronze-green and deep-teal dorsal scales with real relief and directional roughness; continuous pale antique-gold segmented ventral scutes from throat through belly toward the tail base; layered indigo-black feather groups with distinct overlap and thickness, not a flat painted texture; worn ivory keratin horns and claws; separated wet eyes, nostrils and mouth line; dark mane ridge attached continuously to the head and neck. Use clean watertight topology suitable for later non-humanoid rigging, with continuous wing shoulders, neck, hips and tail root. No scene, floor, pedestal or detached accessories.\n\nReject western fire-dragon redesign, bat-only wings, armor, saddle, rider, humanoid proportions, extra or missing wings, legs, horns, eyes or tails, fused geometry, floating feathers, holes, clipped tips, smooth clay, glossy plastic, blurry identity features or baked dramatic shadows.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Quad",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "addons": "HighPack"
+  },
+  "estimated_credit_cost": 1.5,
+  "credentials_recorded": false
+}

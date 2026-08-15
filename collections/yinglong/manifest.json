@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "status": "ready",
+  "created_at": "2026-08-15T09:10:18+00:00",
+  "updated_at": "2026-08-15T11:27:38Z",
+  "artifacts": [
+    {
+      "kind": "mandarin_narration",
+      "path": "collections/yinglong/scene/narration-zh-cn-v1.m4a",
+      "status": "ready",
+      "sha256": "bc903d5c08c2266af3377fee57222ea02c54814b3d8e302e56ae0f9b4d986848",
+      "bytes": 209996,
+      "notes": [
+        "49.599 秒固定普通话朗读；使用全站统一的 mandarin-tingting-r160-v1 音色、语速与 AAC 编码配置。"
+      ]
+    },
+    {
+      "kind": "concept_master",
+      "path": "collections/yinglong/concepts/master.png",
+      "status": "ready",
+      "sha256": "b741e74dfc7cc4750e240d27f6095f451ccffaf13310900eb0085a9ffcfff974",
+      "bytes": 2732894,
+      "notes": [
+        "视觉身份主稿，不作为 3D provider 输入。"
+      ]
+    },
+    {
+      "kind": "provider_view_left",
+      "path": "collections/yinglong/views/left.png",
+      "status": "ready",
+      "sha256": "6114394448e0527abe7461d245a87a2b4d158322469ee69ac1d96eb2051b5d63",
+      "bytes": 2002690,
+      "notes": []
+    },
+    {
+      "kind": "provider_view_front",
+      "path": "collections/yinglong/views/front.png",
+      "status": "ready",
+      "sha256": "0b50ed1e7f9e8a37ace3fd8e14c28032e6e61ffae89da6f5721e5fbb8c751886",
+      "bytes": 2025840,
+      "notes": []
+    },
+    {
+      "kind": "provider_view_back",
+      "path": "collections/yinglong/views/back.png",
+      "status": "ready",
+      "sha256": "c8006870175d06b81298a4ba166b59069896533995fe813c16494c575aa4031d",
+      "bytes": 2119018,
+      "notes": [
+        "后左三分之四近正交视图。"
+      ]
+    },
+    {
+      "kind": "reference_qc_evidence",
+      "path": "collections/yinglong/reports/contact-sheet.png",
+      "status": "ready",
+      "sha256": "377933f8afb90c6c28ed9b1e469e99b180d82d32af84c4113b7e90bf50e453f7",
+      "bytes": 1027007,
+      "notes": [
+        "逐图200%裁图由 reports/reference-qc.json 直接引用。"
+      ]
+    },
+    {
+      "kind": "web_glb",
+      "path": "collections/yinglong/models/web.glb",
+      "status": "ready",
+      "sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+      "bytes": 17157080,
+      "notes": [
+        "唯一规范 GLB；Rodin 正确结构基础上增加分层羽片、连续角枝、9 个区域 Morph 和 7 个动作。",
+        "保留 4096x4096 PBR 三通道并转为 WebP；Morph POSITION accessor 带完整 min/max，浏览器无元数据警告；不保留与其字节相同的 raw/rigged 副本。"
+      ]
+    },
+    {
+      "kind": "scene_background",
+      "path": "collections/yinglong/scene/background.webp",
+      "status": "ready",
+      "sha256": "d00e950ef5c8f68f8ab2f4cdeda4d5a236c8e7b82d7fa67de224909a901b4bcd",
+      "bytes": 129566,
+      "notes": [
+        "南荒雨后洪泽空场环境；1774x887 WebP equirectangular 背景。"
+      ]
+    },
+    {
+      "kind": "catalog_preview",
+      "path": "collections/yinglong/preview.webp",
+      "status": "ready",
+      "sha256": "f8e8b1d6f87c70ad19c2d778a78feada7425ab8a13e4cf962fd09417b327cf94",
+      "bytes": 29406,
+      "notes": [
+        "由最终 Three.js 页面在 1920x1080 preview 模式实拍并缩至 1280x720。"
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "id": "reference_quality",
+      "status": "ready",
+      "evidence": "collections/yinglong/reports/reference-qc.json"
+    },
+    {
+      "id": "model_quality",
+      "status": "ready",
+      "evidence": "collections/yinglong/reports/model-qc.json"
+    },
+    {
+      "id": "detail_quality",
+      "status": "ready",
+      "evidence": "collections/yinglong/reports/detail-qc.json"
+    },
+    {
+      "id": "motion_system_quality",
+      "status": "ready",
+      "evidence": "collections/yinglong/reports/rig-qc.json"
+    },
+    {
+      "id": "animation_quality",
+      "status": "ready",
+      "evidence": "collections/yinglong/reports/animation-qc.json"
+    },
+    {
+      "id": "page_quality",
+      "status": "ready",
+      "evidence": "collections/yinglong/reports/page-qc.json"
+    }
+  ],
+  "notes": [
+    "原典与视觉推演已分离记录；参考图质量门已通过。",
+    "四次 Rodin 单独输出未通过；随后以结构计数正确的候选为基础进行不删件的程序化混合增强。",
+    "Tripo avian 真实骨骼路线通过结构和关节实转，但因不含最终增强几何且无匹配的完整动作集而未选用。",
+    "最终混合 GLB、7 个动作、独立场景和桌面 Three.js 页面均通过质量门与 1920x1080 浏览器实测。",
+    "页面使用全站统一的 shared-v1 交互外壳，并已与九尾狐逐项对照通过。",
+    "朗读使用与九尾狐一致的 mandarin-tingting-r160-v1 固定音频，浏览器不再回退到设备系统语音。"
+  ]
+}

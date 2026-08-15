@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "id": "concept-001",
+  "stage": "concept",
+  "tool": "codex_builtin_imagegen",
+  "created_at": "2026-08-15T09:12:40Z",
+  "use_case": "stylized-concept",
+  "asset_type": "cinematic identity master for a high-fidelity 3D mythic-creature collection",
+  "prompt": "Create a museum-quality cinematic identity master of Yinglong, the ancient Chinese winged rain dragon. Show one single complete creature in a three-quarter full-body view, with no rider and no other beings. Anatomy lock: one continuous elongated Chinese-dragon body from skull through long neck, deep ribcage, pelvis and one tapering tail; exactly four powerful legs with distinct shoulders, hips, joints and taloned feet; exactly one bilateral pair of enormous wings attached clearly to the upper back, each with a scaled leading edge, a restrained flexible inner membrane and layered indigo-black primary feathers; exactly two backward-sweeping branched ivory horns; exactly two eyes on one head. The head should read as an ancient Chinese dragon rather than a western fire dragon: long muzzle, strong brow, nostrils, whisker roots, cheek scales, modest dark mane, intelligent solemn expression. Materials: physically convincing overlapping bronze-green and deep teal scales with separated edges and directional relief, pale antique-gold segmented ventral scutes, indigo-black wing feathers with layered groups and subtle rain sheen, worn ivory keratin horns and claws, wet eyes and nostrils. Pose: grounded and dignified on a dark rain-wet stone ledge, torso seen clearly, wings lifted and opened enough to reveal their attachment and full silhouette, long tail sweeping behind without hiding any limb. Environment: the South Wilderness after a storm, distant floodplain and layered ink-dark mountains, low rain clouds parting around a restrained warm shaft of light; environment stays quieter and softer than the creature. Style: high-end cinematic creature design, realistic anatomy and PBR material study, ancient Chinese bronze and ink-painting sensibility without turning into a statue or painting. No text, labels, borders or watermark.",
+  "negative_prompt": "extra or missing wings, extra or missing legs, extra heads, two tails, forked tail, fused limbs, wing roots hidden by fog, western bat-only dragon, fire breathing, armor, saddle, rider, humanoid anatomy, mechanical parts, smooth clay, glossy plastic, blurry painted scales, flat feather texture, cropped body, severe perspective distortion, depth-of-field blur on anatomy, lightning covering the face, excessive particles, text, logo, watermark",
+  "references": [],
+  "expected_output": "collections/yinglong/concepts/master.png",
+  "outputs": [
+    {
+      "path": "collections/yinglong/concepts/master.png",
+      "sha256": "b741e74dfc7cc4750e240d27f6095f451ccffaf13310900eb0085a9ffcfff974",
+      "bytes": 2732894,
+      "resolution": "1536x1024",
+      "generation_id": "exec-abbea034-56ab-4c65-9c84-0b4f6306265d"
+    }
+  ],
+  "status": "selected",
+  "notes": [
+    "视觉主稿只锁定身份、比例、材质与气质，不作为 Rodin 输入图。",
+    "原始分辨率检查：单头、双眼、双角、双翼、四足和单尾成立；翼根与肩背连续，鳞片、腹甲、飞羽和角质分区可辨。"
+  ]
+}

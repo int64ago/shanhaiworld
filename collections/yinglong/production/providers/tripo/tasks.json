@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "provider": "tripo",
+  "tasks": [
+    {
+      "kind": "rig-check",
+      "task_id": "4dee25f3-9c3a-43d1-b89f-56b70ccffe49",
+      "status": "success",
+      "submitted_at": "2026-08-15T10:37:24+00:00",
+      "request_record": "collections/yinglong/production/providers/tripo/requests/005-rig-check.json",
+      "response_record": "collections/yinglong/production/providers/tripo/responses/003-rig-check.json",
+      "updated_at": "2026-08-15T10:37:29+00:00",
+      "status_record": "collections/yinglong/production/providers/tripo/responses/004-task.json",
+      "credits_consumed": 0.0,
+      "output_summary": {
+        "riggable": true,
+        "rig_type": "avian",
+        "available_files": []
+      }
+    },
+    {
+      "kind": "rig",
+      "task_id": "2df32230-52f9-4082-bb17-4f4c504631ca",
+      "status": "success",
+      "submitted_at": "2026-08-15T10:38:09+00:00",
+      "request_record": "collections/yinglong/production/providers/tripo/requests/006-rig.json",
+      "response_record": "collections/yinglong/production/providers/tripo/responses/005-rig.json",
+      "updated_at": "2026-08-15T10:39:23+00:00",
+      "status_record": "collections/yinglong/production/providers/tripo/responses/006-task.json",
+      "credits_consumed": 25.0,
+      "output_summary": {
+        "available_files": [
+          "model_url",
+          "rendered_image_url"
+        ]
+      },
+      "download_record": "collections/yinglong/production/providers/tripo/responses/007-download.json",
+      "downloaded_files": [
+        ".agents/runtime/yinglong/downloads/tripo/2df32230-52f9-4082-bb17-4f4c504631ca/01-output-model_url.glb",
+        ".agents/runtime/yinglong/downloads/tripo/2df32230-52f9-4082-bb17-4f4c504631ca/02-output-rendered_image_url.webp"
+      ],
+      "runtime_files_removed_at": "2026-08-15T10:51:58Z"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-08-15T10:37:29+00:00",
+  "task_id": "4dee25f3-9c3a-43d1-b89f-56b70ccffe49",
+  "type": "animate_prerigcheck",
+  "status": "success",
+  "progress": 100,
+  "credits_consumed": 0.0,
+  "error_code": null,
+  "error_message": null,
+  "output": {
+    "riggable": true,
+    "rig_type": "avian",
+    "available_files": []
+  },
+  "created_at": "2026-08-15T10:37:24.289534Z",
+  "completed_at": "2026-08-15T10:37:26.809497Z"
+}

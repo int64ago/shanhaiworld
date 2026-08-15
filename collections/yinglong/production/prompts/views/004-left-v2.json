@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "view-004-left-v2",
+  "stage": "view",
+  "tool": "codex_builtin_imagegen",
+  "created_at": "2026-08-15T09:16:14Z",
+  "use_case": "stylized-concept",
+  "asset_type": "clean near-orthographic provider input for multi-view 3D reconstruction",
+  "input_images": [
+    {
+      "path": "collections/yinglong/concepts/master.png",
+      "role": "identity, anatomy proportion and material reference; do not copy its scene or dramatic lighting"
+    }
+  ],
+  "prompt": "Create a clean near-orthographic left modeling view of the exact same Yinglong from Image 1. Preserve all identity, proportions and materials. One isolated full creature on seamless medium cool-gray. Frozen pose: mouth closed, head aligned forward, shallow untwisted S neck, level torso, exactly four planted legs separated in a rectangular stance, one nearly straight unbranched tail. Critical correction: make both anatomical wings independently visible from this side—near-side wing lifted 40 degrees above horizontal, far-side wing lifted 28 degrees, both swept 15 degrees backward; preserve exactly two distinct roots attached to left and right shoulder-back, with a clear narrow band of negative space between their upper silhouettes and no extra wing. Use an orthographic camera with only a subtle 6-degree elevation so the far wing root and tip can be verified while the body still reads as a left profile. Uniform softbox light; complete horns, whiskers, wing tips, feet and tail in frame; no scene, floor texture, shadows, fog, text or watermark.",
+  "negative_prompt": "only one visible wing, completely overlapping wings, extra wing, fused wing roots, identity drift, changed colors, extra or missing legs, horns, eyes or tails, merged feet, coiled or forked tail, open mouth, dynamic pose, perspective distortion, scenery, pedestal, cast shadow, rim glow, depth of field, smooth clay, glossy plastic, blurry scales or feathers, crop, label, logo, watermark",
+  "expected_output": "collections/yinglong/views/left.png",
+  "outputs": [
+    {
+      "path": "collections/yinglong/views/left.png",
+      "generation_id": "exec-e552b7b4-e6b6-4153-8e06-2a15b7f808a7",
+      "sha256": "6114394448e0527abe7461d245a87a2b4d158322469ee69ac1d96eb2051b5d63",
+      "bytes": 2002690,
+      "resolution": "1536x1024"
+    }
+  ],
+  "status": "selected",
+  "notes": [
+    "针对 v1 双翼完全重叠的单一根因进行迭代；冻结姿势更新为近翼40度、远翼28度。",
+    "原始分辨率检查：两翼轮廓分离；四足、双角、两眼、单头、连续躯干与单尾成立；翼羽、背鳞、腹甲和角质边界可读。"
+  ]
+}

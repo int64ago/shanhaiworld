@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:39:28+00:00",
+  "task_uuid": "bc669258-a8cb-46a3-80b1-51ce1fabd19f",
+  "status": "Done",
+  "jobs": [
+    {
+      "uuid": "a05939de-4113-4a21-b658-34ff7d94969a",
+      "status": "Done"
+    },
+    {
+      "uuid": "711d0aae-8485-4593-a9b7-d8d9efaa8127",
+      "status": "Done"
+    },
+    {
+      "uuid": "86471fb1-b055-4083-bd7a-4042f8b94c07",
+      "status": "Done"
+    },
+    {
+      "uuid": "139b5909-1fbe-4fda-8a84-faecc26a00d2",
+      "status": "Done"
+    },
+    {
+      "uuid": "062a8c6d-c2f1-4b9d-9963-c33e09a65eae",
+      "status": "Done"
+    },
+    {
+      "uuid": "b9e9b2af-e8e0-4629-a133-d9764fb6c0fc",
+      "status": "Done"
+    },
+    {
+      "uuid": "27b1834f-8ae7-4fb0-9d84-7f0481996cc3",
+      "status": "Done"
+    }
+  ]
+}

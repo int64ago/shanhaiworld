@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "input_mode": "name_only",
+  "status": "ready",
+  "created_at": "2026-08-15T09:10:18+00:00",
+  "intent": {
+    "platform": "desktop_web",
+    "renderer": "threejs",
+    "interaction": "mouse",
+    "autonomous_motion": true,
+    "rich_actions": true,
+    "coherent_scene": true,
+    "visual_target": "high_fidelity_pc",
+    "quality_priority": "quality_over_credits",
+    "preferred_motion_mode": "skeletal",
+    "accepted_motion_modes": [
+      "skeletal",
+      "morph",
+      "articulated",
+      "hybrid"
+    ],
+    "hard_quality_gates": [
+      "reference",
+      "model",
+      "detail",
+      "motion_system",
+      "animation"
+    ]
+  },
+  "source": {
+    "canonical_traits": [
+      {
+        "trait": "应龙属于龙类，并以有翼为最明确的形态识别特征",
+        "basis": "《广雅·释鱼》定义“有翼曰应龙”",
+        "confidence": "high"
+      },
+      {
+        "trait": "能蓄水、兴雨，与旱涝和南方多雨相联系",
+        "basis": "《山海经·大荒东经》《大荒北经》",
+        "confidence": "high"
+      },
+      {
+        "trait": "受黄帝命攻蚩尤，并有杀蚩尤、夸父的叙事",
+        "basis": "《山海经·大荒东经》《大荒北经》",
+        "confidence": "high"
+      },
+      {
+        "trait": "与治水、河海路径的早期神话传统有关",
+        "basis": "《楚辞·天问》“河海应龙，何尽何历”",
+        "confidence": "medium"
+      }
+    ],
+    "visual_inferences": [
+      {
+        "trait": "采用一对大型羽膜混合翼、四足、双角和单尾的中国龙体型",
+        "reason": "原典仅锁定有翼龙类；为三维结构、飞行运动和跨视图可验证性补全明确解剖"
+      },
+      {
+        "trait": "青铜绿至深青鳞片、浅金腹甲、黛青飞羽与雨水珠光",
+        "reason": "呼应蓄水、降雨与上古青铜审美，不冒充原典颜色记载"
+      },
+      {
+        "trait": "角、爪、喙缘采用旧象牙和深角质材质",
+        "reason": "提高身份区域和 PBR 材质分区的近景可读性"
+      }
+    ],
+    "citations": [
+      "https://zh.wikisource.org/wiki/%E5%B1%B1%E6%B5%B7%E7%B6%93/%E5%A4%A7%E8%8D%92%E6%9D%B1%E7%B6%93",
+      "https://zh.wikisource.org/wiki/%E5%B1%B1%E6%B5%B7%E7%B6%93/%E5%A4%A7%E8%8D%92%E5%8C%97%E7%B6%93",
+      "https://ctext.org/wiki.pl?chapter=460407&if=gb",
+      "https://zh.wikisource.org/wiki/%E5%A4%A9%E5%95%8F"
+    ]
+  },
+  "design": {
+    "body_type": "winged_serpentine_quadruped",
+    "locked_traits": [
+      "单一连续的长龙躯干与单尾",
+      "左右一对大型翼，翼根清楚接入肩背",
+      "四条承重肢体，前后肢分离",
+      "一对向后分叉的角",
+      "两眼、单头、单下颌",
+      "鳞片、腹甲、翼羽/翼膜、角质形成清楚材质分区"
+    ],
+    "anatomy_profile": {
+      "counted_features": [
+        {
+          "id": "wings",
+          "count": 2,
+          "evidence_class": "visual_inference",
+          "validation": "左右各一，翼根、翼肘、翼腕与翼尖轮廓分离，不增翼、不融合"
+        },
+        {
+          "id": "legs",
+          "count": 4,
+          "evidence_class": "visual_inference",
+          "validation": "两前肢两后肢，肩胯连接和足爪负空间清楚"
+        },
+        {
+          "id": "horns",
+          "count": 2,
+          "evidence_class": "visual_inference",
+          "validation": "左右一对，角根连续，无额外枝角或断根"
+        },
+        {
+          "id": "eyes",
+          "count": 2,
+          "evidence_class": "visual_inference",
+          "validation": "左右对称置于单一头颅"
+        },
+        {
+          "id": "tail",
+          "count": 1,
+          "evidence_class": "visual_inference",
+          "validation": "由骨盆后连续收束为单一尾尖，无分叉"
+        }
+      ],
+      "continuous_features": [
+        {
+          "id": "axial_body",
+          "validation": "头颅、长颈、胸腹、骨盆与尾构成一条有体积的连续轴线，无断裂、双身或突兀截面"
+        },
+        {
+          "id": "ventral_scutes",
+          "validation": "腹甲从喉下沿胸腹连续到尾基，叠压方向一致"
+        },
+        {
+          "id": "dorsal_mane_ridge",
+          "validation": "冠鬃/背脊从枕后沿颈背延续至肩后，允许在翼根处自然减弱但不能漂浮"
+        }
+      ],
+      "articulated_regions": [
+        {
+          "id": "jaw_head_neck",
+          "requirements": "下颌开合、头颈俯仰转向，颈部连续弯曲且鬃脊不脱离"
+        },
+        {
+          "id": "spine_tail",
+          "requirements": "胸腰躯干到长尾具多段连续波动，尾根不折断"
+        },
+        {
+          "id": "left_wing",
+          "requirements": "肩、肘、腕、翼尖形成可折叠与下拍链，翼根与胸背连接保形"
+        },
+        {
+          "id": "right_wing",
+          "requirements": "肩、肘、腕、翼尖形成可折叠与下拍链，翼根与胸背连接保形"
+        },
+        {
+          "id": "forelimbs",
+          "requirements": "肩、肘、腕、趾爪可独立屈伸，飞行时可收拢"
+        },
+        {
+          "id": "hindlimbs",
+          "requirements": "髋、膝、踝、趾爪可承重蹬地和飞行收拢"
+        }
+      ],
+      "surface_features": [
+        {
+          "id": "overlapping_scales",
+          "requirements": "青铜绿背鳞具真实边界、叠压、法线起伏与粗糙度变化"
+        },
+        {
+          "id": "ventral_armor",
+          "requirements": "浅金腹甲分节清楚，反射比背鳞更柔和"
+        },
+        {
+          "id": "wing_surfaces",
+          "requirements": "黛青主飞羽分组叠压，翼根至前缘保留带鳞皮膜过渡，不画成平面花纹"
+        },
+        {
+          "id": "keratin",
+          "requirements": "双角、爪、喙缘具有层理、磨损与半哑光高光"
+        },
+        {
+          "id": "face",
+          "requirements": "眼睑、鼻孔、口缝、须根、颊鳞和湿润口腔在近景可辨"
+        }
+      ],
+      "locomotion_modes": [
+        {
+          "id": "flight",
+          "primary": true,
+          "propulsion": "左右翼错相细微但整体同步的完整拍翼周期，脊柱和尾部参与稳定与转向"
+        },
+        {
+          "id": "ground_walk",
+          "primary": false,
+          "propulsion": "四足交替承重，长躯干与尾巴补偿摆动，翼折叠稳定"
+        },
+        {
+          "id": "water_serpentine",
+          "primary": false,
+          "propulsion": "脊柱至尾的连续侧向波穿过全身，四肢和翼收拢"
+        }
+      ],
+      "not_applicable": [
+        "多头计数",
+        "多尾扇形拓扑",
+        "无肢蛇形身体",
+        "人形双足骨架",
+        "昆虫翅脉",
+        "毛皮或逐根毛发规则"
+      ]
+    },
+    "palette": [
+      "深青 #173C43",
+      "青铜绿 #2F6B63",
+      "浅金腹甲 #C9AD72",
+      "黛青翼羽 #172B38",
+      "旧象牙角爪 #C8B991",
+      "雨云灰 #6F8388"
+    ],
+    "animations": [
+      "IdleRainSense",
+      "Fly",
+      "GroundWalk",
+      "WaterCoil",
+      "Roar",
+      "WingThreat",
+      "TailStrike",
+      "Takeoff",
+      "Land"
+    ]
+  },
+  "creative_brief": {
+    "identity": "上古司雨战龙，不是西方喷火龙，也不是现代机甲龙",
+    "pose": "四足低重心中性站姿；前肢站距略窄、后肢站距略宽，使正视图四足可分离；头朝前；长颈与尾沿身体轴线伸展；为避免侧视图双翼完全重叠，生物左翼上抬约四十度、右翼约二十八度，二者均略向后展；所有建模视图保持这一冻结姿势，翼根、四肢和尾部负空间清楚",
+    "material_language": "青铜绿叠鳞、浅金腹甲、黛青分组飞羽、旧象牙角爪、湿润眼鼻与克制水珠",
+    "mood": "庄严、古老、携雨而来，避免邪恶火龙语汇"
+  },
+  "scene": {
+    "habitat": "南荒雨后高台与远方洪泽",
+    "terrain": "暗青岩台、浅水洼与稀疏古木",
+    "time_of_day": "暴雨将歇的暮色",
+    "weather": "低云、远雨、微弱天光，不遮挡主体",
+    "palette": ["雨云灰", "远山青", "湿岩黑", "克制暖金天光"],
+    "lighting": {
+      "key": "云隙暖金侧上光",
+      "fill": "冷青天光",
+      "rim": "极弱水汽轮廓光"
+    },
+    "props": ["低矮断石", "浅水洼", "远景古木"],
+    "exclusions": ["现代建筑", "文字", "兵器堆砌", "闪电遮脸", "高对比杂乱前景"]
+  },
+  "production": {
+    "concept_provider": "codex_imagegen",
+    "model_provider": "hyper3d_rodin_gen2",
+    "animation_provider": "best_available_motion_system",
+    "required_env": [
+      "RODIN_API_KEY",
+      "TRIPO_API_KEY"
+    ],
+    "optional_env": [
+      "MESHY_API_KEY"
+    ],
+    "env_file": ".env"
+  }
+}

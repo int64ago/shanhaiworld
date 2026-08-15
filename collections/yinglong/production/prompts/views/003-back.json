@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "view-003-back",
+  "stage": "view",
+  "tool": "codex_builtin_imagegen",
+  "created_at": "2026-08-15T09:15:00Z",
+  "use_case": "stylized-concept",
+  "asset_type": "clean rear three-quarter near-orthographic provider input for multi-view 3D reconstruction",
+  "input_images": [
+    {
+      "path": "collections/yinglong/concepts/master.png",
+      "role": "identity and material reference"
+    },
+    {
+      "path": "collections/yinglong/views/left.png",
+      "role": "frozen-pose and proportion reference"
+    },
+    {
+      "path": "collections/yinglong/views/front.png",
+      "role": "bilateral spacing and frozen-pose reference"
+    }
+  ],
+  "prompt": "Create a rear-left three-quarter near-orthographic modeling view of the exact same Yinglong shown in the references, preserving the frozen pose, proportions, left-high/right-low wing offset and all materials without redesign. One isolated complete creature on seamless medium cool-gray, long-lens camera only 25 degrees around from true rear and 8 degrees elevated. This angle must reveal the paired wing roots on the upper back, the full dorsal spine, the pelvis and the entire continuous unbranched tail taper; do not hide or shorten the tail. Exactly two wings with the creature's left wing visibly higher and its right wing lower, matching the selected front and left views; exactly four planted legs with foreleg narrow stance and hindleg wider stance, all hips, knees, hocks, ankles and four feet separated; backs of exactly two branched horns visible beyond the head. Preserve bronze-green overlapping dorsal scales, dark mane ridge, antique-gold ventral edge glimpses, indigo-black layered flight feathers and worn ivory keratin. Uniform softbox light, complete wing tips, feet and tail inside frame. No mirrored front image, no scenery, floor texture, cast shadow, fog, perspective exaggeration, text, labels or watermark.",
+  "negative_prompt": "front or three-quarter view, mirrored front image, different creature identity, changed proportions or materials, extra or missing wings, legs, horns or tails, fused wing roots, merged hind legs, split tail, asymmetric wings, dynamic pose, smooth clay, flat feather texture, crop, text, logo, watermark",
+  "expected_output": "collections/yinglong/views/back.png",
+  "outputs": [
+    {
+      "path": "collections/yinglong/views/back.png",
+      "generation_id": "exec-40d14465-dd43-45c4-8104-4372b4d894cc",
+      "sha256": "c8006870175d06b81298a4ba166b59069896533995fe813c16494c575aa4031d",
+      "bytes": 2119018,
+      "resolution": "1536x1024"
+    }
+  ],
+  "status": "selected",
+  "notes": [
+    "采用后左三分之四近正交角度，以同时验证双翼根、背部连接、四足与完整单尾；冻结姿势继承 selected left/front。",
+    "原始分辨率检查：两处翼根、背脊到骨盆和尾尖连续；四足分离；双翼高差、双角、单尾与材质布局和 selected left/front 一致。"
+  ]
+}

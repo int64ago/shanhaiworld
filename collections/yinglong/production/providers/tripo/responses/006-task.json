@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-08-15T10:38:50+00:00",
+  "task_id": "2df32230-52f9-4082-bb17-4f4c504631ca",
+  "type": "animate_rig",
+  "status": "success",
+  "progress": 100,
+  "credits_consumed": 25.0,
+  "error_code": null,
+  "error_message": null,
+  "output": {
+    "available_files": [
+      "model_url",
+      "rendered_image_url"
+    ]
+  },
+  "created_at": "2026-08-15T10:38:09.963465Z",
+  "completed_at": "2026-08-15T10:38:46.038148Z"
+}

@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "status": "passed",
+  "checked_at": "2026-08-15T09:25:56Z",
+  "anatomy_profile_source": "collections/yinglong/spec.json",
+  "frozen_pose": "四足中性站姿，前肢窄站、后肢宽站；生物左翼高、右翼低；长颈与单尾沿连续身体轴线伸展",
+  "images": [
+    {
+      "path": "collections/yinglong/views/left.png",
+      "role": "provider_input_left_near_orthographic",
+      "sha256": "6114394448e0527abe7461d245a87a2b4d158322469ee69ac1d96eb2051b5d63",
+      "bytes": 2002690,
+      "resolution": "1536x1024",
+      "original_resolution_checked": true,
+      "zoom_200_evidence": "collections/yinglong/reports/reference-crops/left-roots-limbs-200.webp",
+      "checks": {
+        "anatomy_profile_defined": "passed",
+        "applicable_counts": "passed",
+        "continuous_structure_integrity": "passed",
+        "articulation_visibility": "passed",
+        "cross_view_consistency": "passed",
+        "material_legibility": "passed",
+        "clean_background": "passed"
+      },
+      "evidence": "单头、两眼、双角、双翼、四足、单尾均可辨；两翼通过高差形成独立轮廓，四肢关节和足爪有负空间；喉腹甲、背鳞、翼羽和角质边界在200%证据中清楚。"
+    },
+    {
+      "path": "collections/yinglong/views/front.png",
+      "role": "provider_input_front_near_orthographic",
+      "sha256": "0b50ed1e7f9e8a37ace3fd8e14c28032e6e61ffae89da6f5721e5fbb8c751886",
+      "bytes": 2025840,
+      "resolution": "1536x1024",
+      "original_resolution_checked": true,
+      "zoom_200_evidence": "collections/yinglong/reports/reference-crops/front-wings-feet-200.webp",
+      "checks": {
+        "anatomy_profile_defined": "passed",
+        "applicable_counts": "passed",
+        "continuous_structure_integrity": "passed",
+        "articulation_visibility": "passed",
+        "cross_view_consistency": "passed",
+        "material_legibility": "passed",
+        "clean_background": "passed"
+      },
+      "evidence": "两翼根接肩背且左高右低；前肢窄站、后肢宽站使四条腿和四只足爪逐一分离；双角、双眼、闭口和居中单尾成立，腹甲叠片与翼羽分层可读。"
+    },
+    {
+      "path": "collections/yinglong/views/back.png",
+      "role": "provider_input_rear_left_threequarter_near_orthographic",
+      "sha256": "c8006870175d06b81298a4ba166b59069896533995fe813c16494c575aa4031d",
+      "bytes": 2119018,
+      "resolution": "1536x1024",
+      "original_resolution_checked": true,
+      "zoom_200_evidence": "collections/yinglong/reports/reference-crops/back-roots-tail-200.webp",
+      "checks": {
+        "anatomy_profile_defined": "passed",
+        "applicable_counts": "passed",
+        "continuous_structure_integrity": "passed",
+        "articulation_visibility": "passed",
+        "cross_view_consistency": "passed",
+        "material_legibility": "passed",
+        "clean_background": "passed"
+      },
+      "evidence": "后左三分之四角度不是正面镜像；明确显示两处翼根、背脊、骨盆、完整单尾和四条分离肢体；双翼高差、角形、鳞色与另两视图一致。"
+    }
+  ],
+  "contact_sheet": {
+    "path": "collections/yinglong/reports/contact-sheet.png",
+    "sha256": "377933f8afb90c6c28ed9b1e469e99b180d82d32af84c4113b7e90bf50e453f7",
+    "bytes": 1027007,
+    "purpose": "三张 selected provider input 的同屏跨视图复核"
+  },
+  "zoom_evidence": [
+    {
+      "path": "collections/yinglong/reports/reference-crops/left-roots-limbs-200.webp",
+      "sha256": "eaaaf69996504278b22b973c84f8566ca5568b34cf3fa1ff9ebefec00e737aff",
+      "bytes": 278818
+    },
+    {
+      "path": "collections/yinglong/reports/reference-crops/front-wings-feet-200.webp",
+      "sha256": "63a8ee257609d724856db0728c3b123bb08ab62ddd7d723ec9125db6c61a3601",
+      "bytes": 210072
+    },
+    {
+      "path": "collections/yinglong/reports/reference-crops/back-roots-tail-200.webp",
+      "sha256": "902b06d95d45649044f267a1e55bde2ee083fb27a8a76f70add2930ad64dbe04",
+      "bytes": 231676
+    }
+  ],
+  "provider_inputs": [
+    "collections/yinglong/views/left.png",
+    "collections/yinglong/views/front.png",
+    "collections/yinglong/views/back.png"
+  ],
+  "checks": [
+    {
+      "id": "anatomy_profile_defined",
+      "status": "passed",
+      "evidence": "spec.json 动态记录5类可计数结构、3条连续结构、6类活动区域、5类表面语言和3种运动方式。",
+      "notes": []
+    },
+    {
+      "id": "applicable_counts",
+      "status": "passed",
+      "evidence": "三视图合并与逐图检查均支持单头、两眼、双角、双翼、四足和单尾；未以 prompt 文本替代视觉证据。",
+      "notes": []
+    },
+    {
+      "id": "continuous_structure_integrity",
+      "status": "passed",
+      "evidence": "左视和后视可沿头—颈—躯干—骨盆—尾尖追踪单一连续体积，腹甲与背脊方向连续，无分叉或断段。",
+      "notes": []
+    },
+    {
+      "id": "articulation_visibility",
+      "status": "passed",
+      "evidence": "翼根、翼肘/翼尖轮廓、四肢主要关节、颈、骨盆与尾根在 selected 视图和200%证据中清楚；双翼与四足均有负空间。",
+      "notes": []
+    },
+    {
+      "id": "cross_view_consistency",
+      "status": "passed",
+      "evidence": "contact-sheet.png 显示同一头角、青铜绿鳞、浅金腹甲、黛青翼羽、左高右低翼姿、前窄后宽站姿与单尾；后视为真实新视角而非镜像。",
+      "notes": []
+    },
+    {
+      "id": "material_legibility",
+      "status": "passed",
+      "evidence": "原分辨率与200%裁图均可区分重叠鳞片、分节腹甲、成组飞羽、角爪层理和湿润眼鼻。",
+      "notes": []
+    },
+    {
+      "id": "clean_background",
+      "status": "passed",
+      "evidence": "三图均为与主体明度分离的中性灰背景，无场景、雾、景深、投影、文字、标尺或水印。",
+      "notes": []
+    },
+    {
+      "id": "provider_input_suitability",
+      "status": "passed",
+      "evidence": "只选择3张互相一致的干净视图；视觉主稿未列入 provider_inputs，三个被拒绝视图也未进入 collection。",
+      "notes": []
+    }
+  ],
+  "rejected_generations": [
+    {
+      "id": "view-001-left",
+      "sha256": "05e1bea39a4ac29a752a6338086b1216b7da0927ad5b55da5bb161c8de1b5057",
+      "reason": "双翼在严格侧投影中完全重叠"
+    },
+    {
+      "id": "view-002-front",
+      "sha256": "e4f2c5f6862d232f5d4141dae3bf5435d13adeacef6e15973d209af5b728a994",
+      "reason": "前后肢同轴遮挡，无法逐一核验四足"
+    },
+    {
+      "id": "view-005-front-v2",
+      "sha256": "0960064c6f42d7194a5a8e194ec5d3489f38e897bd72a905ad69c6f0dc86d0a7",
+      "reason": "双翼回到镜像同角度，跨视图冻结姿势不一致"
+    }
+  ],
+  "blocking_failures": []
+}

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "view-002-front",
+  "stage": "view",
+  "tool": "codex_builtin_imagegen",
+  "created_at": "2026-08-15T09:15:00Z",
+  "use_case": "stylized-concept",
+  "asset_type": "clean orthographic provider input for multi-view 3D reconstruction",
+  "input_images": [
+    {
+      "path": "collections/yinglong/concepts/master.png",
+      "role": "identity and material reference"
+    },
+    {
+      "path": "collections/yinglong/views/left.png",
+      "role": "frozen-pose and proportion reference"
+    }
+  ],
+  "prompt": "Create the true front orthographic modeling view of the exact same Yinglong shown in the references, preserving the frozen pose from Image 2 without redesign. One isolated full creature, seamless medium cool-gray background, long-lens orthographic camera at torso height. The skull, sternum, pelvis and tail axis face the camera with no yaw. Exactly two backward-sweeping branched horns, two eyes, one closed mouth, exactly two wings with distinct left/right roots on the shoulder-back: the creature's left wing is lifted 40 degrees and the creature's right wing 28 degrees, both swept 15 degrees backward exactly as established in Image 2. Exactly four planted legs with left/right shoulders, elbows, knees, ankles and feet separated by clean negative space, and one unbranched tail receding on the centerline. Preserve the bronze-green overlapping scales, antique-gold ventral scutes, indigo-black layered feathers, ivory keratin and body proportions. Uniform softbox light, complete body and every appendage inside frame. No floor, scenery, shadows, fog, perspective exaggeration, labels, text or watermark.",
+  "negative_prompt": "three-quarter view, yawed head or torso, different creature identity, changed materials, extra or missing wings, legs, horns, eyes or tails, merged feet, asymmetric wings, hidden wing root, tail off center, dynamic pose, open mouth, smooth clay, flat painted feathers, crop, text, logo, watermark",
+  "expected_output": "collections/yinglong/views/front.png",
+  "outputs": [
+    {
+      "generation_id": "exec-a5bbe0f5-1cc7-46b5-b4e8-68cda7475f26",
+      "sha256": "e4f2c5f6862d232f5d4141dae3bf5435d13adeacef6e15973d209af5b728a994",
+      "bytes": 2111479,
+      "resolution": "1536x1024",
+      "retained": false
+    }
+  ],
+  "status": "rejected",
+  "notes": [
+    "冻结姿势继承 left-v2：生物左翼40度、右翼28度。",
+    "拒绝：正投影下前后肢同轴遮挡，无法在原始分辨率逐一核验四足；下一轮前肢站距收窄、后肢站距加宽并使用8度轻俯视。"
+  ]
+}

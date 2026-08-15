@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:42:06+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/yinglong/views/front.png",
+    "collections/yinglong/views/back.png"
+  ],
+  "prompt_file": "collections/yinglong/production/prompts/models/005-rodin-two-view.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "Build one complete PBR Yinglong from these two views of the same frozen creature. There are exactly TWO anatomical wings total, one left and one right; do not create one wing pair per image, duplicate silhouettes, floating wing pieces or extra roots. Each wing attaches once to its side of the upper back and has physical overlapping feather plates with layered rows, thickness and feather-tip silhouette, never a smooth bat membrane. Exactly two branched ivory horns, one sharp Chinese-dragon face, exactly four separate jointed legs, one continuous long neck-body-pelvis and one unbranched tail. Preserve clear negative spaces and watertight riggable connections at wings, neck, hips and tail. Crisp relief bronze-green scales, pale-gold belly scutes, indigo feather rows, worn ivory claws/horns, wet eyes, attached mane. No scene, fire-dragon redesign, rider, armor, extra/missing/fused parts, holes, black flat sheets, clay, plastic or blur.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Quad",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "quality_override": "200000",
+    "addons": "HighPack"
+  },
+  "estimated_credit_cost": 1.5,
+  "credentials_recorded": false
+}

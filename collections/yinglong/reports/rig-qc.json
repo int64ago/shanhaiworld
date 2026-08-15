@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "status": "passed",
+  "checked_at": "2026-08-15T10:56:23Z",
+  "selected_motion_system": {
+    "mode": "hybrid",
+    "model": "collections/yinglong/models/web.glb",
+    "model_sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+    "morph_targets": [
+      "ChestBreath",
+      "NeckLift",
+      "NeckStrike",
+      "TailLeft",
+      "TailRight",
+      "WingLift",
+      "StrideA",
+      "StrideB",
+      "RainBow"
+    ],
+    "articulated_nodes": [
+      "WingFeathers_L",
+      "WingFeathers_R",
+      "Eye_L",
+      "Eye_R"
+    ],
+    "reason": "Tripo 的 avian 绑定证明基础网格可建立真实骨骼，但它不接受带 EXT_texture_webp 的最终增强 GLB，输出也不含程序化翼羽、枝角和动作。当前官方非人形预设没有与应龙 avian 结构匹配的完整飞行/地行/反应动作集，因此保留细节完整且已经逐动作目视验证的局部 Morph + 关节节点混合系统。"
+  },
+  "preferred_skeletal_attempt": {
+    "provider": "tripo",
+    "model_version": "v2.5-20260210",
+    "final_web_upload": {
+      "status": "rejected_by_provider_import",
+      "notes": [
+        "最终 web.glb 上传后 rig-check 返回 model import failed；同一网格路线的 PNG 纹理基础 GLB 可正常通过，差异与 provider 未接受必需的 EXT_texture_webp 路径一致。"
+      ]
+    },
+    "base_rig_check": {
+      "task_id": "4dee25f3-9c3a-43d1-b89f-56b70ccffe49",
+      "status": "success",
+      "riggable": true,
+      "recommended_rig_type": "avian",
+      "credits_consumed": 0.0,
+      "evidence": "collections/yinglong/production/providers/tripo/responses/004-task.json"
+    },
+    "base_rig": {
+      "task_id": "2df32230-52f9-4082-bb17-4f4c504631ca",
+      "status": "success",
+      "rig_type": "avian",
+      "credits_consumed": 25.0,
+      "sha256": "9983cccdb6e007e080b35dc3ee8acedef09a1a4301eaa64b27e0ec46416e7880",
+      "bytes": 49999500,
+      "triangles": 87882,
+      "skins": 1,
+      "joints": 49,
+      "skinned_primitives": 1,
+      "animations": 0,
+      "selected": false,
+      "retention": "未提交二进制；任务 ID、哈希、大小、结构检查和最小目视证据足以审计并可从 provider 重新获取。",
+      "evidence": "collections/yinglong/production/providers/tripo/responses/006-task.json"
+    },
+    "joint_topology": {
+      "head_neck": "Head_0..Head_3 与 Spine_0 形成连续头颈链",
+      "spine_tail": "Spine_0 与 Tail_0..Tail_3 覆盖轴向躯干和尾链",
+      "left_wing": "bone_7..bone_12 覆盖左翼根至翼尖分支",
+      "right_wing": "bone_13..bone_18 覆盖右翼根至翼尖分支",
+      "forelimbs": "左右前肢拥有独立肩、肘、腕和趾端链",
+      "hindlimbs": "左右后肢拥有独立髋、膝、踝和趾端链"
+    },
+    "visual_rotation_evidence": [
+      {
+        "region": "wing_root",
+        "path": "collections/yinglong/reports/rig-tripo-v1/wing-root-rotation.png",
+        "sha256": "94792f147844214a9839d0b77204389a64d356e27a31969d790d3cba0f177144",
+        "bytes": 88528,
+        "observation": "bone_7 绕局部 Z 轴 40° 后翼面随翼根连续折叠，无脱离。"
+      },
+      {
+        "region": "hindlimb",
+        "path": "collections/yinglong/reports/rig-tripo-v1/hindlimb-rotation.png",
+        "sha256": "8e87b98041c309acd8453c3d8fd3602abf942f9e7fcc946f114ac4b7edf73506",
+        "bytes": 113662,
+        "observation": "左后肢根链绕局部 X 轴 -42° 后整肢屈曲，髋部连接保持。"
+      },
+      {
+        "region": "tail_root",
+        "path": "collections/yinglong/reports/rig-tripo-v1/tail-root-rotation.png",
+        "sha256": "4d9ea4673776d2178f81c5b09f4178eb8f66b4d765d3fa2a141100351fbb1a03",
+        "bytes": 180580,
+        "observation": "Tail_0 绕局部 Y 轴 38° 后尾根至尾梢连续弯曲，无裂缝。"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "motion_mode_declared",
+      "status": "passed",
+      "evidence": "collection.json 声明 hybrid；inspect_glb 验证 morph=true、articulated=true。",
+      "notes": []
+    },
+    {
+      "id": "skeletal_attempt_recorded",
+      "status": "passed",
+      "evidence": "Tripo rig-check 先判定 avian，再产出 49 关节皮肤绑定；结构和关节实转记录完整。",
+      "notes": [
+        "未将 provider 的单一预设或零动作骨骼描述为丰富动画集。"
+      ]
+    },
+    {
+      "id": "motion_targets_present",
+      "status": "passed",
+      "evidence": "最终 GLB 含 9 个区域 Morph、4 个语义关节节点、7 个动作。",
+      "notes": []
+    },
+    {
+      "id": "articulated_region_coverage",
+      "status": "passed",
+      "evidence": "胸腹、头颈、全尾、双翼、四肢步态和眼睑均有确定性局部驱动。",
+      "notes": [
+        "当前混合系统用连续形变场覆盖轴向区域，并用独立节点驱动左右翼羽和双眼。"
+      ]
+    },
+    {
+      "id": "deformation_quality",
+      "status": "passed",
+      "evidence": "collections/yinglong/reports/animation-hybrid-v2/contact-sheet.webp",
+      "notes": [
+        "浏览器逐动作检查未见断裂、漂浮、塌陷、根节点替代动作或整体摇晃。"
+      ]
+    }
+  ],
+  "blocking_failures": []
+}

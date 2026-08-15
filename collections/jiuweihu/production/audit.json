@@ -3,7 +3,7 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "created_at": "2026-08-14T17:59:20+00:00",
-  "updated_at": "2026-08-15T03:09:51Z",
+  "updated_at": "2026-08-15T11:27:38Z",
   "runs": [
     {
       "id": "research-001",
@@ -629,6 +629,29 @@
         "The top three-step strip and bottom mouse-hint strip were removed to enlarge the observation field while keeping orbit, zoom and creature-click interaction active.",
         "Previous and next action buttons wrap across all seven clips; the detailed formal introduction has a 51.110-second Mandarin audio reading.",
         "Clean single-tab 1920x1080 QA measured 116.9 average FPS, five draw calls, 95,250 rendered triangles, and zero console warnings or errors."
+      ]
+    },
+    {
+      "id": "shared-narration-contract-001",
+      "stage": "interface_accessibility_and_narration",
+      "tool": "shared_threejs_narration_contract",
+      "created_at": "2026-08-15T11:27:38Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/audio/002-narration-zh-cn.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/scene/narration-zh-cn-v2.m4a",
+        "collections/yinglong/scene/narration-zh-cn-v1.m4a"
+      ],
+      "output_files": [
+        "collections/jiuweihu/collection.json",
+        "collections/jiuweihu/reports/release-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "已发布九尾狐音频确认对应 Tingting 普通话音色与 rate 160；写入统一 voice_profile=mandarin-tingting-r160-v1。",
+        "九尾狐与应龙在 1920x1080 Chromium 均播放固定 M4A，speechSynthesisSpeaking=false，控制台 0 errors/warnings。",
+        "移除浏览器系统语音发布回退，避免不同设备产生音色、语速和断句差异。"
       ]
     }
   ],

@@ -11,6 +11,17 @@
       "preview": "./collections/jiuweihu/preview.webp",
       "href": "./collections/jiuweihu/index.html",
       "status": "ready"
+    },
+    {
+      "id": "yinglong",
+      "name": "应龙",
+      "name_pinyin": "yìng lóng",
+      "subtitle": "《山海经》中的有翼司雨战龙",
+      "summary": "有翼之龙，能蓄水兴雨；曾受黄帝之命攻蚩尤，并与南方多雨的神话相连。",
+      "body_type": "winged_serpentine_quadruped",
+      "preview": "./collections/yinglong/preview.webp",
+      "href": "./collections/yinglong/index.html",
+      "status": "draft"
     }
   ]
 }

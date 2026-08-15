@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T10:44:00Z",
+  "provider": "codex_builtin_imagegen",
+  "use_case": "stylized-concept",
+  "asset_type": "2:1 equirectangular Three.js environment background",
+  "prompt": "Use case: stylized-concept\nAsset type: 2:1 equirectangular Three.js environment background for a high-fidelity PC mythic-creature viewer\nPrimary request: Create an empty ancient southern wilderness after a storm, a rain-dark elevated stone terrace overlooking distant floodplains and layered mountains, suitable as the habitat of Yinglong, the Chinese winged rain dragon.\nScene/backdrop: dark teal wet rock platform across the lower foreground; shallow reflective puddles; low broken stone forms and a few distant wind-bent ancient trees; broad misty marsh and mountain silhouettes at the horizon; receding rain curtains under heavy low clouds; one restrained warm-gold break in the cloud cover.\nSubject: environment only. Absolutely no dragon, no creature, no people.\nStyle/medium: cinematic realistic fantasy environment, physically plausible materials, subtle Chinese ancient myth atmosphere, polished game-background quality, not a painting pasted on canvas.\nComposition/framing: seamless-looking 2:1 equirectangular panorama; level horizon; keep the central foreground open and uncluttered for a moving 3D actor; no close foreground objects that could intersect the creature.\nLighting/mood: storm just ending at dusk, cool blue-green ambient light, faint warm rim from cloud break, restrained contrast so a dark green creature remains readable.\nColor palette: rain-cloud gray, distant mountain teal, wet-rock near-black, muted warm gold.\nMaterials/textures: wet stone, thin water sheen, mist, soft rain haze, real surface variation.\nConstraints: environment only; no text, no letters, no symbols, no watermark, no modern architecture, no temples, no weapons, no lightning bolt, no fire, no high-contrast clutter; panorama edges should not contain unique landmarks that make a seam obvious.",
+  "selected_output": {
+    "path": "collections/yinglong/scene/background.webp",
+    "sha256": "d00e950ef5c8f68f8ab2f4cdeda4d5a236c8e7b82d7fa67de224909a901b4bcd",
+    "bytes": 129566,
+    "dimensions": [1774, 887],
+    "codec": "WebP"
+  }
+}

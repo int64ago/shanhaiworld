@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "provider": "hyper3d_rodin_gen2",
+  "tasks": [
+    {
+      "task_uuid": "0eaa5253-018a-4afc-95d8-02e554e9f71d",
+      "job_uuids": [
+        "cdbc19a1-9b8a-42be-adeb-8633709a6747",
+        "43081c7a-ddf8-4c44-a346-7db42785e386",
+        "3bdcdf7b-66dd-4506-8562-884e46ac7702",
+        "639d5ac7-6060-4011-a0f5-41aa8e67b7f1",
+        "8edc49d6-b6e7-4ab3-8e60-ccfd94772383",
+        "95293a93-4ca8-45d1-8658-87945b0af201",
+        "cb2bac7c-e95b-4b42-b9ca-fd91c4ac776d"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-15T09:29:01+00:00",
+      "request_record": "collections/yinglong/production/providers/rodin/requests/002-submit.json",
+      "response_record": "collections/yinglong/production/providers/rodin/responses/001-submit.json",
+      "credit_cost": 1.5,
+      "status_record": "collections/yinglong/production/providers/rodin/responses/002-status.json",
+      "updated_at": "2026-08-15T10:21:18+00:00",
+      "download_record": "collections/yinglong/production/providers/rodin/responses/014-download.json",
+      "downloaded_files": [
+        ".agents/runtime/yinglong/downloads/rodin/0eaa5253-018a-4afc-95d8-02e554e9f71d/base_high_pbr.glb",
+        ".agents/runtime/yinglong/downloads/rodin/0eaa5253-018a-4afc-95d8-02e554e9f71d/preview.webp",
+        ".agents/runtime/yinglong/downloads/rodin/0eaa5253-018a-4afc-95d8-02e554e9f71d/render.jpg"
+      ],
+      "runtime_files_removed_at": "2026-08-15T10:51:58Z"
+    },
+    {
+      "task_uuid": "bc669258-a8cb-46a3-80b1-51ce1fabd19f",
+      "job_uuids": [
+        "a05939de-4113-4a21-b658-34ff7d94969a",
+        "711d0aae-8485-4593-a9b7-d8d9efaa8127",
+        "86471fb1-b055-4083-bd7a-4042f8b94c07",
+        "139b5909-1fbe-4fda-8a84-faecc26a00d2",
+        "062a8c6d-c2f1-4b9d-9963-c33e09a65eae",
+        "b9e9b2af-e8e0-4629-a133-d9764fb6c0fc",
+        "27b1834f-8ae7-4fb0-9d84-7f0481996cc3"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-15T09:36:26+00:00",
+      "request_record": "collections/yinglong/production/providers/rodin/requests/003-submit.json",
+      "response_record": "collections/yinglong/production/providers/rodin/responses/004-submit.json",
+      "credit_cost": 1.5,
+      "status_record": "collections/yinglong/production/providers/rodin/responses/005-status.json",
+      "updated_at": "2026-08-15T09:39:37+00:00",
+      "download_record": "collections/yinglong/production/providers/rodin/responses/006-download.json",
+      "downloaded_files": [
+        ".agents/runtime/yinglong/downloads/rodin/bc669258-a8cb-46a3-80b1-51ce1fabd19f/base_high_pbr.glb",
+        ".agents/runtime/yinglong/downloads/rodin/bc669258-a8cb-46a3-80b1-51ce1fabd19f/preview.webp",
+        ".agents/runtime/yinglong/downloads/rodin/bc669258-a8cb-46a3-80b1-51ce1fabd19f/render.jpg"
+      ],
+      "runtime_files_removed_at": "2026-08-15T09:55:19Z"
+    },
+    {
+      "task_uuid": "a37fe3ff-1a9f-434c-8d17-1ef97afe513f",
+      "job_uuids": [
+        "65432cec-8a5b-46dd-a2ef-87be69adf0b7",
+        "182c12cd-f55d-4e7e-915d-d0a47d09befa",
+        "8f1160a5-07a9-412a-a1b7-1af755262da7",
+        "ca8567fd-6568-400c-847f-093957b3d052",
+        "7f551e3f-4d7a-4407-9bf4-1969907fe388",
+        "3326387e-9dbc-48a5-8505-19526d1ce4cb",
+        "b72699ad-fdeb-4d7d-a5d7-c98c05ed8e26"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-15T09:42:10+00:00",
+      "request_record": "collections/yinglong/production/providers/rodin/requests/004-submit.json",
+      "response_record": "collections/yinglong/production/providers/rodin/responses/007-submit.json",
+      "credit_cost": 1.5,
+      "status_record": "collections/yinglong/production/providers/rodin/responses/008-status.json",
+      "updated_at": "2026-08-15T10:05:52+00:00",
+      "download_record": "collections/yinglong/production/providers/rodin/responses/013-download.json",
+      "downloaded_files": [
+        ".agents/runtime/yinglong/downloads/rodin/a37fe3ff-1a9f-434c-8d17-1ef97afe513f/base_high_pbr.glb",
+        ".agents/runtime/yinglong/downloads/rodin/a37fe3ff-1a9f-434c-8d17-1ef97afe513f/preview.webp",
+        ".agents/runtime/yinglong/downloads/rodin/a37fe3ff-1a9f-434c-8d17-1ef97afe513f/render.jpg"
+      ],
+      "runtime_files_removed_at": "2026-08-15T10:51:58Z"
+    },
+    {
+      "task_uuid": "00de757d-a5ad-4a2b-9c5a-ab31201346f6",
+      "job_uuids": [
+        "fd2d4318-43a7-480d-ad17-475530e7e40b",
+        "9fa492c8-2ae7-4ac7-b78b-bc3129b2244e",
+        "6d827aa4-ff4a-47a2-9248-805102ce0013",
+        "3205c0ac-3af3-49b1-8a9c-ab2c8520fbe9",
+        "d963c717-118b-4f09-82fd-04e4c6a38cf5",
+        "5265fbf0-975f-40f9-b35a-ca952dfdd714",
+        "a0601fd0-6721-4e47-8cc7-e5b54ee84d38"
+      ],
+      "status": "Done",
+      "submitted_at": "2026-08-15T09:48:45+00:00",
+      "request_record": "collections/yinglong/production/providers/rodin/requests/005-submit.json",
+      "response_record": "collections/yinglong/production/providers/rodin/responses/010-submit.json",
+      "credit_cost": 0.5,
+      "status_record": "collections/yinglong/production/providers/rodin/responses/011-status.json",
+      "updated_at": "2026-08-15T09:52:36+00:00",
+      "download_record": "collections/yinglong/production/providers/rodin/responses/012-download.json",
+      "downloaded_files": [
+        ".agents/runtime/yinglong/downloads/rodin/00de757d-a5ad-4a2b-9c5a-ab31201346f6/base_basic_pbr.glb",
+        ".agents/runtime/yinglong/downloads/rodin/00de757d-a5ad-4a2b-9c5a-ab31201346f6/preview.webp",
+        ".agents/runtime/yinglong/downloads/rodin/00de757d-a5ad-4a2b-9c5a-ab31201346f6/render.jpg"
+      ],
+      "runtime_files_removed_at": "2026-08-15T09:55:19Z"
+    }
+  ]
+}

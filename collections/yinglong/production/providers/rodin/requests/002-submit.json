@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:28:55+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/yinglong/views/left.png",
+    "collections/yinglong/views/front.png",
+    "collections/yinglong/views/back.png"
+  ],
+  "prompt_file": "collections/yinglong/production/prompts/models/003-rodin-short-v2.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "Create one complete PBR Yinglong matching all three views as one creature in one frozen pose. Exact anatomy: one head, two eyes, two branched horns; one continuous long Chinese-dragon body from skull and neck through chest and pelvis into one unbranched tail; exactly four separate legs with clean shoulder/hip joints and taloned feet; exactly two large feathered wings with distinct left/right roots integrated into the upper back, left wing higher and right lower as shown. Preserve silhouettes and negative spaces. Use watertight riggable topology with continuous neck, wing shoulders, hips and tail root. Materials: relief bronze-green scales, pale-gold segmented belly scutes, layered indigo-black feathers with thickness, worn ivory horns/claws, wet eyes, attached dark mane. No scene. Reject western fire-dragon redesign, bat-only wings, rider, armor, extra, missing or fused parts, forked tail, floating feathers, holes, clipped tips, clay, plastic or blurry detail.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Quad",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "addons": "HighPack"
+  },
+  "estimated_credit_cost": 1.5,
+  "credentials_recorded": false
+}

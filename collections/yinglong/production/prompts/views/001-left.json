@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "view-001-left",
+  "stage": "view",
+  "tool": "codex_builtin_imagegen",
+  "created_at": "2026-08-15T09:15:00Z",
+  "use_case": "stylized-concept",
+  "asset_type": "clean orthographic provider input for multi-view 3D reconstruction",
+  "input_images": [
+    {
+      "path": "collections/yinglong/concepts/master.png",
+      "role": "identity, anatomy proportion and material reference; do not copy its scene or dramatic lighting"
+    }
+  ],
+  "prompt": "Create the true left orthographic modeling view of the exact same Yinglong from Image 1. Show one isolated full creature in a neutral frozen rigging pose against a seamless medium cool-gray background. Preserve the exact head identity, bronze-green scale pattern, antique-gold ventral scutes, indigo-black layered flight feathers, ivory branched horns, body thickness and limb proportions. Frozen pose lock for all future views: head facing straight forward along the spine with mouth closed; long neck in a shallow natural S but without twist; deep torso level; exactly four legs planted in a balanced rectangular stance with elbows, knees, ankles and every foot clearly separated; one long unbranched tail extended almost straight behind at body height with gentle downward taper; exactly two wings attached at the shoulder-back, symmetrically lifted 35 degrees above horizontal and swept 15 degrees backward, elbows open and feathers spread only enough to show layers and clean negative space. Camera is a long-lens orthographic left profile at torso height, no perspective exaggeration. Uniform large softbox lighting reveals topology and PBR material without rim glow. Entire horns, whiskers, wing tips, claws and tail tip inside frame. No floor texture, scenery, cast shadow, fog, depth of field, text, arrows, labels or watermark.",
+  "negative_prompt": "different creature identity, changed scale color or pattern, extra or missing wings, legs or horns, hidden far wing, merged legs, crossed feet, forked or coiled tail, open mouth, asymmetric wing angle, dynamic pose, flying pose, crouch, foreshortening, perspective, scenery, pedestal, shadow, dramatic rim light, fog, smooth clay, glossy plastic, blurry feathers, cropped appendages, text, logo, watermark",
+  "expected_output": "collections/yinglong/views/left.png",
+  "outputs": [
+    {
+      "generation_id": "exec-bccac2fb-ab38-43a9-a2fe-b2ba986633de",
+      "sha256": "05e1bea39a4ac29a752a6338086b1216b7da0927ad5b55da5bb161c8de1b5057",
+      "bytes": 1940782,
+      "resolution": "1536x1024",
+      "retained": false
+    }
+  ],
+  "status": "rejected",
+  "notes": [
+    "拒绝：严格左投影使双翼完全重叠，只能读到一个翼轮廓，无法验证左右一对翼与双翼根；其余四足、单尾、双角和材质分区清楚。",
+    "根因是冻结姿势的翼角完全对称，而非主体身份漂移；v2 只改变左右翼抬角形成负空间。"
+  ]
+}

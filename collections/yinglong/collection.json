@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "id": "yinglong",
+  "name": "应龙",
+  "name_pinyin": "yìng lóng",
+  "subtitle": "《山海经》中的有翼司雨战龙",
+  "summary": "有翼之龙，能蓄水兴雨；曾受黄帝之命攻蚩尤，并与南方多雨的神话相连。",
+  "body_type": "winged_serpentine_quadruped",
+  "status": "draft",
+  "viewer_ui": "shared-v1",
+  "kid_mode": true,
+  "preview": "./preview.webp",
+  "model": {
+    "path": "./models/web.glb",
+    "target_height": 3.4,
+    "facing_offset": 0,
+    "in_place_root_motion": true
+  },
+  "animation": {
+    "mode": "hybrid",
+    "min_actions": 6,
+    "min_animated_nodes": 3,
+    "morph_target_count": 9,
+    "fallback_reason": "Tripo avian 绑定在基础网格上通过，但最终增强 GLB 不被其导入，且官方 API 没有匹配应龙的完整 avian 动作集；采用 9 个区域 Morph 与 4 个语义关节节点的确定性混合动作。"
+  },
+  "quality": {
+    "require_reference_qc": true,
+    "require_model_qc": true,
+    "require_detail_qc": true,
+    "require_rig_qc": true,
+    "require_animation_qc": true
+  },
+  "scene": {
+    "background": "./scene/background.webp",
+    "background_mode": "equirectangular",
+    "background_color": "#101a1d",
+    "fog_color": "#536a70",
+    "fog_near": 19,
+    "fog_far": 50,
+    "ground_color": "#172a2a",
+    "ground_size": 48,
+    "ground_opacity": 0.82,
+    "procedural_props": {
+      "enabled": true,
+      "water_radius": 13,
+      "water_color": "#17444a",
+      "water_opacity": 0.38,
+      "rock_count": 20,
+      "rock_color": "#344f4d",
+      "rock_radius": 16
+    }
+  },
+  "lighting": {
+    "ambient_color": "#9ab7bd",
+    "ambient_intensity": 2.05,
+    "sun_color": "#f0cc8f",
+    "sun_intensity": 4.0,
+    "exposure": 1.2,
+    "sun_position": [
+      7,
+      11,
+      5
+    ]
+  },
+  "camera": {
+    "position": [4.8, 3.2, 6.4],
+    "target": [0, 1.6, 0],
+    "min_distance": 3.8,
+    "max_distance": 18
+  },
+  "actions": {
+    "idle": "Idle",
+    "walk": "Walk",
+    "locomotion": "Walk",
+    "fly": "Flight",
+    "observe": "Observe",
+    "roar": "RainCall",
+    "attack": "Strike",
+    "threat": "WingGuard",
+    "listen": "Observe"
+  },
+  "action_labels": {
+    "Idle": {
+      "label": "听雨静息",
+      "message": "胸腹随呼吸起伏，尾端换向，双眼自然眨动。"
+    },
+    "Walk": {
+      "label": "四足巡行",
+      "message": "两组对角肢交替迈步，躯干与长尾保持平衡。"
+    },
+    "Flight": {
+      "label": "振翼飞行",
+      "message": "双翼完成抬翼、下拍和回收，颈部与长尾共同稳定身体。"
+    },
+    "Observe": {
+      "label": "抬首观雨",
+      "message": "头颈抬高，尾部缓慢换向，并以眨眼回应周围动静。"
+    },
+    "RainCall": {
+      "label": "蓄水兴雨",
+      "message": "胸腹蓄力后仰颈展翼，躯干成弓，呼应应龙司雨的神话身份。"
+    },
+    "Strike": {
+      "label": "战龙突击",
+      "message": "压低躯干、错步蓄势，随后伸颈突刺并以翼尾稳定。"
+    },
+    "WingGuard": {
+      "label": "翼盾守势",
+      "message": "双翼向前收成防护轮廓，四足换步并摆尾平衡。"
+    }
+  },
+  "narration": {
+    "button_label": "朗读介绍",
+    "voice_profile": "mandarin-tingting-r160-v1",
+    "audio": "./scene/narration-zh-cn-v1.m4a",
+    "text": "应龙是中国古代神话中的有翼之龙。《广雅》用有翼曰应龙概括它最醒目的形态。《山海经》记载它曾受黄帝之命攻蚩尤，并能蓄水、兴雨；又把它与南方多雨和久旱祈雨联系起来。古书没有规定应龙必须是怎样的四足、角形和颜色，因此页面中的四足长龙体、一对分叉角、青铜绿鳞片和黛青翼羽属于为三维表现所作的视觉推演。你可以拖动和缩放观察鳞片、双角与实体翼羽，切换七组动作，也可以点击应龙触发观察、唤雨、突击或翼盾反应。"
+  },
+  "interaction": {
+    "click_actions": [
+      "Observe",
+      "RainCall",
+      "Strike",
+      "WingGuard"
+    ]
+  },
+  "roaming": {
+    "enabled": true,
+    "bounds": 6.4,
+    "walk_speed": 0.52,
+    "run_speed": 1.2
+  },
+  "facts": [
+    {
+      "label": "原典形态",
+      "value": "《广雅·释鱼》概括为“有翼曰应龙”"
+    },
+    {
+      "label": "神话事迹",
+      "value": "受黄帝命攻蚩尤，并能蓄水兴雨"
+    },
+    {
+      "label": "身体结构",
+      "value": "单头、双翼、四足、双角、单尾"
+    },
+    {
+      "label": "视觉说明",
+      "value": "四足、角形与配色属于三维视觉推演"
+    }
+  ]
+}

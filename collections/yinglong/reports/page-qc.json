@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "status": "passed",
+  "checked_at": "2026-08-15T11:27:38Z",
+  "environment": {
+    "browser": "Codex in-app Chromium",
+    "viewport": [1920, 1080],
+    "device_pixel_ratio": 1,
+    "preview_server": "shanhai3d/scripts/serve.py",
+    "server_security": {
+      "root": 200,
+      "collection": 200,
+      ".env": 404,
+      ".agents": 404,
+      "production": 404
+    }
+  },
+  "runtime": {
+    "viewer_status": "ready",
+    "viewer_ui": "shared-v1",
+    "kid_mode": true,
+    "narration_voice_profile": "mandarin-tingting-r160-v1",
+    "narration_duration_seconds": 49.599,
+    "motion_mode": "hybrid",
+    "animation_clips": 7,
+    "animated_body_nodes": 5,
+    "morph_meshes": 1,
+    "average_fps": 88.4,
+    "draw_calls": 13,
+    "rendered_triangles": 106166,
+    "console_errors": 0,
+    "console_warnings": 0
+  },
+  "load": {
+    "web_glb_bytes": 17157080,
+    "background_bytes": 129566,
+    "preview_bytes": 29406,
+    "narration_bytes": 209996,
+    "model_textures": [
+      {"role": "normal", "dimensions": [4096, 4096], "mime": "image/webp", "bytes": 3582836},
+      {"role": "diffuse", "dimensions": [4096, 4096], "mime": "image/webp", "bytes": 1101470},
+      {"role": "metallic_roughness", "dimensions": [4096, 4096], "mime": "image/webp", "bytes": 2904040}
+    ]
+  },
+  "interaction_checks": [
+    {
+      "id": "fixed_narration_contract",
+      "status": "passed",
+      "evidence": "应龙与九尾狐均声明 narrationVoice=mandarin-tingting-r160-v1；1920x1080 Chromium 点击两页朗读后均为 aria-pressed=true、正在朗读详细介绍，speechSynthesisSpeaking=false，证明实际播放固定 M4A 而非设备系统语音；双方控制台 0 errors/warnings。"
+    },
+    {
+      "id": "shared_viewer_contract",
+      "status": "passed",
+      "evidence": "与九尾狐同在 1920x1080 Chromium 中对照；信息面板、控制面板、动作选择、巡游/回正按钮、朗读按钮和动作说明的 display、尺寸、间距、圆角、背景、字号及控件 ID 全部一致，双方 viewer_ui=shared-v1、kid_mode=true，控制台均为 0 errors/warnings。"
+    },
+    {
+      "id": "action_selector",
+      "status": "passed",
+      "evidence": "控件列出 Idle、Walk、Flight、Observe、RainCall、Strike、WingGuard；选择 RainCall 后 activeAction=RainCall 且中文说明同步。"
+    },
+    {
+      "id": "autonomous_roaming",
+      "status": "passed",
+      "evidence": "默认 roamMode=walk、activeAction=Walk，actorPosition 在 7 秒内从原点移动至 -2.647,0,0.767，世界位移与四足步态配对。"
+    },
+    {
+      "id": "model_click",
+      "status": "passed",
+      "evidence": "点击 canvas 上的模型后 activeAction 从 RainCall 切换为 click_actions 中的 WingGuard。"
+    },
+    {
+      "id": "orbit_drag",
+      "status": "passed",
+      "evidence": "在 canvas 中水平拖拽后相机从后三分之四视角转到左侧视角，模型没有被误触为点击。"
+    },
+    {
+      "id": "wheel_zoom",
+      "status": "passed",
+      "evidence": "滚轮 -520 后视距明显缩短，仍受 minDistance=3.8 限制。"
+    },
+    {
+      "id": "raycast_scope",
+      "status": "passed",
+      "evidence": "点击射线仅 intersectObject(modelRoot, true)，场景水面、岩石与地面不进入神兽点击判定。"
+    }
+  ],
+  "evidence": [
+    {
+      "role": "desktop_page",
+      "path": "collections/yinglong/reports/page-qc-v2/desktop-1920x1080.png",
+      "sha256": "e5015d884c1ff2624343e44fdf4037194203acc0c35f3adcd5201d59d4c27c5b",
+      "bytes": 115190
+    },
+    {
+      "role": "clean_preview",
+      "path": "collections/yinglong/reports/page-qc-v1/preview-1920x1080.png",
+      "sha256": "24736197e884a699ff5d9fedbe0b67f5b52b4d67d4560a26c53c7d7bfe61843e",
+      "bytes": 81997
+    }
+  ],
+  "blocking_failures": []
+}

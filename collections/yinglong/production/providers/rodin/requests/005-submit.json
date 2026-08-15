@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:48:41+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/yinglong/views/front.png",
+    "collections/yinglong/views/back.png"
+  ],
+  "prompt_file": "collections/yinglong/production/prompts/models/006-rodin-raw-topology.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "Generate one dense Raw-topology PBR Yinglong matching these two views as the same creature. Exactly TWO wings total, one per side with one root each. Model each wing surface as many physical overlapping feather plates in layered rows with thickness and separated tips; never use a smooth membrane, flat black sheet or bat wing. Exactly two visibly branched ivory horns. Sharp Chinese-dragon face with eyes, nostrils, closed mouth, cheek scales and attached mane. Exact continuous anatomy: one head, long neck, deep chest, pelvis and one unbranched tail; exactly four distinct jointed legs and feet. Preserve clean negative spaces and watertight riggable neck, wing roots, hips and tail root. Crisp relief bronze-green scales, pale-gold belly scutes, indigo feathers, worn ivory claws/horns. No scene, duplicate wing, floating piece, fire-dragon redesign, rider, armor, extra/missing/fused parts, holes, clay, plastic or blur.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Raw",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "quality_override": "1000000"
+  },
+  "estimated_credit_cost": 0.5,
+  "credentials_recorded": false
+}

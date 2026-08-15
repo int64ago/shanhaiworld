@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "status": "passed",
+  "checked_at": "2026-08-15T10:56:23Z",
+  "model": {
+    "path": "collections/yinglong/models/web.glb",
+    "sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+    "motion_mode": "hybrid",
+    "clip_count": 7,
+    "animated_nodes": 5,
+    "morph_targets": 9
+  },
+  "actions": [
+    {
+      "name": "Idle",
+      "duration_seconds": 4.0,
+      "role": "idle",
+      "phases": "0–1s 吸气准备；1–3s 胸腹起伏、尾部换向并眨眼；3–4s 回到首帧",
+      "driven_regions": ["胸腹", "头颈", "尾部", "左右眼", "双翼羽"],
+      "evidence": {"path": "collections/yinglong/reports/animation-hybrid-v2/Idle.png", "sha256": "7437447e021b96c752c5799c698c69246c5a3a10aa3af201ab883d7bbdc6e3e8", "bytes": 112325},
+      "status": "passed"
+    },
+    {
+      "name": "Walk",
+      "duration_seconds": 2.4,
+      "role": "ground_locomotion",
+      "phases": "0–0.6s 对角肢起步；0.6–1.8s 两组对角肢交替承重；1.8–2.4s 回到循环起点",
+      "driven_regions": ["四肢", "胸腰躯干", "尾部", "双翼羽"],
+      "evidence": {"path": "collections/yinglong/reports/animation-hybrid-v2/Walk.png", "sha256": "3b5299403297e08051a23a4571fb482fc08519aad41b78308d0b17a1e67fc89f", "bytes": 109450},
+      "status": "passed"
+    },
+    {
+      "name": "Flight",
+      "duration_seconds": 3.0,
+      "role": "primary_locomotion",
+      "phases": "0–0.75s 抬翼准备；0.75–2.25s 两次下拍/回收并以脊尾稳定；2.25–3s 回到抬翼起点",
+      "driven_regions": ["左右翼", "颈部", "胸腰躯干", "尾部"],
+      "evidence": {"path": "collections/yinglong/reports/animation-hybrid-v2/Flight.png", "sha256": "d55ce7f07059479103c5205707eb38a3efc4e613f00fe8b98d0cbc965e4e655d", "bytes": 113380},
+      "status": "passed"
+    },
+    {
+      "name": "Observe",
+      "duration_seconds": 2.6,
+      "role": "reaction",
+      "phases": "0–0.45s 抬颈准备；0.45–2.05s 头颈升高、尾部换向并两次眨眼；2.05–2.6s 恢复",
+      "driven_regions": ["头颈", "尾部", "左右眼", "双翼羽"],
+      "evidence": {"path": "collections/yinglong/reports/animation-hybrid-v2/Observe.png", "sha256": "6509d03529484a5b8d39d40cec33249177a7f6c3b832213d5cd6898c97202727", "bytes": 109560},
+      "status": "passed"
+    },
+    {
+      "name": "RainCall",
+      "duration_seconds": 3.6,
+      "role": "signature",
+      "phases": "0–0.55s 胸腹蓄力；0.55–2.25s 仰颈展翼、躯干成弓并摆尾；2.25–3.6s 收翼复位",
+      "driven_regions": ["胸腹", "头颈", "左右翼", "胸腰躯干", "尾部"],
+      "evidence": {"path": "collections/yinglong/reports/animation-hybrid-v2/RainCall.png", "sha256": "e7a061f7de9e75c768ec25ede3d031642bc6065ecb170ce5a44d82c5c2fbd438", "bytes": 109125},
+      "status": "passed"
+    },
+    {
+      "name": "Strike",
+      "duration_seconds": 2.2,
+      "role": "attack",
+      "phases": "0–0.35s 压低躯干并错步；0.35–1.1s 颈部突刺、展翼和甩尾；1.1–2.2s 收颈换步恢复",
+      "driven_regions": ["头颈", "四肢", "左右翼", "尾部", "胸腰躯干"],
+      "evidence": {"path": "collections/yinglong/reports/animation-hybrid-v2/Strike.png", "sha256": "30ef3d34a8c7de15a84666ea92bd19b28a1ecf03e85ad634ff326135c633e651", "bytes": 113771},
+      "status": "passed"
+    },
+    {
+      "name": "WingGuard",
+      "duration_seconds": 2.8,
+      "role": "defense",
+      "phases": "0–0.45s 压低重心；0.45–1.85s 双翼前收成盾、四肢错步并摆尾；1.85–2.8s 逐段复位",
+      "driven_regions": ["左右翼", "四肢", "胸腰躯干", "尾部", "左右眼"],
+      "evidence": {"path": "collections/yinglong/reports/animation-hybrid-v2/WingGuard.png", "sha256": "cdcab3773e9e0e4e404c482eed7320144e520679ece7597744abcf3997bcf312", "bytes": 105105},
+      "status": "passed"
+    }
+  ],
+  "contact_sheet": {
+    "path": "collections/yinglong/reports/animation-hybrid-v2/contact-sheet.webp",
+    "sha256": "647c253ffec98bdaed80301aca8885536ce1d1cf02a208c0da27011b98e22070",
+    "bytes": 43330,
+    "status": "ready"
+  },
+  "checks": [
+    {"id": "minimum_six_actions", "status": "passed", "evidence": "7 个真实可播放 GLB clips。", "notes": []},
+    {"id": "semantic_match", "status": "passed", "evidence": "待机、四足行走、飞行、观察、唤雨、突刺和翼盾动作与命名一致。", "notes": []},
+    {"id": "body_region_deformation", "status": "passed", "evidence": "每个动作至少驱动两个语义区域；无 actor/root 变换占位。", "notes": []},
+    {"id": "locomotion_match", "status": "passed", "evidence": "Flight 提供主飞行推进节律；Walk 提供自主地面巡游的四足交替步态。", "notes": ["页面世界位移由巡游路径控制，GLB locomotion 保持原地。"]},
+    {"id": "timing_and_recovery", "status": "passed", "evidence": "7 个动作都具有准备、主动作和恢复/闭环关键帧。", "notes": []},
+    {"id": "action_variety", "status": "passed", "evidence": "包含两种 locomotion、感知反应、神话标志动作、攻击和防御。", "notes": []},
+    {"id": "transitions_and_loops", "status": "passed", "evidence": "循环首尾姿态相符；页面以 0.38s cross-fade 切换动作。", "notes": []}
+  ],
+  "blocking_failures": []
+}

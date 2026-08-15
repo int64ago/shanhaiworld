@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:29:01+00:00",
+  "error": null,
+  "message": "Submitted. Please check progress via /api/v2/status and get download link via /api/v2/download",
+  "uuid": "0eaa5253-018a-4afc-95d8-02e554e9f71d",
+  "jobs": {
+    "uuids": [
+      "cdbc19a1-9b8a-42be-adeb-8633709a6747",
+      "43081c7a-ddf8-4c44-a346-7db42785e386",
+      "3bdcdf7b-66dd-4506-8562-884e46ac7702",
+      "639d5ac7-6060-4011-a0f5-41aa8e67b7f1",
+      "8edc49d6-b6e7-4ab3-8e60-ccfd94772383",
+      "95293a93-4ca8-45d1-8658-87945b0af201",
+      "cb2bac7c-e95b-4b42-b9ca-fd91c4ac776d"
+    ]
+  }
+}

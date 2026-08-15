@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "researched_at": "2026-08-15T09:10:54Z",
+  "method": "优先采用原典正文；后世注释和视觉推演与原典事实分栏记录",
+  "sources": [
+    {
+      "id": "shanhaijing-dahuangdongjing",
+      "title": "《山海经·大荒东经》",
+      "url": "https://zh.wikisource.org/wiki/%E5%B1%B1%E6%B5%B7%E7%B6%93/%E5%A4%A7%E8%8D%92%E6%9D%B1%E7%B6%93",
+      "accessed_at": "2026-08-15T09:10:54Z",
+      "source_class": "primary_text",
+      "location": "应龙段",
+      "excerpt": "应龙出一作处南极，杀蚩尤与夸父，不得复上。故下数旱，旱而为应龙之状，乃得大雨。",
+      "adopted_traits": ["居南方/南极", "杀蚩尤与夸父", "与旱雨感应"]
+    },
+    {
+      "id": "shanhaijing-dahuangbeijing",
+      "title": "《山海经·大荒北经》",
+      "url": "https://zh.wikisource.org/wiki/%E5%B1%B1%E6%B5%B7%E7%B6%93/%E5%A4%A7%E8%8D%92%E5%8C%97%E7%B6%93",
+      "accessed_at": "2026-08-15T09:10:54Z",
+      "source_class": "primary_text",
+      "location": "夸父段与蚩尤之战段",
+      "excerpt": "黄帝乃令应龙攻之冀州之野。应龙畜水。",
+      "adopted_traits": ["受黄帝命攻蚩尤", "能蓄水", "与南方多雨相关"]
+    },
+    {
+      "id": "guangya-shiyu",
+      "title": "《广雅·释鱼》",
+      "url": "https://ctext.org/wiki.pl?chapter=460407&if=gb",
+      "accessed_at": "2026-08-15T09:10:54Z",
+      "source_class": "primary_text",
+      "location": "释鱼·龙类",
+      "excerpt": "有翼曰应龙。",
+      "adopted_traits": ["有翼之龙"]
+    },
+    {
+      "id": "chuci-tianwen",
+      "title": "《楚辞·天问》",
+      "url": "https://zh.wikisource.org/wiki/%E5%A4%A9%E5%95%8F",
+      "accessed_at": "2026-08-15T09:10:54Z",
+      "source_class": "primary_text",
+      "location": "鲧禹治水问句",
+      "excerpt": "河海应龙，何尽何历？",
+      "adopted_traits": ["与河海和治水神话传统相关"]
+    },
+    {
+      "id": "nlc-shanhaijing-overview-2024",
+      "title": "宁稼雨：《山海经》：原生性中国上古神话文献",
+      "url": "https://www.nlc.cn/upload/attachments/2024-09-26/fbb202de.pdf",
+      "accessed_at": "2026-08-15T09:10:54Z",
+      "source_class": "authoritative_secondary",
+      "location": "《文津流觞》2024年第3期",
+      "adopted_traits": ["将《山海经》视为保存早期原生性神话材料的重要文献，并对原典与后世再生神话作区分"]
+    }
+  ],
+  "rejected_or_demoted_claims": [
+    {
+      "claim": "应龙必为黄色、金色或五彩",
+      "reason": "所核原典未规定颜色，降为视觉设计推演"
+    },
+    {
+      "claim": "应龙必有固定四足、双角、鹰爪、鹿角等九似结构",
+      "reason": "所核应龙原典仅明确有翼龙类；为建模补全但不标为原典事实"
+    },
+    {
+      "claim": "应龙以尾画地直接辅佐禹治水",
+      "reason": "属于《天问》后世注释中的解释，正文只保留问句，因此不作为高置信原典形态事实"
+    }
+  ]
+}

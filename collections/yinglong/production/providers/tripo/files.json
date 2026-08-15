@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "files": [
+    {
+      "file_token": "file_27b7c298-6316-49e4-938d-864299b6238c",
+      "local_path": "collections/yinglong/models/web.glb",
+      "bytes": 17156408,
+      "uploaded_at": "2026-08-15T10:35:40+00:00",
+      "request_record": "collections/yinglong/production/providers/tripo/requests/001-upload.json",
+      "response_record": "collections/yinglong/production/providers/tripo/responses/001-upload.json"
+    },
+    {
+      "file_token": "file_8398d3ee-6824-4ba2-af94-cc2c94579b55",
+      "local_path": ".agents/runtime/yinglong/downloads/rodin/0eaa5253-018a-4afc-95d8-02e554e9f71d/base_high_pbr.glb",
+      "bytes": 49779804,
+      "uploaded_at": "2026-08-15T10:37:02+00:00",
+      "request_record": "collections/yinglong/production/providers/tripo/requests/004-upload.json",
+      "response_record": "collections/yinglong/production/providers/tripo/responses/002-upload.json"
+    }
+  ]
+}

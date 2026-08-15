@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "status": "passed",
+  "checked_at": "2026-08-15T10:56:23Z",
+  "model": {
+    "path": "collections/yinglong/models/web.glb",
+    "sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+    "bytes": 17157080,
+    "triangles": 102722,
+    "materials": 5,
+    "draw_call_primitives": 8,
+    "feather_triangles": 13600
+  },
+  "textures": [
+    {"role": "normal", "dimensions": "4096x4096", "codec": "WebP", "embedded_bytes": 3582836, "source_codec": "PNG"},
+    {"role": "base_color", "dimensions": "4096x4096", "codec": "WebP", "embedded_bytes": 1101470, "source_codec": "PNG"},
+    {"role": "metallic_roughness", "dimensions": "4096x4096", "codec": "WebP", "embedded_bytes": 2904040, "source_codec": "PNG"}
+  ],
+  "evidence": {
+    "contact_sheet": {"path": "collections/yinglong/reports/detail-hybrid-v2/contact-sheet.webp", "sha256": "c68a42e40070bc4ed9858502cbc38e3e6073b3d112817eafa0f48ae221c4053f", "bytes": 58334},
+    "closeups": [
+      {"region": "face_horns_eye", "path": "collections/yinglong/reports/detail-hybrid-v2/face-horns-eye.png", "sha256": "58d41cb01cb55ab99bb2db0ff7e3fdd5c17f3293a4720c2f1eab9b3d846d0487", "bytes": 144678},
+      {"region": "wing_feathers", "path": "collections/yinglong/reports/detail-hybrid-v2/wing-feathers.png", "sha256": "cbbfbb7d8ce062ff96cde2a7eb16d42316d675ba2611506004a42f30324d7032", "bytes": 167424},
+      {"region": "legs_tail_root", "path": "collections/yinglong/reports/detail-hybrid-v2/legs-tail-root.png", "sha256": "973b70642d0bf82519ef0325cc62a4a82ffa0949eae289336c807c542af4cdff", "bytes": 115598},
+      {"region": "rear_wing_roots", "path": "collections/yinglong/reports/detail-hybrid-v2/rear-wing-roots.png", "sha256": "e4a9b8a29ef3b8a26051c95840c81066eba1c70f00bf95c9af391a528a19f59f", "bytes": 147673}
+    ],
+    "optimization_comparison": {
+      "source": {"path": "collections/yinglong/reports/detail-hybrid-v2/source-wing.png", "sha256": "c198dc5216473890849296e1011067c9eb1f4909e1c5fde37e8c3ec102589d33", "bytes": 168000},
+      "web": {"path": "collections/yinglong/reports/detail-hybrid-v2/wing-feathers.png", "sha256": "cbbfbb7d8ce062ff96cde2a7eb16d42316d675ba2611506004a42f30324d7032", "bytes": 167424},
+      "normalized_rmse": 0.0090543,
+      "conclusion": "同镜头比较未见羽片边界、脸部鳞片、角枝轮廓或金属/粗糙度层次的可感知退化。"
+    }
+  },
+  "checks": [
+    {"id": "face_and_signature_details", "status": "passed", "evidence": "面部近景可辨眼、鼻、口缘、颊部鳞片、黑色鬃刺和两棵连续分枝角。", "notes": []},
+    {"id": "surface_directionality", "status": "passed", "evidence": "13,600 个程序羽片三角面形成有厚度、错位叠压和方向变化的翼层；鳞片、腹甲、角质和羽片使用独立反射参数。", "notes": []},
+    {"id": "pbr_channels", "status": "passed", "evidence": "保留 4096x4096 baseColor、normal、metallicRoughness 三通道；新增羽片、角枝和眼部材质分别设置 roughness/metallic/emissive。", "notes": []},
+    {"id": "optimization_retention", "status": "passed", "evidence": "4K PNG 转为 4K WebP 后 GLB 从 56.3 MB 降至 17.2 MB；同镜头 RMSE 0.0090543，结构、羽层和身份细节无可感知退化。", "notes": []}
+  ],
+  "blocking_failures": []
+}

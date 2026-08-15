@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-08-15T09:36:21+00:00",
+  "provider": "hyper3d_rodin_gen2",
+  "endpoint": "/api/v2/rodin",
+  "input_files": [
+    "collections/yinglong/views/front.png",
+    "collections/yinglong/views/left.png",
+    "collections/yinglong/views/back.png"
+  ],
+  "prompt_file": "collections/yinglong/production/prompts/models/004-rodin-feather-detail.txt",
+  "parameters": {
+    "tier": "Gen-2",
+    "condition_mode": "concat",
+    "prompt": "One complete PBR Yinglong matching all three views. Highest priorities: both wings must be covered by physical overlapping feather plates with layered rows, thickness and feather-tip silhouette; absolutely no smooth membrane or black flat wing sheet. Exactly two visibly branched ivory horns, not simple spikes. Sharp Chinese-dragon face with eyes, nostrils, closed mouth, cheek scales and attached mane; no blur or black blotches. Exact anatomy: one head, one continuous long neck-body-pelvis-tail, one unbranched tail, exactly four separate jointed legs and exactly two wings with distinct roots, left higher than right. Watertight riggable topology at neck, wing roots, hips and tail root. Materials: crisp relief bronze-green scales, pale-gold segmented belly, indigo feather rows, worn ivory claws/horns. Preserve negative spaces. No scene, fire-dragon redesign, bat wings, rider, armor, extra/missing/fused parts, holes, clay, plastic or blurry textures.",
+    "geometry_file_format": "glb",
+    "material": "PBR",
+    "mesh_mode": "Quad",
+    "quality": "high",
+    "preview_render": "true",
+    "use_original_alpha": "false",
+    "bbox_condition": "[100,85,150]",
+    "quality_override": "200000",
+    "addons": "HighPack"
+  },
+  "estimated_credit_cost": 1.5,
+  "credentials_recorded": false
+}

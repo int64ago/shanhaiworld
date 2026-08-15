@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "status": "passed",
+  "checked_at": "2026-08-15T10:56:23Z",
+  "anatomy_profile_source": "collections/yinglong/spec.json",
+  "provider_attempt_count": 4,
+  "local_hybrid_attempt_count": 5,
+  "attempts": [
+    {
+      "id": "rodin-model-001",
+      "provider": "hyper3d_rodin_gen2",
+      "task_uuid": "0eaa5253-018a-4afc-95d8-02e554e9f71d",
+      "prompt_file": "collections/yinglong/production/prompts/models/003-rodin-short-v2.txt",
+      "input_order": [
+        "collections/yinglong/views/left.png",
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "parameters": {
+        "mesh_mode": "Quad",
+        "quality": "high",
+        "quality_override": null,
+        "material": "PBR",
+        "addons": ["HighPack"]
+      },
+      "source_candidate": {
+        "runtime_path": ".agents/runtime/yinglong/downloads/rodin/0eaa5253-018a-4afc-95d8-02e554e9f71d/base_high_pbr.glb",
+        "sha256": "4d65e60deb47c59b1490370c222d337083e76ce4370eaaaba3fcc67b33112189",
+        "bytes": 49779804,
+        "triangles": 87882,
+        "materials": 1,
+        "textures": 3,
+        "retention": "runtime_only_until_task_end",
+        "runtime_files_removed_at": "2026-08-15T09:55:19Z"
+      },
+      "status": "rejected",
+      "rejection_reasons": [
+        "双翼被重建为大面积平滑膜片/黑色块，未保留 anatomy_profile 的分层飞羽、厚度和叠压边界",
+        "双角退化成无枝尖角，与 selected references 的分枝角不符",
+        "面部、鳞片与翼面纹理近景明显糊化并出现黑斑，身份特征不可读",
+        "模型虽保留单头、双翼、四足、单尾总体轮廓，但未通过模型与细节门"
+      ],
+      "diagnosis": "三张参考图的羽片、角枝和面部均清楚且一致；失败归因于首次生成的87,882三角面密度与将侧视图作为首张材质视图。下一尝试提高 Quad quality_override 至200,000，把正视图置首，并把物理羽片、分枝角和清晰面部写在 Prompt 首位。"
+    },
+    {
+      "id": "rodin-model-002",
+      "provider": "hyper3d_rodin_gen2",
+      "task_uuid": "bc669258-a8cb-46a3-80b1-51ce1fabd19f",
+      "prompt_file": "collections/yinglong/production/prompts/models/004-rodin-feather-detail.txt",
+      "input_order": [
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/left.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "parameters": {
+        "mesh_mode": "Quad",
+        "quality": "high",
+        "quality_override": 200000,
+        "material": "PBR",
+        "addons": ["HighPack"]
+      },
+      "source_candidate": {
+        "runtime_path": ".agents/runtime/yinglong/downloads/rodin/bc669258-a8cb-46a3-80b1-51ce1fabd19f/base_high_pbr.glb",
+        "sha256": "4afc68e0b029f75a3ed35b4cda737d729f6fa043de23ab22072a7d38650465c4",
+        "bytes": 38624360,
+        "triangles": 91651,
+        "materials": 1,
+        "textures": 3,
+        "retention": "runtime_only_until_task_end",
+        "runtime_files_removed_at": "2026-08-15T09:55:19Z"
+      },
+      "status": "rejected",
+      "rejection_reasons": [
+        "模型生成四只翼而非 anatomy_profile 锁定的两翼",
+        "正视角出现与主体分离的悬浮黑色翼片/几何块",
+        "翼面仍以平滑膜片为主，飞羽层次不足"
+      ],
+      "diagnosis": "将正视放首改善了脸与角，但侧视图中两翼错开轮廓与正/后视的双翼被重建器误解为两对翼。下一尝试排除侧视图，只提交均明确显示整对翼及翼根的正视与后左三分之四视图；Prompt 明确两张图共享同一对翼。"
+    },
+    {
+      "id": "rodin-model-003",
+      "provider": "hyper3d_rodin_gen2",
+      "task_uuid": "a37fe3ff-1a9f-434c-8d17-1ef97afe513f",
+      "prompt_file": "collections/yinglong/production/prompts/models/005-rodin-two-view.txt",
+      "input_order": [
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "parameters": {
+        "mesh_mode": "Quad",
+        "quality": "high",
+        "quality_override": 200000,
+        "material": "PBR",
+        "addons": ["HighPack"]
+      },
+      "source_candidate": {
+        "runtime_path": ".agents/runtime/yinglong/downloads/rodin/a37fe3ff-1a9f-434c-8d17-1ef97afe513f/base_high_pbr.glb",
+        "sha256": "ffcafc65be35edd8673d7f368984c5b27452cc58a0d0fbab4d206b7ba83ba545",
+        "bytes": 45430648,
+        "triangles": 89558,
+        "materials": 1,
+        "textures": 3,
+        "retention": "runtime_only_until_task_end",
+        "runtime_files_removed_at": "2026-08-15T09:55:19Z"
+      },
+      "status": "rejected",
+      "rejection_reasons": [
+        "两翼数量和连接恢复正确，但近翼主体仍是平滑膜片，只有边缘具少量羽尖",
+        "双角仍退化为无枝弯角",
+        "面部与鳞片近景持续糊化，身份区域低于发布质量"
+      ],
+      "diagnosis": "两视图解决结构计数，剩余失败集中在约89,558三角面的 Quad 表面密度。根据官方 Raw quality_override 上限，下一尝试改用 Raw 1,000,000 面并明确羽片为分离几何；Raw 与 HighPack 不兼容，因此先以2K PBR验证结构/几何，纹理另行过细节门。"
+    },
+    {
+      "id": "rodin-model-004",
+      "provider": "hyper3d_rodin_gen2",
+      "task_uuid": "00de757d-a5ad-4a2b-9c5a-ab31201346f6",
+      "prompt_file": "collections/yinglong/production/prompts/models/006-rodin-raw-topology.txt",
+      "input_order": [
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "parameters": {
+        "mesh_mode": "Raw",
+        "quality": "high",
+        "quality_override": 1000000,
+        "material": "PBR",
+        "standard_textures": true,
+        "addons": []
+      },
+      "source_candidate": {
+        "runtime_path": ".agents/runtime/yinglong/downloads/rodin/00de757d-a5ad-4a2b-9c5a-ab31201346f6/base_basic_pbr.glb",
+        "sha256": "ab90cc7400fdf16794a9fd4578ff8af7e4c34ca691603aac12055a749561533b",
+        "bytes": 55843456,
+        "triangles": 999916,
+        "materials": 1,
+        "textures": 3,
+        "retention": "runtime_only_until_task_end",
+        "runtime_files_removed_at": "2026-08-15T09:55:19Z"
+      },
+      "status": "rejected",
+      "rejection_reasons": [
+        "约100万三角面仍把近翼主体重建为大面积平滑深色膜片，仅翼缘出现锯齿状羽尖，未形成分层飞羽几何",
+        "面部、鳞片和角枝在近景仍缺乏可读结构与清晰表面细节",
+        "两翼数量和连接正确，但 anatomy_profile 的翼面、角枝及身份区域质量仍不满足模型与细节门"
+      ],
+      "diagnosis": "在两视图、明确双翼约束、Raw模式和约100万三角面的实质性参数变化后，核心语义结构缺陷仍与第三次一致，证明失败并非拓扑预算不足。继续同一提供方重试缺乏可诊断的新变量，按质量门禁停止，不提交 Tripo。"
+    }
+  ],
+  "turntable": {
+    "directory": "collections/yinglong/reports/model-turntable-v1",
+    "contact_sheet": {
+      "path": "collections/yinglong/reports/model-turntable-v1/contact-sheet.webp",
+      "sha256": "ef679c5287599253045c8e7d5ac1f5a0309d58e323c3a9642ba6fe2dd919d6ec",
+      "bytes": 71628
+    },
+    "angles": [
+      {"yaw": 0, "path": "collections/yinglong/reports/model-turntable-v1/000.png", "sha256": "c385f54152ac7025b00af6d00b714b9b8eb0984e687a8b07d07c7019e0f5f323", "bytes": 69864},
+      {"yaw": 45, "path": "collections/yinglong/reports/model-turntable-v1/045.png", "sha256": "d390d3b029be190d9a58648e5af9e69cdea6e8e4b16c2d7beb6ddc83bc871d94", "bytes": 111504},
+      {"yaw": 90, "path": "collections/yinglong/reports/model-turntable-v1/090.png", "sha256": "3b1df5e3d7eb05b641bd92eb01c66a878d8e8d8cafd9239a90a5ef5041ea76ea", "bytes": 93555},
+      {"yaw": 135, "path": "collections/yinglong/reports/model-turntable-v1/135.png", "sha256": "660581523d2fc6915e60b69d55ce17c3a7cf1acb4f56bea5c3508eb837139b29", "bytes": 87361},
+      {"yaw": 180, "path": "collections/yinglong/reports/model-turntable-v1/180.png", "sha256": "3f1bca3fe5373f74540714e43d624d71916e4ef5b97b2150dbbea16278530589", "bytes": 66879},
+      {"yaw": 225, "path": "collections/yinglong/reports/model-turntable-v1/225.png", "sha256": "367b135452bfa179384fac8fd33b739f1fcc1335b1328e8acaa64a65902e5bb3", "bytes": 80193},
+      {"yaw": 270, "path": "collections/yinglong/reports/model-turntable-v1/270.png", "sha256": "a09ccee81875ea11eda9b891c5c9bed639930f0bdaba4e58d20d884c6e6a03ce", "bytes": 83642},
+      {"yaw": 315, "path": "collections/yinglong/reports/model-turntable-v1/315.png", "sha256": "c18bc3368d069f1b937d32045faddae98a5145f7043eca813d23fa6d692bd604", "bytes": 105289}
+    ]
+  },
+  "closeups": {
+    "contact_sheet": {
+      "path": "collections/yinglong/reports/model-closeups-v1/contact-sheet.webp",
+      "sha256": "ede3ded58e50ce1ca1ccf73edf12a174880de71a8d721ea7aff8a46e1547df0a",
+      "bytes": 180538
+    },
+    "images": [
+      {"region": "face_horns", "path": "collections/yinglong/reports/model-closeups-v1/upper-front.png", "sha256": "8c42bf51b9c7d392da6540a780116dd1aa00bddc32faf7c581eeda70642c16f9", "bytes": 160877},
+      {"region": "face_wing_surface", "path": "collections/yinglong/reports/model-closeups-v1/upper-side.png", "sha256": "e2ea3a2887b773c3a6813efff97743f8594a9ad80550fce90cd78e08d9bbee97", "bytes": 157289},
+      {"region": "wing_roots", "path": "collections/yinglong/reports/model-closeups-v1/wing-roots.png", "sha256": "8aab190b1eb0458adddd9ead42dd827a0faf30cc1cb3f4231c846e8352f79af3", "bytes": 117955},
+      {"region": "legs_tail_root", "path": "collections/yinglong/reports/model-closeups-v1/legs-tail.png", "sha256": "7c9ad1d7603df8a5fbfc864abd7c1b7e860e507868fd26c6964904189a36facc", "bytes": 107900}
+    ]
+  },
+  "attempt_2_evidence": {
+    "directory": "collections/yinglong/reports/model-turntable-v2",
+    "contact_sheet": {
+      "path": "collections/yinglong/reports/model-turntable-v2/contact-sheet.webp",
+      "sha256": "801021e231c1ad2a17657c4bc57c3bda137f61b31c4c92217deb6bca122c15d5",
+      "bytes": 54978
+    },
+    "angles": [
+      {"yaw": 0, "path": "collections/yinglong/reports/model-turntable-v2/000.png", "sha256": "7d16d71f5283ed34407bfd67c0c3b7268352eec03418470bf1a28a4df70b03b0", "bytes": 60692},
+      {"yaw": 45, "path": "collections/yinglong/reports/model-turntable-v2/045.png", "sha256": "d437828b45b89b9b9e1c244e2aec34f1b6d96d8a6daf3e1220a1ac2603d3fc0c", "bytes": 78535},
+      {"yaw": 90, "path": "collections/yinglong/reports/model-turntable-v2/090.png", "sha256": "e34c38e45388235ed35d9971f0d654f4186604a95350251623dc0f23de5a6cb0", "bytes": 67124},
+      {"yaw": 135, "path": "collections/yinglong/reports/model-turntable-v2/135.png", "sha256": "bb44eaa7ea940642a0bac8426d5d19e3433869cb87f21fecc21244464a1aa096", "bytes": 64144},
+      {"yaw": 180, "path": "collections/yinglong/reports/model-turntable-v2/180.png", "sha256": "fa4fa219de2c0cc252c21c23552442f10beaa1b224759d78d65714745183a326", "bytes": 54238},
+      {"yaw": 225, "path": "collections/yinglong/reports/model-turntable-v2/225.png", "sha256": "095dd9944897b670c422945f511f3acc6a959f218ab1cda4237ca090f76bd17f", "bytes": 63601},
+      {"yaw": 270, "path": "collections/yinglong/reports/model-turntable-v2/270.png", "sha256": "1245074950e2f488337c4ed401fe322fd0fd6289176d5fd68610ab6eae4bd00b", "bytes": 65832},
+      {"yaw": 315, "path": "collections/yinglong/reports/model-turntable-v2/315.png", "sha256": "9dc2a0d735431444f29388a0c114ac83de48cdba15ed13a0abc8457c87cf4414", "bytes": 78905}
+    ],
+    "closeup": {
+      "path": "collections/yinglong/reports/model-turntable-v2/upper-four-wings.png",
+      "sha256": "83a94954c503c9141b36dd03ef53f000f94abb063d2fced4bb6435c4f6caacd4",
+      "bytes": 94363,
+      "evidence": "三分之四近景直接显示四个独立翼轮廓与额外翼根。"
+    }
+  },
+  "attempt_3_evidence": {
+    "directory": "collections/yinglong/reports/model-turntable-v3",
+    "contact_sheet": {
+      "path": "collections/yinglong/reports/model-turntable-v3/contact-sheet.webp",
+      "sha256": "3b9384087767dd89f5c33c0c45ea0fe302f0933eeae6bdf9cc696719dc206b45",
+      "bytes": 57722
+    },
+    "closeup_sheet": {
+      "path": "collections/yinglong/reports/model-turntable-v3/closeups.webp",
+      "sha256": "0d36ea4c77c0261ef3faed67dec67a46b3ff7ded18c99c8d1159fe5670b3b071",
+      "bytes": 119046,
+      "evidence": "两翼连接正确，但近翼为平膜、角无枝、脸部和鳞片糊化。"
+    },
+    "angles": [
+      {"yaw": 0, "path": "collections/yinglong/reports/model-turntable-v3/000.png", "sha256": "f6fb24579245939328ffd130b0d1ef87ce1e20ca1d3bcfcbb559e63c3108332d", "bytes": 69438},
+      {"yaw": 45, "path": "collections/yinglong/reports/model-turntable-v3/045.png", "sha256": "e500aca8e20de0a9792d0ff92239621192a51364b80e415bbbd112cc237af688", "bytes": 81239},
+      {"yaw": 90, "path": "collections/yinglong/reports/model-turntable-v3/090.png", "sha256": "6d0eca147476caa82f10bdc7d6e06f3023c9ef739a25520dd0fef7f823d8e242", "bytes": 72687},
+      {"yaw": 135, "path": "collections/yinglong/reports/model-turntable-v3/135.png", "sha256": "30d9102137cdd95a35541867f78796ec4b8f58d88ef59b4715dc2ce1816f3978", "bytes": 66869},
+      {"yaw": 180, "path": "collections/yinglong/reports/model-turntable-v3/180.png", "sha256": "e4be4a61183ac1a21bf23c2020219156f0f817b557eda1a38780be9b18d503f4", "bytes": 70692},
+      {"yaw": 225, "path": "collections/yinglong/reports/model-turntable-v3/225.png", "sha256": "df5dcaca885b98801e9060ae1093cd82db3dcd3a8c275358863dfc66485da8ef", "bytes": 71090},
+      {"yaw": 270, "path": "collections/yinglong/reports/model-turntable-v3/270.png", "sha256": "7aab25429285542ca67be557176f94dfc10ab795abd6fbf690830d62a43bc6a7", "bytes": 68642},
+      {"yaw": 315, "path": "collections/yinglong/reports/model-turntable-v3/315.png", "sha256": "f857a0a628caa6b58c999876e5a3fbae66b15c78ef619428356ca89b070b80ad", "bytes": 80070}
+    ],
+    "closeups": [
+      {"path": "collections/yinglong/reports/model-turntable-v3/upper-front.png", "sha256": "633c00190a1be433b9519f436a6b9fa7593bef36da3f61b68c829aebdd2bf852", "bytes": 125588},
+      {"path": "collections/yinglong/reports/model-turntable-v3/upper-side.png", "sha256": "c23e268e803e98538185b4a46c0757e3471f70775edb7b4c8d5239fb67ea0b5e", "bytes": 125063},
+      {"path": "collections/yinglong/reports/model-turntable-v3/wing-roots.png", "sha256": "b31105add9f4455fbf2685c2e61e588737b4426d66ffc227725fce6d8344aa46", "bytes": 113615}
+    ]
+  },
+  "attempt_4_evidence": {
+    "directory": "collections/yinglong/reports/model-turntable-v4",
+    "contact_sheet": {
+      "path": "collections/yinglong/reports/model-turntable-v4/contact-sheet.webp",
+      "sha256": "77c97672f15890ed82a205c743b06370094abc125fc40d5feaddbb53c0272c88",
+      "bytes": 59680
+    },
+    "closeup_sheet": {
+      "path": "collections/yinglong/reports/model-turntable-v4/closeups.webp",
+      "sha256": "3e65103f9dcf50897c3df85df88859d7ec583e4c53e7a27ece7e15031f87c262",
+      "bytes": 137566,
+      "evidence": "Raw约100万面仍显示近翼大面积平滑膜片、身份区域糊化；提高拓扑密度未修复语义结构。"
+    },
+    "angles": [
+      {"yaw": 0, "path": "collections/yinglong/reports/model-turntable-v4/000.png", "sha256": "210a4f03437f7fd3e980f5566130aabf83bc36b9e2c45689fcc6765793db0e88", "bytes": 64034},
+      {"yaw": 45, "path": "collections/yinglong/reports/model-turntable-v4/045.png", "sha256": "fc0ba8920e3f46ff9b76bec63dc7b69d2a5f9049106a9b62457939f45948ebae", "bytes": 77884},
+      {"yaw": 90, "path": "collections/yinglong/reports/model-turntable-v4/090.png", "sha256": "cd4ba21a84dd93606c8472733dba16fc287771428fa4191dcffad3016abb5a74", "bytes": 73045},
+      {"yaw": 135, "path": "collections/yinglong/reports/model-turntable-v4/135.png", "sha256": "e4f35b910fba559c004b04bec5123072439530da8b21ee86fdcd7d5b9b7b1306", "bytes": 73303},
+      {"yaw": 180, "path": "collections/yinglong/reports/model-turntable-v4/180.png", "sha256": "11d45f44d1e50d09760b9e3823b1be948712ec90a96a2c723b585517bcb15773", "bytes": 69706},
+      {"yaw": 225, "path": "collections/yinglong/reports/model-turntable-v4/225.png", "sha256": "99dd6bccb5995ef2e66496e8fb2099d85d87cb76894f70873cf8cea092220dc0", "bytes": 71812},
+      {"yaw": 270, "path": "collections/yinglong/reports/model-turntable-v4/270.png", "sha256": "e767ba30aba485b4b091968747065de0304dbebcc2b7cde68f6fd4d172d32125", "bytes": 74714},
+      {"yaw": 315, "path": "collections/yinglong/reports/model-turntable-v4/315.png", "sha256": "9a01dd77c1939ab9c2262a5dba053f00665657ab753f1fab789c919106c7c11e", "bytes": 81337}
+    ],
+    "closeups": [
+      {"region": "face_horns", "path": "collections/yinglong/reports/model-turntable-v4/upper-front.png", "sha256": "69a5907d2dc17eda517f5bd241a85ae076d2a052cb7ab96f4a93171e2c02a237", "bytes": 117809},
+      {"region": "face_wing_surface", "path": "collections/yinglong/reports/model-turntable-v4/upper-side.png", "sha256": "9a098c65f5cfc7ec104da1594ce237e2ccdface908acde84edce964a9effffe5", "bytes": 102844},
+      {"region": "wing_roots", "path": "collections/yinglong/reports/model-turntable-v4/wing-roots.png", "sha256": "4c5d0bf7d4f7885b8f9116121f542d7ddd98762a16851c6a57fb5b4444a9e402", "bytes": 115386},
+      {"region": "legs_tail_root", "path": "collections/yinglong/reports/model-turntable-v4/legs-tail.png", "sha256": "94758ce497ba83b427d9f60a61baa8fa8c011fcdbe40ab4d43c493faf79c1798", "bytes": 113328}
+    ]
+  },
+  "hybrid_recovery": {
+    "status": "selected",
+    "route": "Rodin attempt 1 base plus deterministic physical feather plates, continuous horn branches, amber eye inserts, regional morph targets and articulated feather nodes",
+    "source_task_uuid": "0eaa5253-018a-4afc-95d8-02e554e9f71d",
+    "source_sha256": "4d65e60deb47c59b1490370c222d337083e76ce4370eaaaba3fcc67b33112189",
+    "script": "collections/yinglong/production/scripts/build_hybrid_model.py",
+    "anatomy_correction_policy": "未删除、裁切或拆分 Rodin 解剖；原模型已具单头、两翼、四足和单尾，程序层只增加与既有翼面连续贴合的羽片、连接到两根既有角的分枝以及局部动作数据。",
+    "rejected_local_attempts": [
+      {
+        "id": "hybrid-local-001",
+        "status": "rejected",
+        "reason": "质检器和增强坐标误按 Z-up，导致附加件错位；更正为源 GLB 的 Y-up 后完整重建。"
+      },
+      {
+        "id": "hybrid-local-002",
+        "status": "rejected",
+        "reason": "眼部插入靠近角根；仅调整眼部局部坐标。"
+      },
+      {
+        "id": "hybrid-local-003",
+        "status": "rejected",
+        "reason": "眼部插入过于靠前；调整至眼眶并缩小尺寸。"
+      }
+    ],
+    "selected_model": {
+      "path": "collections/yinglong/models/web.glb",
+      "sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+      "bytes": 17157080,
+      "triangles": 102722,
+      "materials": 5,
+      "textures": 3,
+      "texture_resolution": "4096x4096 source dimensions preserved",
+      "nodes": 12,
+      "morph_targets": 9,
+      "animations": 7
+    },
+    "turntable": {
+      "directory": "collections/yinglong/reports/model-turntable-hybrid-v2",
+      "contact_sheet": {"path": "collections/yinglong/reports/model-turntable-hybrid-v2/contact-sheet.webp", "sha256": "a3bb32a85bf484b3e542ded4ef801a1fa14ae17a53f88d7fa174a7c8b2cf4a7d", "bytes": 42390},
+      "angles": [
+        {"yaw": 0, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/000.png", "sha256": "5a5a60d93f5421f00b422a399e5de378e496ffc769fe3255445ab34036b361ed", "bytes": 70661},
+        {"yaw": 45, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/045.png", "sha256": "eda7c0ef8218dc8b7b07d6b4cea3320b1ab6e8ece1d4905d31862cbc25b4b365", "bytes": 114163},
+        {"yaw": 90, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/090.png", "sha256": "5fc0bcd6afda6be33eba439198d170be86bec40ecf61256ee56b5ce1764f39a5", "bytes": 115471},
+        {"yaw": 135, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/135.png", "sha256": "4a48c4f23ff56c2413da1434c976c3dfbaa4819ee05bcc30b16afa3c636b9819", "bytes": 103895},
+        {"yaw": 180, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/180.png", "sha256": "59a240e1563ef43472c7c963fc5ff89545e6a85e0cca7d8f73ff9f1848fe9da0", "bytes": 73634},
+        {"yaw": 225, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/225.png", "sha256": "cf1c9bb026bd4aa84f95e4c734d97b4f7978111b4848355a3ba08d89da64312b", "bytes": 95486},
+        {"yaw": 270, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/270.png", "sha256": "54a690173f47b2a773e52c5f0993d430a190d38d8c88b21d819e9a566a0b836a", "bytes": 110740},
+        {"yaw": 315, "path": "collections/yinglong/reports/model-turntable-hybrid-v2/315.png", "sha256": "6c3cd28d9083e32c67f4817909c5d615e4b4db5155c08a00c405ffda6f3b0e24", "bytes": 107825}
+      ]
+    }
+  },
+  "checks": [
+    {
+      "id": "locked_traits",
+      "status": "passed",
+      "evidence": "最终八方向显示单头、左右一对翼、四足、两棵连续分枝角和单尾；无额外翼或肢体。",
+      "notes": []
+    },
+    {
+      "id": "topology_and_connections",
+      "status": "passed",
+      "evidence": "最终模型保留原网格并只增加贴附翼面的羽片与连接角枝；八方向未见悬浮主体、重复翼根、破面或断尾。",
+      "notes": []
+    },
+    {
+      "id": "silhouette",
+      "status": "passed",
+      "evidence": "前、侧、后轮廓中两翼羽层、长颈、深胸、四足和连续单尾均可读；未以删件修正轮廓。",
+      "notes": []
+    },
+    {
+      "id": "turntable_and_closeups",
+      "status": "passed",
+      "evidence": "最终 1920x1080 八方向转台与面部、羽翼、翼根、四足/尾根近景均已落盘；历史失败证据继续保留。",
+      "notes": []
+    }
+  ],
+  "next_attempt": null,
+  "capability_conclusion": "Rodin 单独输出未达发布门，但第一次候选的结构计数和连续连接正确。程序化混合增强在不删件的前提下补足物理羽层、连续角枝和身份细节，并经八方向与近景复验通过。",
+  "blocking_failures": []
+}

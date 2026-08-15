@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "view-005-front-v2",
+  "stage": "view",
+  "tool": "codex_builtin_imagegen",
+  "created_at": "2026-08-15T09:19:52Z",
+  "use_case": "stylized-concept",
+  "asset_type": "clean near-orthographic provider input for multi-view 3D reconstruction",
+  "input_images": [
+    {
+      "path": "collections/yinglong/concepts/master.png",
+      "role": "identity and material reference"
+    },
+    {
+      "path": "collections/yinglong/views/left.png",
+      "role": "frozen-pose, length and wing-angle reference"
+    },
+    {
+      "path": ".agents/runtime/yinglong/imagegen/front-v1.png",
+      "role": "rejected front view to correct only leg visibility while preserving head, wings and materials"
+    }
+  ],
+  "prompt": "Correct the rejected front modeling view while preserving its head, body, horns, wings, colors, surface details and overall framing. Keep the creature facing directly forward and keep the established wing offset: creature's left wing 40 degrees, right wing 28 degrees. Critical anatomy correction only: exactly four legs and all four feet must be simultaneously and independently visible. Place the two forelegs slightly narrower and forward, and the two hind legs slightly wider and behind, with four separate silhouettes, visible gaps between every foot, and clear shoulders/hips/knees/ankles. Use a near-orthographic front camera with only 8 degrees of elevation so the rear feet remain visible without turning into a three-quarter view. Keep one centered unbranched tail visible between the hind legs. Seamless medium cool-gray background and uniform softbox light. No other changes, no extra appendages, no scene or text.",
+  "negative_prompt": "only two visible legs, overlapped or merged front and rear legs, shared feet, extra leg, missing foot, three-quarter yaw, identity drift, changed head, changed horns, changed wings, symmetric wing angle, extra or missing wing, split tail, open mouth, dynamic pose, perspective distortion, floor, cast shadow, scenery, fog, crop, labels, logo, watermark",
+  "expected_output": "collections/yinglong/views/front.png",
+  "outputs": [
+    {
+      "generation_id": "exec-3c8b6ae8-0884-4a5d-a99d-ebf0d543e897",
+      "sha256": "0960064c6f42d7194a5a8e194ec5d3489f38e897bd72a905ad69c6f0dc86d0a7",
+      "bytes": 2092182,
+      "resolution": "1536x1024",
+      "retained": false
+    }
+  ],
+  "status": "rejected",
+  "notes": [
+    "v1 仅因四足在正投影中遮挡而拒绝；v2 锁定其他区域，只调整站距与相机俯角。",
+    "四足可见性已修正，但双翼回到镜像同角度，与 left-v2 的生物左翼40度、右翼28度不一致；v3 只修正左翼抬角。"
+  ]
+}

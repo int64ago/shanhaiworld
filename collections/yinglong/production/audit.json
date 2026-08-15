@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "name": "应龙",
+  "created_at": "2026-08-15T09:10:18+00:00",
+  "updated_at": "2026-08-15T11:27:38Z",
+  "runs": [
+    {
+      "id": "research-001",
+      "stage": "research",
+      "tool": "web_primary_source_review",
+      "created_at": "2026-08-15T09:10:54Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/yinglong/production/research/sources.json"
+      ],
+      "output_files": [
+        "collections/yinglong/spec.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "原典锁定有翼、蓄水降雨与战蚩尤/夸父；四足双角和材质配色明确标记为视觉推演。"
+      ]
+    },
+    {
+      "id": "concept-001",
+      "stage": "concept",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T09:12:40Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/concepts/001-master.json"
+      ],
+      "reference_files": [],
+      "output_files": [
+        "collections/yinglong/concepts/master.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "生成视觉身份主稿；不作为 provider 输入。",
+        "1536x1024；SHA-256 b741e74dfc7cc4750e240d27f6095f451ccffaf13310900eb0085a9ffcfff974；2,732,894 bytes。",
+        "原始分辨率检查通过：单头、双翼、四足、双角、单尾和材质分区可辨。"
+      ]
+    },
+    {
+      "id": "view-001-left",
+      "stage": "view",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T09:15:00Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/views/001-left.json"
+      ],
+      "reference_files": [
+        "collections/yinglong/concepts/master.png"
+      ],
+      "output_files": [],
+      "status": "rejected",
+      "notes": [
+        "视觉主稿只作身份与材质参考；生成真正左正交视图。",
+        "拒绝：双翼在侧投影中完全重叠，只能验证一个翼轮廓；SHA-256 05e1bea39a4ac29a752a6338086b1216b7da0927ad5b55da5bb161c8de1b5057；1,940,782 bytes；未提升到 collection。"
+      ]
+    },
+    {
+      "id": "view-004-left-v2",
+      "stage": "view",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T09:16:14Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/views/004-left-v2.json"
+      ],
+      "reference_files": [
+        "collections/yinglong/concepts/master.png"
+      ],
+      "output_files": [
+        "collections/yinglong/views/left.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "针对双翼完全重叠：近翼40度、远翼28度，并使用仅6度俯视的近正交侧视。",
+        "1536x1024；SHA-256 6114394448e0527abe7461d245a87a2b4d158322469ee69ac1d96eb2051b5d63；2,002,690 bytes；原始分辨率结构检查通过。"
+      ]
+    },
+    {
+      "id": "view-002-front",
+      "stage": "view",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T09:17:20Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/views/002-front.json"
+      ],
+      "reference_files": [
+        "collections/yinglong/concepts/master.png",
+        "collections/yinglong/views/left.png"
+      ],
+      "output_files": [],
+      "status": "rejected",
+      "notes": [
+        "正视图继承 selected left-v2 的冻结姿势和比例。",
+        "拒绝：前后肢同轴遮挡，无法逐一核验四足；SHA-256 e4f2c5f6862d232f5d4141dae3bf5435d13adeacef6e15973d209af5b728a994；2,111,479 bytes；未提升到 collection。"
+      ]
+    },
+    {
+      "id": "view-005-front-v2",
+      "stage": "view",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T09:19:52Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/views/005-front-v2.json"
+      ],
+      "reference_files": [
+        "collections/yinglong/concepts/master.png",
+        "collections/yinglong/views/left.png"
+      ],
+      "output_files": [],
+      "status": "rejected",
+      "notes": [
+        "只修正四足可见性：前肢窄站、后肢宽站、8度轻俯视。",
+        "拒绝：四足已分离，但双翼回到镜像同角度，跨视图冻结姿势不一致；SHA-256 0960064c6f42d7194a5a8e194ec5d3489f38e897bd72a905ad69c6f0dc86d0a7；2,092,182 bytes。"
+      ]
+    },
+    {
+      "id": "view-006-front-v3",
+      "stage": "view",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T09:22:02Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/views/006-front-v3.json"
+      ],
+      "reference_files": [
+        "collections/yinglong/views/left.png"
+      ],
+      "output_files": [
+        "collections/yinglong/views/front.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "只抬高生物左翼；保持 v2 已通过的四足可见性。",
+        "1536x1024；SHA-256 0b50ed1e7f9e8a37ace3fd8e14c28032e6e61ffae89da6f5721e5fbb8c751886；2,025,840 bytes；结构与材质检查通过。"
+      ]
+    },
+    {
+      "id": "view-003-back",
+      "stage": "view",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T09:23:50Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/views/003-back.json"
+      ],
+      "reference_files": [
+        "collections/yinglong/concepts/master.png",
+        "collections/yinglong/views/left.png",
+        "collections/yinglong/views/front.png"
+      ],
+      "output_files": [
+        "collections/yinglong/views/back.png"
+      ],
+      "status": "selected",
+      "notes": [
+        "后左三分之四近正交视图，验证双翼根、背脊、四足和完整单尾。",
+        "1536x1024；SHA-256 c8006870175d06b81298a4ba166b59069896533995fe813c16494c575aa4031d；2,119,018 bytes；原始分辨率结构与材质检查通过。"
+      ]
+    },
+    {
+      "id": "rodin-submit-001",
+      "stage": "model_generation",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-15T09:27:30Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/models/001-rodin.txt"
+      ],
+      "reference_files": [
+        "collections/yinglong/views/left.png",
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "output_files": [],
+      "status": "failed",
+      "notes": [
+        "API 400：prompt 必须不超过1024字符；未返回 task UUID，未进入生成。",
+        "v2 只压缩措辞，保留数量、连续连接、活动空间和表面材质约束。"
+      ]
+    },
+    {
+      "id": "rodin-model-001",
+      "stage": "model_generation",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-15T09:29:01Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/models/003-rodin-short-v2.txt"
+      ],
+      "reference_files": [
+        "collections/yinglong/views/left.png",
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "output_files": [],
+      "status": "rejected",
+      "provider_task": "0eaa5253-018a-4afc-95d8-02e554e9f71d",
+      "notes": [
+        "Quad high / HighPack；输出 SHA-256 4d65e60deb47c59b1490370c222d337083e76ce4370eaaaba3fcc67b33112189；49,779,804 bytes；87,882 triangles。",
+        "拒绝：双翼成为平滑膜片/黑块，角无枝，面部、鳞片和翼面细节糊化；二进制只留运行时至任务结束。"
+      ]
+    },
+    {
+      "id": "rodin-model-002",
+      "stage": "model_generation",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-15T09:36:26Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/models/004-rodin-feather-detail.txt"
+      ],
+      "reference_files": [
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/left.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "output_files": [],
+      "status": "rejected",
+      "provider_task": "bc669258-a8cb-46a3-80b1-51ce1fabd19f",
+      "notes": [
+        "Quad high / quality_override 200000 / HighPack；输出 SHA-256 4afc68e0b029f75a3ed35b4cda737d729f6fa043de23ab22072a7d38650465c4；38,624,360 bytes；91,651 triangles。",
+        "拒绝：生成四翼并出现悬浮黑色翼片；二进制只留运行时至任务结束。"
+      ]
+    },
+    {
+      "id": "rodin-model-003",
+      "stage": "model_generation",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-15T09:42:10Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/models/005-rodin-two-view.txt"
+      ],
+      "reference_files": [
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "output_files": [],
+      "status": "rejected",
+      "provider_task": "a37fe3ff-1a9f-434c-8d17-1ef97afe513f",
+      "notes": [
+        "Quad high / quality_override 200000 / HighPack；输出 SHA-256 ffcafc65be35edd8673d7f368984c5b27452cc58a0d0fbab4d206b7ba83ba545；45,430,648 bytes；89,558 triangles。",
+        "拒绝：双翼计数恢复，但翼面仍为平滑膜片、角无枝且身份区域糊化；二进制只留运行时至任务结束。"
+      ]
+    },
+    {
+      "id": "rodin-model-004",
+      "stage": "model_generation",
+      "tool": "hyper3d_rodin_gen2",
+      "created_at": "2026-08-15T09:48:45Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/models/006-rodin-raw-topology.txt"
+      ],
+      "reference_files": [
+        "collections/yinglong/views/front.png",
+        "collections/yinglong/views/back.png"
+      ],
+      "output_files": [],
+      "status": "rejected",
+      "provider_task": "00de757d-a5ad-4a2b-9c5a-ab31201346f6",
+      "notes": [
+        "Raw high / quality_override 1000000 / standard 2K PBR；输出 SHA-256 ab90cc7400fdf16794a9fd4578ff8af7e4c34ca691603aac12055a749561533b；55,843,456 bytes；999,916 triangles。",
+        "拒绝：提高至约100万面后近翼仍为大面积平滑膜片，脸、鳞片和角枝仍不可读，证明不是拓扑预算不足；停止同提供方无诊断重试。"
+      ]
+    },
+    {
+      "id": "hybrid-model-001",
+      "stage": "model_detail_and_motion",
+      "tool": "deterministic_python_glb_builder",
+      "created_at": "2026-08-15T10:30:00Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/yinglong/reports/model-qc.json",
+        "collections/yinglong/reports/detail-qc.json"
+      ],
+      "output_files": [
+        "collections/yinglong/models/web.glb",
+        "collections/yinglong/production/scripts/build_hybrid_model.py"
+      ],
+      "status": "selected",
+      "notes": [
+        "以 Rodin task 0eaa5253-018a-4afc-95d8-02e554e9f71d 的结构计数正确模型为基础；不删除或拆分解剖部件，增加 13,600 个分层翼羽三角面、两棵连接既有双角的分枝角树和两枚眼部插入。",
+        "局部 v1 错用 Z-up，v2/v3 依次修正眼部坐标，v4 加强四足步态；v5 仅补齐 9 个 Morph POSITION accessor 的 min/max，消除浏览器元数据警告。",
+        "最终 SHA-256 d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876；17,157,080 bytes；102,722 triangles；9 Morph；7 actions。"
+      ]
+    },
+    {
+      "id": "tripo-rig-check-001",
+      "stage": "rigging",
+      "tool": "tripo_v2.5-20260210",
+      "created_at": "2026-08-15T10:37:24Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/yinglong/production/providers/tripo/requests/005-rig-check.json"
+      ],
+      "output_files": [
+        "collections/yinglong/production/providers/tripo/responses/004-task.json"
+      ],
+      "provider_task": "4dee25f3-9c3a-43d1-b89f-56b70ccffe49",
+      "status": "passed_not_selected",
+      "notes": [
+        "基础 PNG 纹理 GLB riggable=true，官方推荐 rig_type=avian，0 credits。",
+        "最终 EXT_texture_webp GLB 的 provider 导入失败，故继续以基础网格验证骨架可行性。"
+      ]
+    },
+    {
+      "id": "tripo-rig-001",
+      "stage": "rigging",
+      "tool": "tripo_v2.5-20260210",
+      "created_at": "2026-08-15T10:38:09Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/yinglong/production/providers/tripo/requests/006-rig.json"
+      ],
+      "output_files": [
+        "collections/yinglong/reports/rig-tripo-v1/wing-root-rotation.png",
+        "collections/yinglong/reports/rig-tripo-v1/hindlimb-rotation.png",
+        "collections/yinglong/reports/rig-tripo-v1/tail-root-rotation.png"
+      ],
+      "provider_task": "2df32230-52f9-4082-bb17-4f4c504631ca",
+      "status": "passed_not_selected",
+      "notes": [
+        "avian rig 产出 1 skin、49 joints、有效 JOINTS/WEIGHTS 和 0 animations；翼根、后肢和尾根实转保持连接。",
+        "未选择：输出仅含未增强基础模型，且官方 API 没有匹配应龙的完整 avian 动作集。二进制 SHA-256 9983cccdb6e007e080b35dc3ee8acedef09a1a4301eaa64b27e0ec46416e7880；49,999,500 bytes；任务结束时删除运行时下载。"
+      ]
+    },
+    {
+      "id": "scene-001",
+      "stage": "scene",
+      "tool": "codex_builtin_imagegen",
+      "created_at": "2026-08-15T10:44:00Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/scene/001-background.json"
+      ],
+      "reference_files": [],
+      "output_files": [
+        "collections/yinglong/scene/background.webp"
+      ],
+      "status": "selected",
+      "notes": [
+        "空场南荒雨后洪泽 2:1 环境背景；无神兽、人物、文字或现代物件。",
+        "SHA-256 d00e950ef5c8f68f8ab2f4cdeda4d5a236c8e7b82d7fa67de224909a901b4bcd；129,566 bytes；1774x887 WebP。"
+      ]
+    },
+    {
+      "id": "release-page-001",
+      "stage": "page_validation",
+      "tool": "threejs_browser_qc",
+      "created_at": "2026-08-15T10:51:58Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/yinglong/reports/rig-qc.json",
+        "collections/yinglong/reports/animation-qc.json"
+      ],
+      "output_files": [
+        "collections/yinglong/preview.webp",
+        "collections/yinglong/reports/page-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "1920x1080 Chromium：viewer ready，7 clips，5 animated nodes，13 draw calls，106,166 rendered triangles，average 111.7 FPS，0 console errors/warnings。",
+        "实测动作选择、自动巡游、模型点击、Orbit 拖拽、滚轮缩放和安全预览路由。"
+      ]
+    },
+    {
+      "id": "shared-viewer-ui-001",
+      "stage": "page_validation",
+      "tool": "shared_threejs_viewer_contract",
+      "created_at": "2026-08-15T11:16:56Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/collection.json",
+        "collections/yinglong/collection.json"
+      ],
+      "output_files": [
+        "collections/yinglong/reports/page-qc-v2/desktop-1920x1080.png",
+        "collections/yinglong/reports/page-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "移除按神兽切换交互视觉的入口；九尾狐与应龙都固定使用 viewer_ui=shared-v1、kid_mode=true。",
+        "1920x1080 Chromium 逐项对照两页计算样式与控件 ID 完全一致，双方 viewer ready 且 0 console errors/warnings。",
+        "应龙复验：7 clips，5 animated nodes，13 draw calls，106,166 rendered triangles，average 88.4 FPS。",
+        "新 collection 由模板和初始化器写入统一契约；运行时与 ready 构建均会拒绝不一致配置。"
+      ]
+    },
+    {
+      "id": "shared-narration-001",
+      "stage": "interface_accessibility_and_narration",
+      "tool": "build_narration.py_and_threejs_browser",
+      "created_at": "2026-08-15T11:27:38Z",
+      "prompt_files": [
+        "collections/yinglong/production/prompts/audio/001-narration-zh-cn.txt"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/scene/narration-zh-cn-v2.m4a",
+        "collections/yinglong/collection.json"
+      ],
+      "output_files": [
+        "collections/yinglong/scene/narration-zh-cn-v1.m4a",
+        "collections/yinglong/reports/page-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "复现九尾狐朗读源链路：Tingting 普通话音色、rate 160；相同九尾狐文本的源 PCM 与已发布音频解码结果相关系数为 0.98745，且时长逐帧一致为 51.110295 秒。",
+        "应龙固定朗读为单声道 22050 Hz AAC，49.599138 秒，209,996 bytes，SHA-256 bc903d5c08c2266af3377fee57222ea02c54814b3d8e302e56ae0f9b4d986848。",
+        "浏览器对照中两页均播放固定 M4A，speechSynthesisSpeaking=false，控制台 0 errors/warnings。",
+        "公共运行时不再静默回退浏览器系统语音；模板、生成器和 ready 构建共同强制 mandarin-tingting-r160-v1。"
+      ]
+    }
+  ],
+  "selections": {
+    "concept": {
+      "path": "collections/yinglong/concepts/master.png",
+      "sha256": "b741e74dfc7cc4750e240d27f6095f451ccffaf13310900eb0085a9ffcfff974",
+      "bytes": 2732894,
+      "run": "concept-001",
+      "status": "selected"
+    },
+    "views": {
+      "left": {
+        "path": "collections/yinglong/views/left.png",
+        "sha256": "6114394448e0527abe7461d245a87a2b4d158322469ee69ac1d96eb2051b5d63",
+        "bytes": 2002690,
+        "run": "view-004-left-v2",
+        "status": "selected"
+      },
+      "front": {
+        "path": "collections/yinglong/views/front.png",
+        "sha256": "0b50ed1e7f9e8a37ace3fd8e14c28032e6e61ffae89da6f5721e5fbb8c751886",
+        "bytes": 2025840,
+        "run": "view-006-front-v3",
+        "status": "selected"
+      },
+      "back": {
+        "path": "collections/yinglong/views/back.png",
+        "sha256": "c8006870175d06b81298a4ba166b59069896533995fe813c16494c575aa4031d",
+        "bytes": 2119018,
+        "run": "view-003-back",
+        "status": "selected"
+      }
+    },
+    "scene_background": {
+      "path": "collections/yinglong/scene/background.webp",
+      "sha256": "d00e950ef5c8f68f8ab2f4cdeda4d5a236c8e7b82d7fa67de224909a901b4bcd",
+      "bytes": 129566,
+      "run": "scene-001",
+      "status": "selected"
+    },
+    "preview": {
+      "path": "collections/yinglong/preview.webp",
+      "sha256": "f8e8b1d6f87c70ad19c2d778a78feada7425ab8a13e4cf962fd09417b327cf94",
+      "bytes": 29406,
+      "run": "release-page-001",
+      "status": "selected"
+    },
+    "narration": {
+      "path": "collections/yinglong/scene/narration-zh-cn-v1.m4a",
+      "sha256": "bc903d5c08c2266af3377fee57222ea02c54814b3d8e302e56ae0f9b4d986848",
+      "bytes": 209996,
+      "run": "shared-narration-001",
+      "status": "selected"
+    },
+    "model": {
+      "status": "selected",
+      "selected": "collections/yinglong/models/web.glb",
+      "sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+      "bytes": 17157080,
+      "run": "hybrid-model-001",
+      "evidence": "collections/yinglong/reports/model-qc.json",
+      "reason": "在结构计数正确的 Rodin 基础模型上进行不删件的确定性细节与局部动作增强，最终通过模型、细节、运动、动画和页面质量门。"
+    }
+  }
+}
