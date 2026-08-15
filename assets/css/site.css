@@ -569,7 +569,7 @@ select {
 
 .home-page.kid-home .collection-grid {
   grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 292px));
-  justify-content: center;
+  justify-content: start;
   gap: 24px;
 }
 
@@ -1313,6 +1313,12 @@ ruby rt {
   align-items: center;
   gap: 10px;
   pointer-events: auto;
+}
+
+.creature-nav-link[aria-disabled="true"] {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.46;
 }
 
 .immersive-toggle {

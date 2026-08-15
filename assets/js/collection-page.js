@@ -18,9 +18,12 @@ const resetButton = document.querySelector("#reset-camera");
 const speechButton = document.querySelector("#speak-intro");
 const speechStatus = document.querySelector("#voice-status");
 const actionMessage = document.querySelector("#action-message");
+const previousCreatureLink = document.querySelector("#previous-creature");
+const nextCreatureLink = document.querySelector("#next-creature");
 const immersiveButton = document.querySelector("#toggle-immersive");
 const immersiveLabel = immersiveButton?.querySelector(".immersive-label");
 const configUrl = new URL(document.body.dataset.collectionConfig || "./collection.json", window.location.href);
+const catalogUrl = new URL("../../assets/data/collections.json", window.location.href);
 const previewMode = new URLSearchParams(window.location.search).has("preview");
 const SHARED_VIEWER_UI = "shared-v1";
 const SHARED_NARRATION_VOICE = "mandarin-tingting-r160-v1";
@@ -35,6 +38,7 @@ const motionRoot = new THREE.Group();
 const roamDirection = new THREE.Vector3();
 const followTarget = new THREE.Vector3();
 const followDelta = new THREE.Vector3();
+const defaultControlsTarget = new THREE.Vector3(0, 1.35, 0);
 const disposableTextures = new Set();
 const disposableRoots = [];
 const runtimeMetrics = {
@@ -122,6 +126,56 @@ async function fetchConfig() {
   const response = await fetch(configUrl, { cache: "no-store" });
   if (!response.ok) throw new Error(`无法读取神兽配置（${response.status}）`);
   return response.json();
+}
+
+function disableCreatureNavigation(link, label) {
+  if (!link) return;
+  link.removeAttribute("href");
+  link.setAttribute("tabindex", "-1");
+  link.setAttribute("aria-disabled", "true");
+  link.setAttribute("aria-label", `${label}神兽：暂无`);
+  link.title = "暂无可切换的神兽";
+}
+
+function configureCreatureNavigationLink(link, label, collection) {
+  if (!link) return;
+  const name = String(collection.name || collection.id);
+  link.href = new URL(`../${encodeURIComponent(collection.id)}/index.html`, configUrl).href;
+  link.removeAttribute("tabindex");
+  link.setAttribute("aria-disabled", "false");
+  link.setAttribute("aria-label", `${label}神兽：${name}`);
+  link.title = `${label}神兽：${name}`;
+}
+
+async function setupCreatureNavigation() {
+  disableCreatureNavigation(previousCreatureLink, "上一个");
+  disableCreatureNavigation(nextCreatureLink, "下一个");
+
+  try {
+    const response = await fetch(catalogUrl, { cache: "no-store" });
+    if (!response.ok) return;
+    const catalog = await response.json();
+    const readyCollections = Array.isArray(catalog.collections)
+      ? catalog.collections.filter((item) => (
+        item
+        && item.status === "ready"
+        && typeof item.id === "string"
+        && item.id
+      ))
+      : [];
+    const currentIndex = readyCollections.findIndex((item) => item.id === config.id);
+    if (currentIndex < 0) return;
+
+    if (currentIndex > 0) {
+      configureCreatureNavigationLink(previousCreatureLink, "上一个", readyCollections[currentIndex - 1]);
+    }
+    if (currentIndex < readyCollections.length - 1) {
+      configureCreatureNavigationLink(nextCreatureLink, "下一个", readyCollections[currentIndex + 1]);
+    }
+    document.body.dataset.creatureNavigation = "ready";
+  } catch {
+    document.body.dataset.creatureNavigation = "unavailable";
+  }
 }
 
 function setText(selector, value) {
@@ -303,7 +357,8 @@ function configureCamera() {
   const values = config.camera || {};
   if (Array.isArray(values.position)) defaultCameraPosition.fromArray(values.position);
   camera.position.copy(defaultCameraPosition);
-  if (Array.isArray(values.target)) controls.target.fromArray(values.target);
+  if (Array.isArray(values.target)) defaultControlsTarget.fromArray(values.target);
+  controls.target.copy(defaultControlsTarget);
   controls.minDistance = values.min_distance ?? 3.5;
   controls.maxDistance = values.max_distance ?? 20;
   controls.update();
@@ -333,6 +388,20 @@ function addLighting() {
   sun.shadow.camera.top = 12;
   sun.shadow.camera.bottom = -12;
   scene.add(sun);
+
+  const fill = new THREE.DirectionalLight(
+    hexColor(values.fill_color, "#bdd8e5"),
+    values.fill_intensity ?? 1.35,
+  );
+  fill.position.fromArray(values.fill_position || [-7, 6, 4]);
+  scene.add(fill);
+
+  const rim = new THREE.DirectionalLight(
+    hexColor(values.rim_color, "#f2d5a2"),
+    values.rim_intensity ?? 1.0,
+  );
+  rim.position.fromArray(values.rim_position || [-5, 8, -7]);
+  scene.add(rim);
 }
 
 function addGround() {
@@ -436,6 +505,8 @@ async function loadBackground() {
     const texture = await new THREE.TextureLoader().loadAsync(assetUrl(values.background));
     if (values.background_mode === "equirectangular") {
       texture.mapping = THREE.EquirectangularReflectionMapping;
+      scene.environment = texture;
+      scene.environmentIntensity = values.environment_intensity ?? 0.72;
     }
     texture.colorSpace = THREE.SRGBColorSpace;
     scene.background = texture;
@@ -709,8 +780,13 @@ function setupActions() {
 
 function stopRoamingForManualAction() {
   roamEnabled = false;
+  roamMode = "idle";
+  roamUntil = 0;
   roamButton.setAttribute("aria-pressed", "false");
   setBilingualButton(roamButton, "自动巡游：关");
+  actor.position.set(0, 0, 0);
+  actor.rotation.y = config.interaction?.presentation_yaw ?? 0;
+  resetCamera();
 }
 
 function playAdjacentClip(offset) {
@@ -776,7 +852,7 @@ function updateRoaming(delta, elapsed) {
 function resetCamera() {
   followDelta.set(actor.position.x, 0, actor.position.z);
   camera.position.copy(defaultCameraPosition).add(followDelta);
-  controls.target.set(actor.position.x, 1.35, actor.position.z);
+  controls.target.copy(defaultControlsTarget).add(followDelta);
   controls.update();
 }
 
@@ -876,13 +952,16 @@ async function start() {
       || config.narration?.voice_profile !== SHARED_NARRATION_VOICE
       || typeof config.narration?.audio !== "string"
       || !config.narration.audio
+      || config.scene?.background_mode !== "equirectangular"
+      || !(Number(config.scene?.environment_intensity) > 0)
     ) {
       throw new Error(
-        `collection.json 必须使用统一交互外壳 ${SHARED_VIEWER_UI} 与固定朗读 ${SHARED_NARRATION_VOICE}`,
+        `collection.json 必须使用统一交互外壳 ${SHARED_VIEWER_UI}、固定朗读 ${SHARED_NARRATION_VOICE} 与 360° 等距场景`,
       );
     }
     renderer.toneMappingExposure = config.lighting?.exposure ?? 1.08;
     renderMetadata();
+    await setupCreatureNavigation();
     setupSpeech();
     configureCamera();
     addLighting();

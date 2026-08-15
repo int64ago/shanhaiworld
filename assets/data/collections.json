@@ -8,7 +8,7 @@
       "subtitle": "《山海经》中的青丘异兽",
       "summary": "狐形、四足、九尾；原典记载它声音像婴儿，是一种具有危险性的青丘异兽。",
       "body_type": "quadruped",
-      "preview": "./collections/jiuweihu/preview.webp",
+      "preview": "./collections/jiuweihu/preview.webp?v=4",
       "href": "./collections/jiuweihu/index.html",
       "status": "ready"
     },
@@ -19,7 +19,7 @@
       "subtitle": "《山海经》中的有翼司雨战龙",
       "summary": "有翼之龙，能蓄水兴雨；曾受黄帝之命攻蚩尤，并与南方多雨的神话相连。",
       "body_type": "winged_serpentine_quadruped",
-      "preview": "./collections/yinglong/preview.webp",
+      "preview": "./collections/yinglong/preview.webp?v=2",
       "href": "./collections/yinglong/index.html",
       "status": "ready"
     }

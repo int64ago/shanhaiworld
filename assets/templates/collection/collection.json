@@ -29,11 +29,13 @@
   },
   "scene": {
     "background": "./scene/background.webp",
-    "background_color": "#0b1110",
-    "fog_color": "#101a17",
+    "background_mode": "equirectangular",
+    "environment_intensity": 0.72,
+    "background_color": "#172825",
+    "fog_color": "#617974",
     "fog_near": 12,
     "fog_far": 42,
-    "ground_color": "#17231d",
+    "ground_color": "#3a5549",
     "ground_size": 42,
     "props": "./scene/props.glb"
   },
@@ -42,10 +44,18 @@
     "ambient_intensity": 1.3,
     "sun_color": "#f1d3a0",
     "sun_intensity": 2.8,
+    "fill_color": "#bdd8e5",
+    "fill_intensity": 1.35,
+    "fill_position": [-7, 6, 4],
+    "rim_color": "#f2d5a2",
+    "rim_intensity": 1.0,
+    "rim_position": [-5, 8, -7],
+    "exposure": 1.08,
     "sun_position": [6, 10, 4]
   },
   "actions": {},
   "interaction": {
+    "presentation_yaw": 0,
     "click_actions": ["observe", "roar", "attack"]
   },
   "roaming": {

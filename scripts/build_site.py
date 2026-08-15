@@ -25,7 +25,16 @@ PUBLIC_ASSET_FILES = ("favicon.svg",)
 OPTIONAL_ROOT_FILES = ("CNAME",)
 SHARED_VIEWER_UI = "shared-v1"
 SHARED_NARRATION_VOICE = "mandarin-tingting-r160-v1"
+SHARED_LIGHTING_FIELDS = (
+    "ambient_intensity",
+    "sun_intensity",
+    "fill_intensity",
+    "rim_intensity",
+    "exposure",
+)
 SHARED_VIEWER_TEMPLATE_MARKERS = (
+    'id="previous-creature"',
+    'id="next-creature"',
     'id="toggle-immersive"',
     'class="immersive-toggle back-link bilingual-button"',
     'aria-pressed="false"',
@@ -184,6 +193,27 @@ def validate_shared_viewer_contract(
     collection: dict[str, Any], creature_id: str
 ) -> None:
     narration = collection.get("narration")
+    lighting = collection.get("lighting")
+    interaction = collection.get("interaction")
+    scene = collection.get("scene")
+    lighting_valid = isinstance(lighting, dict) and all(
+        isinstance(lighting.get(field), (int, float))
+        and not isinstance(lighting.get(field), bool)
+        and float(lighting[field]) > 0
+        for field in SHARED_LIGHTING_FIELDS
+    )
+    presentation_valid = (
+        isinstance(interaction, dict)
+        and isinstance(interaction.get("presentation_yaw"), (int, float))
+        and not isinstance(interaction.get("presentation_yaw"), bool)
+    )
+    scene_360_valid = (
+        isinstance(scene, dict)
+        and scene.get("background_mode") == "equirectangular"
+        and isinstance(scene.get("environment_intensity"), (int, float))
+        and not isinstance(scene.get("environment_intensity"), bool)
+        and float(scene["environment_intensity"]) > 0
+    )
     if (
         collection.get("viewer_ui") != SHARED_VIEWER_UI
         or collection.get("kid_mode") is not True
@@ -193,11 +223,16 @@ def validate_shared_viewer_contract(
         or not narration["audio"]
         or not isinstance(narration.get("text"), str)
         or not narration["text"].strip()
+        or not lighting_valid
+        or not presentation_valid
+        or not scene_360_valid
     ):
         raise RuntimeError(
             f"Ready collection {creature_id} must use the shared viewer UI "
             f"contract {SHARED_VIEWER_UI!r} with kid_mode=true and fixed "
-            f"narration {SHARED_NARRATION_VOICE!r}"
+            f"narration {SHARED_NARRATION_VOICE!r}, shared key/fill/rim lighting, "
+            "a numeric manual-action presentation yaw, and a 2:1 "
+            "equirectangular 360-degree environment"
         )
 
 
@@ -205,7 +240,7 @@ def validate_shared_viewer_template(template: str) -> None:
     missing = [marker for marker in SHARED_VIEWER_TEMPLATE_MARKERS if marker not in template]
     if missing:
         raise RuntimeError(
-            "Shared collection template is missing required immersive-mode markup: "
+            "Shared collection template is missing required navigation or immersive-mode markup: "
             + ", ".join(missing)
         )
 
