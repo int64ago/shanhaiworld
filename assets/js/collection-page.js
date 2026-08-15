@@ -482,11 +482,25 @@ function normalizeModel(root) {
 async function loadCreature() {
   if (!config.model?.path) throw new Error("collection.json 缺少 model.path");
   const url = assetUrl(config.model.path);
+  let lastPercent = -1;
+  let hasMeasurableTotal = false;
+  loadingDetail.textContent = "加载模型与动画中…";
   const gltf = await loader.loadAsync(url, (event) => {
-    if (!event.total) return;
-    const percent = Math.round((event.loaded / event.total) * 100);
+    const loaded = Number(event.loaded);
+    const total = Number(event.total);
+    if (!Number.isFinite(loaded) || !Number.isFinite(total) || total <= 0) {
+      if (!hasMeasurableTotal) loadingDetail.textContent = "加载模型与动画中…";
+      return;
+    }
+
+    hasMeasurableTotal = true;
+    const measuredPercent = Math.floor((Math.max(0, loaded) / total) * 100);
+    const percent = Math.max(lastPercent, Math.min(99, measuredPercent));
+    if (percent === lastPercent) return;
+    lastPercent = percent;
     loadingDetail.textContent = `加载模型与动画 ${percent}%`;
   });
+  loadingDetail.textContent = "加载模型与动画 100%";
 
   modelRoot = gltf.scene;
   modelRoot.name = config.id || config.name;
