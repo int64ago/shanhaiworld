@@ -23,6 +23,8 @@ SKIP_NAMES = {".ds_store", "thumbs.db"}
 PUBLIC_ASSET_DIRS = ("css", "js", "vendor")
 PUBLIC_ASSET_FILES = ("favicon.svg",)
 OPTIONAL_ROOT_FILES = ("CNAME",)
+SHARED_VIEWER_UI = "shared-v1"
+SHARED_NARRATION_VOICE = "mandarin-tingting-r160-v1"
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -173,6 +175,27 @@ def public_catalog_item(item: dict[str, Any]) -> dict[str, Any]:
     return {key: item[key] for key in allowed if key in item}
 
 
+def validate_shared_viewer_contract(
+    collection: dict[str, Any], creature_id: str
+) -> None:
+    narration = collection.get("narration")
+    if (
+        collection.get("viewer_ui") != SHARED_VIEWER_UI
+        or collection.get("kid_mode") is not True
+        or not isinstance(narration, dict)
+        or narration.get("voice_profile") != SHARED_NARRATION_VOICE
+        or not isinstance(narration.get("audio"), str)
+        or not narration["audio"]
+        or not isinstance(narration.get("text"), str)
+        or not narration["text"].strip()
+    ):
+        raise RuntimeError(
+            f"Ready collection {creature_id} must use the shared viewer UI "
+            f"contract {SHARED_VIEWER_UI!r} with kid_mode=true and fixed "
+            f"narration {SHARED_NARRATION_VOICE!r}"
+        )
+
+
 def build_site(project_root: Path, output: Path) -> dict[str, Any]:
     home = project_root / "index.html"
     catalog_path = project_root / "assets" / "data" / "collections.json"
@@ -214,6 +237,7 @@ def build_site(project_root: Path, output: Path) -> dict[str, Any]:
                 f"Catalog marks {creature_id} ready, but collection.json status is "
                 f"{collection.get('status')!r}"
             )
+        validate_shared_viewer_contract(collection, creature_id)
 
         destination_root = output / "collections" / creature_id
         destination_root.mkdir(parents=True, exist_ok=True)

@@ -20,6 +20,8 @@ const speechStatus = document.querySelector("#voice-status");
 const actionMessage = document.querySelector("#action-message");
 const configUrl = new URL(document.body.dataset.collectionConfig || "./collection.json", window.location.href);
 const previewMode = new URLSearchParams(window.location.search).has("preview");
+const SHARED_VIEWER_UI = "shared-v1";
+const SHARED_NARRATION_VOICE = "mandarin-tingting-r160-v1";
 document.body.dataset.previewMode = String(previewMode);
 
 const clock = new THREE.Clock();
@@ -53,7 +55,6 @@ let roamMode = "idle";
 let roamUntil = 0;
 let destination = new THREE.Vector3();
 let pointerDown = null;
-let narrationUtterance = null;
 let narrationAudio = null;
 
 actor.add(motionRoot);
@@ -152,7 +153,11 @@ function setBilingualButton(button, text) {
 }
 
 function renderMetadata() {
-  document.body.dataset.kidMode = String(config.kid_mode === true);
+  // The interaction shell is product-level UI. Creature data may change the
+  // content, model, actions, camera, and scene, but never the shared controls.
+  document.body.dataset.viewerUi = SHARED_VIEWER_UI;
+  document.body.dataset.kidMode = "true";
+  document.body.dataset.narrationVoice = SHARED_NARRATION_VOICE;
   document.title = `${config.name} · 山海万象`;
   setBilingualContent(
     document.querySelector("#creature-name"),
@@ -172,9 +177,13 @@ function renderMetadata() {
   const facts = document.querySelector("#creature-facts");
   const rows = Array.isArray(config.facts) ? [...config.facts] : [];
   if (config.body_type) {
+    const bodyTypeLabels = {
+      quadruped: "狐形四足兽",
+      winged_serpentine_quadruped: "有翼长龙形四足兽",
+    };
     rows.unshift({
       label: "身体类型",
-      value: config.body_type === "quadruped" ? "狐形四足兽" : config.body_type,
+      value: bodyTypeLabels[config.body_type] || config.body_type,
     });
   }
 
@@ -194,13 +203,6 @@ function renderMetadata() {
   facts.replaceChildren(fragment);
 }
 
-function selectChineseVoice() {
-  const voices = window.speechSynthesis?.getVoices?.() || [];
-  return voices.find((voice) => /zh[-_](CN|Hans)/iu.test(voice.lang))
-    || voices.find((voice) => voice.lang.toLowerCase().startsWith("zh"))
-    || null;
-}
-
 function setSpeechState(speaking) {
   setBilingualButton(
     speechButton,
@@ -209,74 +211,42 @@ function setSpeechState(speaking) {
   speechButton?.setAttribute("aria-pressed", String(speaking));
 }
 
-function speakWithBrowserVoice() {
-  if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) return;
-  narrationUtterance = new SpeechSynthesisUtterance(
-    config.narration?.text || `${config.name}。${config.summary || ""}`,
-  );
-  narrationUtterance.lang = "zh-CN";
-  narrationUtterance.rate = 0.86;
-  narrationUtterance.pitch = 1.08;
-  const voice = selectChineseVoice();
-  if (voice) narrationUtterance.voice = voice;
-  narrationUtterance.onstart = () => {
-    setSpeechState(true);
-    speechStatus.textContent = "正在朗读详细介绍";
-  };
-  narrationUtterance.onend = () => {
-    setSpeechState(false);
-    speechStatus.textContent = "介绍已朗读完毕，可以再次播放";
-  };
-  narrationUtterance.onerror = () => {
-    setSpeechState(false);
-    speechStatus.textContent = "暂时无法朗读，请再点击一次";
-  };
-  window.speechSynthesis.speak(narrationUtterance);
-}
-
 async function speakIntroduction() {
   const audioIsPlaying = narrationAudio && !narrationAudio.paused && !narrationAudio.ended;
-  if (audioIsPlaying || window.speechSynthesis?.speaking) {
-    narrationAudio?.pause();
-    if (narrationAudio) narrationAudio.currentTime = 0;
-    window.speechSynthesis?.cancel();
+  if (audioIsPlaying) {
+    narrationAudio.pause();
+    narrationAudio.currentTime = 0;
     setSpeechState(false);
     speechStatus.textContent = "朗读已停止";
     return;
   }
 
-  if (narrationAudio) {
-    try {
-      narrationAudio.currentTime = 0;
-      await narrationAudio.play();
-      setSpeechState(true);
-      speechStatus.textContent = "正在朗读详细介绍";
-      return;
-    } catch {
-      narrationAudio = null;
-    }
+  try {
+    narrationAudio.currentTime = 0;
+    await narrationAudio.play();
+    setSpeechState(true);
+    speechStatus.textContent = "正在朗读详细介绍";
+  } catch {
+    speechButton.disabled = true;
+    setSpeechState(false);
+    speechStatus.textContent = "固定朗读音频加载失败";
   }
-
-  speakWithBrowserVoice();
 }
 
 function setupSpeech() {
   if (!speechButton) return;
-  if (config.narration?.audio) {
-    narrationAudio = new Audio(assetUrl(config.narration.audio));
-    narrationAudio.preload = "metadata";
-    narrationAudio.addEventListener("ended", () => {
-      setSpeechState(false);
-      speechStatus.textContent = "介绍已朗读完毕，可以再次播放";
-    });
-    narrationAudio.addEventListener("error", () => {
-      narrationAudio = null;
-    }, { once: true });
-  }
-  if (!narrationAudio && (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window))) {
-    if (speechStatus) speechStatus.textContent = "这个浏览器暂时无法朗读";
-    return;
-  }
+  narrationAudio = new Audio(assetUrl(config.narration.audio));
+  narrationAudio.preload = "metadata";
+  narrationAudio.addEventListener("ended", () => {
+    setSpeechState(false);
+    speechStatus.textContent = "介绍已朗读完毕，可以再次播放";
+  });
+  narrationAudio.addEventListener("error", () => {
+    narrationAudio = null;
+    speechButton.disabled = true;
+    setSpeechState(false);
+    speechStatus.textContent = "固定朗读音频加载失败";
+  }, { once: true });
   speechButton.disabled = false;
   setSpeechState(false);
   speechStatus.textContent = `点击按钮，朗读${config.name}的详细介绍`;
@@ -847,13 +817,23 @@ function cleanup() {
   ktx2Loader.dispose();
   renderer.dispose();
   narrationAudio?.pause();
-  if (narrationUtterance && window.speechSynthesis?.speaking) window.speechSynthesis.cancel();
 }
 
 async function start() {
   try {
     loadingDetail.textContent = "读取神兽设定…";
     config = await fetchConfig();
+    if (
+      config.viewer_ui !== SHARED_VIEWER_UI
+      || config.kid_mode !== true
+      || config.narration?.voice_profile !== SHARED_NARRATION_VOICE
+      || typeof config.narration?.audio !== "string"
+      || !config.narration.audio
+    ) {
+      throw new Error(
+        `collection.json 必须使用统一交互外壳 ${SHARED_VIEWER_UI} 与固定朗读 ${SHARED_NARRATION_VOICE}`,
+      );
+    }
     renderer.toneMappingExposure = config.lighting?.exposure ?? 1.08;
     renderMetadata();
     setupSpeech();

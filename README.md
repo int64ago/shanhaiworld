@@ -73,6 +73,8 @@ shanhaiworld/
 
 首页读取 `assets/data/collections.json`，只显示 `ready` 条目。每只神兽独立页面复用公共 Three.js 运行逻辑；动作菜单只读取最终 GLB 中实际存在的 clips。
 
+所有神兽共用同一套 `shared-v1` 查看器外壳：信息面板、朗读、动作选择、上一/下一动作、自动巡游、回正、点击反应、鼠标环绕和滚轮缩放不得按神兽分叉。朗读统一使用 `mandarin-tingting-r160-v1` 固定普通话音色和语速，不以随设备变化的浏览器语音作为发布回退。新 collection 由初始化脚本自动写入统一的查看器、朗读配置与版本化音频路径；发布构建会拒绝缺少固定音频或不符合约定的 ready collection。神兽之间仅允许模型、内容、动作、相机、灯光和场景数据不同。
+
 ## 本地密钥
 
 图片使用 Codex 内置 ImageGen，不需要 `OPENAI_API_KEY`。完整默认路线需要：

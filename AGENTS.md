@@ -5,6 +5,7 @@
 - Treat one Chinese mythic-creature name as the complete input and use the repo-scoped `$shanhai3d` skill.
 - Do not ask the user for prompts, images, style, action names, scene design, performance targets, or Blender work.
 - Deliver one independent PC Three.js page with coherent environment, mouse orbit/zoom/click, autonomous roaming, high-fidelity materials, and rich anatomically meaningful motion. Prefer a real skeleton; accept morph, articulated-node, mesh-deformation, or hybrid motion only when it meets the same visible quality bar.
+- Keep the viewer shell collection-invariant. Every collection, including newly initialized ones, must use `viewer_ui: "shared-v1"`, `kid_mode: true`, `narration.voice_profile: "mandarin-tingting-r160-v1"`, a fixed versioned narration audio file, the shared template, `assets/js/collection-page.js`, and `assets/css/site.css`. Do not create creature-specific UI, control, interaction, narration voice/rate, or layout variants; only creature content, model, actions, camera, lighting, and scene may differ. Browser speech synthesis is not an acceptable release fallback. A mismatched ready collection must fail the site build.
 - Automation never overrides quality gates. Stop with an explicit blocking status instead of publishing a structurally wrong, blurry, unrigged, or weakly animated result.
 
 ## Mandatory stage gates

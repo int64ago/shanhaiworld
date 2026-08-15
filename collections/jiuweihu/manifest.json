@@ -4,7 +4,7 @@
   "name": "九尾狐",
   "status": "ready",
   "created_at": "2026-08-14T17:59:20+00:00",
-  "updated_at": "2026-08-15T03:09:51Z",
+  "updated_at": "2026-08-15T11:27:38Z",
   "artifacts": [
     {
       "kind": "release_qc",
@@ -19,8 +19,9 @@
       "path": "collections/jiuweihu/scene/narration-zh-cn-v2.m4a",
       "status": "ready",
       "sha256": "9c8f7e4a298ebd8a2d689558d54bf2d6e49385c534a4800c3537de37ce2cddc2",
+      "bytes": 216585,
       "notes": [
-        "51.110-second Mandarin reading of the formal source-based introduction; browser speech synthesis remains the fallback."
+        "51.110-second fixed Mandarin reading using the shared mandarin-tingting-r160-v1 voice profile; browser speech synthesis is not a release fallback."
       ]
     },
     {

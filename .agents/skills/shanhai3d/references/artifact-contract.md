@@ -28,7 +28,8 @@ collections/<slug>/
 │   │   ├── concepts/
 │   │   ├── views/
 │   │   ├── scenes/
-│   │   └── previews/
+│   │   ├── previews/
+│   │   └── audio/
 │   ├── generations/
 │   │   ├── concepts/
 │   │   ├── views/

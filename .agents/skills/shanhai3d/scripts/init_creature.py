@@ -25,6 +25,7 @@ SUBDIRECTORIES = (
     "production/prompts/views",
     "production/prompts/scenes",
     "production/prompts/previews",
+    "production/prompts/audio",
     "production/generations/concepts",
     "production/generations/views",
     "production/generations/scenes",
@@ -345,6 +346,8 @@ def main() -> int:
             "id": creature_id,
             "name": name,
             "status": "draft",
+            "viewer_ui": "shared-v1",
+            "kid_mode": True,
             "preview": "./preview.webp",
             "model": {
                 "path": "./models/web.glb",

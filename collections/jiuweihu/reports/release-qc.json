@@ -3,7 +3,7 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "status": "passed",
-  "checked_at": "2026-08-15T03:09:51Z",
+  "checked_at": "2026-08-15T11:27:38Z",
   "page": "collections/jiuweihu/index.html",
   "runtime_asset": {
     "path": "collections/jiuweihu/models/web.glb",
@@ -63,7 +63,7 @@
       "evidence": "collections/jiuweihu/reports/final-page/final-no-pinyin-1920x1080.png",
       "notes": [
         "Only the creature name retains pinyin above the Chinese characters; introductions, facts, controls, action messages and speech status are Chinese-only.",
-        "The formal source-based introduction has a 51.110-second Mandarin audio track with browser speech synthesis as fallback.",
+        "The formal source-based introduction has a 51.110-second fixed Mandarin audio track using mandarin-tingting-r160-v1; browser speech synthesis is not used as a release fallback.",
         "The redundant top instruction strip and bottom mouse-hint strip were removed while orbit, zoom and click behavior remain available."
       ]
     },

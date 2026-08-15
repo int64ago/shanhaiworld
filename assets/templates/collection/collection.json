@@ -6,6 +6,8 @@
   "summary": "",
   "body_type": "unknown",
   "status": "draft",
+  "viewer_ui": "shared-v1",
+  "kid_mode": true,
   "preview": "./preview.webp",
   "model": {
     "path": "./models/web.glb",
@@ -51,6 +53,12 @@
     "bounds": 7,
     "walk_speed": 0.7,
     "run_speed": 1.45
+  },
+  "narration": {
+    "button_label": "朗读介绍",
+    "voice_profile": "mandarin-tingting-r160-v1",
+    "audio": "./scene/narration-zh-cn-v1.m4a",
+    "text": ""
   },
   "facts": []
 }
