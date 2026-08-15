@@ -4,7 +4,7 @@
   "name": "应龙",
   "status": "ready",
   "created_at": "2026-08-15T09:10:18+00:00",
-  "updated_at": "2026-08-15T11:41:49Z",
+  "updated_at": "2026-08-15T13:06:34Z",
   "artifacts": [
     {
       "kind": "mandarin_narration",
@@ -63,14 +63,32 @@
       ]
     },
     {
-      "kind": "web_glb",
-      "path": "collections/yinglong/models/web.glb",
-      "status": "ready",
+      "kind": "web_glb_v1",
+      "path": "collections/yinglong/models/web-v1.glb",
+      "status": "superseded",
       "sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
       "bytes": 17157080,
       "notes": [
-        "唯一规范 GLB；Rodin 正确结构基础上增加分层羽片、连续角枝、9 个区域 Morph 和 7 个动作。",
-        "保留 4096x4096 PBR 三通道并转为 WebP；Morph POSITION accessor 带完整 min/max，浏览器无元数据警告；不保留与其字节相同的 raw/rigged 副本。"
+        "保留的上一版发布资产；结构与材质合格，但动作幅度和飞行推进可读性不足。"
+      ]
+    },
+    {
+      "kind": "web_glb",
+      "path": "collections/yinglong/models/web.glb",
+      "status": "ready",
+      "sha256": "8dc4f39fb704c1ed1961eb95272f68370c66b96dcd92c3a518b8e4c025f083d1",
+      "bytes": 19617952,
+      "notes": [
+        "Rodin 正确结构基础上保留分层羽片和连续角枝，并扩展为 13 个区域 Morph、5 个语义关节节点和 7 个动作。",
+        "Flight 具有独立上拍、下拍、四足收拢和离地阶段；Walk 与 Strike 也通过量化动作可读性门。"
+      ]
+    },
+    {
+      "kind": "motion_readability_qc",
+      "path": "collections/yinglong/reports/motion-readability-v2.json",
+      "status": "ready",
+      "notes": [
+        "量化动作幅度，并保留真实 Three.js 飞行上拍/下拍对照。"
       ]
     },
     {
@@ -87,10 +105,20 @@
       "kind": "catalog_preview",
       "path": "collections/yinglong/preview.webp",
       "status": "ready",
+      "sha256": "4abda89cf988905dab02eb1e068386bf1a30e043a1ae284bb7b60c05a2e7e5ee",
+      "bytes": 37242,
+      "notes": [
+        "由当前 Three.js v2 页面在 1280x720 preview 模式实拍，按完整神兽构图裁成 1200x900。"
+      ]
+    },
+    {
+      "kind": "catalog_preview_previous",
+      "path": "collections/yinglong/preview-v1.webp",
+      "status": "superseded",
       "sha256": "f8e8b1d6f87c70ad19c2d778a78feada7425ab8a13e4cf962fd09417b327cf94",
       "bytes": 29406,
       "notes": [
-        "由最终 Three.js 页面在 1920x1080 preview 模式实拍并缩至 1280x720。"
+        "保留旧版偏暗且主体较小的 16:9 预览；因不再代表当前灯光与构图而替换。"
       ]
     }
   ],
@@ -130,9 +158,11 @@
     "原典与视觉推演已分离记录；参考图质量门已通过。",
     "四次 Rodin 单独输出未通过；随后以结构计数正确的候选为基础进行不删件的程序化混合增强。",
     "Tripo avian 真实骨骼路线通过结构和关节实转，但因不含最终增强几何且无匹配的完整动作集而未选用。",
-    "最终混合 GLB、7 个动作、独立场景和桌面 Three.js 页面均通过质量门与 1920x1080 浏览器实测。",
-    "页面使用全站统一的 shared-v1 交互外壳，并已与九尾狐逐项对照通过。",
+    "v2 混合 GLB 的 13 个区域 Morph、5 个语义关节节点和 7 个动作通过结构、动作幅度与浏览器实测。",
+    "页面使用全站统一的 shared-v1 交互外壳、主/补/轮廓光与等距环境照明，并已与九尾狐逐项对照通过。",
     "朗读使用与九尾狐一致的 mandarin-tingting-r160-v1 固定音频，浏览器不再回退到设备系统语音。",
-    "共享沉浸模式可隐藏非必要覆盖层并通过点击或 Esc 退出；正常模式按钮与返回图鉴使用完全相同的计算样式。"
+    "共享沉浸模式可隐藏非必要覆盖层并通过点击或 Esc 退出；正常模式按钮与返回图鉴使用完全相同的计算样式。",
+    "共享顶部从 ready 图鉴顺序动态生成上一个/下一个神兽入口；第一只禁用上一个、最后一只禁用下一个，新神兽上架后无需编写专属导航。",
+    "首页使用当前真实 Three.js 页面的 1200x900 神兽预览，并让卡片列表从容器左侧开始排列。"
   ]
 }

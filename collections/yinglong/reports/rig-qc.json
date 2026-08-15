@@ -3,11 +3,11 @@
   "creature_id": "yinglong",
   "name": "应龙",
   "status": "passed",
-  "checked_at": "2026-08-15T10:56:23Z",
+  "checked_at": "2026-08-15T12:41:25Z",
   "selected_motion_system": {
     "mode": "hybrid",
     "model": "collections/yinglong/models/web.glb",
-    "model_sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+    "model_sha256": "8dc4f39fb704c1ed1961eb95272f68370c66b96dcd92c3a518b8e4c025f083d1",
     "morph_targets": [
       "ChestBreath",
       "NeckLift",
@@ -17,13 +17,18 @@
       "WingLift",
       "StrideA",
       "StrideB",
-      "RainBow"
+      "RainBow",
+      "BodyLeanLeft",
+      "BodyLeanRight",
+      "FlightTuck",
+      "WingDown"
     ],
     "articulated_nodes": [
       "WingFeathers_L",
       "WingFeathers_R",
       "Eye_L",
-      "Eye_R"
+      "Eye_R",
+      "YinglongHeadDetails"
     ],
     "reason": "Tripo 的 avian 绑定证明基础网格可建立真实骨骼，但它不接受带 EXT_texture_webp 的最终增强 GLB，输出也不含程序化翼羽、枝角和动作。当前官方非人形预设没有与应龙 avian 结构匹配的完整飞行/地行/反应动作集，因此保留细节完整且已经逐动作目视验证的局部 Morph + 关节节点混合系统。"
   },
@@ -110,23 +115,23 @@
     {
       "id": "motion_targets_present",
       "status": "passed",
-      "evidence": "最终 GLB 含 9 个区域 Morph、4 个语义关节节点、7 个动作。",
+      "evidence": "最终 GLB 含 13 个区域 Morph、5 个语义关节节点、7 个动作。",
       "notes": []
     },
     {
       "id": "articulated_region_coverage",
       "status": "passed",
-      "evidence": "胸腹、头颈、全尾、双翼、四肢步态和眼睑均有确定性局部驱动。",
+      "evidence": "胸腹、头颈、全尾、双翼上下拍、四肢步态/飞行收腿和眼睑均有确定性局部驱动。",
       "notes": [
-        "当前混合系统用连续形变场覆盖轴向区域，并用独立节点驱动左右翼羽和双眼。"
+        "当前混合系统用连续形变场覆盖轴向区域，并用独立节点驱动左右翼羽、头部附属细节和双眼。"
       ]
     },
     {
       "id": "deformation_quality",
       "status": "passed",
-      "evidence": "collections/yinglong/reports/animation-hybrid-v2/contact-sheet.webp",
+      "evidence": "collections/yinglong/reports/motion-readability-v2.json",
       "notes": [
-        "浏览器逐动作检查未见断裂、漂浮、塌陷、根节点替代动作或整体摇晃。"
+        "浏览器逐动作检查未见断裂、漂浮、塌陷或整体摇晃；飞行上下拍、收腿和离地轮廓明显，根节点轨迹仅作补充。"
       ]
     }
   ],

@@ -3,7 +3,7 @@
   "creature_id": "yinglong",
   "name": "应龙",
   "status": "passed",
-  "checked_at": "2026-08-15T11:41:49Z",
+  "checked_at": "2026-08-15T13:06:34Z",
   "environment": {
     "browser": "Codex in-app Chromium",
     "viewport": [1920, 1080],
@@ -25,18 +25,18 @@
     "narration_duration_seconds": 49.599,
     "motion_mode": "hybrid",
     "animation_clips": 7,
-    "animated_body_nodes": 5,
+    "animated_body_nodes": 7,
     "morph_meshes": 1,
-    "average_fps": 88.4,
+    "average_fps": 113.9,
     "draw_calls": 13,
     "rendered_triangles": 106166,
     "console_errors": 0,
     "console_warnings": 0
   },
   "load": {
-    "web_glb_bytes": 17157080,
+    "web_glb_bytes": 19617952,
     "background_bytes": 129566,
-    "preview_bytes": 29406,
+    "preview_bytes": 37242,
     "narration_bytes": 209996,
     "model_textures": [
       {"role": "normal", "dimensions": [4096, 4096], "mime": "image/webp", "bytes": 3582836},
@@ -45,6 +45,21 @@
     ]
   },
   "interaction_checks": [
+    {
+      "id": "shared_creature_navigation",
+      "status": "passed",
+      "evidence": "1280x720 Chromium：共享顶部按 ready 图鉴顺序且不循环；九尾狐上一个无 href、aria-disabled=true、tabindex=-1，下一个指向应龙；应龙上一个指向九尾狐，下一个无 href、aria-disabled=true、tabindex=-1。禁用项 pointer-events=none、opacity=0.46；两页 viewer-ready，控制台 0 errors/warnings。"
+    },
+    {
+      "id": "catalog_preview_and_alignment",
+      "status": "passed",
+      "evidence": "首页加载九尾狐 preview.webp?v=4 与应龙 preview.webp?v=2，均为当前真实 Three.js 页面生成的 1200x900 图；collection-grid 的 justify-content=start，gridLeft 与 firstCardLeft 均为 48px，控制台 0 errors/warnings。"
+    },
+    {
+      "id": "lighting_and_motion_readability",
+      "status": "passed",
+      "evidence": "主光、补光、轮廓光与等距环境照明共同保持鳞片、羽层、角和四肢连接可读；Flight 的上下拍、离地和收腿在 collections/yinglong/reports/motion-readability-v2.json 的真实页面帧中清楚区分。"
+    },
     {
       "id": "shared_immersive_mode",
       "status": "passed",

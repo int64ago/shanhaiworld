@@ -78,6 +78,10 @@ def quat_y(angle: float) -> list[float]:
     return [0.0, math.sin(angle * 0.5), 0.0, math.cos(angle * 0.5)]
 
 
+def quat_x(angle: float) -> list[float]:
+    return [math.sin(angle * 0.5), 0.0, 0.0, math.cos(angle * 0.5)]
+
+
 def quat_z(angle: float) -> list[float]:
     return [0.0, 0.0, math.sin(angle * 0.5), math.cos(angle * 0.5)]
 
@@ -418,6 +422,36 @@ def read_float_accessor(
     return output
 
 
+def replace_float_accessor(
+    document: dict[str, Any],
+    binary: bytearray,
+    index: int,
+    values: Sequence[float],
+    value_type: str,
+) -> None:
+    widths = {"SCALAR": 1, "VEC2": 2, "VEC3": 3, "VEC4": 4}
+    width = widths[value_type]
+    accessor = document["accessors"][index]
+    if accessor["componentType"] != 5126 or accessor["type"] != value_type:
+        raise RuntimeError(f"Accessor {index} is not a FLOAT {value_type}")
+    if len(values) != int(accessor["count"]) * width:
+        raise RuntimeError(f"Accessor {index} value count changed")
+    view = document["bufferViews"][accessor["bufferView"]]
+    stride = int(view.get("byteStride", width * 4))
+    offset = int(view.get("byteOffset", 0)) + int(accessor.get("byteOffset", 0))
+    for row in range(int(accessor["count"])):
+        start = row * width
+        struct.pack_into(
+            f"<{width}f",
+            binary,
+            offset + row * stride,
+            *values[start : start + width],
+        )
+    grouped = list(zip(*[values[row : row + width] for row in range(0, len(values), width)]))
+    accessor["min"] = [min(component) for component in grouped]
+    accessor["max"] = [max(component) for component in grouped]
+
+
 def add_prism(
     triangles: list[tuple[Sequence[float], Sequence[float], Sequence[float]]],
     outline: Sequence[Sequence[float]],
@@ -669,6 +703,10 @@ def morph_deltas(
         "StrideA",
         "StrideB",
         "RainBow",
+        "BodyLeanLeft",
+        "BodyLeanRight",
+        "FlightTuck",
+        "WingDown",
     ]
     targets = [[] for _ in names]
     for point in positions:
@@ -679,17 +717,17 @@ def morph_deltas(
             * (1.0 - smoothstep(0.34, 0.49, y))
             * smoothstep(-0.05, 0.22, z)
         )
-        targets[0].append((x * 0.032 * chest, 0.006 * chest, 0.014 * chest))
+        targets[0].append((x * 0.060 * chest, 0.012 * chest, 0.022 * chest))
 
         neck = (
             (1.0 - smoothstep(0.22, 0.31, abs(x)))
             * smoothstep(0.24, 0.58, z)
             * smoothstep(0.00, 0.23, y)
         )
-        lifted = rotate_x(point, (0.0, 0.12, 0.25), math.radians(-8.0))
+        lifted = rotate_x(point, (0.0, 0.12, 0.25), math.radians(-16.0))
         strike = add(
-            rotate_x(point, (0.0, 0.13, 0.28), math.radians(10.0)),
-            (0.0, -0.004 * neck, 0.045 * neck),
+            rotate_x(point, (0.0, 0.13, 0.28), math.radians(20.0)),
+            (0.0, -0.008 * neck, 0.090 * neck),
         )
         targets[1].append(mul(sub(lifted, point), neck))
         targets[2].append(mul(sub(strike, point), neck))
@@ -699,19 +737,19 @@ def morph_deltas(
             * (1.0 - smoothstep(-0.20, 0.00, z))
         )
         tail_strength = tail * smoothstep(-0.05, -0.82, z)
-        targets[3].append((0.092 * tail_strength, 0.010 * tail_strength, 0.0))
-        targets[4].append((-0.092 * tail_strength, 0.006 * tail_strength, 0.0))
+        targets[3].append((0.160 * tail_strength, 0.020 * tail_strength, 0.0))
+        targets[4].append((-0.160 * tail_strength, 0.016 * tail_strength, 0.0))
 
         wing = smoothstep(0.135, 0.22, abs(x)) * smoothstep(0.02, 0.16, y)
         side = 1.0 if x >= 0.0 else -1.0
-        winged = rotate_z(point, (side * 0.12, 0.14, 0.15), side * math.radians(11.5))
+        winged = rotate_z(point, (side * 0.12, 0.14, 0.15), side * math.radians(24.0))
         targets[5].append(mul(sub(winged, point), wing))
 
         leg = smoothstep(0.09, 0.17, abs(x)) * (1.0 - smoothstep(-0.20, -0.06, y))
         phase = 1.0 if x * z >= 0.0 else -1.0
-        stride = 0.055 * leg * phase
-        targets[6].append((0.0, 0.018 * leg * (1.0 - phase) * 0.5, stride))
-        targets[7].append((0.0, 0.018 * leg * (1.0 + phase) * 0.5, -stride))
+        stride = 0.095 * leg * phase
+        targets[6].append((0.0, 0.038 * leg * (1.0 - phase) * 0.5, stride))
+        targets[7].append((0.0, 0.038 * leg * (1.0 + phase) * 0.5, -stride))
 
         bow_region = (
             (1.0 - smoothstep(0.25, 0.38, abs(x)))
@@ -719,7 +757,24 @@ def morph_deltas(
             * (1.0 - smoothstep(0.58, 0.76, z))
             * smoothstep(-0.10, 0.08, y)
         )
-        targets[8].append((0.028 * math.sin((z + 0.2) * 5.5) * bow_region, -0.018 * bow_region, 0.0))
+        targets[8].append((0.045 * math.sin((z + 0.2) * 5.5) * bow_region, -0.035 * bow_region, 0.0))
+
+        torso = (
+            (1.0 - smoothstep(0.24, 0.40, abs(x)))
+            * smoothstep(-0.52, -0.28, z)
+            * (1.0 - smoothstep(0.58, 0.78, z))
+            * smoothstep(-0.12, 0.08, y)
+        )
+        targets[9].append((-0.058 * torso, -0.012 * torso, 0.0))
+        targets[10].append((0.058 * torso, -0.012 * torso, 0.0))
+        tuck_direction = -1.0 if z >= 0.0 else 0.65
+        targets[11].append((0.0, 0.120 * leg, 0.070 * tuck_direction * leg))
+        downwing = rotate_z(
+            point,
+            (side * 0.12, 0.14, 0.15),
+            -side * math.radians(30.0),
+        )
+        targets[12].append(mul(sub(downwing, point), wing))
     return names, targets
 
 
@@ -736,20 +791,33 @@ def add_animation(
     model_node: int,
     wing_left: int,
     wing_right: int,
+    head_details: int,
+    enhancement_root: int,
     eye_left: int,
     eye_right: int,
     wing_angles: Sequence[float],
+    head_angles: Sequence[float],
+    semantic_regions: Sequence[str],
     blink_frames: Sequence[float] | None = None,
+    body_positions: Sequence[Sequence[float]] | None = None,
 ) -> None:
+    if not (
+        len(times) == len(weight_frames) == len(wing_angles) == len(head_angles)
+    ):
+        raise RuntimeError(f"Animation {name} has inconsistent frame counts")
     input_accessor = builder.add_animation_accessor(list(times), "SCALAR")
     weight_accessor = builder.add_animation_accessor(flattened(weight_frames), "SCALAR")
     left_rotations = [quat_z(-angle) for angle in wing_angles]
     right_rotations = [quat_z(angle) for angle in wing_angles]
+    head_rotations = [quat_x(angle) for angle in head_angles]
     left_rotation_accessor = builder.add_animation_accessor(
         flattened(left_rotations), "VEC4"
     )
     right_rotation_accessor = builder.add_animation_accessor(
         flattened(right_rotations), "VEC4"
+    )
+    head_rotation_accessor = builder.add_animation_accessor(
+        flattened(head_rotations), "VEC4"
     )
     samplers: list[dict[str, Any]] = [
         {"input": input_accessor, "output": weight_accessor, "interpolation": "LINEAR"},
@@ -763,37 +831,87 @@ def add_animation(
             "output": right_rotation_accessor,
             "interpolation": "LINEAR",
         },
+        {
+            "input": input_accessor,
+            "output": head_rotation_accessor,
+            "interpolation": "LINEAR",
+        },
     ]
     channels: list[dict[str, Any]] = [
         {"sampler": 0, "target": {"node": model_node, "path": "weights"}},
         {"sampler": 1, "target": {"node": wing_left, "path": "rotation"}},
         {"sampler": 2, "target": {"node": wing_right, "path": "rotation"}},
+        {"sampler": 3, "target": {"node": head_details, "path": "rotation"}},
     ]
     if blink_frames is not None:
+        if len(blink_frames) != len(times):
+            raise RuntimeError(f"Animation {name} has inconsistent blink frames")
         scales = [(1.0, max(0.12, value), 1.0) for value in blink_frames]
         scale_accessor = builder.add_animation_accessor(flattened(scales), "VEC3")
+        blink_sampler = len(samplers)
         samplers.append(
             {"input": input_accessor, "output": scale_accessor, "interpolation": "LINEAR"}
         )
         channels.extend(
             [
-                {"sampler": 3, "target": {"node": eye_left, "path": "scale"}},
-                {"sampler": 3, "target": {"node": eye_right, "path": "scale"}},
+                {"sampler": blink_sampler, "target": {"node": eye_left, "path": "scale"}},
+                {"sampler": blink_sampler, "target": {"node": eye_right, "path": "scale"}},
+            ]
+        )
+    if body_positions is not None:
+        if len(body_positions) != len(times):
+            raise RuntimeError(f"Animation {name} has inconsistent body positions")
+        position_accessor = builder.add_animation_accessor(
+            flattened(body_positions), "VEC3"
+        )
+        position_sampler = len(samplers)
+        samplers.append(
+            {
+                "input": input_accessor,
+                "output": position_accessor,
+                "interpolation": "LINEAR",
+            }
+        )
+        channels.extend(
+            [
+                {
+                    "sampler": position_sampler,
+                    "target": {"node": model_node, "path": "translation"},
+                },
+                {
+                    "sampler": position_sampler,
+                    "target": {"node": enhancement_root, "path": "translation"},
+                },
             ]
         )
     builder.doc["animations"].append(
-        {"name": name, "samplers": samplers, "channels": channels}
+        {
+            "name": name,
+            "samplers": samplers,
+            "channels": channels,
+            "extras": {
+                "phases": ["preparation", "main", "recovery"],
+                "semantic_regions": list(semantic_regions),
+                "root_motion_supplement": body_positions is not None,
+            },
+        }
     )
 
 
 def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str, Any]:
     source_digest = hashlib.sha256(source.read_bytes()).hexdigest()
-    if source_digest != EXPECTED_SOURCE_SHA256:
+    document, binary = load_glb(source)
+    existing_metadata = document.get("extras", {}).get("shanhaiworld", {})
+    rebuild_existing = (
+        existing_metadata.get("creature") == "yinglong"
+        and existing_metadata.get("sourceSha256") == EXPECTED_SOURCE_SHA256
+    )
+    if source_digest != EXPECTED_SOURCE_SHA256 and not rebuild_existing:
         raise RuntimeError(
             f"Unexpected Rodin source SHA-256: {source_digest}; expected {EXPECTED_SOURCE_SHA256}"
         )
-    document, binary = load_glb(source)
-    if web_textures:
+    already_webp = "EXT_texture_webp" in document.get("extensionsUsed", [])
+    if web_textures and not already_webp:
         binary = transcode_embedded_textures(document, binary)
     builder = Builder(document, binary)
     primitive = document["meshes"][0]["primitives"][0]
@@ -801,102 +919,156 @@ def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str
     normal_accessor_index = primitive["attributes"]["NORMAL"]
     positions = read_float_accessor(document, binary, position_accessor_index)
     normals = read_float_accessor(document, binary, normal_accessor_index)
-
-    feather_primary_material = builder.add_material(
-        "Indigo primary feathers",
-        (0.030, 0.060, 0.105, 1.0),
-        metallic=0.08,
-        roughness=0.58,
-        double_sided=True,
-    )
-    feather_covert_material = builder.add_material(
-        "Blue-green covert feathers",
-        (0.050, 0.105, 0.125, 1.0),
-        metallic=0.12,
-        roughness=0.62,
-        double_sided=True,
-    )
-    ivory_material = builder.add_material(
-        "Aged ivory horn branches",
-        (0.44, 0.36, 0.24, 1.0),
-        metallic=0.02,
-        roughness=0.54,
-    )
-    eye_material = builder.add_material(
-        "Rain amber eyes",
-        (0.30, 0.16, 0.035, 1.0),
-        metallic=0.08,
-        roughness=0.24,
-        emissive=(0.12, 0.055, 0.008),
+    model_node = next(
+        index for index, node in enumerate(document["nodes"]) if node.get("mesh") == 0
     )
 
-    enhancement_children: list[int] = []
-    wing_nodes: dict[int, int] = {}
-    for side, label in ((-1, "L"), (1, "R")):
-        root = (side * 0.12, 0.14, 0.15)
-        primary, covert = choose_wing_feathers(positions, normals, side, root)
-        primary_mesh = builder.add_triangle_mesh(
-            f"WingPrimary_{label}", primary, feather_primary_material
+    def named_node(name: str) -> int:
+        return next(
+            index
+            for index, node in enumerate(document["nodes"])
+            if node.get("name") == name
         )
-        covert_mesh = builder.add_triangle_mesh(
-            f"WingCoverts_{label}", covert, feather_covert_material
-        )
-        primary_node = builder.add_node(name=f"WingPrimary_{label}", mesh=primary_mesh)
-        covert_node = builder.add_node(name=f"WingCoverts_{label}", mesh=covert_mesh)
-        parent = builder.add_node(
-            name=f"WingFeathers_{label}",
-            translation=list(root),
-            children=[primary_node, covert_node],
-        )
-        wing_nodes[side] = parent
-        enhancement_children.append(parent)
 
-    for side, label in ((-1, "L"), (1, "R")):
-        horn_mesh = builder.add_triangle_mesh(
-            f"HornTree_{label}", build_horn(side), ivory_material
+    head_pivot = [0.0, 0.13, 0.28]
+    if rebuild_existing:
+        wing_nodes = {-1: named_node("WingFeathers_L"), 1: named_node("WingFeathers_R")}
+        eye_nodes = {-1: named_node("Eye_L"), 1: named_node("Eye_R")}
+        horn_nodes = [named_node("HornTree_L"), named_node("HornTree_R")]
+        enhancement_root = named_node("YinglongEnhancements")
+        try:
+            head_details = named_node("YinglongHeadDetails")
+        except StopIteration:
+            head_children = horn_nodes + [eye_nodes[-1], eye_nodes[1]]
+            root_children = document["nodes"][enhancement_root].setdefault("children", [])
+            document["nodes"][enhancement_root]["children"] = [
+                child for child in root_children if child not in head_children
+            ]
+            for child in head_children:
+                translation = document["nodes"][child].get("translation", [0.0, 0.0, 0.0])
+                document["nodes"][child]["translation"] = [
+                    translation[index] - head_pivot[index] for index in range(3)
+                ]
+            head_details = builder.add_node(
+                name="YinglongHeadDetails",
+                translation=head_pivot,
+                children=head_children,
+            )
+            document["nodes"][enhancement_root].setdefault("children", []).append(
+                head_details
+            )
+    else:
+        feather_primary_material = builder.add_material(
+            "Indigo primary feathers",
+            (0.030, 0.060, 0.105, 1.0),
+            metallic=0.08,
+            roughness=0.58,
+            double_sided=True,
         )
-        horn_node = builder.add_node(
-            name=f"HornTree_{label}",
-            mesh=horn_mesh,
-            translation=[side * 0.040, 0.350, 0.700],
+        feather_covert_material = builder.add_material(
+            "Blue-green covert feathers",
+            (0.050, 0.105, 0.125, 1.0),
+            metallic=0.12,
+            roughness=0.62,
+            double_sided=True,
         )
-        enhancement_children.append(horn_node)
+        ivory_material = builder.add_material(
+            "Aged ivory horn branches",
+            (0.44, 0.36, 0.24, 1.0),
+            metallic=0.02,
+            roughness=0.54,
+        )
+        eye_material = builder.add_material(
+            "Rain amber eyes",
+            (0.30, 0.16, 0.035, 1.0),
+            metallic=0.08,
+            roughness=0.24,
+            emissive=(0.12, 0.055, 0.008),
+        )
 
-    eye_mesh = builder.add_triangle_mesh(
-        "EyeGem", uv_sphere((0.005, 0.005, 0.004)), eye_material
-    )
-    eye_nodes: dict[int, int] = {}
-    for side, label in ((-1, "L"), (1, "R")):
-        eye = builder.add_node(
-            name=f"Eye_{label}",
-            mesh=eye_mesh,
-            translation=[side * 0.052, 0.260, 0.800],
-        )
-        eye_nodes[side] = eye
-        enhancement_children.append(eye)
+        enhancement_children: list[int] = []
+        wing_nodes: dict[int, int] = {}
+        for side, label in ((-1, "L"), (1, "R")):
+            root = (side * 0.12, 0.14, 0.15)
+            primary, covert = choose_wing_feathers(positions, normals, side, root)
+            primary_mesh = builder.add_triangle_mesh(
+                f"WingPrimary_{label}", primary, feather_primary_material
+            )
+            covert_mesh = builder.add_triangle_mesh(
+                f"WingCoverts_{label}", covert, feather_covert_material
+            )
+            primary_node = builder.add_node(name=f"WingPrimary_{label}", mesh=primary_mesh)
+            covert_node = builder.add_node(name=f"WingCoverts_{label}", mesh=covert_mesh)
+            parent = builder.add_node(
+                name=f"WingFeathers_{label}",
+                translation=list(root),
+                children=[primary_node, covert_node],
+            )
+            wing_nodes[side] = parent
+            enhancement_children.append(parent)
 
-    enhancement_root = builder.add_node(
-        name="YinglongEnhancements", children=enhancement_children
-    )
-    document["scenes"][document.get("scene", 0)].setdefault("nodes", []).append(
-        enhancement_root
-    )
+        head_children: list[int] = []
+        for side, label in ((-1, "L"), (1, "R")):
+            horn_mesh = builder.add_triangle_mesh(
+                f"HornTree_{label}", build_horn(side), ivory_material
+            )
+            horn_node = builder.add_node(
+                name=f"HornTree_{label}",
+                mesh=horn_mesh,
+                translation=[side * 0.040, 0.220, 0.420],
+            )
+            head_children.append(horn_node)
+
+        eye_mesh = builder.add_triangle_mesh(
+            "EyeGem", uv_sphere((0.005, 0.005, 0.004)), eye_material
+        )
+        eye_nodes: dict[int, int] = {}
+        for side, label in ((-1, "L"), (1, "R")):
+            eye = builder.add_node(
+                name=f"Eye_{label}",
+                mesh=eye_mesh,
+                translation=[side * 0.052, 0.130, 0.520],
+            )
+            eye_nodes[side] = eye
+            head_children.append(eye)
+
+        head_details = builder.add_node(
+            name="YinglongHeadDetails",
+            translation=head_pivot,
+            children=head_children,
+        )
+        enhancement_children.append(head_details)
+        enhancement_root = builder.add_node(
+            name="YinglongEnhancements", children=enhancement_children
+        )
+        document["scenes"][document.get("scene", 0)].setdefault("nodes", []).append(
+            enhancement_root
+        )
 
     target_names, targets = morph_deltas(positions)
-    primitive["targets"] = []
-    for target in targets:
+    existing_targets = list(primitive.get("targets", []))
+    if len(existing_targets) > len(target_names):
+        raise RuntimeError("Existing Yinglong GLB has unexpected extra morph targets")
+    rebuilt_targets: list[dict[str, int]] = []
+    for index, target in enumerate(targets):
         values = flattened(target)
-        target_triples = list(zip(values[0::3], values[1::3], values[2::3]))
-        accessor = builder.float_accessor(
-            values,
-            "VEC3",
-            target=34962,
-            minimum=[min(components) for components in zip(*target_triples)],
-            maximum=[max(components) for components in zip(*target_triples)],
-        )
-        primitive["targets"].append({"POSITION": accessor})
+        if index < len(existing_targets):
+            accessor = int(existing_targets[index]["POSITION"])
+            replace_float_accessor(document, builder.bin, accessor, values, "VEC3")
+        else:
+            target_triples = list(zip(values[0::3], values[1::3], values[2::3]))
+            accessor = builder.float_accessor(
+                values,
+                "VEC3",
+                target=34962,
+                minimum=[min(components) for components in zip(*target_triples)],
+                maximum=[max(components) for components in zip(*target_triples)],
+            )
+        rebuilt_targets.append({"POSITION": accessor})
+    primitive["targets"] = rebuilt_targets
     document["meshes"][0]["weights"] = [0.0] * len(target_names)
     document["meshes"][0].setdefault("extras", {})["targetNames"] = target_names
+    document["animations"] = []
 
     zero = [0.0] * len(target_names)
 
@@ -917,49 +1089,76 @@ def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str
             frame(ChestBreath=0.70, NeckLift=0.08, TailRight=0.18),
             frame(ChestBreath=0.15, TailLeft=0.08),
         ],
-        model_node=0,
+        model_node=model_node,
         wing_left=wing_nodes[-1],
         wing_right=wing_nodes[1],
+        head_details=head_details,
+        enhancement_root=enhancement_root,
         eye_left=eye_nodes[-1],
         eye_right=eye_nodes[1],
         wing_angles=[0.00, 0.025, 0.00, -0.022, 0.00],
+        head_angles=[0.0, -0.025, 0.0, 0.018, 0.0],
+        semantic_regions=["chest", "head_neck", "nine_tail_field", "eyes"],
         blink_frames=[1.0, 1.0, 0.16, 1.0, 1.0],
     )
     add_animation(
         builder,
         name="Walk",
-        times=[0.0, 0.6, 1.2, 1.8, 2.4],
+        times=[0.0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4],
         weight_frames=[
-            frame(StrideA=0.15, TailLeft=0.25, ChestBreath=0.20),
-            frame(StrideA=0.95, TailRight=0.18, RainBow=0.18),
-            frame(StrideB=0.15, TailRight=0.25, ChestBreath=0.20),
-            frame(StrideB=0.95, TailLeft=0.18, RainBow=0.18),
-            frame(StrideA=0.15, TailLeft=0.25, ChestBreath=0.20),
+            frame(StrideA=0.15, BodyLeanLeft=0.12, TailLeft=0.20),
+            frame(StrideA=1.0, BodyLeanRight=0.65, TailRight=0.42, RainBow=0.22),
+            frame(StrideB=0.15, BodyLeanRight=0.12, TailRight=0.20),
+            frame(StrideB=1.0, BodyLeanLeft=0.65, TailLeft=0.42, RainBow=0.22),
+            frame(StrideA=0.15, BodyLeanLeft=0.12, TailLeft=0.20),
+            frame(StrideA=1.0, BodyLeanRight=0.65, TailRight=0.42, RainBow=0.22),
+            frame(StrideB=0.15, BodyLeanRight=0.12, TailRight=0.20),
+            frame(StrideB=1.0, BodyLeanLeft=0.65, TailLeft=0.42, RainBow=0.22),
+            frame(StrideA=0.15, BodyLeanLeft=0.12, TailLeft=0.20),
         ],
-        model_node=0,
+        model_node=model_node,
         wing_left=wing_nodes[-1],
         wing_right=wing_nodes[1],
+        head_details=head_details,
+        enhancement_root=enhancement_root,
         eye_left=eye_nodes[-1],
         eye_right=eye_nodes[1],
-        wing_angles=[0.02, 0.06, 0.02, -0.04, 0.02],
+        wing_angles=[0.01, 0.055, 0.01, -0.045, 0.01, 0.055, 0.01, -0.045, 0.01],
+        head_angles=[0.0, 0.045, 0.0, -0.035, 0.0, 0.045, 0.0, -0.035, 0.0],
+        semantic_regions=["four_legs", "torso", "nine_tail_field", "head_neck"],
     )
     add_animation(
         builder,
         name="Flight",
-        times=[0.0, 0.75, 1.5, 2.25, 3.0],
+        times=[0.0, 0.45, 0.9, 1.35, 1.8, 2.25, 2.7],
         weight_frames=[
-            frame(WingLift=0.15, NeckLift=0.35, TailLeft=0.20),
-            frame(WingLift=1.0, ChestBreath=0.45, TailRight=0.30),
-            frame(WingLift=0.20, RainBow=0.25, TailRight=0.12),
-            frame(WingLift=0.85, ChestBreath=0.40, TailLeft=0.30),
-            frame(WingLift=0.15, NeckLift=0.35, TailLeft=0.20),
+            frame(WingDown=0.35, FlightTuck=0.82, NeckLift=0.35, TailLeft=0.22),
+            frame(WingLift=1.0, FlightTuck=1.0, ChestBreath=0.50, TailRight=0.40),
+            frame(WingDown=1.0, FlightTuck=0.92, RainBow=0.30, TailRight=0.18),
+            frame(WingLift=0.96, FlightTuck=1.0, ChestBreath=0.46, TailLeft=0.42),
+            frame(WingDown=0.95, FlightTuck=0.90, RainBow=0.28, TailLeft=0.18),
+            frame(WingLift=0.88, FlightTuck=1.0, ChestBreath=0.42, TailRight=0.36),
+            frame(WingDown=0.35, FlightTuck=0.82, NeckLift=0.35, TailLeft=0.22),
         ],
-        model_node=0,
+        model_node=model_node,
         wing_left=wing_nodes[-1],
         wing_right=wing_nodes[1],
+        head_details=head_details,
+        enhancement_root=enhancement_root,
         eye_left=eye_nodes[-1],
         eye_right=eye_nodes[1],
-        wing_angles=[0.02, -0.18, 0.06, -0.15, 0.02],
+        wing_angles=[-0.12, 0.52, -0.28, 0.48, -0.26, 0.44, -0.12],
+        head_angles=[-0.08, -0.18, -0.10, -0.16, -0.08, -0.15, -0.08],
+        semantic_regions=["paired_wings", "four_legs", "torso", "head_neck", "nine_tail_field"],
+        body_positions=[
+            [0.0, 0.10, 0.0],
+            [0.0, 0.24, 0.0],
+            [0.0, 0.14, 0.0],
+            [0.0, 0.25, 0.0],
+            [0.0, 0.13, 0.0],
+            [0.0, 0.23, 0.0],
+            [0.0, 0.10, 0.0],
+        ],
     )
     add_animation(
         builder,
@@ -972,12 +1171,16 @@ def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str
             frame(NeckLift=0.45, TailLeft=0.18),
             frame(ChestBreath=0.20),
         ],
-        model_node=0,
+        model_node=model_node,
         wing_left=wing_nodes[-1],
         wing_right=wing_nodes[1],
+        head_details=head_details,
+        enhancement_root=enhancement_root,
         eye_left=eye_nodes[-1],
         eye_right=eye_nodes[1],
         wing_angles=[0.0, 0.05, 0.08, 0.03, 0.0],
+        head_angles=[0.0, -0.12, -0.24, -0.10, 0.0],
+        semantic_regions=["head_neck", "eyes", "nine_tail_field", "chest"],
         blink_frames=[1.0, 0.18, 1.0, 0.18, 1.0],
     )
     add_animation(
@@ -992,12 +1195,24 @@ def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str
             frame(NeckLift=0.40, WingLift=0.25, RainBow=0.30),
             frame(ChestBreath=0.20, RainBow=0.10),
         ],
-        model_node=0,
+        model_node=model_node,
         wing_left=wing_nodes[-1],
         wing_right=wing_nodes[1],
+        head_details=head_details,
+        enhancement_root=enhancement_root,
         eye_left=eye_nodes[-1],
         eye_right=eye_nodes[1],
-        wing_angles=[0.0, -0.12, -0.28, -0.18, -0.06, 0.0],
+        wing_angles=[0.0, 0.18, 0.48, 0.34, 0.12, 0.0],
+        head_angles=[0.0, -0.14, -0.28, -0.22, -0.08, 0.0],
+        semantic_regions=["paired_wings", "head_neck", "chest", "nine_tail_field"],
+        body_positions=[
+            [0.0, 0.0, 0.0],
+            [0.0, 0.025, 0.0],
+            [0.0, 0.075, 0.0],
+            [0.0, 0.050, 0.0],
+            [0.0, 0.015, 0.0],
+            [0.0, 0.0, 0.0],
+        ],
     )
     add_animation(
         builder,
@@ -1011,12 +1226,24 @@ def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str
             frame(NeckLift=0.20, ChestBreath=0.45),
             frame(ChestBreath=0.20),
         ],
-        model_node=0,
+        model_node=model_node,
         wing_left=wing_nodes[-1],
         wing_right=wing_nodes[1],
+        head_details=head_details,
+        enhancement_root=enhancement_root,
         eye_left=eye_nodes[-1],
         eye_right=eye_nodes[1],
-        wing_angles=[0.0, 0.12, -0.10, 0.08, 0.03, 0.0],
+        wing_angles=[0.0, 0.12, 0.30, 0.20, 0.06, 0.0],
+        head_angles=[0.0, -0.08, 0.34, 0.22, -0.04, 0.0],
+        semantic_regions=["head_neck", "torso", "paired_wings", "four_legs", "nine_tail_field"],
+        body_positions=[
+            [0.0, 0.0, 0.0],
+            [0.0, -0.015, -0.025],
+            [0.0, 0.030, 0.14],
+            [0.0, 0.015, 0.09],
+            [0.0, 0.0, 0.02],
+            [0.0, 0.0, 0.0],
+        ],
     )
     add_animation(
         builder,
@@ -1030,30 +1257,45 @@ def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str
             frame(RainBow=0.25, ChestBreath=0.40),
             frame(ChestBreath=0.20),
         ],
-        model_node=0,
+        model_node=model_node,
         wing_left=wing_nodes[-1],
         wing_right=wing_nodes[1],
+        head_details=head_details,
+        enhancement_root=enhancement_root,
         eye_left=eye_nodes[-1],
         eye_right=eye_nodes[1],
-        wing_angles=[0.0, 0.16, 0.32, 0.24, 0.08, 0.0],
+        wing_angles=[0.0, 0.28, 0.58, 0.42, 0.14, 0.0],
+        head_angles=[0.0, 0.06, -0.06, 0.08, 0.02, 0.0],
+        semantic_regions=["paired_wings", "torso", "four_legs", "nine_tail_field"],
         blink_frames=[1.0, 1.0, 0.22, 1.0, 1.0, 1.0],
     )
 
     document.setdefault("asset", {})["generator"] = (
-        "Shanhaiworld deterministic Yinglong hybrid builder v1"
+        "Shanhaiworld deterministic Yinglong hybrid builder v2"
     )
     document.setdefault("extras", {}).setdefault("shanhaiworld", {}).update({
         "creature": "yinglong",
         "motionMode": "hybrid",
-        "sourceSha256": source_digest,
-        "modelingRoute": "Rodin base plus procedural geometry and regional morphs",
+        "sourceSha256": EXPECTED_SOURCE_SHA256,
+        "rebuildInputSha256": source_digest,
+        "modelingRoute": "Rodin base plus procedural geometry, regional morphs and articulated detail nodes",
         "morphTargets": target_names,
         "actions": [animation["name"] for animation in document["animations"]],
     })
     write_glb(output, document, builder.bin)
+    bounds_min = [min(point[axis] for point in positions) for axis in range(3)]
+    bounds_max = [max(point[axis] for point in positions) for axis in range(3)]
+    model_diagonal = length(sub(bounds_max, bounds_min))
+    maximum_displacements = {
+        name: max(length(delta) for delta in target)
+        for name, target in zip(target_names, targets)
+    }
     return {
+        "schema_version": 1,
         "source": str(source),
         "source_sha256": source_digest,
+        "rodin_source_sha256": EXPECTED_SOURCE_SHA256,
+        "rebuild_existing": rebuild_existing,
         "output": str(output),
         "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
         "bytes": output.stat().st_size,
@@ -1069,7 +1311,25 @@ def build(source: Path, output: Path, *, web_textures: bool = False) -> dict[str
             for primitive in mesh.get("primitives", [])
         ),
         "morph_targets": target_names,
+        "model_diagonal": round(model_diagonal, 6),
+        "maximum_displacements": {
+            name: round(value, 6) for name, value in maximum_displacements.items()
+        },
+        "maximum_displacement_ratios": {
+            name: round(value / model_diagonal, 6)
+            for name, value in maximum_displacements.items()
+        },
         "animations": [animation["name"] for animation in document["animations"]],
+        "articulated_nodes": [
+            document["nodes"][wing_nodes[-1]]["name"],
+            document["nodes"][wing_nodes[1]]["name"],
+            document["nodes"][head_details]["name"],
+        ],
+        "motion_notes": [
+            "Flight combines large bilateral wing arcs, tucked legs, continuous body deformation and a visible airborne trajectory.",
+            "Walk alternates diagonal leg fields with torso weight shift, head counter-motion and tail counter-sweep.",
+            "Every clip has preparation, main and recovery phases; model/root translation is supplemental and never the sole qualifying motion.",
+        ],
         "web_textures": web_textures,
     }
 

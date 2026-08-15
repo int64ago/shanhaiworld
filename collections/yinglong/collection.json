@@ -9,9 +9,9 @@
   "status": "ready",
   "viewer_ui": "shared-v1",
   "kid_mode": true,
-  "preview": "./preview.webp",
+  "preview": "./preview.webp?v=2",
   "model": {
-    "path": "./models/web.glb",
+    "path": "./models/web.glb?v=2",
     "target_height": 3.4,
     "facing_offset": 0,
     "in_place_root_motion": true
@@ -20,8 +20,8 @@
     "mode": "hybrid",
     "min_actions": 6,
     "min_animated_nodes": 3,
-    "morph_target_count": 9,
-    "fallback_reason": "Tripo avian 绑定在基础网格上通过，但最终增强 GLB 不被其导入，且官方 API 没有匹配应龙的完整 avian 动作集；采用 9 个区域 Morph 与 4 个语义关节节点的确定性混合动作。"
+    "morph_target_count": 13,
+    "fallback_reason": "Tripo avian 绑定在基础网格上通过，但最终增强 GLB 不被其导入，且官方 API 没有匹配应龙的完整 avian 动作集；采用 13 个区域 Morph 与 5 个语义关节节点的确定性混合动作。"
   },
   "quality": {
     "require_reference_qc": true,
@@ -33,28 +33,35 @@
   "scene": {
     "background": "./scene/background.webp",
     "background_mode": "equirectangular",
+    "environment_intensity": 0.78,
     "background_color": "#101a1d",
-    "fog_color": "#536a70",
+    "fog_color": "#70868a",
     "fog_near": 19,
     "fog_far": 50,
-    "ground_color": "#172a2a",
+    "ground_color": "#304949",
     "ground_size": 48,
     "ground_opacity": 0.82,
     "procedural_props": {
       "enabled": true,
       "water_radius": 13,
-      "water_color": "#17444a",
-      "water_opacity": 0.38,
+      "water_color": "#2d656b",
+      "water_opacity": 0.3,
       "rock_count": 20,
-      "rock_color": "#344f4d",
+      "rock_color": "#536f6b",
       "rock_radius": 16
     }
   },
   "lighting": {
-    "ambient_color": "#9ab7bd",
-    "ambient_intensity": 2.05,
+    "ambient_color": "#c4d7dc",
+    "ambient_intensity": 1.8,
     "sun_color": "#f0cc8f",
-    "sun_intensity": 4.0,
+    "sun_intensity": 3.6,
+    "fill_color": "#bdd8e8",
+    "fill_intensity": 1.55,
+    "fill_position": [-7, 6, 4],
+    "rim_color": "#f1cf93",
+    "rim_intensity": 1.1,
+    "rim_position": [-5, 8, -7],
     "exposure": 1.2,
     "sun_position": [
       7,
@@ -116,6 +123,7 @@
     "text": "应龙是中国古代神话中的有翼之龙。《广雅》用有翼曰应龙概括它最醒目的形态。《山海经》记载它曾受黄帝之命攻蚩尤，并能蓄水、兴雨；又把它与南方多雨和久旱祈雨联系起来。古书没有规定应龙必须是怎样的四足、角形和颜色，因此页面中的四足长龙体、一对分叉角、青铜绿鳞片和黛青翼羽属于为三维表现所作的视觉推演。你可以拖动和缩放观察鳞片、双角与实体翼羽，切换七组动作，也可以点击应龙触发观察、唤雨、突击或翼盾反应。"
   },
   "interaction": {
+    "presentation_yaw": 0,
     "click_actions": [
       "Observe",
       "RainCall",

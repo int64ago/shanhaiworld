@@ -3,7 +3,7 @@
   "creature_id": "yinglong",
   "name": "应龙",
   "created_at": "2026-08-15T09:10:18+00:00",
-  "updated_at": "2026-08-15T11:41:49Z",
+  "updated_at": "2026-08-15T13:06:34Z",
   "runs": [
     {
       "id": "research-001",
@@ -427,6 +427,74 @@
         "根据并排视觉复核移除独立图标、粗体和尺寸差异；沉浸模式与返回图鉴直接复用同一组样式类，16 项关键计算样式逐项完全相等。",
         "应龙在 1920x1080 Chromium 进入、点击退出和 Esc 退出均通过，控制台 0 errors/warnings；发布构建会拒绝缺失沉浸控件的共享模板。"
       ]
+    },
+    {
+      "id": "hybrid-motion-readability-002",
+      "stage": "animation_and_scene_revision",
+      "tool": "build_hybrid_model.py_and_threejs_browser",
+      "created_at": "2026-08-15T12:41:25Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/yinglong/models/web-v1.glb",
+        "collections/yinglong/production/scripts/build_hybrid_model.py"
+      ],
+      "output_files": [
+        "collections/yinglong/models/web.glb",
+        "collections/yinglong/reports/hybrid-build-v2.json",
+        "collections/yinglong/reports/motion-readability-v2.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "保留 v1 作为上一版唯一历史资产；v2 复用其正确几何和 4K WebP PBR，不重复生成程序化细节。",
+        "混合系统从 9 个 Morph/4 个语义关节扩展为 13 个 Morph/5 个语义关节，增加躯干承重、四足收拢、独立下拍和头部附属细节轴心。",
+        "Flight 上拍、下拍和 Strike 头颈峰值分别为模型对角线的 8.8%、11.0% 和 10.8%；Walk 步幅为 4.48%。",
+        "1280x720 真实 Three.js 复检确认飞行离地、四足收拢和上下拍轮廓明显，主/补/轮廓光与环境照明保持鳞羽细节可读。"
+      ]
+    },
+    {
+      "id": "shared-creature-navigation-001",
+      "stage": "shared_viewer_navigation",
+      "tool": "shared_template_and_threejs_browser",
+      "created_at": "2026-08-15T13:01:32Z",
+      "prompt_files": [],
+      "reference_files": [
+        "assets/data/collections.json",
+        "assets/templates/collection/index.html"
+      ],
+      "output_files": [
+        "assets/js/collection-page.js",
+        "assets/css/site.css",
+        "collections/yinglong/index.html",
+        "collections/yinglong/reports/page-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "共享顶部新增上一个/下一个入口，按 ready 图鉴顺序动态解析且不循环，不为具体神兽硬编码。",
+        "1280x720 Chromium 实测九尾狐禁用上一个、应龙禁用下一个；可用方向跳转正常，沉浸模式会隐藏导航，控制台 0 errors/warnings。"
+      ]
+    },
+    {
+      "id": "catalog-preview-refresh-002",
+      "stage": "catalog_preview_and_home_layout",
+      "tool": "threejs_browser_and_imagemagick",
+      "created_at": "2026-08-15T13:06:34Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/yinglong/preview-v1.webp",
+        "collections/yinglong/models/web.glb",
+        "collections/yinglong/scene/background.webp"
+      ],
+      "output_files": [
+        "collections/yinglong/preview.webp",
+        "assets/data/collections.json",
+        "assets/css/site.css",
+        "collections/yinglong/reports/page-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "保留旧 preview-v1.webp；稳定预览改为当前 v2 Three.js 页面实拍并裁成 1200x900，模型、灯光与场景均与现页一致。",
+        "首页预览 URL 增加 v=2 缓存版本；1280x720 浏览器确认图片自然尺寸 1200x900，列表 justify-content=start，首卡与容器左边缘均为 48px。"
+      ]
     }
   ],
   "selections": {
@@ -469,9 +537,9 @@
     },
     "preview": {
       "path": "collections/yinglong/preview.webp",
-      "sha256": "f8e8b1d6f87c70ad19c2d778a78feada7425ab8a13e4cf962fd09417b327cf94",
-      "bytes": 29406,
-      "run": "release-page-001",
+      "sha256": "4abda89cf988905dab02eb1e068386bf1a30e043a1ae284bb7b60c05a2e7e5ee",
+      "bytes": 37242,
+      "run": "catalog-preview-refresh-002",
       "status": "selected"
     },
     "narration": {
@@ -484,11 +552,11 @@
     "model": {
       "status": "selected",
       "selected": "collections/yinglong/models/web.glb",
-      "sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
-      "bytes": 17157080,
-      "run": "hybrid-model-001",
+      "sha256": "8dc4f39fb704c1ed1961eb95272f68370c66b96dcd92c3a518b8e4c025f083d1",
+      "bytes": 19617952,
+      "run": "hybrid-motion-readability-002",
       "evidence": "collections/yinglong/reports/model-qc.json",
-      "reason": "在结构计数正确的 Rodin 基础模型上进行不删件的确定性细节与局部动作增强，最终通过模型、细节、运动、动画和页面质量门。"
+      "reason": "保留结构计数正确的 Rodin 基础和程序化细节，扩展局部 Morph 与语义关节，使飞行、行走和突击通过量化动作可读性门。"
     }
   }
 }

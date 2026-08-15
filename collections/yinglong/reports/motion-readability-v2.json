@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "creature_id": "yinglong",
+  "status": "passed",
+  "checked_at": "2026-08-15T12:41:25Z",
+  "asset": "collections/yinglong/models/web.glb",
+  "asset_sha256": "8dc4f39fb704c1ed1961eb95272f68370c66b96dcd92c3a518b8e4c025f083d1",
+  "viewport": [1280, 720],
+  "quantitative_checks": {
+    "model_diagonal": 2.282314,
+    "walk_stride_peak_ratio": 0.044831,
+    "wing_upstroke_peak_ratio": 0.088291,
+    "wing_downstroke_peak_ratio": 0.109909,
+    "neck_strike_peak_ratio": 0.108444,
+    "signature_threshold": 0.08,
+    "locomotion_threshold": 0.04
+  },
+  "browser_observations": [
+    "Flight is visibly airborne, tucks all four legs, alternates broad upstroke and downstroke silhouettes, and uses neck and tail stabilization.",
+    "Walk alternates diagonal leg fields with torso weight shift, head counter-motion and tail counter-sweep.",
+    "Strike combines preparation, neck extension, wing stabilization and recovery; translation supplements rather than replaces regional deformation.",
+    "Environment illumination plus key/fill/rim lights keep scales, feather layering, horns and limb connections readable throughout the reviewed turn."
+  ],
+  "evidence": [
+    {
+      "path": "collections/yinglong/reports/motion-readability-v2/flight-upstroke.png",
+      "sha256": "d0bf70d5e9bafc9a202b22864b67fd6b4c9eea1be702743316b6d5de1fe009cb",
+      "bytes": 85402
+    },
+    {
+      "path": "collections/yinglong/reports/motion-readability-v2/flight-downstroke.png",
+      "sha256": "6c1fd84546a1b850ac779713501312f870303e551c9977dce351697b1f03d1ac",
+      "bytes": 84265
+    }
+  ],
+  "blocking_failures": []
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "source": "collections/yinglong/models/web-v1.glb",
+  "source_sha256": "d877770f68508467a9d07fc440435791a46533e7d6c0308decb7ac2ce2488876",
+  "rodin_source_sha256": "4d65e60deb47c59b1490370c222d337083e76ce4370eaaaba3fcc67b33112189",
+  "rebuild_existing": true,
+  "output": "collections/yinglong/models/web.glb",
+  "output_sha256": "8dc4f39fb704c1ed1961eb95272f68370c66b96dcd92c3a518b8e4c025f083d1",
+  "bytes": 19617952,
+  "feather_triangles": 13600,
+  "morph_targets": [
+    "ChestBreath",
+    "NeckLift",
+    "NeckStrike",
+    "TailLeft",
+    "TailRight",
+    "WingLift",
+    "StrideA",
+    "StrideB",
+    "RainBow",
+    "BodyLeanLeft",
+    "BodyLeanRight",
+    "FlightTuck",
+    "WingDown"
+  ],
+  "model_diagonal": 2.282314,
+  "maximum_displacements": {
+    "ChestBreath": 0.028358,
+    "NeckLift": 0.188672,
+    "NeckStrike": 0.247503,
+    "TailLeft": 0.161245,
+    "TailRight": 0.160798,
+    "WingLift": 0.201508,
+    "StrideA": 0.102318,
+    "StrideB": 0.102318,
+    "RainBow": 0.057009,
+    "BodyLeanLeft": 0.059228,
+    "BodyLeanRight": 0.059228,
+    "FlightTuck": 0.138924,
+    "WingDown": 0.250848
+  },
+  "maximum_displacement_ratios": {
+    "ChestBreath": 0.012425,
+    "NeckLift": 0.082667,
+    "NeckStrike": 0.108444,
+    "TailLeft": 0.07065,
+    "TailRight": 0.070454,
+    "WingLift": 0.088291,
+    "StrideA": 0.044831,
+    "StrideB": 0.044831,
+    "RainBow": 0.024978,
+    "BodyLeanLeft": 0.025951,
+    "BodyLeanRight": 0.025951,
+    "FlightTuck": 0.06087,
+    "WingDown": 0.109909
+  },
+  "animations": [
+    "Idle",
+    "Walk",
+    "Flight",
+    "Observe",
+    "RainCall",
+    "Strike",
+    "WingGuard"
+  ],
+  "articulated_nodes": [
+    "WingFeathers_L",
+    "WingFeathers_R",
+    "YinglongHeadDetails"
+  ],
+  "motion_notes": [
+    "Flight combines large bilateral wing arcs, tucked legs, continuous body deformation and a visible airborne trajectory.",
+    "Walk alternates diagonal leg fields with torso weight shift, head counter-motion and tail counter-sweep.",
+    "Every clip has preparation, main and recovery phases; model/root translation is supplemental and never the sole qualifying motion."
+  ],
+  "web_textures": true
+}
