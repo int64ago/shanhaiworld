@@ -3,10 +3,10 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "status": "passed",
-  "checked_at": "2026-08-15T03:09:51Z",
+  "checked_at": "2026-08-15T12:41:25Z",
   "motion_mode": "morph",
   "asset": "collections/jiuweihu/models/web.glb",
-  "asset_sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e",
+  "asset_sha256": "88f49338a5e2bd7670ac469b0f22fcfbf4945c6d527d742d7aff9a4b5d9bbeb6",
   "action_count": 7,
   "actions": [
     {
@@ -26,7 +26,7 @@
     },
     {
       "name": "Pounce",
-      "duration_seconds": 3.0,
+      "duration_seconds": 2.8,
       "phases": ["preparation", "main", "recovery"],
       "regions": ["spine_pelvis", "front_and_rear_leg_chains", "head_neck", "nine_tail_field"],
       "loop": false
@@ -64,28 +64,36 @@
     {
       "id": "minimum_six_actions",
       "status": "passed",
-      "evidence": "collections/jiuweihu/reports/morph-build-v8.json",
+      "evidence": "collections/jiuweihu/reports/morph-build-v9.json",
       "notes": ["Seven real GLB animation clips exceed the minimum of six."]
     },
     {
       "id": "semantic_match",
       "status": "passed",
-      "evidence": "collections/jiuweihu/reports/morph-actions-v8/",
-      "notes": ["Idle, quadruped walk, pounce, tail flare, threat, listen and dodge are visibly distinct and creature-appropriate."]
+      "evidence": "collections/jiuweihu/reports/motion-readability-v9.json",
+      "notes": ["Idle, quadruped walk, airborne pounce, tail flare, threat, listen and lateral dodge are visibly distinct and creature-appropriate."]
     },
     {
       "id": "body_region_deformation",
       "status": "passed",
-      "evidence": "collections/jiuweihu/reports/morph-build-v8.json",
+      "evidence": "collections/jiuweihu/reports/morph-build-v9.json",
       "notes": ["Every action affects at least two semantic regions or one continuous nine-tail deformation field; no slot is root, camera, material or particle motion."]
     },
     {
       "id": "locomotion_match",
       "status": "passed",
-      "evidence": "collections/jiuweihu/reports/morph-actions-v8/",
+      "evidence": "collections/jiuweihu/reports/motion-readability-v9.json",
       "notes": [
         "Walk is an in-place quadruped gait with alternating front and rear leg fields, pelvic response and tail counter-motion; autonomous world translation pairs only with this clip.",
-        "Rear paw displacement is now approximately 0.048–0.051 model units per alternating field, up from about 0.030 before the overlap-cancellation repair."
+        "Walk gait fields peak at 10.4% of model diagonal and exceed the 4% locomotion visibility gate while retaining side-owned paw masks."
+      ]
+    },
+    {
+      "id": "screen_space_readability",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/motion-readability-v9.json",
+      "notes": [
+        "Pounce and Dodge peak regional fields reach 27.8% and 15.4% of model diagonal respectively; browser review confirms clear preparation, airborne/lateral peaks and recovery."
       ]
     },
     {

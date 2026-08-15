@@ -3,7 +3,7 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "status": "passed",
-  "checked_at": "2026-08-15T03:09:51Z",
+  "checked_at": "2026-08-15T12:41:25Z",
   "selected_motion_mode": "morph",
   "provider_attempt": {
     "provider": "Tripo",
@@ -20,7 +20,7 @@
   "fallback": {
     "type": "deterministic localized morph targets",
     "source": "collections/jiuweihu/models/rigged-v1.glb",
-    "selected_asset": "collections/jiuweihu/models/morph-v8.glb",
+    "selected_asset": "collections/jiuweihu/models/web.glb",
     "web_asset": "collections/jiuweihu/models/web.glb",
     "generator": "collections/jiuweihu/production/scripts/build_morph_actions.py",
     "target_count": 16,
@@ -66,7 +66,7 @@
     {
       "id": "motion_targets_present",
       "status": "passed",
-      "evidence": "collections/jiuweihu/reports/morph-build-v8.json",
+      "evidence": "collections/jiuweihu/reports/morph-build-v9.json",
       "notes": [
         "One mesh primitive exposes 16 named local morph targets; all seven clips contain playable morph-weight tracks."
       ]
@@ -74,22 +74,22 @@
     {
       "id": "articulated_region_coverage",
       "status": "passed",
-      "evidence": "collections/jiuweihu/reports/morph-actions-v8/",
+      "evidence": "collections/jiuweihu/reports/motion-readability-v9.json",
       "notes": [
         "Continuous nine-tail fields preserve every root while producing sweep, lift and flare.",
         "Surface-geodesic leg masks isolate four paws and leg chains from spatially adjacent tails.",
         "Head/neck, spine/pelvis, all four leg regions and the complete tail fan are visibly driven.",
-        "The v8 rear-leg field adds side ownership plus upper-leg and pelvis tapers, preventing opposite rear masks from cancelling at the paws."
+        "The v9 fields retain side ownership while increasing visible paw swing, pounce extension and lateral dodge travel."
       ]
     },
     {
       "id": "deformation_quality",
       "status": "passed",
-      "evidence": "collections/jiuweihu/reports/final-page/",
+      "evidence": "collections/jiuweihu/reports/motion-readability-v9.json",
       "notes": [
-        "The complete v2 action frame set plus targeted v8 rear and side walk frames cover preparation, main and recovery phases.",
+        "The v9 browser evidence covers pounce and dodge peaks; the generated tracks retain explicit preparation, main and recovery phases for all actions.",
         "No collapse, detachment, visible seam, topology change or nine-tail count loss was observed.",
-        "Selected v8 retains the accepted geometry, textures, seven-clip structure and accessor bounds while visibly increasing alternate rear-leg stride; the final browser load has zero warnings and errors."
+        "Selected v9 retains the accepted geometry, textures, seven-clip structure and accessor bounds while amplifying regional motion without seams or detachment."
       ]
     }
   ],

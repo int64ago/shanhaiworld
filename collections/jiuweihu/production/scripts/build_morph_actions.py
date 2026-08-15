@@ -223,27 +223,27 @@ def make_targets(
         head_weight = smoothstep(0.14, 0.34, original[2]) * (1.0 - front_mask)
         body_weight = smoothstep(0.035, 0.25, original[1])
 
-        transformed = rotate_y(original, tail_pivot, math.radians(14.0) * tail_weight)
+        transformed = rotate_y(original, tail_pivot, math.radians(18.0) * tail_weight)
         outputs["tail_left"].append(transformed)
-        transformed = rotate_y(original, tail_pivot, math.radians(-14.0) * tail_weight)
+        transformed = rotate_y(original, tail_pivot, math.radians(-18.0) * tail_weight)
         outputs["tail_right"].append(transformed)
-        transformed = rotate_x(original, tail_pivot, math.radians(17.0) * tail_weight)
+        transformed = rotate_x(original, tail_pivot, math.radians(25.0) * tail_weight)
         outputs["tail_lift"].append(transformed)
         x, y, z = original
-        outputs["tail_flare"].append((x * (1.0 + 0.32 * tail_weight), y + 0.055 * tail_weight, z))
+        outputs["tail_flare"].append((x * (1.0 + 0.42 * tail_weight), y + 0.075 * tail_weight, z))
 
-        outputs["head_left"].append(rotate_y(original, head_pivot, math.radians(25.0) * head_weight))
-        outputs["head_right"].append(rotate_y(original, head_pivot, math.radians(-25.0) * head_weight))
-        outputs["head_down"].append(rotate_x(original, head_pivot, math.radians(-18.0) * head_weight))
-        outputs["head_up"].append(rotate_x(original, head_pivot, math.radians(16.0) * head_weight))
-        outputs["crouch"].append((x, y - 0.075 * body_weight, z))
-        outputs["arch"].append((x, y + 0.055 * body_weight, z))
+        outputs["head_left"].append(rotate_y(original, head_pivot, math.radians(32.0) * head_weight))
+        outputs["head_right"].append(rotate_y(original, head_pivot, math.radians(-32.0) * head_weight))
+        outputs["head_down"].append(rotate_x(original, head_pivot, math.radians(-24.0) * head_weight))
+        outputs["head_up"].append(rotate_x(original, head_pivot, math.radians(23.0) * head_weight))
+        outputs["crouch"].append((x, y - 0.105 * body_weight, z))
+        outputs["arch"].append((x, y + 0.075 * body_weight, z))
         surge_weight = smoothstep(0.02, 0.34, z) * body_weight
-        outputs["surge"].append((x, y + 0.020 * surge_weight, z + 0.115 * surge_weight))
+        outputs["surge"].append((x, y + 0.035 * surge_weight, z + 0.170 * surge_weight))
         planted_weight = max(front_mask, rear_mask)
         lean_weight = body_weight * (1.0 - 0.75 * planted_weight)
-        outputs["lean_left"].append((x - 0.055 * lean_weight, y, z))
-        outputs["lean_right"].append((x + 0.055 * lean_weight, y, z))
+        outputs["lean_left"].append((x - 0.120 - 0.085 * lean_weight, y + 0.015, z))
+        outputs["lean_right"].append((x + 0.120 + 0.085 * lean_weight, y + 0.015, z))
 
         gait_points: dict[str, tuple[float, float, float]] = {}
         for gait_name, phase in (("gait_a", 1.0), ("gait_b", -1.0)):
@@ -262,12 +262,12 @@ def make_targets(
                     pelvis_taper = 1.0 - 0.82 * smoothstep(-0.25, -0.155, original[2])
                     mask *= (0.08 + 0.92 * side_share) * upper_leg_taper * pelvis_taper
                 if is_rear:
-                    changed = (original[0], original[1], original[2] + 0.052 * direction * phase * mask)
-                    lift = 0.018 * mask if direction * phase > 0 else 0.0
-                else:
-                    angle = math.radians(22.0) * direction * phase * mask
-                    changed = rotate_x(original, pivot, angle)
+                    changed = (original[0], original[1], original[2] + 0.070 * direction * phase * mask)
                     lift = 0.030 * mask if direction * phase > 0 else 0.0
+                else:
+                    angle = math.radians(30.0) * direction * phase * mask
+                    changed = rotate_x(original, pivot, angle)
+                    lift = 0.043 * mask if direction * phase > 0 else 0.0
                 delta_x += changed[0] - original[0]
                 delta_y += changed[1] - original[1] + lift
                 delta_z += changed[2] - original[2]
@@ -278,13 +278,22 @@ def make_targets(
             )
         outputs["gait_a"].append(gait_points["gait_a"])
         outputs["gait_b"].append(gait_points["gait_b"])
-        pounce_point = original
-        for leg_name, (pivot, _) in leg_specs.items():
-            mask = leg_masks[leg_name][welded]
-            angle = math.radians(-25.0 if leg_name.startswith("front") else 22.0) * mask
-            pounce_point = rotate_x(pounce_point, pivot, angle)
-            if mask > 0:
-                pounce_point = (pounce_point[0], pounce_point[1] + 0.018 * mask, pounce_point[2])
+        side_label = "left" if original[0] < 0 else "right"
+        front_name = f"front_{side_label}"
+        rear_name = f"rear_{side_label}"
+        front_pivot = leg_specs[front_name][0]
+        rear_pivot = leg_specs[rear_name][0]
+        front_pounce = leg_masks[front_name][welded]
+        rear_pounce = leg_masks[rear_name][welded]
+        pounce_point = rotate_x(original, front_pivot, math.radians(-38.0) * front_pounce)
+        pounce_point = rotate_x(pounce_point, rear_pivot, math.radians(32.0) * rear_pounce)
+        pounce_lift = 0.042 * max(front_pounce, rear_pounce)
+        pounce_reach = 0.130 * front_pounce - 0.090 * rear_pounce
+        pounce_point = (
+            pounce_point[0],
+            pounce_point[1] + pounce_lift + 0.120,
+            pounce_point[2] + pounce_reach,
+        )
         outputs["pounce_extend"].append(pounce_point)
     return outputs
 
@@ -357,20 +366,21 @@ def main() -> None:
         "Walk": (
             [0, .3, .6, .9, 1.2, 1.5, 1.8, 2.1, 2.4],
             [
-                {"gait_a": .72, "tail_left": .12, "arch": .06}, {},
-                {"gait_b": .72, "tail_right": .12, "crouch": .06}, {},
-                {"gait_a": .72, "tail_left": .12, "arch": .06}, {},
-                {"gait_b": .72, "tail_right": .12, "crouch": .06}, {},
-                {"gait_a": .72, "tail_left": .12, "arch": .06},
+                {"gait_a": .90, "tail_left": .20, "arch": .10}, {},
+                {"gait_b": .90, "tail_right": .20, "crouch": .10}, {},
+                {"gait_a": .90, "tail_left": .20, "arch": .10}, {},
+                {"gait_b": .90, "tail_right": .20, "crouch": .10}, {},
+                {"gait_a": .90, "tail_left": .20, "arch": .10},
             ],
         ),
         "Pounce": (
-            [0, .55, 1.0, 1.35, 1.8, 2.35, 3.0],
-            [{}, {"crouch": .72, "head_down": .36, "tail_lift": .18},
-             {"crouch": 1.0, "head_down": .62, "tail_lift": .25},
-             {"arch": .88, "head_up": .72, "tail_lift": .82, "tail_flare": .38, "surge": 1.0, "pounce_extend": 1.0},
-             {"arch": .55, "head_up": .36, "tail_lift": .52, "surge": .44, "pounce_extend": .42},
-             {"crouch": .18, "head_down": .10, "tail_lift": .18}, {}],
+            [0, .35, .70, 1.0, 1.28, 1.65, 2.20, 2.80],
+            [{}, {"crouch": .72, "head_down": .45, "tail_lift": .25},
+             {"crouch": 1.0, "head_down": .75, "tail_lift": .42, "tail_flare": .18},
+             {"arch": .78, "head_up": .85, "tail_lift": 1.0, "tail_flare": .52, "surge": 1.0, "pounce_extend": .85},
+             {"arch": 1.0, "head_up": .75, "tail_lift": .92, "tail_flare": .45, "surge": 1.0, "pounce_extend": 1.0},
+             {"crouch": .55, "head_down": .25, "tail_lift": .45, "pounce_extend": .22},
+             {"crouch": .20, "head_down": .10, "tail_lift": .18}, {}],
         ),
         "Nine-Tail Flare": (
             [0, .7, 1.2, 2.0, 2.8, 3.5],
@@ -396,10 +406,10 @@ def main() -> None:
         ),
         "Dodge": (
             [0, .42, .78, 1.18, 1.65, 2.2],
-            [{}, {"crouch": .52, "head_left": .35, "tail_right": .30, "lean_left": .52},
-             {"arch": .48, "head_right": .72, "tail_left": .78, "tail_lift": .30, "surge": .28, "lean_right": 1.0},
-             {"crouch": .35, "head_left": .32, "tail_right": .45, "lean_left": .65},
-             {"arch": .12, "head_right": .12, "tail_left": .12, "lean_right": .18}, {}],
+            [{}, {"crouch": .52, "head_left": .35, "tail_right": .30, "lean_left": .35},
+             {"crouch": .55, "head_right": .72, "tail_left": .78, "tail_lift": .30, "surge": .28, "lean_right": 1.0},
+             {"crouch": .35, "head_left": .32, "tail_right": .45, "lean_left": .55},
+             {"arch": .12, "head_right": .12, "tail_left": .12, "lean_right": .15}, {}],
         ),
     }
     mesh_node = next(index for index, node in enumerate(document["nodes"]) if node.get("mesh") == 0)
@@ -414,11 +424,11 @@ def main() -> None:
             "channels": [{"sampler": 0, "target": {"node": mesh_node, "path": "weights"}}],
             "extras": {
                 "phases": ["preparation", "main", "recovery"],
-                "semantic_regions": ["nine_tail_field", "head_neck", "spine_body", "four_legs"] if clip_name == "Walk" else ["nine_tail_field", "head_neck", "spine_body"],
+                "semantic_regions": ["nine_tail_field", "head_neck", "spine_body", "four_legs"] if clip_name in {"Walk", "Pounce"} else ["nine_tail_field", "head_neck", "spine_body"],
                 "root_motion": False,
             },
         })
-    document.setdefault("asset", {})["generator"] = "shanhai3d deterministic morph fallback v8"
+    document.setdefault("asset", {})["generator"] = "shanhai3d deterministic morph fallback v9"
     write_glb(args.output, document, binary)
 
     report = {
@@ -433,6 +443,17 @@ def main() -> None:
         "leg_region_vertices": {name: sum(value > 0 for value in mask) for name, mask in leg_masks.items()},
         "morph_targets": target_names,
         "maximum_displacements": maximum_displacements,
+        "model_diagonal": round(distance(
+            tuple(min(point[axis] for point in positions) for axis in range(3)),
+            tuple(max(point[axis] for point in positions) for axis in range(3)),
+        ), 6),
+        "maximum_displacement_ratios": {
+            name: round(value / distance(
+                tuple(min(point[axis] for point in positions) for axis in range(3)),
+                tuple(max(point[axis] for point in positions) for axis in range(3)),
+            ), 6)
+            for name, value in maximum_displacements.items()
+        },
         "walk_leg_displacements": {
             target_name: {
                 leg_name: {
@@ -457,8 +478,11 @@ def main() -> None:
             "Leg masks are derived from welded surface geodesics, preventing spatially adjacent tails from being treated as paws.",
             "Tail motion is a continuous root-preserving field over the original nine-tail mesh; no tail is split, deleted or regenerated.",
             "All action clips are in place and contain explicit preparation, main and recovery phases.",
-            "Walk v8 separates the fully overlapping rear-paw geodesic masks by left/right surface position so opposite hind strides no longer cancel.",
-            "The rear step uses a restrained tapered fore-aft limb field with swing-foot lift; this keeps the abdomen and inner-thigh surface stable while making both hind paws visibly alternate."
+            "Walk v9 preserves side-owned rear masks while increasing swing-foot lift, fore-aft stride, body counter-motion and nine-tail counter-sway for screen-readable locomotion.",
+            "Pounce v9 uses side-owned leg extension, a sustained airborne silhouette, deeper anticipation and a distinct landing/recovery phase instead of a near-neutral standing pose.",
+            "The pounce_extend target includes a vertical leap trajectory as a supplement while keeping the creature centered in the manual-action camera; the qualifying motion remains the simultaneous four-leg, spine, head-neck and nine-tail deformation.",
+            "The lean targets include the Dodge lateral path while the qualifying pose change remains the crouch/arch, torso lean, head turn and counter-sweeping nine-tail field.",
+            "No actor or model-root transform is used to satisfy an action slot; all amplified motion remains baked into auditable GLB morph tracks."
         ],
     }
     args.report.parent.mkdir(parents=True, exist_ok=True)

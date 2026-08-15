@@ -9,9 +9,9 @@
   "status": "ready",
   "viewer_ui": "shared-v1",
   "kid_mode": true,
-  "preview": "./preview.webp",
+  "preview": "./preview.webp?v=4",
   "model": {
-    "path": "./models/web.glb?v=8",
+    "path": "./models/web.glb?v=9",
     "target_height": 2.6,
     "facing_offset": 0,
     "in_place_root_motion": true
@@ -31,28 +31,36 @@
     "require_animation_qc": true
   },
   "scene": {
-    "background": "./scene/background.webp",
+    "background": "./scene/background-360-v2.webp",
+    "background_mode": "equirectangular",
+    "environment_intensity": 0.76,
     "background_color": "#132523",
-    "fog_color": "#425f5b",
+    "fog_color": "#617974",
     "fog_near": 15,
     "fog_far": 40,
-    "ground_color": "#233a31",
+    "ground_color": "#3a5549",
     "ground_size": 42,
     "procedural_props": {
       "enabled": true,
       "water_radius": 14,
-      "water_color": "#1a4745",
-      "water_opacity": 0.34,
+      "water_color": "#2f6661",
+      "water_opacity": 0.28,
       "rock_count": 24,
-      "rock_color": "#3d5e55",
+      "rock_color": "#58756b",
       "rock_radius": 16
     }
   },
   "lighting": {
-    "ambient_color": "#a9c6b6",
-    "ambient_intensity": 1.55,
+    "ambient_color": "#c7d9cf",
+    "ambient_intensity": 1.7,
     "sun_color": "#f1d3a0",
     "sun_intensity": 3.1,
+    "fill_color": "#b9d7e4",
+    "fill_intensity": 1.5,
+    "fill_position": [-7, 6, 4],
+    "rim_color": "#f4d6a1",
+    "rim_intensity": 1.05,
+    "rim_position": [-5, 8, -7],
     "exposure": 1.18,
     "sun_position": [
       8,
@@ -112,6 +120,7 @@
     "text": "九尾狐是《山海经》中与青丘有关的异兽。《南山经》说它外形像狐狸，却长着九条尾巴，声音像婴儿；《海外东经》又明确记载它有四只脚和九条尾巴。古书里的九尾狐具有危险性，并不只是后来故事中常见的温和狐仙。这个模型采用自然的狐形身体，九条尾巴都从腰后连续生长。铜红色毛发参考了后世文献中的赤色传统，并不是《山海经》原文规定的颜色。你可以拖动鼠标观察它的头部、四肢和九条尾巴，也可以切换动作，比较它在行走、防御和聆听时的身体变化。"
   },
   "interaction": {
+    "presentation_yaw": 0,
     "click_actions": [
       "Nine-Tail Flare",
       "Threat Display",

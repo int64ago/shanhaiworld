@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "status": "passed",
+  "checked_at": "2026-08-15T12:41:25Z",
+  "asset": "collections/jiuweihu/models/web.glb",
+  "asset_sha256": "88f49338a5e2bd7670ac469b0f22fcfbf4945c6d527d742d7aff9a4b5d9bbeb6",
+  "viewport": [1280, 720],
+  "quantitative_checks": {
+    "model_diagonal": 1.338755,
+    "walk_peak_ratio": 0.104277,
+    "pounce_peak_ratio": 0.277931,
+    "dodge_peak_ratio": 0.153537,
+    "signature_threshold": 0.08,
+    "locomotion_threshold": 0.04
+  },
+  "browser_observations": [
+    "Walk shows alternating lifted swing feet, fore-aft paw travel, body counter-motion and tail counter-sway instead of actor sliding.",
+    "Pounce has a deep crouch, visibly airborne four-leg extension, raised tail fan and a separate landing/recovery phase.",
+    "Dodge combines lateral travel with a lowered center of mass, head reversal and counter-sweeping nine-tail field.",
+    "The brighter key/fill/rim setup keeps face, paws, tail roots and directional fur readable against the scene."
+  ],
+  "evidence": [
+    {
+      "path": "collections/jiuweihu/reports/motion-readability-v9/pounce-peak.png",
+      "sha256": "02dbf5f2aee9a8c30aa89a67c6a69959f35b1c592a19b87e28f0be18f21e0dcc",
+      "bytes": 96711
+    },
+    {
+      "path": "collections/jiuweihu/reports/motion-readability-v9/dodge-peak.png",
+      "sha256": "c3c1f47313739b495d40bcb99958aba5f5ed0a70bc3565ab8881a828e5cfc046",
+      "bytes": 94079
+    }
+  ],
+  "blocking_failures": []
+}

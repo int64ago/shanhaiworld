@@ -3,13 +3,13 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "status": "passed",
-  "checked_at": "2026-08-15T11:41:49Z",
+  "checked_at": "2026-08-15T13:06:34Z",
   "page": "collections/jiuweihu/index.html",
   "runtime_asset": {
     "path": "collections/jiuweihu/models/web.glb",
-    "sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e",
-    "bytes": 52131460,
-    "mebibytes": 49.716,
+    "sha256": "88f49338a5e2bd7670ac469b0f22fcfbf4945c6d527d742d7aff9a4b5d9bbeb6",
+    "bytes": 52131604,
+    "mebibytes": 49.717,
     "triangles": 91600,
     "textures": 3,
     "texture_resolution": [4096, 4096],
@@ -24,7 +24,7 @@
   "performance": {
     "viewport": [1920, 1080],
     "device_pixel_ratio": 1,
-    "average_fps": 116.9,
+    "average_fps": 84.5,
     "draw_calls": 5,
     "rendered_triangles": 95250,
     "console_errors": 0,
@@ -37,7 +37,25 @@
       "status": "passed",
       "evidence": "python3 .agents/skills/shanhai3d/scripts/inspect_glb.py collections/jiuweihu/models/web.glb --motion-mode morph --min-animations 6",
       "notes": [
-        "Validator reports morph evidence, seven clips and no validation failures."
+        "Validator reports morph evidence, seven clips and no validation failures; final v9 Chromium load is viewer-ready with zero console warnings or errors."
+      ]
+    },
+    {
+      "id": "full_360_scene_orbit",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/scene-360-qc.json",
+      "notes": [
+        "The former fixed 16:9 screen background was replaced by a native 2:1 equirectangular Qingqiu panorama used for both scene background and environment lighting.",
+        "Four successive real OrbitControls drags show distinct continuous directions while ground, rocks, water and the creature remain world-locked; no azimuth limit is configured."
+      ]
+    },
+    {
+      "id": "lighting_and_motion_readability",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/reports/motion-readability-v9.json",
+      "notes": [
+        "Shared key, fill and rim lighting keeps the fox face, paws, nine tail roots and directional fur readable against the brighter ground and fog.",
+        "Walk, Pounce and Dodge exceed the new locomotion/signature displacement gates and were replayed in the real Three.js page."
       ]
     },
     {
@@ -45,8 +63,8 @@
       "status": "passed",
       "evidence": "collections/jiuweihu/reports/final-page/",
       "notes": [
-        "The final v8 page control activated Idle, Walk, Pounce, Nine-Tail Flare, Threat Display, Listen and Dodge by exact clip name.",
-        "Preparation, main and recovery visuals are retained in reports/morph-actions-v2; targeted v8 walk views verify the repaired rear stride."
+        "The final v9 page control activated Idle, Walk, Pounce, Nine-Tail Flare, Threat Display, Listen and Dodge by exact clip name.",
+        "Preparation, main and recovery visuals remain explicit; targeted v9 evidence verifies airborne pounce and lateral dodge peaks."
       ]
     },
     {
@@ -55,6 +73,25 @@
       "evidence": "collections/jiuweihu/index.html and assets/js/collection-page.js",
       "notes": [
         "Previous and next buttons advance through the seven real clips and wrap from Idle to Dodge and from Dodge to Idle."
+      ]
+    },
+    {
+      "id": "shared_creature_navigation",
+      "status": "passed",
+      "evidence": "assets/templates/collection/index.html, assets/data/collections.json and assets/js/collection-page.js",
+      "notes": [
+        "At 1280x720 the shared top bar resolves ready catalog order without wrapping: 九尾狐 disables 上一个 and links 下一个 to 应龙; 应龙 links 上一个 to 九尾狐 and disables 下一个.",
+        "Disabled endpoints have no href, aria-disabled=true, tabindex=-1, pointer-events=none and reduced opacity; both pages remained viewer-ready with zero console errors or warnings.",
+        "Previous, next, immersive and catalog-return controls match across 13 computed layout, border, color and typography properties; immersive mode hides both creature links."
+      ]
+    },
+    {
+      "id": "catalog_preview_and_alignment",
+      "status": "passed",
+      "evidence": "collections/jiuweihu/preview.webp, collections/yinglong/preview.webp and assets/css/site.css",
+      "notes": [
+        "Both catalog previews are current 1200x900 frames captured from the real v9/v2 Three.js pages, with present lighting and a tighter full-creature composition.",
+        "At 1280x720 both images loaded successfully with versioned URLs; collection-grid computed justify-content=start and the first card left edge exactly matched the grid left edge at 48px."
       ]
     },
     {

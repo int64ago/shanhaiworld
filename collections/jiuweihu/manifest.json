@@ -4,7 +4,7 @@
   "name": "九尾狐",
   "status": "ready",
   "created_at": "2026-08-14T17:59:20+00:00",
-  "updated_at": "2026-08-15T11:41:49Z",
+  "updated_at": "2026-08-15T13:06:34Z",
   "artifacts": [
     {
       "kind": "release_qc",
@@ -25,21 +25,51 @@
       ]
     },
     {
-      "kind": "scene_background",
+      "kind": "scene_background_v1",
       "path": "collections/jiuweihu/scene/background.webp",
-      "status": "ready",
+      "status": "superseded",
       "sha256": "80759c50c4ca054faf10cfb79a15be5b9ffbd435e968f440d64f171675288f85",
       "notes": [
-        "Creature-free Qingqiu dawn environment plate selected for the interactive scene."
+        "上一版 16:9 青丘环境板；视觉合格，但作为屏幕背景不会随 OrbitControls 方位旋转。"
+      ]
+    },
+    {
+      "kind": "scene_background_360",
+      "path": "collections/jiuweihu/scene/background-360-v2.webp",
+      "status": "ready",
+      "sha256": "6521c89f2b37df765880c3c12c3b7e38ea81eae185394d1f55b29d02f0f00370",
+      "bytes": 314670,
+      "notes": [
+        "1774x887 原生 2:1 等距青丘全景；作为 Three.js background 与 environment 使用，支持连续 360° 环视。",
+        "左右边缘归一化 RMSE 为 0.0332557；浏览器四方位拖拽未见垂直接缝。"
+      ]
+    },
+    {
+      "kind": "scene_360_qc",
+      "path": "collections/jiuweihu/reports/scene-360-qc.json",
+      "status": "ready",
+      "notes": [
+        "记录全景投影、接缝、OrbitControls 四方位、性能和控制台验收。"
       ]
     },
     {
       "kind": "catalog_preview",
       "path": "collections/jiuweihu/preview.webp",
       "status": "ready",
-      "sha256": "a077f8d66a392fb3e8bc1c3e34b1453926e0b23d8fc5ac7f216e82e38fb0dade",
+      "sha256": "6e52162b29379f4c8521c4953572513403128ff00eaa299bdf8f402741bb3dcf",
+      "bytes": 30948,
       "notes": [
-        "Captured from the real Three.js v3 release scene during Nine-Tail Flare."
+        "1200x900 current Three.js v9 release frame using the brighter equirectangular scene and a tighter full-creature composition."
+      ]
+    },
+    {
+      "kind": "catalog_preview_previous",
+      "path": "collections/jiuweihu/preview-v3.webp",
+      "status": "superseded",
+      "sha256": "a077f8d66a392fb3e8bc1c3e34b1453926e0b23d8fc5ac7f216e82e38fb0dade",
+      "bytes": 44364,
+      "notes": [
+        "Preserved former dark v3 preview; replaced because it no longer represented the current lighting, environment or framing."
       ]
     },
     {
@@ -82,11 +112,20 @@
       "kind": "selected_animated_glb",
       "path": "collections/jiuweihu/models/web.glb",
       "status": "ready",
-      "sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e",
+      "sha256": "88f49338a5e2bd7670ac469b0f22fcfbf4945c6d527d742d7aff9a4b5d9bbeb6",
+      "bytes": 52131604,
       "notes": [
         "Seven playable clips drive 16 localized semantic morph targets across head, spine, legs and the continuous nine-tail field.",
-        "The v8 walk repair prevents overlapping opposite rear masks from cancelling and increases visible alternating hind-paw stride.",
-        "All morph POSITION accessors include min/max bounds; final Three.js console has zero warnings and errors."
+        "The v9 rebuild retains the repaired alternating gait while amplifying airborne pounce, lateral dodge, head motion and nine-tail counter-motion.",
+        "All morph POSITION accessors include min/max bounds; browser readability evidence passes the new locomotion and signature-motion gates."
+      ]
+    },
+    {
+      "kind": "motion_readability_qc",
+      "path": "collections/jiuweihu/reports/motion-readability-v9.json",
+      "status": "ready",
+      "notes": [
+        "Quantified v9 regional displacement plus real Three.js pounce and dodge peak evidence."
       ]
     },
     {
@@ -217,9 +256,11 @@
     "Reference QC revision 4 selects shallow-front body volume plus rear topology lock after attempt 3 proved direct-opposite depth collapse.",
     "Rodin attempt 4 and its audited closed-manifold derivative pass source model and detail gates.",
     "Tripo quadruped rigging passed structurally, but the provider walk failed visual deformation QC and remains preserved as a rejection.",
-    "The selected deterministic fallback contains 16 localized morph targets and seven visually validated actions; the v8 rear-leg repair passes targeted walk review.",
+    "The selected deterministic fallback contains 16 localized morph targets and seven visually validated actions; v9 passes explicit locomotion and signature-motion visibility gates.",
     "The readable interface keeps pinyin only over the creature name, provides formal detailed copy and Mandarin narration, and supports previous/next action navigation.",
-    "Final 1920x1080 interaction, performance, security and console checks pass; collection remains ready.",
-    "共享沉浸模式可隐藏非必要覆盖层并通过点击或 Esc 退出；正常模式按钮与返回图鉴使用完全相同的计算样式。"
+    "Shared key/fill/rim lighting and the brighter scene palette keep the creature readable through roaming turns; the v2 equirectangular Qingqiu environment now follows the full 360-degree camera orbit.",
+    "共享沉浸模式可隐藏非必要覆盖层并通过点击或 Esc 退出；正常模式按钮与返回图鉴使用完全相同的计算样式。",
+    "共享顶部从 ready 图鉴顺序动态生成上一个/下一个神兽入口；第一只禁用上一个、最后一只禁用下一个，新神兽上架后无需编写专属导航。",
+    "首页使用当前真实 Three.js 页面的 1200x900 神兽预览，并让卡片列表从容器左侧开始排列。"
   ]
 }

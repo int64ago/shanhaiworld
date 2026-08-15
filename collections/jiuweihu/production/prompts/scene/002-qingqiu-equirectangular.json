@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "id": "scene-background-002",
+  "created_at": "2026-08-15T12:49:26Z",
+  "tool": "codex_imagegen",
+  "purpose": "Seamless 2:1 equirectangular Qingqiu environment for full 360-degree OrbitControls viewing",
+  "input_images": [
+    {
+      "path": "collections/jiuweihu/scene/background.webp",
+      "role": "palette, atmosphere and habitat reference; not a canvas to stretch"
+    }
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: Three.js 360-degree environment map. Primary request: transform the referenced Qingqiu dawn habitat into a true seamless 2:1 equirectangular 360 panorama, not a widened rectilinear crop. Preserve the blue-green stone, sparse wind-shaped pines, jade valley, shallow reflective water, pale ground mist and warm dawn atmosphere of the reference. Scene/backdrop: an unbroken circular mountain basin suitable for a copper-red nine-tailed fox to roam; distant rounded Chinese mountains, low wetlands and scattered ancient pines continue naturally around the entire horizon. Style/medium: realistic high-end cinematic game environment with restrained Chinese mythic naturalism. Composition/framing: exact latitude-longitude equirectangular projection, horizon level and centered vertically, camera at fox eye height, calm readable lower-middle belt throughout the full circumference, zenith and nadir filled naturally, left and right edges must join seamlessly with matching terrain, cloud, color and brightness. Lighting/mood: cool blue-green ambient dawn with one soft pale-gold light direction, readable rather than dark, no blown-out sun disk at the seam. Constraints: environment only; no creature, fox, tails, people, architecture, text, border or UI; no foreground object close enough to collide with the virtual camera; no duplicated landmark at the seam; no visible vertical seam; no cubemap cross layout; no fisheye circle; no flat rectilinear landscape pretending to be panoramic.",
+  "negative_constraints": [
+    "no creature, fox or tails",
+    "no people or architecture",
+    "no text, watermark, border or interface",
+    "no cubemap faces, fisheye circle or rectilinear projection",
+    "no left-right seam or duplicated seam landmark",
+    "no central foreground obstruction",
+    "no crushed black shadows"
+  ],
+  "expected_output": "collections/jiuweihu/scene/background-360-v2.webp"
+}

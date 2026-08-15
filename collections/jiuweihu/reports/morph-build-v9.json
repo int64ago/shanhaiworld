@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "source": "collections/jiuweihu/models/rigged-v1.glb",
+  "output": "collections/jiuweihu/models/web.glb",
+  "output_sha256": "88f49338a5e2bd7670ac469b0f22fcfbf4945c6d527d742d7aff9a4b5d9bbeb6",
+  "bytes": 52131604,
+  "motion_mode": "morph",
+  "fallback_reason": "Tripo quadruped rig-check passed, but its preset walk visibly misclassified low tail chains and failed deformation QC.",
+  "welded_vertices": 45802,
+  "raw_vertices": 50175,
+  "paw_seeds": {
+    "front_left": {
+      "welded_vertex": 30930,
+      "position": [
+        -0.053310904651880264,
+        0.005448490381240845,
+        0.30957067012786865
+      ]
+    },
+    "front_right": {
+      "welded_vertex": 8325,
+      "position": [
+        0.054184701293706894,
+        0.0016072392463684082,
+        0.31434762477874756
+      ]
+    },
+    "rear_left": {
+      "welded_vertex": 25545,
+      "position": [
+        -0.02108911983668804,
+        0.03131106495857239,
+        -0.3242514729499817
+      ]
+    },
+    "rear_right": {
+      "welded_vertex": 3034,
+      "position": [
+        0.021712377667427063,
+        0.03238925337791443,
+        -0.32506752014160156
+      ]
+    }
+  },
+  "leg_region_vertices": {
+    "front_left": 5798,
+    "front_right": 5539,
+    "rear_left": 10179,
+    "rear_right": 10549
+  },
+  "morph_targets": [
+    "tail_left",
+    "tail_right",
+    "tail_lift",
+    "tail_flare",
+    "head_left",
+    "head_right",
+    "head_down",
+    "head_up",
+    "crouch",
+    "arch",
+    "gait_a",
+    "gait_b",
+    "surge",
+    "pounce_extend",
+    "lean_left",
+    "lean_right"
+  ],
+  "maximum_displacements": {
+    "tail_left": 0.143212,
+    "tail_right": 0.143212,
+    "tail_lift": 0.17609,
+    "tail_flare": 0.160774,
+    "head_left": 0.187434,
+    "head_right": 0.187434,
+    "head_down": 0.142385,
+    "head_up": 0.136534,
+    "crouch": 0.105,
+    "arch": 0.075,
+    "gait_a": 0.139601,
+    "gait_b": 0.138953,
+    "surge": 0.173566,
+    "pounce_extend": 0.372081,
+    "lean_left": 0.205548,
+    "lean_right": 0.205548
+  },
+  "model_diagonal": 1.338755,
+  "maximum_displacement_ratios": {
+    "tail_left": 0.106974,
+    "tail_right": 0.106974,
+    "tail_lift": 0.131533,
+    "tail_flare": 0.120092,
+    "head_left": 0.140006,
+    "head_right": 0.140006,
+    "head_down": 0.106356,
+    "head_up": 0.101986,
+    "crouch": 0.078431,
+    "arch": 0.056022,
+    "gait_a": 0.104277,
+    "gait_b": 0.103793,
+    "surge": 0.129647,
+    "pounce_extend": 0.277931,
+    "lean_left": 0.153537,
+    "lean_right": 0.153537
+  },
+  "walk_leg_displacements": {
+    "gait_a": {
+      "front_left": {
+        "maximum": 0.139601,
+        "mean": 0.07172,
+        "sample_vertices": 2695
+      },
+      "front_right": {
+        "maximum": 0.132831,
+        "mean": 0.06266,
+        "sample_vertices": 2410
+      },
+      "rear_left": {
+        "maximum": 0.064445,
+        "mean": 0.023304,
+        "sample_vertices": 3104
+      },
+      "rear_right": {
+        "maximum": 0.071045,
+        "mean": 0.028305,
+        "sample_vertices": 2940
+      }
+    },
+    "gait_b": {
+      "front_left": {
+        "maximum": 0.132594,
+        "mean": 0.062017,
+        "sample_vertices": 2695
+      },
+      "front_right": {
+        "maximum": 0.138953,
+        "mean": 0.071672,
+        "sample_vertices": 2410
+      },
+      "rear_left": {
+        "maximum": 0.071045,
+        "mean": 0.025929,
+        "sample_vertices": 3104
+      },
+      "rear_right": {
+        "maximum": 0.064445,
+        "mean": 0.02544,
+        "sample_vertices": 2940
+      }
+    }
+  },
+  "animations": [
+    "Idle",
+    "Walk",
+    "Pounce",
+    "Nine-Tail Flare",
+    "Threat Display",
+    "Listen",
+    "Dodge"
+  ],
+  "animation_count": 7,
+  "anatomy_changed": false,
+  "notes": [
+    "Leg masks are derived from welded surface geodesics, preventing spatially adjacent tails from being treated as paws.",
+    "Tail motion is a continuous root-preserving field over the original nine-tail mesh; no tail is split, deleted or regenerated.",
+    "All action clips are in place and contain explicit preparation, main and recovery phases.",
+    "Walk v9 preserves side-owned rear masks while increasing swing-foot lift, fore-aft stride, body counter-motion and nine-tail counter-sway for screen-readable locomotion.",
+    "Pounce v9 uses side-owned leg extension, a sustained airborne silhouette, deeper anticipation and a distinct landing/recovery phase instead of a near-neutral standing pose.",
+    "The pounce_extend target includes a vertical leap trajectory as a supplement while keeping the creature centered in the manual-action camera; the qualifying motion remains the simultaneous four-leg, spine, head-neck and nine-tail deformation.",
+    "The lean targets include the Dodge lateral path while the qualifying pose change remains the crouch/arch, torso lean, head turn and counter-sweeping nine-tail field.",
+    "No actor or model-root transform is used to satisfy an action slot; all amplified motion remains baked into auditable GLB morph tracks."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "creature_id": "jiuweihu",
+  "status": "passed",
+  "checked_at": "2026-08-15T12:55:31Z",
+  "asset": {
+    "path": "collections/jiuweihu/scene/background-360-v2.webp",
+    "sha256": "6521c89f2b37df765880c3c12c3b7e38ea81eae185394d1f55b29d02f0f00370",
+    "bytes": 314670,
+    "dimensions": [1774, 887],
+    "projection": "equirectangular",
+    "aspect_ratio": "2:1"
+  },
+  "seam_check": {
+    "method": "RMSE comparison of the first and last vertical pixel columns before WebP encoding",
+    "normalized_rmse": 0.0332557,
+    "status": "passed",
+    "observation": "Terrain height, horizon, cloud cover, color and brightness continue across the wrap without a visible vertical seam in the browser."
+  },
+  "interaction_check": {
+    "viewport": [1280, 720],
+    "orbit_controls_full_azimuth": true,
+    "successive_drag_views": 4,
+    "background_changed_with_camera": true,
+    "ground_and_props_remained_world_locked": true,
+    "viewer_status": "ready",
+    "average_fps": 84.5,
+    "draw_calls": 5,
+    "rendered_triangles": 95260,
+    "console_errors": 0,
+    "console_warnings": 0
+  },
+  "evidence": {
+    "path": "collections/jiuweihu/reports/scene-360-v2.webp",
+    "sha256": "7ab37be3472184f32059621a8f011014cafb5f939e74f1e69cb729255e6aa05f",
+    "bytes": 95456,
+    "notes": "Four real Three.js frames after successive horizontal OrbitControls drags show distinct continuous panoramic directions."
+  },
+  "blocking_failures": []
+}

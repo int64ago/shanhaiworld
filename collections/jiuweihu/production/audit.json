@@ -3,7 +3,7 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "created_at": "2026-08-14T17:59:20+00:00",
-  "updated_at": "2026-08-15T11:41:49Z",
+  "updated_at": "2026-08-15T13:06:34Z",
   "runs": [
     {
       "id": "research-001",
@@ -675,6 +675,99 @@
         "根据并排视觉复核移除独立图标、粗体和尺寸差异；沉浸模式与返回图鉴直接复用同一组样式类，16 项关键计算样式逐项完全相等。",
         "九尾狐在 1920x1080 Chromium 进入、点击退出和 Esc 退出均通过，控制台 0 errors/warnings；发布构建会拒绝缺失沉浸控件的共享模板。"
       ]
+    },
+    {
+      "id": "motion-readability-005",
+      "stage": "animation_and_scene_revision",
+      "tool": "build_morph_actions.py_and_threejs_browser",
+      "created_at": "2026-08-15T12:41:25Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/models/rigged-v1.glb",
+        "collections/jiuweihu/models/web-v8.glb",
+        "collections/jiuweihu/production/scripts/build_morph_actions.py"
+      ],
+      "output_files": [
+        "collections/jiuweihu/models/web.glb",
+        "collections/jiuweihu/reports/morph-build-v9.json",
+        "collections/jiuweihu/reports/motion-readability-v9.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "共享场景增加补光和轮廓光，并提高地面、雾、水面和岩石亮度；手动动作会停止巡游、回到原点并恢复统一展示镜头。",
+        "v9 保留 16 个局部 Morph，将 Walk、Pounce 和 Dodge 的区域峰值提高到模型对角线的 10.4%、27.8% 和 15.4%。",
+        "1280x720 真实 Three.js 复检确认脚步摆动、腾空扑跃和侧向闪避清楚可见，无裂缝、脱离或拓扑变化。"
+      ]
+    },
+    {
+      "id": "scene-equirectangular-002",
+      "stage": "scene_and_interaction_revision",
+      "tool": "codex_imagegen_and_threejs_browser",
+      "created_at": "2026-08-15T12:55:31Z",
+      "prompt_files": [
+        "collections/jiuweihu/production/prompts/scene/002-qingqiu-equirectangular.json"
+      ],
+      "reference_files": [
+        "collections/jiuweihu/scene/background.webp",
+        "assets/js/collection-page.js"
+      ],
+      "output_files": [
+        "collections/jiuweihu/scene/background-360-v2.webp",
+        "collections/jiuweihu/reports/scene-360-v2.webp",
+        "collections/jiuweihu/reports/scene-360-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "诊断确认旧 1672x941 背景是固定屏幕纹理，无法表达相机 360° 方位变化；未将旧图拉伸伪装成全景。",
+        "按旧青丘场景的色彩和氛围生成原生 1774x887、2:1 latitude-longitude 等距全景，并转为 314,670 bytes WebP。",
+        "左右首末像素列归一化 RMSE 为 0.0332557；浏览器连续拖拽四个方位时远景自然变化，未见垂直接缝。",
+        "最终 viewer ready，84.5 average FPS、5 draw calls、95,260 rendered triangles、0 console errors/warnings。"
+      ]
+    },
+    {
+      "id": "shared-creature-navigation-001",
+      "stage": "shared_viewer_navigation",
+      "tool": "shared_template_and_threejs_browser",
+      "created_at": "2026-08-15T13:01:32Z",
+      "prompt_files": [],
+      "reference_files": [
+        "assets/data/collections.json",
+        "assets/templates/collection/index.html"
+      ],
+      "output_files": [
+        "assets/js/collection-page.js",
+        "assets/css/site.css",
+        "collections/jiuweihu/index.html",
+        "collections/jiuweihu/reports/release-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "共享顶部新增上一个/下一个入口，按 ready 图鉴顺序动态解析且不循环，不为具体神兽硬编码。",
+        "1280x720 Chromium 实测九尾狐禁用上一个、应龙禁用下一个；可用方向跳转正常，沉浸模式会隐藏导航，控制台 0 errors/warnings。"
+      ]
+    },
+    {
+      "id": "catalog-preview-refresh-004",
+      "stage": "catalog_preview_and_home_layout",
+      "tool": "threejs_browser_and_imagemagick",
+      "created_at": "2026-08-15T13:06:34Z",
+      "prompt_files": [],
+      "reference_files": [
+        "collections/jiuweihu/preview-v3.webp",
+        "collections/jiuweihu/models/web.glb",
+        "collections/jiuweihu/scene/background-360-v2.webp"
+      ],
+      "output_files": [
+        "collections/jiuweihu/preview.webp",
+        "assets/data/collections.json",
+        "assets/css/site.css",
+        "collections/jiuweihu/reports/release-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "保留旧 preview-v3.webp；稳定预览改为当前 v9 Three.js 页面实拍并裁成 1200x900，模型、灯光与 360° 场景均与现页一致。",
+        "首页预览 URL 增加 v=4 缓存版本；1280x720 浏览器确认图片自然尺寸 1200x900，列表 justify-content=start，首卡与容器左边缘均为 48px。"
+      ]
     }
   ],
   "selections": {
@@ -706,16 +799,16 @@
       }
     },
     "scene_background": {
-      "source": "collections/jiuweihu/production/generations/scene/001-qingqiu-background.png",
-      "stable": "collections/jiuweihu/scene/background.webp",
-      "reason": "Creature-free Qingqiu dawn environment with an uncluttered roaming clearing and edge-weighted mountain framing.",
-      "sha256": "80759c50c4ca054faf10cfb79a15be5b9ffbd435e968f440d64f171675288f85"
+      "source": "collections/jiuweihu/production/prompts/scene/002-qingqiu-equirectangular.json",
+      "stable": "collections/jiuweihu/scene/background-360-v2.webp",
+      "reason": "Native 2:1 equirectangular Qingqiu panorama with a continuous horizon, selected after real OrbitControls review confirmed full-scene 360-degree rotation and no visible seam.",
+      "sha256": "6521c89f2b37df765880c3c12c3b7e38ea81eae185394d1f55b29d02f0f00370"
     },
     "preview": {
-      "source": "collections/jiuweihu/reports/final-page/preview-source-v3.png",
+      "source": "current Three.js v9 preview-mode browser frame",
       "stable": "collections/jiuweihu/preview.webp",
-      "reason": "Real Three.js release frame using the selected v3 asset and Nine-Tail Flare clip; no concept-image substitution.",
-      "sha256": "a077f8d66a392fb3e8bc1c3e34b1453926e0b23d8fc5ac7f216e82e38fb0dade"
+      "reason": "Real current Three.js frame with the v9 model, brighter 360-degree environment and a tighter 4:3 full-creature composition; no concept-image substitution.",
+      "sha256": "6e52162b29379f4c8521c4953572513403128ff00eaa299bdf8f402741bb3dcf"
     },
     "model": {
       "source": "collections/jiuweihu/models/raw-v4.glb",
@@ -726,8 +819,8 @@
     "motion": {
       "source": "collections/jiuweihu/models/rigged-v1.glb",
       "stable": "collections/jiuweihu/models/web.glb",
-      "reason": "Tripo quadruped skeletal motion failed visual QC; selected v8 uses 16 deterministic localized morph targets and seven visually validated clips, with repaired alternating rear-leg stride, complete accessor bounds and a clean Three.js console.",
-      "sha256": "e9eaf903a0d23c5320ac5ff3288e99f7e74d7385b6796065e07a24669c22361e"
+      "reason": "Tripo quadruped skeletal motion failed visual QC; selected v9 uses 16 deterministic localized morph targets and seven visually validated clips with explicit displacement and browser readability gates.",
+      "sha256": "88f49338a5e2bd7670ac469b0f22fcfbf4945c6d527d742d7aff9a4b5d9bbeb6"
     }
   }
 }
