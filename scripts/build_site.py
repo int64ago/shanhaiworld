@@ -22,6 +22,7 @@ LFS_POINTER_PREFIX = b"version https://git-lfs.github.com/spec/v1"
 SKIP_NAMES = {".ds_store", "thumbs.db"}
 PUBLIC_ASSET_DIRS = ("css", "js", "vendor")
 PUBLIC_ASSET_FILES = ("favicon.svg",)
+OPTIONAL_ROOT_FILES = ("CNAME",)
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -183,6 +184,10 @@ def build_site(project_root: Path, output: Path) -> dict[str, Any]:
     output.mkdir(parents=True)
 
     copy_file(home, output / "index.html")
+    for filename in OPTIONAL_ROOT_FILES:
+        source = project_root / filename
+        if source.is_file():
+            copy_file(source, output / filename)
     for directory in PUBLIC_ASSET_DIRS:
         copy_tree(assets_root / directory, output / "assets" / directory)
     for filename in PUBLIC_ASSET_FILES:
