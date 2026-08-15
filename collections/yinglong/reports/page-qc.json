@@ -3,7 +3,7 @@
   "creature_id": "yinglong",
   "name": "应龙",
   "status": "passed",
-  "checked_at": "2026-08-15T11:27:38Z",
+  "checked_at": "2026-08-15T11:41:49Z",
   "environment": {
     "browser": "Codex in-app Chromium",
     "viewport": [1920, 1080],
@@ -45,6 +45,11 @@
     ]
   },
   "interaction_checks": [
+    {
+      "id": "shared_immersive_mode",
+      "status": "passed",
+      "evidence": "1920x1080 Chromium：右上角沉浸模式进入后 aria-pressed=true，品牌、返回图鉴、信息面板和动作控件均为 visibility=hidden、opacity=0、pointer-events=none；退出沉浸按钮保持可见可点，点击和 Esc 均恢复全部界面。正常模式下沉浸模式与返回图鉴的尺寸、间距、边框、圆角、背景、颜色、字体、字号、字重、行高、阴影和对齐计算值完全相等；进入时会停止正在播放的朗读；控制台 0 errors/warnings。"
+    },
     {
       "id": "fixed_narration_contract",
       "status": "passed",

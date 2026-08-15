@@ -3,7 +3,7 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "created_at": "2026-08-14T17:59:20+00:00",
-  "updated_at": "2026-08-15T11:27:38Z",
+  "updated_at": "2026-08-15T11:41:49Z",
   "runs": [
     {
       "id": "research-001",
@@ -652,6 +652,28 @@
         "已发布九尾狐音频确认对应 Tingting 普通话音色与 rate 160；写入统一 voice_profile=mandarin-tingting-r160-v1。",
         "九尾狐与应龙在 1920x1080 Chromium 均播放固定 M4A，speechSynthesisSpeaking=false，控制台 0 errors/warnings。",
         "移除浏览器系统语音发布回退，避免不同设备产生音色、语速和断句差异。"
+      ]
+    },
+    {
+      "id": "shared-immersive-ui-001",
+      "stage": "page_validation",
+      "tool": "shared_threejs_immersive_contract",
+      "created_at": "2026-08-15T11:41:49Z",
+      "prompt_files": [],
+      "reference_files": [
+        "assets/templates/collection/index.html",
+        "assets/css/site.css",
+        "assets/js/collection-page.js"
+      ],
+      "output_files": [
+        "collections/jiuweihu/index.html",
+        "collections/jiuweihu/reports/release-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "新增全站共享的右上角沉浸模式；进入后隐藏非必要覆盖层，保留可点击退出控件，并支持 Esc 退出和停止朗读。",
+        "根据并排视觉复核移除独立图标、粗体和尺寸差异；沉浸模式与返回图鉴直接复用同一组样式类，16 项关键计算样式逐项完全相等。",
+        "九尾狐在 1920x1080 Chromium 进入、点击退出和 Esc 退出均通过，控制台 0 errors/warnings；发布构建会拒绝缺失沉浸控件的共享模板。"
       ]
     }
   ],

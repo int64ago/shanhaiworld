@@ -4,7 +4,7 @@
   "name": "九尾狐",
   "status": "ready",
   "created_at": "2026-08-14T17:59:20+00:00",
-  "updated_at": "2026-08-15T11:27:38Z",
+  "updated_at": "2026-08-15T11:41:49Z",
   "artifacts": [
     {
       "kind": "release_qc",
@@ -219,6 +219,7 @@
     "Tripo quadruped rigging passed structurally, but the provider walk failed visual deformation QC and remains preserved as a rejection.",
     "The selected deterministic fallback contains 16 localized morph targets and seven visually validated actions; the v8 rear-leg repair passes targeted walk review.",
     "The readable interface keeps pinyin only over the creature name, provides formal detailed copy and Mandarin narration, and supports previous/next action navigation.",
-    "Final 1920x1080 interaction, performance, security and console checks pass; collection remains ready."
+    "Final 1920x1080 interaction, performance, security and console checks pass; collection remains ready.",
+    "共享沉浸模式可隐藏非必要覆盖层并通过点击或 Esc 退出；正常模式按钮与返回图鉴使用完全相同的计算样式。"
   ]
 }

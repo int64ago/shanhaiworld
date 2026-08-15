@@ -6,7 +6,7 @@
     <meta name="description" content="九尾狐儿童可读互动 3D 图鉴：保留神兽名拼音，提供原典介绍、普通话朗读与七个可观察动作。" />
     <title>九尾狐 · 山海万象</title>
     <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="../../assets/css/site.css?v=20260815-kids-4" />
+    <link rel="stylesheet" href="../../assets/css/site.css?v=20260815-immersive-2" />
     <script type="importmap">
       {
         "imports": {
@@ -25,7 +25,12 @@
           <span class="brand-mark">山海</span>
           <span class="brand-name">Shanhaiworld</span>
         </a>
-        <a class="back-link bilingual-button" href="../../index.html"><span>返回图鉴</span></a>
+        <div class="viewer-header-actions">
+          <button id="toggle-immersive" class="immersive-toggle back-link bilingual-button" type="button" aria-pressed="false" aria-label="进入沉浸模式" title="隐藏界面，专注观察 3D 模型">
+            <span class="immersive-label">沉浸模式</span>
+          </button>
+          <a class="back-link bilingual-button" href="../../index.html"><span>返回图鉴</span></a>
+        </div>
       </header>
 
       <aside class="creature-panel" aria-labelledby="creature-name">
@@ -67,6 +72,6 @@
       </div>
     </div>
 
-    <script type="module" src="../../assets/js/collection-page.js?v=20260815-shared-2"></script>
+    <script type="module" src="../../assets/js/collection-page.js?v=20260815-immersive-2"></script>
   </body>
 </html>

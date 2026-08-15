@@ -3,7 +3,7 @@
   "creature_id": "jiuweihu",
   "name": "九尾狐",
   "status": "passed",
-  "checked_at": "2026-08-15T11:27:38Z",
+  "checked_at": "2026-08-15T11:41:49Z",
   "page": "collections/jiuweihu/index.html",
   "runtime_asset": {
     "path": "collections/jiuweihu/models/web.glb",
@@ -55,6 +55,16 @@
       "evidence": "collections/jiuweihu/index.html and assets/js/collection-page.js",
       "notes": [
         "Previous and next buttons advance through the seven real clips and wrap from Idle to Dodge and from Dodge to Idle."
+      ]
+    },
+    {
+      "id": "shared_immersive_mode",
+      "status": "passed",
+      "evidence": "assets/templates/collection/index.html, assets/css/site.css and assets/js/collection-page.js",
+      "notes": [
+        "At 1920x1080 the top-right 沉浸模式 control enters with aria-pressed=true, hides the brand, back link, information panel and action controls, leaves a visible 退出沉浸 control, and exits by click or Escape.",
+        "Normal-mode computed styles for 沉浸模式 and 返回图鉴 are exactly equal across width, height, display, padding, border, radius, background, color, font family, size, weight, line height, shadow and alignment.",
+        "Entering immersive mode stops active narration; Chromium reports zero console warnings or errors."
       ]
     },
     {

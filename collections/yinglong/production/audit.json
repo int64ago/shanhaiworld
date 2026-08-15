@@ -3,7 +3,7 @@
   "creature_id": "yinglong",
   "name": "应龙",
   "created_at": "2026-08-15T09:10:18+00:00",
-  "updated_at": "2026-08-15T11:27:38Z",
+  "updated_at": "2026-08-15T11:41:49Z",
   "runs": [
     {
       "id": "research-001",
@@ -404,6 +404,28 @@
         "应龙固定朗读为单声道 22050 Hz AAC，49.599138 秒，209,996 bytes，SHA-256 bc903d5c08c2266af3377fee57222ea02c54814b3d8e302e56ae0f9b4d986848。",
         "浏览器对照中两页均播放固定 M4A，speechSynthesisSpeaking=false，控制台 0 errors/warnings。",
         "公共运行时不再静默回退浏览器系统语音；模板、生成器和 ready 构建共同强制 mandarin-tingting-r160-v1。"
+      ]
+    },
+    {
+      "id": "shared-immersive-ui-001",
+      "stage": "page_validation",
+      "tool": "shared_threejs_immersive_contract",
+      "created_at": "2026-08-15T11:41:49Z",
+      "prompt_files": [],
+      "reference_files": [
+        "assets/templates/collection/index.html",
+        "assets/css/site.css",
+        "assets/js/collection-page.js"
+      ],
+      "output_files": [
+        "collections/yinglong/index.html",
+        "collections/yinglong/reports/page-qc.json"
+      ],
+      "status": "selected",
+      "notes": [
+        "新增全站共享的右上角沉浸模式；进入后隐藏非必要覆盖层，保留可点击退出控件，并支持 Esc 退出和停止朗读。",
+        "根据并排视觉复核移除独立图标、粗体和尺寸差异；沉浸模式与返回图鉴直接复用同一组样式类，16 项关键计算样式逐项完全相等。",
+        "应龙在 1920x1080 Chromium 进入、点击退出和 Esc 退出均通过，控制台 0 errors/warnings；发布构建会拒绝缺失沉浸控件的共享模板。"
       ]
     }
   ],

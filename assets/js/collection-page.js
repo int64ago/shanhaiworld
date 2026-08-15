@@ -18,11 +18,14 @@ const resetButton = document.querySelector("#reset-camera");
 const speechButton = document.querySelector("#speak-intro");
 const speechStatus = document.querySelector("#voice-status");
 const actionMessage = document.querySelector("#action-message");
+const immersiveButton = document.querySelector("#toggle-immersive");
+const immersiveLabel = immersiveButton?.querySelector(".immersive-label");
 const configUrl = new URL(document.body.dataset.collectionConfig || "./collection.json", window.location.href);
 const previewMode = new URLSearchParams(window.location.search).has("preview");
 const SHARED_VIEWER_UI = "shared-v1";
 const SHARED_NARRATION_VOICE = "mandarin-tingting-r160-v1";
 document.body.dataset.previewMode = String(previewMode);
+document.body.dataset.immersiveMode = "false";
 
 const clock = new THREE.Clock();
 const raycaster = new THREE.Raycaster();
@@ -56,6 +59,7 @@ let roamUntil = 0;
 let destination = new THREE.Vector3();
 let pointerDown = null;
 let narrationAudio = null;
+let immersiveEnabled = false;
 
 actor.add(motionRoot);
 
@@ -251,6 +255,32 @@ function setupSpeech() {
   setSpeechState(false);
   speechStatus.textContent = `点击按钮，朗读${config.name}的详细介绍`;
   speechButton.addEventListener("click", speakIntroduction);
+}
+
+function setImmersiveMode(enabled) {
+  immersiveEnabled = Boolean(enabled);
+  document.body.dataset.immersiveMode = String(immersiveEnabled);
+  immersiveButton?.setAttribute("aria-pressed", String(immersiveEnabled));
+  immersiveButton?.setAttribute(
+    "aria-label",
+    immersiveEnabled ? "退出沉浸模式" : "进入沉浸模式",
+  );
+  immersiveButton?.setAttribute(
+    "title",
+    immersiveEnabled ? "退出沉浸模式（Esc）" : "隐藏界面，专注观察 3D 模型",
+  );
+  if (immersiveLabel) immersiveLabel.textContent = immersiveEnabled ? "退出沉浸" : "沉浸模式";
+
+  if (immersiveEnabled && narrationAudio && !narrationAudio.paused) {
+    narrationAudio.pause();
+    narrationAudio.currentTime = 0;
+    setSpeechState(false);
+    speechStatus.textContent = "朗读已停止";
+  }
+}
+
+function onViewerKeyDown(event) {
+  if (event.key === "Escape" && immersiveEnabled) setImmersiveMode(false);
 }
 
 function renderActionMessage(clipName) {
@@ -785,6 +815,8 @@ function bindControls() {
   });
 
   resetButton.addEventListener("click", resetCamera);
+  immersiveButton?.addEventListener("click", () => setImmersiveMode(!immersiveEnabled));
+  window.addEventListener("keydown", onViewerKeyDown);
   canvas.addEventListener("pointerdown", onPointerDown);
   canvas.addEventListener("pointerup", onPointerUp);
 }
@@ -817,6 +849,7 @@ function cleanup() {
   ktx2Loader.dispose();
   renderer.dispose();
   narrationAudio?.pause();
+  window.removeEventListener("keydown", onViewerKeyDown);
 }
 
 async function start() {

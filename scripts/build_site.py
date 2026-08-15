@@ -25,6 +25,11 @@ PUBLIC_ASSET_FILES = ("favicon.svg",)
 OPTIONAL_ROOT_FILES = ("CNAME",)
 SHARED_VIEWER_UI = "shared-v1"
 SHARED_NARRATION_VOICE = "mandarin-tingting-r160-v1"
+SHARED_VIEWER_TEMPLATE_MARKERS = (
+    'id="toggle-immersive"',
+    'class="immersive-toggle back-link bilingual-button"',
+    'aria-pressed="false"',
+)
 
 
 def read_json(path: Path) -> dict[str, Any]:
@@ -196,11 +201,22 @@ def validate_shared_viewer_contract(
         )
 
 
+def validate_shared_viewer_template(template: str) -> None:
+    missing = [marker for marker in SHARED_VIEWER_TEMPLATE_MARKERS if marker not in template]
+    if missing:
+        raise RuntimeError(
+            "Shared collection template is missing required immersive-mode markup: "
+            + ", ".join(missing)
+        )
+
+
 def build_site(project_root: Path, output: Path) -> dict[str, Any]:
     home = project_root / "index.html"
     catalog_path = project_root / "assets" / "data" / "collections.json"
     template_html = project_root / "assets" / "templates" / "collection" / "index.html"
     assets_root = project_root / "assets"
+    template_source = template_html.read_text(encoding="utf-8")
+    validate_shared_viewer_template(template_source)
 
     if output.exists():
         shutil.rmtree(output)
@@ -243,7 +259,7 @@ def build_site(project_root: Path, output: Path) -> dict[str, Any]:
         destination_root.mkdir(parents=True, exist_ok=True)
         copy_file(collection_config_path, destination_root / "collection.json")
         (destination_root / "index.html").write_text(
-            render_collection_html(template_html.read_text(encoding="utf-8"), collection),
+            render_collection_html(template_source, collection),
             encoding="utf-8",
         )
 

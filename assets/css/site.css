@@ -1286,6 +1286,85 @@ ruby rt {
   pointer-events: auto;
 }
 
+.viewer-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.immersive-toggle {
+  cursor: pointer;
+  font: inherit;
+}
+
+.back-link:focus-visible,
+.immersive-toggle:focus-visible {
+  outline: 3px solid rgba(255, 213, 106, 0.88);
+  outline-offset: 3px;
+}
+
+.viewer-brand,
+.back-link,
+.creature-panel,
+.viewer-controls {
+  transition: opacity 180ms ease, visibility 180ms ease, transform 180ms ease;
+}
+
+.collection-page[data-immersive-mode="true"] .viewer-brand,
+.collection-page[data-immersive-mode="true"] .back-link:not(.immersive-toggle),
+.collection-page[data-immersive-mode="true"] .creature-panel,
+.collection-page[data-immersive-mode="true"] .viewer-controls,
+.collection-page[data-immersive-mode="true"] .mouse-hint {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.collection-page[data-immersive-mode="true"] .viewer-brand,
+.collection-page[data-immersive-mode="true"] .back-link:not(.immersive-toggle) {
+  transform: translateY(-8px);
+}
+
+.collection-page[data-immersive-mode="true"] .creature-panel {
+  transform: translateX(-24px);
+}
+
+.collection-page[data-immersive-mode="true"] .viewer-controls {
+  transform: translateX(24px);
+}
+
+.collection-page[data-immersive-mode="true"] .viewer-header {
+  justify-content: flex-end;
+}
+
+.collection-page[data-immersive-mode="true"] .viewer-header-actions {
+  margin-left: auto;
+}
+
+.collection-page[data-immersive-mode="true"] .immersive-toggle {
+  min-width: 112px;
+  border-color: rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  background: rgba(4, 10, 9, 0.48);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Space Grotesk", "Noto Serif SC", sans-serif;
+  font-weight: 500;
+  opacity: 0.74;
+}
+
+.collection-page[data-immersive-mode="true"] .immersive-toggle:hover,
+.collection-page[data-immersive-mode="true"] .immersive-toggle:focus-visible {
+  background: rgba(4, 10, 9, 0.72);
+  opacity: 1;
+}
+
+.collection-page[data-immersive-mode="true"] .immersive-toggle:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.42);
+  outline-offset: 2px;
+}
+
 .viewer-brand .brand-mark {
   background: rgba(4, 10, 8, 0.28);
   backdrop-filter: blur(12px);
