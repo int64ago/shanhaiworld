@@ -435,7 +435,25 @@ def command_download(args: argparse.Namespace) -> int:
     root = Path(args.project_root).expanduser().resolve()
     collection = Path(args.collection).expanduser().resolve()
     key = load_key(root)
-    task = latest_task(collection)
+    store_path, store = task_store(collection)
+    task_index = len(store["tasks"]) - 1
+    if args.task_uuid:
+        task_index = next(
+            (
+                index
+                for index, candidate in enumerate(store["tasks"])
+                if isinstance(candidate, dict)
+                and candidate.get("task_uuid") == args.task_uuid
+            ),
+            -1,
+        )
+        if task_index < 0:
+            raise RuntimeError(f"Unknown Rodin task UUID: {args.task_uuid}")
+    if task_index < 0:
+        raise RuntimeError("No Rodin task has been submitted for this collection")
+    task = store["tasks"][task_index]
+    if not isinstance(task, dict):
+        raise RuntimeError("Invalid task record")
     task_uuid = task.get("task_uuid")
     payload = api_request(
         key,
@@ -477,11 +495,13 @@ def command_download(args: argparse.Namespace) -> int:
             "signed_urls_recorded": False,
         },
     )
-    path, store = task_store(collection)
-    store["tasks"][-1]["download_record"] = str(response_path.relative_to(root))
-    store["tasks"][-1]["downloaded_files"] = [item["local_path"] for item in downloaded]
-    store["tasks"][-1]["updated_at"] = now_iso()
-    write_json(path, store)
+    store["tasks"][task_index]["download_record"] = str(response_path.relative_to(root))
+    store["tasks"][task_index]["downloaded_files"] = [
+        item["local_path"] for item in downloaded
+    ]
+    store["tasks"][task_index]["updated_at"] = now_iso()
+    store["tasks"][task_index].pop("runtime_files_removed_at", None)
+    write_json(store_path, store)
     print(json.dumps({"downloaded": len(downloaded), "files": downloaded}))
     return 0 if downloaded else 1
 
@@ -537,6 +557,10 @@ def parse_args() -> argparse.Namespace:
     download = subparsers.add_parser("download")
     download.add_argument("--collection", required=True)
     download.add_argument("--out-dir", required=True)
+    download.add_argument(
+        "--task-uuid",
+        help="Download a specific recorded task instead of the latest task",
+    )
     download.set_defaults(func=command_download)
     return parser.parse_args()
 
